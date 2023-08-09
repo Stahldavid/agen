@@ -99,7 +99,7 @@ for filename, file_data in files.items():
 # %%
 
 completion2 = openai.ChatCompletion.create(
-    model="gpt-4-0613",
+    model="gpt-3.5-turbo-0613",
     messages=[
         {
             "role": "system",
@@ -119,7 +119,7 @@ completion2 = openai.ChatCompletion.create(
 
 reply_content2 = completion2.choices[0]
 print(reply_content2)
-
+# todo
 args2 = reply_content2["message"]['function_call']['arguments']
 data2 = json.loads(args2)
 
@@ -355,6 +355,7 @@ messages = [
         "content": f"I need your assistance in reviewing these code and pseudocode documents. You final goal is to rewrite and finish the code to make full functional The final goal is to create a project for variable impedance control providing force feedback. The project will use Webots, ROS2, webots_ros2, and ros2_control. You are required to identify potential problems, inefficiencies, and areas for improvements in these documents. Here are the documents you need to work on:\n\n{output_string}\n\nPlease first clarify any question that you need to finish the code with me. After you completely understand the goal of the user, use the search_code function to find relevant code that can help improve the code."  
     }
 ]
+conversation = messages
 
 import openai
 import tiktoken
@@ -364,54 +365,51 @@ import json
 cl100k_base = tiktoken.get_encoding("cl100k_base")
 tokenizer = cl100k_base
 
-# # Define the function to count tokens in a list of messages
-# def num_tokens_from_messages(messages):
-#     num_tokens = 0
-#     for message in messages:
-#         num_tokens += len(tokenizer.encode(message["content"]))  # Add 4 for special tokens
-#     num_tokens += 2 # Add 2 for <im_start>assistant which always primes a user's message
-#     return num_tokens
 
+
+max_response_tokens = 2500
+token_limit = 7000  # Adjusted to your value
+#conversation = []
+#conversation.append(system_message)
 
 def num_tokens_from_messages(messages):
-    encoding = tiktoken.get_encoding("cl100k_base")
-    tokens = []
+    encoding = tiktoken.get_encoding("cl100k_base")  # Model to encoding mapping
+    num_tokens = 0
     for message in messages:
-        tokens += encoding.encode(message["content"])  # Corrected this line
-    return len(tokens)
+        num_tokens += 4  # Every message follows <im_start>{role/name}\n{content}<im_end>\n
+        for key, value in message.items():
+            if isinstance(value, str):  # Ensure value is a string before encoding
+                num_tokens += len(encoding.encode(value))
+                if key == "name":  # If there's a name, the role is omitted
+                    num_tokens -= 1  # Role is always required and always 1 token
+    num_tokens += 2  # Every reply is primed with <im_start>assistant
+    return num_tokens
 
-
-
-# Start the chat
-token_limit = 7000 # Adjust the token limit to 7000
-#messages = []
 while True:
-    user_input = input("Enter message: ")
-    user_message = {
-        "role": "user",
-        "content": user_input
-    }
-    messages.append(user_message)
-    model_messages = messages.copy() # Create a copy of the messages for the model
+    user_input = input("Enter message: ")     
+    conversation.append({"role": "user", "content": user_input})
+    conv_history_tokens = num_tokens_from_messages(conversation)
 
-    while num_tokens_from_messages(messages) > token_limit:
-        print(f"Exceeding token limit of {token_limit}. Removing earliest messages until below 5000 tokens.")
-        while num_tokens_from_messages(messages) > token_limit - 2000: # Continue removing messages until we reach 5000 tokens
-            removed_message = messages.pop(0) # Remove the earliest message
-            print(f"Removed message: {removed_message['content']}") # Print the removed message
+    while conv_history_tokens + max_response_tokens >= token_limit:
+        del conversation[1] 
+        conv_history_tokens = num_tokens_from_messages(conversation)
 
     chat_response = openai.ChatCompletion.create(
         model="gpt-4-0613",
-        messages=model_messages,
-        functions=functions3,
+        messages=conversation,
+        functions=functions3,  # Assuming functions3 is defined elsewhere in your code
+        temperature=0.7,
+        max_tokens=max_response_tokens,
     )
 
     assistant_message = chat_response['choices'][0].get('message')
-    if assistant_message:
-        messages.append(assistant_message)
-        pretty_print_conversation(messages)
+    if assistant_message['content'] is not None:
+        conversation.append({"role": "assistant", "content": assistant_message['content']})
+        pretty_print_conversation(conversation)
+    else:
 
         if assistant_message.get("function_call"):
+            # todo ADD APEND
             function_name = assistant_message["function_call"]["name"]
             arguments = json.loads(assistant_message["function_call"]["arguments"])
 
@@ -420,10 +418,10 @@ while True:
                 function_message = {
                     "role": "function",
                     "name": function_name,
-                    "content": results
+                    "content":  f"code search content: {results}"
                 }
-                messages.append(function_message)
-                pretty_print_conversation(messages)
+                conversation.append(function_message)
+                pretty_print_conversation(conversation)
             elif function_name == "write_to_file":
                 write_to_file(arguments['content'], arguments['file_path'])
                 function_message = {
@@ -431,5 +429,5 @@ while True:
                     "name": function_name,
                     "content": f"File successfully written at {arguments['file_path']}"
                 }
-                messages.append(function_message)
-                pretty_print_conversation(messages)
+                conversation.append(function_message)
+                pretty_print_conversation(conversation)
