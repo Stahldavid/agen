@@ -1,0 +1,1 @@
+The goal is to refine and improve the motor wrapper. The semantic search results suggest adding additional parameters and methods for motor control and force feedback.

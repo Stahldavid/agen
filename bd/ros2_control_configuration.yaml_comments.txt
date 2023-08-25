@@ -1,0 +1,1 @@
+This is a ROS2 control configuration file for a robotic application. It specifically includes plugins and hardware interfaces parameters.

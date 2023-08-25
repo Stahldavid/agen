@@ -1,0 +1,13 @@
+controller_manager:
+  # Controller manager parameters
+  plugins:
+    - package: my_robot_description
+      plugins:
+        - name: my_robot_hardware
+          type: my_robot_hardware::MyRobotHardware
+
+hardware_interface:
+  # Hardware interface parameters
+  joints:
+    - name: joint1
+      type: position

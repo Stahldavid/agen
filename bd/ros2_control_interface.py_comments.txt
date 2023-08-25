@@ -1,0 +1,1 @@
+This file contains the implementation of the ROS2 control interface for controlling the robot. The 'main' function initializes 'rclpy', creates an instance of 'Ros2ControlInterface',  runs the instance, destroys the node, and then shuts down 'rclpy'. The 'run' method and '__init__' method in 'Ros2ControlInterface' class need more details.

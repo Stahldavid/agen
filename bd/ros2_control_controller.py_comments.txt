@@ -1,0 +1,1 @@
+This code is an implementation of the ros2_control controller in python. The controller creates a node and publishes JointControllerState messages. The use case is specifically for a variable impedance control code for force feedback.

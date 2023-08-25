@@ -1,4 +1,4 @@
-functions1=[
+functions1 = [
     {
         "name": "generate_code",
         "description": "Generates the code for multiple files, each described by a dictionary of attributes.",
@@ -36,8 +36,6 @@ functions1=[
                                         "content": {
                                             "type": "string",
                                             "description": "The details of the function or class, including arguments and methods as applicable."
-                                        },
-                                        
                                         }
                                     },
                                     "required": ["type", "name", "description", "content"]
@@ -48,14 +46,12 @@ functions1=[
                     }
                 }
             },
-"required": ["files"]
+            "required": ["files"]
         }
-    
+    }
 ]
 
-
-
-functions2=[
+functions2 = [
     {
         "name": "analyze_code",
         "description": "This function performs an analysis on the provided code files. It returns a list of suitable repositories for fetching relevant code samples and suggests a respective search query for each repository.",
@@ -98,7 +94,6 @@ functions2=[
     }
 ]
 
-
 functions3 = [
     {
         "name": "similarity_search",
@@ -123,12 +118,11 @@ functions3 = [
             "required": ["query", "directories"]
         }
     },
-
     {
         "name": "read_file",
         "description": "Reads the contents of a file and returns it as a string.",
         "parameters": {
-            "type": "object", 
+            "type": "object",
             "properties": {
                 "file_path": {
                     "type": "string",
@@ -138,7 +132,6 @@ functions3 = [
             "required": ["file_path"]
         }
     },
-    
     {
         "name": "write_to_file",
         "description": "This function writes the given content to a file at a specified path. It creates the file if it doesn't already exist, and overwrites the file if it does.",
@@ -155,6 +148,54 @@ functions3 = [
                 }
             },
             "required": ["content", "file_path"]
+        }
+    },
+    {
+        "name": "pdb_tool",
+        "description": "A tool for interacting with the Python Debugger (PDB). Allows setting breakpoints, stepping through code, continuing execution, and inspecting variables.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "code_or_filename": {
+                    "type": "string",
+                    "description": "The Python code to be debugged or the filename of the Python file to be debugged."
+                },
+                "action": {
+                    "type": "string",
+                    "enum": ["set_breakpoint", "step", "continue", "inspect"],
+                    "description": "The action to be performed in the debugger."
+                },
+                "line_number": {
+                    "type": "integer",
+                    "description": "The line number for setting a breakpoint (required for 'set_breakpoint' action)."
+                },
+                "variable_name": {
+                    "type": "string",
+                    "description": "The name of the variable to inspect (required for 'inspect' action)."
+                }
+            },
+            "required": ["code_or_filename", "action"]
+        }
+    }
+]
+
+functions4 = [
+    {
+        "name": "optimize_code",
+        "description": "This function optimizes the given code by applying insights from semantic search results using OpenAI embeddings. It aims to produce a fully functional and optimized code file for a specific project, such as variable impedance control code for force feedback.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "The code that needs to be optimized."
+                },
+                "comments": {
+                    "type": "string",
+                    "description": "Any additional comments or context related to the code."
+                }
+            },
+            "required": ["code", "comments"]
         }
     }
 ]

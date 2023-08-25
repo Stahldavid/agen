@@ -1,0 +1,1 @@
+This is a motor controller code for controlling the robot's motors in Webots and ROS2. It currently contains empty methods for controlling the motors, which need to be filled in with the appropriate functionality. Semantic search results from a vectorstore using OpenAI embeddings are being used to suggest improvements and completions for this code.
