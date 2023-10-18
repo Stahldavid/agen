@@ -1,0 +1,233 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rosdistro.manifest_provider package &#8212; rosdistro  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="rosdistro.external package" href="rosdistro.external.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rosdistro-manifest-provider-package">
+<h1>rosdistro.manifest_provider package<a class="headerlink" href="#rosdistro-manifest-provider-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-rosdistro.manifest_provider.bitbucket">
+<span id="rosdistro-manifest-provider-bitbucket-module"></span><h2>rosdistro.manifest_provider.bitbucket module<a class="headerlink" href="#module-rosdistro.manifest_provider.bitbucket" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.manifest_provider.bitbucket.bitbucket_manifest_provider">
+<code class="descclassname">rosdistro.manifest_provider.bitbucket.</code><code class="descname">bitbucket_manifest_provider</code><span class="sig-paren">(</span><em>_dist_name</em>, <em>repo</em>, <em>pkg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/bitbucket.html#bitbucket_manifest_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.bitbucket.bitbucket_manifest_provider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.manifest_provider.cache">
+<span id="rosdistro-manifest-provider-cache-module"></span><h2>rosdistro.manifest_provider.cache module<a class="headerlink" href="#module-rosdistro.manifest_provider.cache" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.manifest_provider.cache.CachedManifestProvider">
+<em class="property">class </em><code class="descclassname">rosdistro.manifest_provider.cache.</code><code class="descname">CachedManifestProvider</code><span class="sig-paren">(</span><em>distribution_cache</em>, <em>manifest_providers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/cache.html#CachedManifestProvider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.cache.CachedManifestProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rosdistro.manifest_provider.cache.CachedSourceManifestProvider">
+<em class="property">class </em><code class="descclassname">rosdistro.manifest_provider.cache.</code><code class="descname">CachedSourceManifestProvider</code><span class="sig-paren">(</span><em>distribution_cache</em>, <em>source_manifest_providers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/cache.html#CachedSourceManifestProvider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.cache.CachedSourceManifestProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.manifest_provider.cache.sanitize_xml">
+<code class="descclassname">rosdistro.manifest_provider.cache.</code><code class="descname">sanitize_xml</code><span class="sig-paren">(</span><em>xml_string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/cache.html#sanitize_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.cache.sanitize_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a version of the supplied XML string with comments and all whitespace stripped,
+including runs of spaces internal to text nodes. The returned string will be encoded,
+so str (Python 2) or bytes (Python 3).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.manifest_provider.git">
+<span id="rosdistro-manifest-provider-git-module"></span><h2>rosdistro.manifest_provider.git module<a class="headerlink" href="#module-rosdistro.manifest_provider.git" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.manifest_provider.git.git_manifest_provider">
+<code class="descclassname">rosdistro.manifest_provider.git.</code><code class="descname">git_manifest_provider</code><span class="sig-paren">(</span><em>_dist_name</em>, <em>repo</em>, <em>pkg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/git.html#git_manifest_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.git.git_manifest_provider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.manifest_provider.git.git_source_manifest_provider">
+<code class="descclassname">rosdistro.manifest_provider.git.</code><code class="descname">git_source_manifest_provider</code><span class="sig-paren">(</span><em>repo</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/git.html#git_source_manifest_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.git.git_source_manifest_provider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.manifest_provider.github">
+<span id="rosdistro-manifest-provider-github-module"></span><h2>rosdistro.manifest_provider.github module<a class="headerlink" href="#module-rosdistro.manifest_provider.github" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.manifest_provider.github.github_manifest_provider">
+<code class="descclassname">rosdistro.manifest_provider.github.</code><code class="descname">github_manifest_provider</code><span class="sig-paren">(</span><em>_dist_name</em>, <em>repo</em>, <em>pkg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/github.html#github_manifest_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.github.github_manifest_provider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.manifest_provider.github.github_source_manifest_provider">
+<code class="descclassname">rosdistro.manifest_provider.github.</code><code class="descname">github_source_manifest_provider</code><span class="sig-paren">(</span><em>repo</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/github.html#github_source_manifest_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.github.github_source_manifest_provider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.manifest_provider.tar">
+<span id="rosdistro-manifest-provider-tar-module"></span><h2>rosdistro.manifest_provider.tar module<a class="headerlink" href="#module-rosdistro.manifest_provider.tar" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.manifest_provider.tar.tar_manifest_provider">
+<code class="descclassname">rosdistro.manifest_provider.tar.</code><code class="descname">tar_manifest_provider</code><span class="sig-paren">(</span><em>_dist_name</em>, <em>repo</em>, <em>pkg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/tar.html#tar_manifest_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.tar.tar_manifest_provider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.manifest_provider.tar.tar_source_manifest_provider">
+<code class="descclassname">rosdistro.manifest_provider.tar.</code><code class="descname">tar_source_manifest_provider</code><span class="sig-paren">(</span><em>repo</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider/tar.html#tar_source_manifest_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.tar.tar_source_manifest_provider" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.manifest_provider">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-rosdistro.manifest_provider" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.manifest_provider.get_release_tag">
+<code class="descclassname">rosdistro.manifest_provider.</code><code class="descname">get_release_tag</code><span class="sig-paren">(</span><em>repo</em>, <em>pkg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/manifest_provider.html#get_release_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.manifest_provider.get_release_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">rosdistro</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="rosdistro.html">rosdistro package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="rosdistro.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rosdistro.external.html">rosdistro.external package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">rosdistro.manifest_provider package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-rosdistro.manifest_provider.bitbucket">rosdistro.manifest_provider.bitbucket module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-rosdistro.manifest_provider.cache">rosdistro.manifest_provider.cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-rosdistro.manifest_provider.git">rosdistro.manifest_provider.git module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-rosdistro.manifest_provider.github">rosdistro.manifest_provider.github module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-rosdistro.manifest_provider.tar">rosdistro.manifest_provider.tar module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-rosdistro.manifest_provider">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.aptdistro">rosdistro.aptdistro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.common">rosdistro.common module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.dependency_walker">rosdistro.dependency_walker module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.develdistro">rosdistro.develdistro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.distribution">rosdistro.distribution module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.distribution_cache">rosdistro.distribution_cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.distribution_cache_generator">rosdistro.distribution_cache_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.distribution_file">rosdistro.distribution_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.doc_build_file">rosdistro.doc_build_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.doc_file">rosdistro.doc_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.doc_repository_specification">rosdistro.doc_repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.freeze_source">rosdistro.freeze_source module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.index">rosdistro.index module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.legacy">rosdistro.legacy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.loader">rosdistro.loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.package">rosdistro.package module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release">rosdistro.release module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_build">rosdistro.release_build module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_build_file">rosdistro.release_build_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_cache">rosdistro.release_cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_cache_generator">rosdistro.release_cache_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_file">rosdistro.release_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_repository_specification">rosdistro.release_repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.repository">rosdistro.repository module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.repository_specification">rosdistro.repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.rosdistro">rosdistro.rosdistro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.source_build_file">rosdistro.source_build_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.source_file">rosdistro.source_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.source_repository_cache">rosdistro.source_repository_cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.source_repository_specification">rosdistro.source_repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.status">rosdistro.status module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.vcs">rosdistro.vcs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.verify">rosdistro.verify module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.writer">rosdistro.writer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="rosdistro.html">rosdistro package</a><ul>
+      <li>Previous: <a href="rosdistro.external.html" title="previous chapter">rosdistro.external package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/rosdistro.manifest_provider.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

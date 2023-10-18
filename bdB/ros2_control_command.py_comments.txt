@@ -1,0 +1,1 @@
+This python code block is a ros2 command extension for controlling different operations. It contains two methods, 'add_arguments' which adds arguments to the parser and 'main' which checks if the '_verb' attribute is available and if it succeeds, it invokes the corresponding verb's main method. 

@@ -1,0 +1,670 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>capabilities.specs.interface &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/_modules/capabilities/specs/interface.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for capabilities.specs.interface</h1><div class="highlight"><pre>
+<span class="c"># Software License Agreement (BSD License)</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) 2013, Open Source Robotics Foundation, Inc.</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c"># modification, are permitted provided that the following conditions</span>
+<span class="c"># are met:</span>
+<span class="c">#</span>
+<span class="c">#  * Redistributions of source code must retain the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c">#  * Redistributions in binary form must reproduce the above</span>
+<span class="c">#    copyright notice, this list of conditions and the following</span>
+<span class="c">#    disclaimer in the documentation and/or other materials provided</span>
+<span class="c">#    with the distribution.</span>
+<span class="c">#  * Neither the name of Open Source Robotics Foundation, Inc. nor</span>
+<span class="c">#    the names of its contributors may be used to endorse or promote</span>
+<span class="c">#    products derived from this software without specific prior</span>
+<span class="c">#    written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c"># &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="c"># FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="c"># COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="c"># INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="c"># BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="c"># LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="c"># LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="c"># ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="c"># Author: William Woodall &lt;william@osrfoundation.org&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module implements the Capability Interface concept</span>
+
+<span class="sd">This module contains free functions which serve as factories for the :py:class:`CapabilityInterface` class.</span>
+<span class="sd">These factories can take the spec file for a Capability Interface and create a</span>
+<span class="sd">:py:class:`CapabilityInterface` instance out of it.</span>
+<span class="sd">The :py:class:`Interface` class encapsulates the interface itself, representing the topics, services, params, etc...</span>
+<span class="sd">The :py:class:`CapabilityInterface` class encapsulates meta information about the Interface like the name,</span>
+<span class="sd">description, and extends the :py:class:`Interface` class.</span>
+<span class="sd">The :py:class:`Interface` class is made up of :py:class:`InterfaceElement`&#39;s which represent</span>
+<span class="sd">the elements of a Capability Interface, each consisting of a name, type, and description.</span>
+
+<span class="sd">With an Interface RGBCamera.yaml, like this::</span>
+
+<span class="sd">    %YAML 1.1</span>
+<span class="sd">    # Capability Interface file for RGBCamera</span>
+<span class="sd">    ---</span>
+<span class="sd">    # Name of the Interface</span>
+<span class="sd">    name: RGBCamera</span>
+<span class="sd">    spec_version: 1</span>
+<span class="sd">    spec_type: interface</span>
+<span class="sd">    description: &#39;This Capability describes the interface exposed by a generic RGBCamera.&#39;</span>
+<span class="sd">    interface:</span>
+<span class="sd">      # Topics</span>
+<span class="sd">      topics:</span>
+<span class="sd">        # Topics provided by the interface</span>
+<span class="sd">        provides:</span>
+<span class="sd">          &#39;camera/image_raw&#39;:</span>
+<span class="sd">            type: &#39;sensor_msgs/Image&#39;</span>
+<span class="sd">            description: &#39;raw image from the camera&#39;</span>
+<span class="sd">          &#39;camera/camera_info&#39;:</span>
+<span class="sd">            type: &#39;sensor_msgs/CameraInfo&#39;</span>
+<span class="sd">        # Topics expect by the interface</span>
+<span class="sd">        requires: {}</span>
+<span class="sd">      # Services provided by the interface</span>
+<span class="sd">      services:</span>
+<span class="sd">        &#39;camera/set_info&#39;:</span>
+<span class="sd">          type: &#39;sensor_msgs/SetCameraInfo&#39;</span>
+
+<span class="sd">You can use this interface like so::</span>
+
+<span class="sd">    &gt;&gt;&gt; from pprint import pprint</span>
+<span class="sd">    &gt;&gt;&gt; from capabilities.specs.interface import capability_interface_from_file_path</span>
+<span class="sd">    &gt;&gt;&gt; ci = capability_interface_from_file_path(&#39;test/unit/specs/interfaces/RGBCamera.yaml&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; pprint(ci.topics)</span>
+<span class="sd">    {&#39;camera/camera_info&#39;: &lt;capabilities.specs.interface.InterfaceElement object at 0x10736ced0&gt;,</span>
+<span class="sd">     &#39;camera/image_raw&#39;: &lt;capabilities.specs.interface.InterfaceElement object at 0x10736cf10&gt;}</span>
+<span class="sd">    &gt;&gt;&gt; print(ci.topics.values()[0].name)</span>
+<span class="sd">    camera/image_raw</span>
+<span class="sd">    &gt;&gt;&gt; print(ci.topics.values()[0].type)</span>
+<span class="sd">    sensor_msgs/Image</span>
+<span class="sd">    &gt;&gt;&gt; print(ci.topics.values()[0].description)</span>
+<span class="sd">    raw image from the camera</span>
+<span class="sd">    &gt;&gt;&gt; pprint(ci.required_services)</span>
+<span class="sd">    {}</span>
+<span class="sd">    &gt;&gt;&gt; pprint(ci.provided_topics)</span>
+<span class="sd">    {&#39;camera/camera_info&#39;: &lt;capabilities.specs.interface.InterfaceElement object at 0x10774ce10&gt;,</span>
+<span class="sd">     &#39;camera/image_raw&#39;: &lt;capabilities.specs.interface.InterfaceElement object at 0x10774ce50&gt;}</span>
+<span class="sd">    &gt;&gt;&gt; pprint(ci.actions)</span>
+<span class="sd">    {}</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">difflib</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+
+<div class="viewcode-block" id="InvalidInterface"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.InvalidInterface">[docs]</a><span class="k">class</span> <span class="nc">InvalidInterface</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;InvalidInterface exception&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;In interface spec file &#39;{0}&#39;: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="capability_interface_from_file_path"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.capability_interface_from_file_path">[docs]</a><span class="k">def</span> <span class="nf">capability_interface_from_file_path</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a CapabilityInterface instance from a spec file at a given path</span>
+
+<span class="sd">    See :py:func:`capability_interface_from_dict` for list of possible exceptions</span>
+
+<span class="sd">    :param file_path: location of the Capability Interface spec file</span>
+<span class="sd">    :type file_path: str</span>
+<span class="sd">    :returns: CapabilityInterface instance, populated with data from the spec file</span>
+<span class="sd">    :rtype: :py:class:`CapabilityInterface`</span>
+<span class="sd">    :raises: :py:exc:`OSError` if the given file does not exist</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_path</span><span class="p">),</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">capability_interface_from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">file_path</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="capability_interface_from_file"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.capability_interface_from_file">[docs]</a><span class="k">def</span> <span class="nf">capability_interface_from_file</span><span class="p">(</span><span class="n">file_handle</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a CapabilityInterface instance from a given spec file handle</span>
+
+<span class="sd">    See :py:func:`capability_interface_from_dict` for list of possible exceptions</span>
+
+<span class="sd">    :param file_handle: file handle for the Capability Interface spec file</span>
+<span class="sd">    :type file_handle: file</span>
+<span class="sd">    :returns: CapabilityInterface instance, populated with data from the spec file</span>
+<span class="sd">    :rtype: :py:class:`CapabilityInterface`</span>
+<span class="sd">    :raises: :py:exc:`OSError` if the given file does not exist</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">capability_interface_from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handle</span><span class="o">.</span><span class="n">read</span><span class="p">()),</span> <span class="n">file_handle</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="capability_interface_from_string"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.capability_interface_from_string">[docs]</a><span class="k">def</span> <span class="nf">capability_interface_from_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="s">&#39;&lt;string&gt;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a CapabilityInterface instance from a string containing the spec</span>
+
+<span class="sd">    See :py:func:`capability_interface_from_dict` for list of possible exceptions</span>
+
+<span class="sd">    :param string: Capability Interface spec</span>
+<span class="sd">    :type string: str</span>
+<span class="sd">    :param file_name: Name of the file where this spec originated (defaults to &#39;&lt;string&gt;&#39;)</span>
+<span class="sd">    :param file_name: str</span>
+<span class="sd">    :returns: CapabilityInterface instance, populated with the provided spec</span>
+<span class="sd">    :rtype: :py:class:`CapabilityInterface`</span>
+<span class="sd">    :raises: :py:exc:`AttributeError` if the given value for string is not a str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">capability_interface_from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">string</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="capability_interface_from_dict"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.capability_interface_from_dict">[docs]</a><span class="k">def</span> <span class="nf">capability_interface_from_dict</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="s">&#39;&lt;dict&gt;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a CapabilityInterface instance from a dict version of the spec</span>
+
+<span class="sd">    :param string: Capability Interface spec</span>
+<span class="sd">    :type string: dict</span>
+<span class="sd">    :param file_name: Name of the file where this spec originated (defaults to &#39;&lt;dict&gt;&#39;)</span>
+<span class="sd">    :param file_name: str</span>
+<span class="sd">    :returns: CapabilityInterface instance, populated with the provided spec</span>
+<span class="sd">    :rtype: :py:class:`CapabilityInterface`</span>
+<span class="sd">    :raises: :py:exc:`InvalidInterface` if the spec is not complete or has invalid entries</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s">&#39;name&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="s">&#39;No name specified&#39;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s">&#39;spec_type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="s">&#39;No spec type specified&#39;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">spec</span><span class="p">[</span><span class="s">&#39;spec_type&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;interface&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="s">&quot;Invalid spec type, expected &#39;interface&#39; got: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s">&#39;spec_type&#39;</span><span class="p">]),</span>
+                               <span class="n">file_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;spec_version&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="s">&#39;No spec version specified&#39;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">spec_version</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s">&#39;spec_version&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">spec_version</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="s">&quot;Invalid spec version: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spec_version</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;description&#39;</span><span class="p">,</span> <span class="s">&#39;No description given.&#39;</span><span class="p">)</span>
+    <span class="n">capability_interface</span> <span class="o">=</span> <span class="n">CapabilityInterface</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">spec_version</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+    <span class="n">interface</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;interface&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">interface</span><span class="p">:</span>
+        <span class="n">valid_interface_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;topics&#39;</span><span class="p">,</span> <span class="s">&#39;services&#39;</span><span class="p">,</span> <span class="s">&#39;actions&#39;</span><span class="p">,</span> <span class="s">&#39;parameters&#39;</span><span class="p">,</span> <span class="s">&#39;dynamic_parameters&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">valid_interface_keys</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">element_groups</span> <span class="o">=</span> <span class="n">interface</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_groups</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="s">&quot;Invalid {0} section, expected dict got: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">element_groups</span><span class="p">)),</span>
+                                       <span class="n">file_name</span><span class="p">)</span>
+            <span class="n">__process_interface_element</span><span class="p">(</span><span class="n">key</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">capability_interface</span><span class="p">,</span> <span class="n">element_groups</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s">&#39;dynamic_parameters&#39;</span><span class="p">:</span>
+            <span class="n">dynamic_parameters</span> <span class="o">=</span> <span class="n">interface</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dynamic_parameters</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="s">&quot;Invalid dynamic_parameters entry, expect list got: &#39;{0}&#39;&quot;</span>
+                                       <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">dynamic_parameters</span><span class="p">)),</span> <span class="n">file_name</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dynamic_parameter</span> <span class="ow">in</span> <span class="n">dynamic_parameters</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">capability_interface</span><span class="o">.</span><span class="n">add_dynamic_parameter</span><span class="p">(</span><span class="n">dynamic_parameter</span><span class="p">)</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">RuntimeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="n">difflib</span><span class="o">.</span><span class="n">get_close_matches</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">valid_interface_keys</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;, did you mean: &#39;{0}{1}&#39;?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;&#39;, &#39;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">matches</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="s">&quot;&#39;, or &#39;&quot;</span> <span class="o">+</span> <span class="n">matches</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">matches</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;, did you mean: &#39;{0}&#39;?&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="s">&quot;Invalid interface section: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="n">msg</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">capability_interface</span>
+
+</div>
+<span class="k">def</span> <span class="nf">__process_interface_element</span><span class="p">(</span><span class="n">element_type</span><span class="p">,</span> <span class="n">capability_interface</span><span class="p">,</span> <span class="n">element_groups</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__add_element_to_interface</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">group_name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s">&#39;type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">element</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="s">&quot;{0} has no type: &#39;{1}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">element_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">name</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;description&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">interface_element</span> <span class="o">=</span> <span class="n">InterfaceElement</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">element_type</span><span class="p">,</span> <span class="n">element</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">],</span> <span class="n">description</span><span class="p">)</span>
+        <span class="n">add</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">capability_interface</span><span class="p">,</span> <span class="s">&#39;add_&#39;</span> <span class="o">+</span> <span class="n">element_type</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">interface_element</span><span class="p">,</span> <span class="n">group_name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">RuntimeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidInterface</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">element_groups</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">group</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;requires&#39;</span><span class="p">,</span> <span class="s">&#39;provides&#39;</span><span class="p">]:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="n">element_groups</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="ow">or</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="n">__add_element_to_interface</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">__add_element_to_interface</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">element_groups</span><span class="p">[</span><span class="n">group</span><span class="p">])</span>
+
+
+<div class="viewcode-block" id="Interface"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.Interface">[docs]</a><span class="k">class</span> <span class="nc">Interface</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents the Interface part of a Capability Interface</span>
+
+<span class="sd">    An Interface can consist of zero to all of these elements:</span>
+
+<span class="sd">    - topics: (name/type)</span>
+
+<span class="sd">      - requires: Expected topics</span>
+<span class="sd">      - provides: Provided topics</span>
+
+<span class="sd">    - services: (name/type)</span>
+
+<span class="sd">      - requires: Expected services</span>
+<span class="sd">      - provides: Provided services</span>
+
+<span class="sd">    - actions: (name/type)</span>
+
+<span class="sd">      - requires: Expected actions</span>
+<span class="sd">      - provides: Provided actions</span>
+
+<span class="sd">    - parameters: (name/type/description)</span>
+
+<span class="sd">      - requires: Parameters which should be set for the interface, e.g. map_resolution</span>
+<span class="sd">      - provides: Parameters which the interface provides, e.g. robot_model</span>
+
+<span class="sd">    - dynamic_parameters: List of dynamic_parameters which are available (name)</span>
+
+<span class="sd">    The groupings &#39;requires&#39; and &#39;provides&#39; are purely semantic,</span>
+<span class="sd">    and are not used by the capability system programatically,</span>
+<span class="sd">    but instead are there to give more meaning to the developers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__topics</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__services</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__actions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__parameters</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dynamic_parameters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__element_containers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;topic&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__topics</span><span class="p">,</span>
+            <span class="s">&#39;service&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__services</span><span class="p">,</span>
+            <span class="s">&#39;action&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__actions</span><span class="p">,</span>
+            <span class="s">&#39;parameter&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parameters</span><span class="p">,</span>
+            <span class="s">&#39;dynamic_parameter&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dynamic_parameters</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__check_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">InterfaceElement</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Invalid element, expected InterfaceElement got: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">__check_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&quot;Invalid element name, expected str got: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">__add_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">grouping</span><span class="p">):</span>
+        <span class="c"># Make sure this is a valid kind of element</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__element_containers</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Invalid element kind: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kind</span><span class="p">))</span>
+        <span class="c"># Make sure the name is a str</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="c"># Make sure this is actually an InterfaceElement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__check_element</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="c"># Make sure the grouping is valid</span>
+        <span class="n">grouping</span> <span class="o">=</span> <span class="n">grouping</span> <span class="ow">or</span> <span class="s">&#39;no group&#39;</span>
+        <span class="k">if</span> <span class="n">grouping</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;no group&#39;</span><span class="p">,</span> <span class="s">&#39;requires&#39;</span><span class="p">,</span> <span class="s">&#39;provides&#39;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Invalid grouping: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">grouping</span><span class="p">))</span>
+        <span class="n">container</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__element_containers</span><span class="p">[</span><span class="n">kind</span><span class="p">]</span>
+        <span class="c"># Create the group in the container if needed</span>
+        <span class="k">if</span> <span class="n">grouping</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">container</span><span class="p">:</span>
+            <span class="n">container</span><span class="p">[</span><span class="n">grouping</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c"># Store the element in the container by group and name</span>
+        <span class="n">container</span><span class="p">[</span><span class="n">grouping</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">element</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">topics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">name</span><span class="p">,</span> <span class="n">topics</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">topics</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__topics</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">])</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">required_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__topics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;requires&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">provided_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__topics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;provides&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+<div class="viewcode-block" id="Interface.add_topic"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.Interface.add_topic">[docs]</a>    <span class="k">def</span> <span class="nf">add_topic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">,</span> <span class="n">interface_element</span><span class="p">,</span> <span class="n">grouping</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a topic to the Interface</span>
+
+<span class="sd">        :param topic_name: name of the topic</span>
+<span class="sd">        :type topic_name: str</span>
+<span class="sd">        :param interface_element: :py:class:`InterfaceElement` instance for the topic</span>
+<span class="sd">        :type interface_element: :py:class:`InterfaceElement`</span>
+<span class="sd">        :param grouping: semantic grouping of the topic, &#39;requires&#39;, &#39;provides&#39;, or None</span>
+<span class="sd">        :type grouping: :py:obj:`str` or :py:obj:`None`</span>
+<span class="sd">        :raises: :py:exc:`ValueError` if the grouping is invalid</span>
+<span class="sd">        :raises: :py:exc:`RuntimeError` if the topic is already in the interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">topic_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Interface has topic listed twice: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">topic_name</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_element</span><span class="p">(</span><span class="s">&#39;topic&#39;</span><span class="p">,</span> <span class="n">topic_name</span><span class="p">,</span> <span class="n">interface_element</span><span class="p">,</span> <span class="n">grouping</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">services</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">name</span><span class="p">,</span> <span class="n">services</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">services</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__services</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">services</span><span class="p">])</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">required_services</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__services</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;requires&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">provided_services</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__services</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;provides&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+<div class="viewcode-block" id="Interface.add_service"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.Interface.add_service">[docs]</a>    <span class="k">def</span> <span class="nf">add_service</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_name</span><span class="p">,</span> <span class="n">interface_element</span><span class="p">,</span> <span class="n">grouping</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a service to the Interface</span>
+
+<span class="sd">        :param service_name: name of the service</span>
+<span class="sd">        :type service_name: str</span>
+<span class="sd">        :param interface_element: :py:class:`InterfaceElement` instance for the service</span>
+<span class="sd">        :type interface_element: :py:class:`InterfaceElement`</span>
+<span class="sd">        :param grouping: semantic grouping of the service, &#39;requires&#39;, &#39;provides&#39;, or None</span>
+<span class="sd">        :type grouping: :py:obj:`str` or :py:obj:`None`</span>
+<span class="sd">        :raises: :py:exc:`ValueError` if the grouping is invalid</span>
+<span class="sd">        :raises: :py:exc:`RuntimeError` if the service is already in the interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">service_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Interface has service listed twice: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">service_name</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_element</span><span class="p">(</span><span class="s">&#39;service&#39;</span><span class="p">,</span> <span class="n">service_name</span><span class="p">,</span> <span class="n">interface_element</span><span class="p">,</span> <span class="n">grouping</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">name</span><span class="p">,</span> <span class="n">actions</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">actions</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__actions</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">])</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">required_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__actions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;requires&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">provided_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__actions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;provides&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+<div class="viewcode-block" id="Interface.add_action"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.Interface.add_action">[docs]</a>    <span class="k">def</span> <span class="nf">add_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">interface_element</span><span class="p">,</span> <span class="n">grouping</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a action to the Interface</span>
+
+<span class="sd">        :param action_name: name of the action</span>
+<span class="sd">        :type action_name: str</span>
+<span class="sd">        :param interface_element: :py:class:`InterfaceElement` instance for the action</span>
+<span class="sd">        :type interface_element: :py:class:`InterfaceElement`</span>
+<span class="sd">        :param grouping: semantic grouping of the action, &#39;requires&#39;, &#39;provides&#39;, or None</span>
+<span class="sd">        :type grouping: :py:obj:`str` or :py:obj:`None`</span>
+<span class="sd">        :raises: :py:exc:`ValueError` if the grouping is invalid</span>
+<span class="sd">        :raises: :py:exc:`RuntimeError` if the action is already in the interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">action_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Interface has action listed twice: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action_name</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_element</span><span class="p">(</span><span class="s">&#39;action&#39;</span><span class="p">,</span> <span class="n">action_name</span><span class="p">,</span> <span class="n">interface_element</span><span class="p">,</span> <span class="n">grouping</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">name</span><span class="p">,</span> <span class="n">actions</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">actions</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__parameters</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">])</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">required_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;requires&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">provided_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;provides&#39;</span><span class="p">,</span> <span class="p">{}))</span>
+
+<div class="viewcode-block" id="Interface.add_parameter"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.Interface.add_parameter">[docs]</a>    <span class="k">def</span> <span class="nf">add_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter_name</span><span class="p">,</span> <span class="n">interface_element</span><span class="p">,</span> <span class="n">grouping</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a parameter to the Interface</span>
+
+<span class="sd">        :param parameter_name: name of the parameter</span>
+<span class="sd">        :type parameter_name: str</span>
+<span class="sd">        :param interface_element: :py:class:`InterfaceElement` instance for the parameter</span>
+<span class="sd">        :type interface_element: :py:class:`InterfaceElement`</span>
+<span class="sd">        :param grouping: semantic grouping of the parameter, &#39;requires&#39;, &#39;provides&#39;, or None</span>
+<span class="sd">        :type grouping: :py:obj:`str` or :py:obj:`None`</span>
+<span class="sd">        :raises: :py:exc:`ValueError` if the grouping is invalid</span>
+<span class="sd">        :raises: :py:exc:`RuntimeError` if the parameter is already in the interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">parameter_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Interface has parameter listed twice: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">parameter_name</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_element</span><span class="p">(</span><span class="s">&#39;parameter&#39;</span><span class="p">,</span> <span class="n">parameter_name</span><span class="p">,</span> <span class="n">interface_element</span><span class="p">,</span> <span class="n">grouping</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dynamic_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dynamic_parameters</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Interface.add_dynamic_parameter"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.Interface.add_dynamic_parameter">[docs]</a>    <span class="k">def</span> <span class="nf">add_dynamic_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamic_parameter_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Adds a dynamic_parameter to the Interface</span>
+
+<span class="sd">        :param dynamic_parameter_name: name of the dynamic_parameter</span>
+<span class="sd">        :type dynamic_parameter_name: str</span>
+<span class="sd">        :raises: :py:exc:`RuntimeError` if the dynamic_parameter is already in the interface</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dynamic_parameter_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_parameters</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Interface has dynamic parameter listed twice: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dynamic_parameter_name</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__dynamic_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dynamic_parameter_name</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="InterfaceElement"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.InterfaceElement">[docs]</a><span class="k">class</span> <span class="nc">InterfaceElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents a part of an interface</span>
+
+<span class="sd">    An interface element is defined by:</span>
+
+<span class="sd">    - name: topic, service, action, or parameter name</span>
+<span class="sd">    - element kind: topic, service, action, parameter, or dynamic_parameter</span>
+<span class="sd">    - type: topic, service or action type (pkg/msg) or parameter type</span>
+<span class="sd">    - description: free form description of the element</span>
+
+<span class="sd">    :raises: :py:exc:`ValueError` if the element kind is invalid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">valid_element_kinds</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;topic&#39;</span><span class="p">,</span> <span class="s">&#39;service&#39;</span><span class="p">,</span> <span class="s">&#39;action&#39;</span><span class="p">,</span> <span class="s">&#39;parameter&#39;</span><span class="p">,</span> <span class="s">&#39;dynamic_parameter&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">element_kind</span><span class="p">,</span> <span class="n">element_type</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="n">element_kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_element_kinds</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;Invalid element kind: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">element_kind</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kind</span> <span class="o">=</span> <span class="n">element_kind</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">element_type</span> <span class="o">=</span> <span class="n">element_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;&quot;name: {name}</span>
+<span class="s">kind: {kind}</span>
+<span class="s">element type: {element_type}</span>
+<span class="s">description:</span>
+<span class="s">  {description}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="CapabilityInterface"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.interface.CapabilityInterface">[docs]</a><span class="k">class</span> <span class="nc">CapabilityInterface</span><span class="p">(</span><span class="n">Interface</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents a Capability Interface</span>
+
+<span class="sd">    A Capability Interface is defined by:</span>
+
+<span class="sd">    - name (str): name of the interface</span>
+<span class="sd">    - spec_type (str): type of the interface specification (has to be &#39;interface&#39;)</span>
+<span class="sd">    - spec_version (int): version of the interface specification</span>
+<span class="sd">    - description (str): free form description of the interface</span>
+<span class="sd">    - default_provider (str): name of the default provider for this interface, defaults to &#39;unknown&#39;</span>
+<span class="sd">    - interface (:py:class:`Interface`): representation of components which make up the interface</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">spec_type</span> <span class="o">=</span> <span class="s">&#39;interface&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">spec_version</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spec_version</span> <span class="o">=</span> <span class="n">spec_version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_provider</span> <span class="o">=</span> <span class="s">&#39;unknown&#39;</span>
+        <span class="n">Interface</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="s">&quot;topics:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">required_and_provided</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">required_topics</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">provided_topics</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">both</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">topics</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">required_and_provided</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">both</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">        &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      requires:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_topics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;        &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">          &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      provides:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">provided_topics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;        &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">          &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">topic</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;    services:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">required_and_provided</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">required_services</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">provided_services</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">both</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">required_and_provided</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">service</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">both</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">        &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">service</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      requires:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">service</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_services</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;        &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">          &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">service</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      provides:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">service</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">provided_services</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;        &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">          &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">service</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;    actions:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">required_and_provided</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">required_actions</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">provided_actions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">both</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">required_and_provided</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">both</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">        &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">action</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      requires:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;        &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">          &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">action</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      provides:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">action</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">provided_actions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;        &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">          &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">action</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;    parameters:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">required_and_provided</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">required_parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">provided_parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">both</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">required_and_provided</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">both</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">        &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      requires:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">required_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;        &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">          &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;      provides:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">provided_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;        &#39;&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s">&quot;&#39;:</span><span class="se">\n</span><span class="s">        &quot;</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">          &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;    dynamic parameters:</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">for</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_parameters</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">      &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+            <span class="n">elements</span> <span class="o">+=</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;&quot;Capability Interface:</span>
+<span class="s">{{</span>
+<span class="s">  name: {name}</span>
+<span class="s">  spec version: {spec_version}</span>
+<span class="s">  default provider: {default_provider}</span>
+<span class="s">  description:</span>
+<span class="s">    {description}</span>
+<span class="s">  elements:</span>
+<span class="s">    {elements}</span>
+<span class="s">}}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="n">elements</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

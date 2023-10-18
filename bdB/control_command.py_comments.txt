@@ -1,0 +1,1 @@
+This is a part of a variable impedance control code for force feedback. It aims to control various functionalities. The semantic search queries provide insights on how to improve the ControlCommand class implementation.

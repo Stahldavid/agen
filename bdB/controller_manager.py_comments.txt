@@ -1,0 +1,1 @@
+The code to be optimized is a python script that sets up a ROS node for a controller manager and sets up services for configuring, listing, loading, unloading, and switching controllers. The goal for optimization should be towards making the code more effective, efficient, and easier to understand.

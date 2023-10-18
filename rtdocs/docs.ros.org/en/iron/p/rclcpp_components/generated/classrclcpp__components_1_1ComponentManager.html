@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class ComponentManager &mdash; rclcpp_components 21.0.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Class ComponentManagerException" href="classrclcpp__components_1_1ComponentManagerException.html" />
+    <link rel="prev" title="Struct ComponentManagerIsolated::DedicatedExecutorWrapper" href="structrclcpp__components_1_1ComponentManagerIsolated_1_1DedicatedExecutorWrapper.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            rclcpp_components
+          </a>
+              <div class="version">
+                21.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">rclcpp_components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#page-hierarchy">Page Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#reference">Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespace_class_loader.html">Namespace class_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespace_rclcpp.html">Namespace rclcpp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="namespace_rclcpp_components.html">Namespace rclcpp_components</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_components.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="namespace_std.html">Namespace std</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#classes-and-structs">Classes and Structs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="structrclcpp__components_1_1ComponentManagerIsolated_1_1DedicatedExecutorWrapper.html">Struct ComponentManagerIsolated::DedicatedExecutorWrapper</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structrclcpp__components_1_1ComponentManagerIsolated_1_1DedicatedExecutorWrapper.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l5"><a class="reference internal" href="structrclcpp__components_1_1ComponentManagerIsolated_1_1DedicatedExecutorWrapper.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Class ComponentManager</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#base-type">Base Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerException.html">Class ComponentManagerException</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerException.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerException.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerException.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerIsolated.html">Template Class ComponentManagerIsolated</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerIsolated.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerIsolated.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerIsolated.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerIsolated.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerIsolated.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__components_1_1NodeFactory.html">Class NodeFactory</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1NodeFactory.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__components_1_1NodeFactory.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1NodeFactory.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__components_1_1NodeFactoryTemplate.html">Template Class NodeFactoryTemplate</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1NodeFactoryTemplate.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__components_1_1NodeFactoryTemplate.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1NodeFactoryTemplate.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__components_1_1NodeInstanceWrapper.html">Class NodeInstanceWrapper</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__components_1_1NodeInstanceWrapper.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#defines">Defines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1ab41098c2720a1d86a493cca41dbea5dd.html">Define RCLCPP_COMPONENTS_EXPORT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1ab41098c2720a1d86a493cca41dbea5dd.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1aeac5f721beb2b53c2a11229b13ea8276.html">Define RCLCPP_COMPONENTS_IMPORT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1aeac5f721beb2b53c2a11229b13ea8276.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1a1df4f249cc54f6ad0d7564a5c07aef05.html">Define RCLCPP_COMPONENTS_LOCAL</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1a1df4f249cc54f6ad0d7564a5c07aef05.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1a6f5fc35c32399b11eb83ca0b3a9426be.html">Define RCLCPP_COMPONENTS_PUBLIC</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1a6f5fc35c32399b11eb83ca0b3a9426be.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1aa497fcd256389d5f27f23adcc8cb8031.html">Define RCLCPP_COMPONENTS_PUBLIC_TYPE</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1aa497fcd256389d5f27f23adcc8cb8031.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_register__node__macro_8hpp_1a544e598f1116a756e7440b8ce8bc5296.html">Define RCLCPP_COMPONENTS_REGISTER_NODE</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_register__node__macro_8hpp_1a544e598f1116a756e7440b8ce8bc5296.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#directories">Directories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dir_include.html">Directory include</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dir_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="dir_include_rclcpp_components.html">Directory rclcpp_components</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dir_include_rclcpp_components.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#files">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_components_component_manager.hpp.html">File component_manager.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_component_manager.hpp.html#definition-include-rclcpp-components-component-manager-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_components/component_manager.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_components_component_manager.hpp.html">Program Listing for File component_manager.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_component_manager.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_component_manager.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_component_manager.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_component_manager.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_components_component_manager_isolated.hpp.html">File component_manager_isolated.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_component_manager_isolated.hpp.html#definition-include-rclcpp-components-component-manager-isolated-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_components/component_manager_isolated.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_components_component_manager_isolated.hpp.html">Program Listing for File component_manager_isolated.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_component_manager_isolated.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_component_manager_isolated.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_component_manager_isolated.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_components_node_factory.hpp.html">File node_factory.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory.hpp.html#definition-include-rclcpp-components-node-factory-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_components/node_factory.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_components_node_factory.hpp.html">Program Listing for File node_factory.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_components_node_factory_template.hpp.html">File node_factory_template.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory_template.hpp.html#definition-include-rclcpp-components-node-factory-template-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_components/node_factory_template.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_components_node_factory_template.hpp.html">Program Listing for File node_factory_template.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory_template.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory_template.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory_template.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_factory_template.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_components_node_instance_wrapper.hpp.html">File node_instance_wrapper.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_instance_wrapper.hpp.html#definition-include-rclcpp-components-node-instance-wrapper-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_components/node_instance_wrapper.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_components_node_instance_wrapper.hpp.html">Program Listing for File node_instance_wrapper.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_instance_wrapper.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_instance_wrapper.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_instance_wrapper.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_node_instance_wrapper.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_components_register_node_macro.hpp.html">File register_node_macro.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_register_node_macro.hpp.html#definition-include-rclcpp-components-register-node-macro-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_components/register_node_macro.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_components_register_node_macro.hpp.html">Program Listing for File register_node_macro.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_register_node_macro.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_register_node_macro.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_components_visibility_control.hpp.html">File visibility_control.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_visibility_control.hpp.html#definition-include-rclcpp-components-visibility-control-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_components/visibility_control.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_components_visibility_control.hpp.html">Program Listing for File visibility_control.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_visibility_control.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_components_visibility_control.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#pages">Pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page_deprecated.html">Deprecated List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rclcpp_components</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">rclcpp_components: Package containing tools for dynamically loadable components.</a></li>
+      <li class="breadcrumb-item active">Class ComponentManager</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/classrclcpp__components_1_1ComponentManager.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="class-componentmanager">
+<span id="exhale-class-classrclcpp-components-1-1componentmanager"></span><h1>Class ComponentManager<a class="headerlink" href="#class-componentmanager" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>Defined in <a class="reference internal" href="file_include_rclcpp_components_component_manager.hpp.html#file-include-rclcpp-components-component-manager-hpp"><span class="std std-ref">File component_manager.hpp</span></a></p></li>
+</ul>
+<section id="inheritance-relationships">
+<h2>Inheritance Relationships<a class="headerlink" href="#inheritance-relationships" title="Permalink to this heading"></a></h2>
+<section id="base-type">
+<h3>Base Type<a class="headerlink" href="#base-type" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">rclcpp::Node</span></code></p></li>
+</ul>
+</section>
+<section id="derived-type">
+<h3>Derived Type<a class="headerlink" href="#derived-type" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">rclcpp_components::ComponentManagerIsolated&lt;</span> <span class="pre">ExecutorT</span> <span class="pre">&gt;</span></code> (<a class="reference internal" href="classrclcpp__components_1_1ComponentManagerIsolated.html#exhale-class-classrclcpp-components-1-1componentmanagerisolated"><span class="std std-ref">Template Class ComponentManagerIsolated</span></a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="class-documentation">
+<h2>Class Documentation<a class="headerlink" href="#class-documentation" title="Permalink to this heading"></a></h2>
+<dl class="cpp class">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManagerE">
+<span id="_CPPv3N17rclcpp_components16ComponentManagerE"></span><span id="_CPPv2N17rclcpp_components16ComponentManagerE"></span><span id="rclcpp_components::ComponentManager"></span><span class="target" id="classrclcpp__components_1_1ComponentManager"></span><span class="k"><span class="pre">class</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ComponentManager</span></span></span><span class="w"> </span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="k"><span class="pre">public</span></span><span class="w"> </span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Node</span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManagerE" title="Permalink to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="#classrclcpp__components_1_1ComponentManager"><span class="std std-ref">ComponentManager</span></a> handles the services to load, unload, and get the list of loaded components. </p>
+<p>Subclassed by <a class="reference internal" href="classrclcpp__components_1_1ComponentManagerIsolated.html#classrclcpp__components_1_1ComponentManagerIsolated"><span class="std std-ref">rclcpp_components::ComponentManagerIsolated&lt; ExecutorT &gt;</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager8LoadNodeE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager8LoadNodeE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager8LoadNodeE"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1ae4041997397b5a89a2e41c0ac644addf"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">LoadNode</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">composition_interfaces</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">srv</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">LoadNode</span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager8LoadNodeE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager10UnloadNodeE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager10UnloadNodeE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager10UnloadNodeE"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1aa8dddf738027eb6363f7a533f8cbbc36"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">UnloadNode</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">composition_interfaces</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">srv</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">UnloadNode</span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager10UnloadNodeE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager9ListNodesE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager9ListNodesE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager9ListNodesE"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1ad21d810a6cfe772b1c6b6c630e377525"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ListNodes</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">composition_interfaces</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">srv</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ListNodes</span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager9ListNodesE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager17ComponentResourceE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager17ComponentResourceE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager17ComponentResourceE"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1adb7a8f7668bdd6ab2accec856611834d"></span><span class="k"><span class="pre">using</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ComponentResource</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">pair</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">&gt;</span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager17ComponentResourceE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Represents a component resource. </p>
+<p>Is a pair of class name (for class loader) and library path (absolute) </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager16ComponentManagerENSt8weak_ptrIN6rclcpp8ExecutorEEENSt6stringERKN6rclcpp11NodeOptionsE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager16ComponentManagerENSt8weak_ptrIN6rclcpp8ExecutorEEENSt6stringERKN6rclcpp11NodeOptionsE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager16ComponentManagerENSt8weak_ptrIN6rclcpp8ExecutorEEENSt6stringERKN6rclcpp11NodeOptionsE"></span><span id="rclcpp_components::ComponentManager::ComponentManager__std::weak_ptr:rclcpp::Executor:.ss.rclcpp::NodeOptionsCR"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1ad34d153739479116c1926cd58d74eb77"></span><span class="sig-name descname"><span class="n"><span class="pre">ComponentManager</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">weak_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Executor</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">executor</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">weak_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">executors</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">MultiThreadedExecutor</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">node_name</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;ComponentManager&quot;</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">NodeOptions</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">node_options</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">NodeOptions</span></span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">.</span></span><span class="n"><span class="pre">start_parameter_services</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">.</span></span><span class="n"><span class="pre">start_parameter_event_publisher</span></span><span class="p"><span class="pre">(</span></span><span class="k"><span class="pre">false</span></span><span class="p"><span class="pre">)</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager16ComponentManagerENSt8weak_ptrIN6rclcpp8ExecutorEEENSt6stringERKN6rclcpp11NodeOptionsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Default constructor. </p>
+<p>Initializes the component manager. It creates the services: load node, unload node and list nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>executor</strong> – the executor which will spin the node. </p></li>
+<li><p><strong>node_name</strong> – the name of the node that the data originates from. </p></li>
+<li><p><strong>node_options</strong> – additional options to control creation of the node. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManagerD0Ev">
+<span id="_CPPv3N17rclcpp_components16ComponentManagerD0Ev"></span><span id="_CPPv2N17rclcpp_components16ComponentManagerD0Ev"></span><span id="rclcpp_components::ComponentManager::~ComponentManager"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a0841b2c652360936c4f2fefe4e5a84b5"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">~ComponentManager</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManagerD0Ev" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK17rclcpp_components16ComponentManager23get_component_resourcesERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3NK17rclcpp_components16ComponentManager23get_component_resourcesERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2NK17rclcpp_components16ComponentManager23get_component_resourcesERKNSt6stringERKNSt6stringE"></span><span id="rclcpp_components::ComponentManager::get_component_resources__ssCR.ssCRC"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a35c9b7317b529807fe2ed43d3b2c43d6"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager17ComponentResourceE" title="rclcpp_components::ComponentManager::ComponentResource"><span class="n"><span class="pre">ComponentResource</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">get_component_resources</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">package_name</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">resource_index</span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="s"><span class="pre">&quot;rclcpp_components&quot;</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK17rclcpp_components16ComponentManager23get_component_resourcesERKNSt6stringERKNSt6stringE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Return a list of valid loadable components in a given package. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>package_name</strong> – name of the package </p></li>
+<li><p><strong>resource_index</strong> – name of the executable </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><p><span><span class="cpp-expr sig sig-inline cpp"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerException.html#_CPPv4N17rclcpp_components25ComponentManagerExceptionE" title="rclcpp_components::ComponentManagerException"><span class="n">ComponentManagerException</span></a></span></span> – if the resource was not found or a invalid resource entry </p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a list of component resources </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager24create_component_factoryERK17ComponentResource">
+<span id="_CPPv3N17rclcpp_components16ComponentManager24create_component_factoryERK17ComponentResource"></span><span id="_CPPv2N17rclcpp_components16ComponentManager24create_component_factoryERK17ComponentResource"></span><span id="rclcpp_components::ComponentManager::create_component_factory__ComponentResourceCR"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a04be8e3a705e9a4996ee684a1a92e39d"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rclcpp_components</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classrclcpp__components_1_1NodeFactory.html#_CPPv4N17rclcpp_components11NodeFactoryE" title="rclcpp_components::NodeFactory"><span class="n"><span class="pre">NodeFactory</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create_component_factory</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager17ComponentResourceE" title="rclcpp_components::ComponentManager::ComponentResource"><span class="n"><span class="pre">ComponentResource</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">resource</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager24create_component_factoryERK17ComponentResource" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Instantiate a component from a dynamic library. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>resource</strong> – a component resource (class name + library path) </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a <a class="reference internal" href="classrclcpp__components_1_1NodeFactory.html#classrclcpp__components_1_1NodeFactory"><span class="std std-ref">NodeFactory</span></a> interface </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager12set_executorEKNSt8weak_ptrIN6rclcpp8ExecutorEEE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager12set_executorEKNSt8weak_ptrIN6rclcpp8ExecutorEEE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager12set_executorEKNSt8weak_ptrIN6rclcpp8ExecutorEEE"></span><span id="rclcpp_components::ComponentManager::set_executor__std::weak_ptr:rclcpp::Executor:C"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a2dcd4cff373b2f39c50238a5003e0521"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">set_executor</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">weak_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Executor</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">executor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager12set_executorEKNSt8weak_ptrIN6rclcpp8ExecutorEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Member function to set a executor in the component. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>executor</strong> – executor to be set </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager19create_node_optionsEKNSt10shared_ptrIN8LoadNode7RequestEEE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager19create_node_optionsEKNSt10shared_ptrIN8LoadNode7RequestEEE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager19create_node_optionsEKNSt10shared_ptrIN8LoadNode7RequestEEE"></span><span id="rclcpp_components::ComponentManager::create_node_options__std::shared_ptr:LoadNode::Request:C"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a57fae8817b4a32c251bdaceb6a8125d2"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">NodeOptions</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">create_node_options</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager8LoadNodeE" title="rclcpp_components::ComponentManager::LoadNode"><span class="n"><span class="pre">LoadNode</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager19create_node_optionsEKNSt10shared_ptrIN8LoadNode7RequestEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create node options for loaded component. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – information with the node to load </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>node options </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager20add_node_to_executorE8uint64_t">
+<span id="_CPPv3N17rclcpp_components16ComponentManager20add_node_to_executorE8uint64_t"></span><span id="_CPPv2N17rclcpp_components16ComponentManager20add_node_to_executorE8uint64_t"></span><span id="rclcpp_components::ComponentManager::add_node_to_executor__uint64_t"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a9bf968cc49434bbeaa593bcbd0343fe4"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">add_node_to_executor</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">node_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager20add_node_to_executorE8uint64_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add component node to executor model, it’s invoked in <a class="reference internal" href="#classrclcpp__components_1_1ComponentManager_1a03ff0b2738d8c8395de159ec08437e0a"><span class="std std-ref">on_load_node()</span></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>node_id</strong> – node_id of loaded component node in node_wrappers_ </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager25remove_node_from_executorE8uint64_t">
+<span id="_CPPv3N17rclcpp_components16ComponentManager25remove_node_from_executorE8uint64_t"></span><span id="_CPPv2N17rclcpp_components16ComponentManager25remove_node_from_executorE8uint64_t"></span><span id="rclcpp_components::ComponentManager::remove_node_from_executor__uint64_t"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a34e596f388e817f75c4fc00f2bf21867"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">remove_node_from_executor</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">node_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager25remove_node_from_executorE8uint64_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Remove component node from executor model, it’s invoked in <a class="reference internal" href="#classrclcpp__components_1_1ComponentManager_1a16375c42cf2778963f6e3fe2f92b5fd5"><span class="std std-ref">on_unload_node()</span></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>node_id</strong> – node_id of loaded component node in node_wrappers_ </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager12on_load_nodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN8LoadNode7RequestEEENSt10shared_ptrIN8LoadNode8ResponseEEE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager12on_load_nodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN8LoadNode7RequestEEENSt10shared_ptrIN8LoadNode8ResponseEEE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager12on_load_nodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN8LoadNode7RequestEEENSt10shared_ptrIN8LoadNode8ResponseEEE"></span><span id="rclcpp_components::ComponentManager::on_load_node__std::shared_ptr:rmw_request_id_t:C.std::shared_ptr:LoadNode::Request:C.std::shared_ptr:LoadNode::Response:"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a03ff0b2738d8c8395de159ec08437e0a"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_load_node</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rmw_request_id_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request_header</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager8LoadNodeE" title="rclcpp_components::ComponentManager::LoadNode"><span class="n"><span class="pre">LoadNode</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager8LoadNodeE" title="rclcpp_components::ComponentManager::LoadNode"><span class="n"><span class="pre">LoadNode</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">response</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager12on_load_nodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN8LoadNode7RequestEEENSt10shared_ptrIN8LoadNode8ResponseEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Service callback to load a new node in the component. </p>
+<p>This function allows to add parameters, remap rules, a specific node, name a namespace and/or additional arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request_header</strong> – unused </p></li>
+<li><p><strong>request</strong> – information with the node to load </p></li>
+<li><p><strong>response</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><span class="n">std</span><span class="p">::</span><span class="n">overflow_error</span></span></span> – if node_id suffers an overflow. Very unlikely to happen at 1 kHz (very optimistic rate). it would take 585 years. </p></li>
+<li><p><span><span class="cpp-expr sig sig-inline cpp"><a class="reference internal" href="classrclcpp__components_1_1ComponentManagerException.html#_CPPv4N17rclcpp_components25ComponentManagerExceptionE" title="rclcpp_components::ComponentManagerException"><span class="n">ComponentManagerException</span></a></span></span> – In the case that the component constructor throws an exception, rethrow into the following catch block. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager10OnLoadNodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN8LoadNode7RequestEEENSt10shared_ptrIN8LoadNode8ResponseEEE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager10OnLoadNodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN8LoadNode7RequestEEENSt10shared_ptrIN8LoadNode8ResponseEEE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager10OnLoadNodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN8LoadNode7RequestEEENSt10shared_ptrIN8LoadNode8ResponseEEE"></span><span id="rclcpp_components::ComponentManager::OnLoadNode__std::shared_ptr:rmw_request_id_t:C.std::shared_ptr:LoadNode::Request:C.std::shared_ptr:LoadNode::Response:"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1ac7a0af4f4f909970b4bd1709d5c6332c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OnLoadNode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rmw_request_id_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request_header</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager8LoadNodeE" title="rclcpp_components::ComponentManager::LoadNode"><span class="n"><span class="pre">LoadNode</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager8LoadNodeE" title="rclcpp_components::ComponentManager::LoadNode"><span class="n"><span class="pre">LoadNode</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">response</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager10OnLoadNodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN8LoadNode7RequestEEENSt10shared_ptrIN8LoadNode8ResponseEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="page_deprecated.html#deprecated_1_deprecated000001"><span class="std std-ref"><span class="pre">Deprecated:</span></span></a></dt>
+<dd><p>Use <a class="reference internal" href="#classrclcpp__components_1_1ComponentManager_1a03ff0b2738d8c8395de159ec08437e0a"><span class="std std-ref">on_load_node()</span></a> instead </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager14on_unload_nodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN10UnloadNode7RequestEEENSt10shared_ptrIN10UnloadNode8ResponseEEE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager14on_unload_nodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN10UnloadNode7RequestEEENSt10shared_ptrIN10UnloadNode8ResponseEEE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager14on_unload_nodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN10UnloadNode7RequestEEENSt10shared_ptrIN10UnloadNode8ResponseEEE"></span><span id="rclcpp_components::ComponentManager::on_unload_node__std::shared_ptr:rmw_request_id_t:C.std::shared_ptr:UnloadNode::Request:C.std::shared_ptr:UnloadNode::Response:"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a16375c42cf2778963f6e3fe2f92b5fd5"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_unload_node</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rmw_request_id_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request_header</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager10UnloadNodeE" title="rclcpp_components::ComponentManager::UnloadNode"><span class="n"><span class="pre">UnloadNode</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager10UnloadNodeE" title="rclcpp_components::ComponentManager::UnloadNode"><span class="n"><span class="pre">UnloadNode</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">response</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager14on_unload_nodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN10UnloadNode7RequestEEENSt10shared_ptrIN10UnloadNode8ResponseEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Service callback to unload a node in the component. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request_header</strong> – unused </p></li>
+<li><p><strong>request</strong> – unique identifier to remove from the component </p></li>
+<li><p><strong>response</strong> – true on the success field if the node unload was succefully, otherwise false and the error_message field contains the error. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager12OnUnloadNodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN10UnloadNode7RequestEEENSt10shared_ptrIN10UnloadNode8ResponseEEE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager12OnUnloadNodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN10UnloadNode7RequestEEENSt10shared_ptrIN10UnloadNode8ResponseEEE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager12OnUnloadNodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN10UnloadNode7RequestEEENSt10shared_ptrIN10UnloadNode8ResponseEEE"></span><span id="rclcpp_components::ComponentManager::OnUnloadNode__std::shared_ptr:rmw_request_id_t:C.std::shared_ptr:UnloadNode::Request:C.std::shared_ptr:UnloadNode::Response:"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1aa88f467cafbb88b5a6ba24bd1daaab5a"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OnUnloadNode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rmw_request_id_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request_header</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager10UnloadNodeE" title="rclcpp_components::ComponentManager::UnloadNode"><span class="n"><span class="pre">UnloadNode</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager10UnloadNodeE" title="rclcpp_components::ComponentManager::UnloadNode"><span class="n"><span class="pre">UnloadNode</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">response</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager12OnUnloadNodeEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN10UnloadNode7RequestEEENSt10shared_ptrIN10UnloadNode8ResponseEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="page_deprecated.html#deprecated_1_deprecated000002"><span class="std std-ref"><span class="pre">Deprecated:</span></span></a></dt>
+<dd><p>Use <a class="reference internal" href="#classrclcpp__components_1_1ComponentManager_1a16375c42cf2778963f6e3fe2f92b5fd5"><span class="std std-ref">on_unload_node()</span></a> instead </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager13on_list_nodesEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN9ListNodes7RequestEEENSt10shared_ptrIN9ListNodes8ResponseEEE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager13on_list_nodesEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN9ListNodes7RequestEEENSt10shared_ptrIN9ListNodes8ResponseEEE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager13on_list_nodesEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN9ListNodes7RequestEEENSt10shared_ptrIN9ListNodes8ResponseEEE"></span><span id="rclcpp_components::ComponentManager::on_list_nodes__std::shared_ptr:rmw_request_id_t:C.std::shared_ptr:ListNodes::Request:C.std::shared_ptr:ListNodes::Response:"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a23a7af8b37191006d14b0377f3ad0722"></span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_list_nodes</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rmw_request_id_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request_header</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager9ListNodesE" title="rclcpp_components::ComponentManager::ListNodes"><span class="n"><span class="pre">ListNodes</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager9ListNodesE" title="rclcpp_components::ComponentManager::ListNodes"><span class="n"><span class="pre">ListNodes</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">response</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager13on_list_nodesEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN9ListNodes7RequestEEENSt10shared_ptrIN9ListNodes8ResponseEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Service callback to get the list of nodes in the component. </p>
+<p>Return a two list: one with the unique identifiers and other with full name of the nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request_header</strong> – unused </p></li>
+<li><p><strong>request</strong> – unused </p></li>
+<li><p><strong>response</strong> – list with the unique ids and full node names </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager11OnListNodesEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN9ListNodes7RequestEEENSt10shared_ptrIN9ListNodes8ResponseEEE">
+<span id="_CPPv3N17rclcpp_components16ComponentManager11OnListNodesEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN9ListNodes7RequestEEENSt10shared_ptrIN9ListNodes8ResponseEEE"></span><span id="_CPPv2N17rclcpp_components16ComponentManager11OnListNodesEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN9ListNodes7RequestEEENSt10shared_ptrIN9ListNodes8ResponseEEE"></span><span id="rclcpp_components::ComponentManager::OnListNodes__std::shared_ptr:rmw_request_id_t:C.std::shared_ptr:ListNodes::Request:C.std::shared_ptr:ListNodes::Response:"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1aab04e0336a4921508c83a5cc48c05927"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">virtual</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">OnListNodes</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rmw_request_id_t</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request_header</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager9ListNodesE" title="rclcpp_components::ComponentManager::ListNodes"><span class="n"><span class="pre">ListNodes</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">request</span></span>, <span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">shared_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager9ListNodesE" title="rclcpp_components::ComponentManager::ListNodes"><span class="n"><span class="pre">ListNodes</span></span></a><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">response</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager11OnListNodesEKNSt10shared_ptrI16rmw_request_id_tEEKNSt10shared_ptrIN9ListNodes7RequestEEENSt10shared_ptrIN9ListNodes8ResponseEEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<a class="reference internal" href="page_deprecated.html#deprecated_1_deprecated000003"><span class="std std-ref"><span class="pre">Deprecated:</span></span></a></dt>
+<dd><p>Use <a class="reference internal" href="#classrclcpp__components_1_1ComponentManager_1a23a7af8b37191006d14b0377f3ad0722"><span class="std std-ref">on_list_nodes()</span></a> instead </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-attributes">Protected Attributes</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager9executor_E">
+<span id="_CPPv3N17rclcpp_components16ComponentManager9executor_E"></span><span id="_CPPv2N17rclcpp_components16ComponentManager9executor_E"></span><span id="rclcpp_components::ComponentManager::executor___std::weak_ptr:rclcpp::Executor:"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1ab5d32e9316e70193510259dfcc16ad5b"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">weak_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Executor</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">executor_</span></span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager9executor_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager10unique_id_E">
+<span id="_CPPv3N17rclcpp_components16ComponentManager10unique_id_E"></span><span id="_CPPv2N17rclcpp_components16ComponentManager10unique_id_E"></span><span id="rclcpp_components::ComponentManager::unique_id___uint64_t"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1aa03425258447b1279ab2fe0fcc6df722"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unique_id_</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="p"><span class="pre">{</span></span><span class="m"><span class="pre">1</span></span><span class="p"><span class="pre">}</span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager10unique_id_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager8loaders_E">
+<span id="_CPPv3N17rclcpp_components16ComponentManager8loaders_E"></span><span id="_CPPv2N17rclcpp_components16ComponentManager8loaders_E"></span><span id="rclcpp_components::ComponentManager::loaders___std::map:ss.std::unique_ptr:class_loader::ClassLoader::"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1ae8594ce180b827c7d244169627d622a9"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">unique_ptr</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">class_loader</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">ClassLoader</span></span><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">loaders_</span></span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager8loaders_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager14node_wrappers_E">
+<span id="_CPPv3N17rclcpp_components16ComponentManager14node_wrappers_E"></span><span id="_CPPv2N17rclcpp_components16ComponentManager14node_wrappers_E"></span><span id="rclcpp_components::ComponentManager::node_wrappers___std::map:uint64_t.rclcpp_components::NodeInstanceWrapper:"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1ae19be6e838a3877913e5591bf03cedd2"></span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">&lt;</span></span><span class="n"><span class="pre">uint64_t</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">rclcpp_components</span></span><span class="p"><span class="pre">::</span></span><a class="reference internal" href="classrclcpp__components_1_1NodeInstanceWrapper.html#_CPPv4N17rclcpp_components19NodeInstanceWrapperE" title="rclcpp_components::NodeInstanceWrapper"><span class="n"><span class="pre">NodeInstanceWrapper</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">node_wrappers_</span></span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager14node_wrappers_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager13loadNode_srv_E">
+<span id="_CPPv3N17rclcpp_components16ComponentManager13loadNode_srv_E"></span><span id="_CPPv2N17rclcpp_components16ComponentManager13loadNode_srv_E"></span><span id="rclcpp_components::ComponentManager::loadNode_srv___rclcpp::Service:LoadNode:::SharedPtr"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1ae001eeebe24753daab8e5a853480700c"></span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Service</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager8LoadNodeE" title="rclcpp_components::ComponentManager::LoadNode"><span class="n"><span class="pre">LoadNode</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">SharedPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">loadNode_srv_</span></span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager13loadNode_srv_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager15unloadNode_srv_E">
+<span id="_CPPv3N17rclcpp_components16ComponentManager15unloadNode_srv_E"></span><span id="_CPPv2N17rclcpp_components16ComponentManager15unloadNode_srv_E"></span><span id="rclcpp_components::ComponentManager::unloadNode_srv___rclcpp::Service:UnloadNode:::SharedPtr"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a06132029e33d567a219a04720ad001b1"></span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Service</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager10UnloadNodeE" title="rclcpp_components::ComponentManager::UnloadNode"><span class="n"><span class="pre">UnloadNode</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">SharedPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unloadNode_srv_</span></span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager15unloadNode_srv_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17rclcpp_components16ComponentManager14listNodes_srv_E">
+<span id="_CPPv3N17rclcpp_components16ComponentManager14listNodes_srv_E"></span><span id="_CPPv2N17rclcpp_components16ComponentManager14listNodes_srv_E"></span><span id="rclcpp_components::ComponentManager::listNodes_srv___rclcpp::Service:ListNodes:::SharedPtr"></span><span class="target" id="classrclcpp__components_1_1ComponentManager_1a43d5851d59561ea70503c0cbefbf71b5"></span><span class="n"><span class="pre">rclcpp</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Service</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N17rclcpp_components16ComponentManager9ListNodesE" title="rclcpp_components::ComponentManager::ListNodes"><span class="n"><span class="pre">ListNodes</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">SharedPtr</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">listNodes_srv_</span></span></span><a class="headerlink" href="#_CPPv4N17rclcpp_components16ComponentManager14listNodes_srv_E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="structrclcpp__components_1_1ComponentManagerIsolated_1_1DedicatedExecutorWrapper.html" class="btn btn-neutral float-left" title="Struct ComponentManagerIsolated::DedicatedExecutorWrapper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="classrclcpp__components_1_1ComponentManagerException.html" class="btn btn-neutral float-right" title="Class ComponentManagerException" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Apache License 2.0.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

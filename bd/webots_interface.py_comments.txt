@@ -1,1 +1,1 @@
-The initial code provided only has a basic structure, without any specific functionality. It is expected to interface with the Webots simulator allowing for motor control and sensor readings. The semantic search results provide suggestions on how to implement such functionality using various libraries such as `rclpy`, `geometry_msgs`, and the Webots API itself.
+The aim of the controller is to communicate to Webots for the variable impedance control of force feedback in a robotic system.

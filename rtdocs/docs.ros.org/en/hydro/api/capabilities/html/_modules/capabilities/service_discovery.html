@@ -1,0 +1,209 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>capabilities.service_discovery &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/_modules/capabilities/service_discovery.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for capabilities.service_discovery</h1><div class="highlight"><pre>
+<span class="c"># Software License Agreement (BSD License)</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) 2013, Open Source Robotics Foundation, Inc.</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c"># modification, are permitted provided that the following conditions</span>
+<span class="c"># are met:</span>
+<span class="c">#</span>
+<span class="c">#  * Redistributions of source code must retain the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c">#  * Redistributions in binary form must reproduce the above</span>
+<span class="c">#    copyright notice, this list of conditions and the following</span>
+<span class="c">#    disclaimer in the documentation and/or other materials provided</span>
+<span class="c">#    with the distribution.</span>
+<span class="c">#  * Neither the name of Open Source Robotics Foundation, Inc. nor</span>
+<span class="c">#    the names of its contributors may be used to endorse or promote</span>
+<span class="c">#    products derived from this software without specific prior</span>
+<span class="c">#    written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c"># &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="c"># FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="c"># COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="c"># INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="c"># BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="c"># LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="c"># LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="c"># ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="c"># Author: William Woodall &lt;william@osrfoundation.org&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;This module provides a way to create a spec_index remotely via a ROS service call.</span>
+
+<span class="sd">Typical usage::</span>
+
+<span class="sd">    &gt;&gt;&gt; from capabilities.service_discovery import spec_index_from_service</span>
+<span class="sd">    &gt;&gt;&gt; si, errors = spec_index_from_service(capability_server_node_name=&#39;/capability_server&#39;, timeout=3.0)</span>
+<span class="sd">    &gt;&gt;&gt; assert not errors, errors</span>
+
+<span class="sd">This results in a :py:class:`capabilities.discovery.SpecIndex` class,</span>
+<span class="sd">created using the capability specs (interfaces, semantic interfaces,</span>
+<span class="sd">and providers) availble to the remote ``capability_server``.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">rospy</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetCapabilitySpecs</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.specs.interface</span> <span class="kn">import</span> <span class="n">capability_interface_from_string</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.specs.provider</span> <span class="kn">import</span> <span class="n">capability_provider_from_string</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.specs.semantic_interface</span> <span class="kn">import</span> <span class="n">semantic_capability_interface_from_string</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.discovery</span> <span class="kn">import</span> <span class="n">_spec_loader</span>
+
+
+<div class="viewcode-block" id="spec_index_from_service"><a class="viewcode-back" href="../../capabilities.service_discovery.html#capabilities.service_discovery.spec_index_from_service">[docs]</a><span class="k">def</span> <span class="nf">spec_index_from_service</span><span class="p">(</span><span class="n">capability_server_node_name</span><span class="o">=</span><span class="s">&#39;capability_server&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Builds a :py:class:`capabilities.discovery.SpecIndex` by calling a ROS service to get the specs</span>
+
+<span class="sd">    Works just like :py:func:`capabilities.discovery.spec_index_from_spec_file_index`, except the raw</span>
+<span class="sd">    spec files are retreived over a service call rather than from disk.</span>
+
+<span class="sd">    :param capability_server_node_name: Name of the capability server&#39;s node,</span>
+<span class="sd">        default is &#39;capability_server&#39;</span>
+<span class="sd">    :type capability_server_node_name: str</span>
+<span class="sd">    :param timeout: timeout for waiting on service to be available</span>
+<span class="sd">    :type timeout: float</span>
+<span class="sd">    :returns: A :py:obj:`tuple` of :py:class:`capabilities.discovery.SpecIndex`</span>
+<span class="sd">        and a :py:obj:`list` of errors encountered, based on contents of ``~get_capability_specs``</span>
+<span class="sd">    :rtype: :py:class:`capabilities.discovery.SpecIndex`, :py:obj:`list` (:py:obj:`Exception`&#39;s)</span>
+<span class="sd">    :raises: :py:class:`rospy.ServiceException` when the service call fails</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">service_name</span> <span class="o">=</span> <span class="s">&#39;/{0}/get_capability_specs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability_server_node_name</span><span class="p">)</span>
+    <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="n">service_name</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+    <span class="n">get_capability_specs</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="n">service_name</span><span class="p">,</span> <span class="n">GetCapabilitySpecs</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">get_capability_specs</span><span class="p">()</span>
+    <span class="n">spec_raw_index</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">capability_specs</span><span class="p">:</span>
+        <span class="n">package_dict</span> <span class="o">=</span> <span class="n">spec_raw_index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">package</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s">&#39;capability_interface&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s">&#39;capability_provider&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">})</span>
+        <span class="k">if</span> <span class="n">spec</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;capability_interface&#39;</span><span class="p">,</span> <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">]:</span>
+            <span class="n">package_dict</span><span class="p">[</span><span class="n">spec</span><span class="o">.</span><span class="n">type</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">spec</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">spec</span><span class="o">.</span><span class="n">default_provider</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">package_dict</span><span class="p">[</span><span class="n">spec</span><span class="o">.</span><span class="n">type</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">spec_raw_index</span><span class="p">[</span><span class="n">spec</span><span class="o">.</span><span class="n">package</span><span class="p">]</span> <span class="o">=</span> <span class="n">package_dict</span>
+
+    <span class="k">def</span> <span class="nf">capability_interface_loader</span><span class="p">(</span><span class="n">interface_tuple</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">spec_index</span><span class="p">):</span>
+        <span class="n">raw</span><span class="p">,</span> <span class="n">default_provider</span> <span class="o">=</span> <span class="n">interface_tuple</span>
+        <span class="n">interface</span> <span class="o">=</span> <span class="n">capability_interface_from_string</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+        <span class="n">interface</span><span class="o">.</span><span class="n">default_provider</span> <span class="o">=</span> <span class="n">default_provider</span>
+        <span class="n">spec_index</span><span class="o">.</span><span class="n">add_interface</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="s">&#39;service call&#39;</span><span class="p">,</span> <span class="n">package_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">semantic_capability_loader</span><span class="p">(</span><span class="n">interface_tuple</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">spec_index</span><span class="p">):</span>
+        <span class="n">raw</span><span class="p">,</span> <span class="n">default_provider</span> <span class="o">=</span> <span class="n">interface_tuple</span>
+        <span class="n">si</span> <span class="o">=</span> <span class="n">semantic_capability_interface_from_string</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+        <span class="n">si</span><span class="o">.</span><span class="n">default_provider</span> <span class="o">=</span> <span class="n">default_provider</span>
+        <span class="n">spec_index</span><span class="o">.</span><span class="n">add_semantic_interface</span><span class="p">(</span><span class="n">si</span><span class="p">,</span> <span class="s">&#39;service call&#39;</span><span class="p">,</span> <span class="n">package_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">capability_provider_loader</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">spec_index</span><span class="p">):</span>
+        <span class="n">provider</span> <span class="o">=</span> <span class="n">capability_provider_from_string</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+        <span class="n">spec_index</span><span class="o">.</span><span class="n">add_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">,</span> <span class="s">&#39;service call&#39;</span><span class="p">,</span> <span class="n">package_name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_spec_loader</span><span class="p">(</span><span class="n">spec_raw_index</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s">&#39;capability_interface&#39;</span><span class="p">:</span> <span class="n">capability_interface_loader</span><span class="p">,</span>
+        <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">:</span> <span class="n">semantic_capability_loader</span><span class="p">,</span>
+        <span class="s">&#39;capability_provider&#39;</span><span class="p">:</span> <span class="n">capability_provider_loader</span>
+    <span class="p">})</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

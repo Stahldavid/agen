@@ -1,0 +1,1 @@
+This is an incomplete Webots controller script for a Differential Drive Robot. The goal is to have this script react to ROS2 messages in a similar fashion to the ROS2 Webots driver does.

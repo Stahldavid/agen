@@ -1,1 +1,0 @@
-This is a foundational controller implementation for a robot simulator (Webots). The controller needs additional initialization and run computations.

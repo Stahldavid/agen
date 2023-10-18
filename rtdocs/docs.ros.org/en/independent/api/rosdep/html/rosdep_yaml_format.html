@@ -1,0 +1,278 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rosdep YAML format &#8212; rosdep 0.22.2 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rosdep sources list" href="sources_list.html" />
+    <link rel="prev" title="Contributing rosdep rules" href="contributing_rules.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sources_list.html" title="rosdep sources list"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="contributing_rules.html" title="Contributing rosdep rules"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="contents.html">rosdep 0.22.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="contents.html">
+              <img class="logo" src="_static/ros.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">rosdep YAML format</a><ul>
+<li><a class="reference internal" href="#specification">Specification</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+<li><a class="reference internal" href="#os-name-identifiers-and-supported-package-managers">OS name identifiers and supported package managers</a></li>
+<li><a class="reference internal" href="#os-version-identifiers">OS version identifiers</a></li>
+<li><a class="reference internal" href="#disambiguation-of-os-version-and-package-manager">Disambiguation of OS_VERSION and PACKAGE_MANAGER</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="contributing_rules.html"
+                        title="previous chapter">Contributing rosdep rules</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sources_list.html"
+                        title="next chapter">rosdep sources list</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/rosdep_yaml_format.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rosdep-yaml-format">
+<span id="rosdep-yaml"></span><h1>rosdep YAML format<a class="headerlink" href="#rosdep-yaml-format" title="Permalink to this headline">¶</a></h1>
+<p>The current rosdep YAML format specification was introduced in <a class="reference external" href="http://ros.org/reps/rep-0111.html">REP 111</a>.</p>
+<div class="section" id="specification">
+<h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
+<p>rosdep supports both a <em>simple</em> and <em>versioned</em> syntax.</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>Simple</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ROSDEP_NAME</span><span class="p">:</span>
+  <span class="n">OS_NAME1</span><span class="p">:</span>
+    <span class="n">PACKAGE_MANAGER1</span><span class="p">:</span>
+      <span class="n">PACKAGE_ARGUMENTS_A</span>
+  <span class="n">OS_NAME2</span><span class="p">:</span>
+    <span class="n">PACKAGE_MANAGER2</span><span class="p">:</span>
+      <span class="n">PACKAGE_ARGUMENTS_A</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Versioned</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ROSDEP_NAME</span><span class="p">:</span>
+  <span class="n">OS_NAME1</span><span class="p">:</span>
+    <span class="n">OS_VERSION1</span><span class="p">:</span>
+      <span class="n">PACKAGE_MANAGER1</span><span class="p">:</span>
+        <span class="n">PACKAGE_ARGUMENTS_A</span>
+    <span class="n">OS_VERSION2</span><span class="p">:</span>
+      <span class="n">PACKAGE_MANAGER2</span><span class="p">:</span>
+        <span class="n">PACKAGE_ARGUMENTS_A2</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>The names above resolve as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ROSDEP_NAME</span></code> is the name referred to by manifest files. Examples: <code class="docutils literal notranslate"><span class="pre">log4cxx</span></code> or <code class="docutils literal notranslate"><span class="pre">gtest</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">OS_NAME</span></code> is the name of an OS.  Examples: <code class="docutils literal notranslate"><span class="pre">ubuntu</span></code>, <code class="docutils literal notranslate"><span class="pre">osx</span></code>, <code class="docutils literal notranslate"><span class="pre">fedora</span></code>, <code class="docutils literal notranslate"><span class="pre">debian</span></code>, <code class="docutils literal notranslate"><span class="pre">openembedded</span></code>, or <code class="docutils literal notranslate"><span class="pre">windows</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">OS_VERSION</span></code> (<em>optional</em>) is the name of specific versions in the OS. Examples: <code class="docutils literal notranslate"><span class="pre">lucid</span></code> or <code class="docutils literal notranslate"><span class="pre">squeeze</span></code>. If no <code class="docutils literal notranslate"><span class="pre">OS_VERSION</span></code> is specified, the rule is assumed to apply to all versions.</li>
+<li><code class="docutils literal notranslate"><span class="pre">PACKAGE_MANAGER</span></code> (<em>optional in ROS Electric, required in ROS Fuerte</em>) is a key to select which package manager to use for this rosdep.  Examples: <code class="docutils literal notranslate"><span class="pre">apt</span></code>, <code class="docutils literal notranslate"><span class="pre">pip</span></code>, <code class="docutils literal notranslate"><span class="pre">macports</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">PACKAGE_ARGUMENT</span></code> is free-form YAML that is be passed to the handler for the specified <code class="docutils literal notranslate"><span class="pre">PACKAGE_MANAGER</span></code>.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>For Ubuntu the default package manager is apt.  An example for the simple syntax is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rosdep_name</span><span class="p">:</span>
+  <span class="n">ubuntu</span><span class="p">:</span>
+    <span class="n">apt</span><span class="p">:</span>
+      <span class="n">packages</span><span class="p">:</span> <span class="p">[</span> <span class="n">debian</span><span class="o">-</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="p">,</span> <span class="n">other</span><span class="o">-</span><span class="n">debian</span><span class="o">-</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>or versioned as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rosdep_name</span><span class="p">:</span>
+  <span class="n">ubuntu</span><span class="p">:</span>
+    <span class="n">lucid</span><span class="p">:</span>
+      <span class="n">apt</span><span class="p">:</span>
+        <span class="n">packages</span><span class="p">:</span> <span class="p">[</span><span class="n">debian</span><span class="o">-</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="p">,</span> <span class="n">other</span><span class="o">-</span><span class="n">debian</span><span class="o">-</span><span class="n">package</span><span class="o">-</span><span class="n">name</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="os-name-identifiers-and-supported-package-managers">
+<h3>OS name identifiers and supported package managers<a class="headerlink" href="#os-name-identifiers-and-supported-package-managers" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">arch</span></code>: Arch Linux<ul>
+<li><code class="docutils literal notranslate"><span class="pre">pacman</span></code> (default)</li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">cygwin</span></code>: Cygwin<ul>
+<li><code class="docutils literal notranslate"><span class="pre">apt-cyg</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">debian</span></code>: Debian GNU/Linux<ul>
+<li><code class="docutils literal notranslate"><span class="pre">apt</span></code> (default)</li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">fedora</span></code>: Fedora Project<ul>
+<li><code class="docutils literal notranslate"><span class="pre">dnf</span></code> (default)</li>
+<li><code class="docutils literal notranslate"><span class="pre">yum</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">freebsd</span></code>: FreeBSD<ul>
+<li><code class="docutils literal notranslate"><span class="pre">pkg_add</span></code> (default)</li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">gentoo</span></code>: Gentoo Linux<ul>
+<li><code class="docutils literal notranslate"><span class="pre">portage</span></code> (default)</li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">openembedded</span></code> : OpenEmbedded<ul>
+<li>TODO: define a remote installation method for cross compiled packages</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">osx</span></code> : Apple OS X<ul>
+<li>TODO: special notes on macports vs. homebrew</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">opensuse</span></code>: OpenSUSE<ul>
+<li><code class="docutils literal notranslate"><span class="pre">zypper</span></code> (default)</li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">rhel</span></code> : Red Hat Enterprise Linux<ul>
+<li><code class="docutils literal notranslate"><span class="pre">yum</span></code> (default)</li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">ubuntu</span></code>: Ubuntu<ul>
+<li><code class="docutils literal notranslate"><span class="pre">apt</span></code> (default)</li>
+<li><code class="docutils literal notranslate"><span class="pre">pip</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">source</span></code></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+<p>For backwards compatibility, <code class="docutils literal notranslate"><span class="pre">macports</span></code> is supported as an alias of <code class="docutils literal notranslate"><span class="pre">osx</span></code>.</p>
+</div>
+<div class="section" id="os-version-identifiers">
+<h3>OS version identifiers<a class="headerlink" href="#os-version-identifiers" title="Permalink to this headline">¶</a></h3>
+<p>OS version identifiers use one-word codenames that refer to particular releases.</p>
+<p>Examples:</p>
+<blockquote>
+<div><ul class="simple">
+<li>debian: <code class="docutils literal notranslate"><span class="pre">squeeze</span></code></li>
+<li>ubuntu: <code class="docutils literal notranslate"><span class="pre">lucid</span></code>, <code class="docutils literal notranslate"><span class="pre">maverick</span></code>, <code class="docutils literal notranslate"><span class="pre">natty</span></code>, <code class="docutils literal notranslate"><span class="pre">oneiric</span></code>, <code class="docutils literal notranslate"><span class="pre">precise</span></code></li>
+<li>osx: <code class="docutils literal notranslate"><span class="pre">snow</span></code>, <code class="docutils literal notranslate"><span class="pre">lion</span></code></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="disambiguation-of-os-version-and-package-manager">
+<h3>Disambiguation of OS_VERSION and PACKAGE_MANAGER<a class="headerlink" href="#disambiguation-of-os-version-and-package-manager" title="Permalink to this headline">¶</a></h3>
+<p>For backwards compatibility, the <code class="docutils literal notranslate"><span class="pre">PACKAGE_MANAGER</span></code> is allowed to be
+optional in the ROS Electric case.  As both <code class="docutils literal notranslate"><span class="pre">PACKAGE_MANAGER</span></code> and
+<code class="docutils literal notranslate"><span class="pre">OS_VERSION</span></code> are optional, this creates an ambiguious case where
+either <code class="docutils literal notranslate"><span class="pre">OS_VERSION</span></code> or <code class="docutils literal notranslate"><span class="pre">PACKAGE_MANAGER</span></code> is specified, but not
+both.</p>
+<p>In this ambiguous case, rosdep first interprets the key as a
+<code class="docutils literal notranslate"><span class="pre">PACKAGE_MANAGER</span></code>.  If this test fails, it will be interpreted as an
+<code class="docutils literal notranslate"><span class="pre">OS_VERSION</span></code>.  Developers should exercise caution in keeping
+<code class="docutils literal notranslate"><span class="pre">OS_VERSION</span></code> and <code class="docutils literal notranslate"><span class="pre">PACKAGE_MANAGER</span></code> keys globally distinct.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sources_list.html" title="rosdep sources list"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="contributing_rules.html" title="Contributing rosdep rules"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="contents.html">rosdep 0.22.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011, Willow Garage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

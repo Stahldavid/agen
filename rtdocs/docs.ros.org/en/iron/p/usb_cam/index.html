@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the documentation for usb_cam &mdash; usb_cam 0.6.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Class Hierarchy" href="generated/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            usb_cam
+          </a>
+              <div class="version">
+                0.6
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rclcpp.html">Namespace rclcpp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_usb_cam.html">Namespace usb_cam</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_usb_cam.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_usb_cam.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_usb_cam__constants.html">Namespace usb_cam::constants</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_usb_cam__constants.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_usb_cam__conversions.html">Namespace usb_cam::conversions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_usb_cam__conversions.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_usb_cam__formats.html">Namespace usb_cam::formats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_usb_cam__formats.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_usb_cam__formats.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_usb_cam__utils.html">Namespace usb_cam::utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_usb_cam__utils.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_usb_cam__utils.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_usb_cam__utils.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/structusb__cam_1_1capture__format__t.html">Struct capture_format_t</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structusb__cam_1_1capture__format__t.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structusb__cam_1_1image__t.html">Struct image_t</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structusb__cam_1_1image__t.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structusb__cam_1_1parameters__t.html">Struct parameters_t</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structusb__cam_1_1parameters__t.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structusb__cam_1_1utils_1_1buffer.html">Struct buffer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structusb__cam_1_1utils_1_1buffer.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1default__pixel__format.html">Class default_pixel_format</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1default__pixel__format.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1default__pixel__format.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1default__pixel__format.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1M4202RGB.html">Class M4202RGB</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1M4202RGB.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1M4202RGB.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1M4202RGB.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MJPEG2RGB.html">Class MJPEG2RGB</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MJPEG2RGB.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MJPEG2RGB.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MJPEG2RGB.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MONO16.html">Class MONO16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MONO16.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MONO16.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MONO16.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MONO8.html">Class MONO8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MONO8.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MONO8.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1MONO8.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1pixel__format__base.html">Class pixel_format_base</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1pixel__format__base.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1pixel__format__base.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1pixel__format__base.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1RGB8.html">Class RGB8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1RGB8.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1RGB8.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1RGB8.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1UYVY.html">Class UYVY</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1UYVY.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1UYVY.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1UYVY.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1UYVY2RGB.html">Class UYVY2RGB</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1UYVY2RGB.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1UYVY2RGB.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1UYVY2RGB.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1Y102MONO8.html">Class Y102MONO8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1Y102MONO8.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1Y102MONO8.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1Y102MONO8.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1YUYV.html">Class YUYV</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1YUYV.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1YUYV.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1YUYV.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1YUYV2RGB.html">Class YUYV2RGB</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1YUYV2RGB.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1YUYV2RGB.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1formats_1_1YUYV2RGB.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1UsbCam.html">Class UsbCam</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1UsbCam.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classusb__cam_1_1UsbCamNode.html">Class UsbCamNode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1UsbCamNode.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classusb__cam_1_1UsbCamNode.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classusb__cam_1_1UsbCamNode.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_utils_8hpp_1a63058f1bcc48388fd863943c4db260a0.html">Enum io_method_t</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_utils_8hpp_1a63058f1bcc48388fd863943c4db260a0.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_usb__cam__node_8hpp_1a93a7e0d7c16afe92e398c869dd0b4035.html">Function operator&lt;&lt;</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_usb__cam__node_8hpp_1a93a7e0d7c16afe92e398c869dd0b4035.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_conversions_8hpp_1a1d1d8ff54f21d3b3bb0accb072904cd1.html">Function usb_cam::conversions::FCC2S</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_conversions_8hpp_1a1d1d8ff54f21d3b3bb0accb072904cd1.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_formats_2utils_8hpp_1aa43c2e30fb5853519a37f1475d8d2d6c.html">Function usb_cam::formats::CLIPVALUE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_formats_2utils_8hpp_1aa43c2e30fb5853519a37f1475d8d2d6c.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_formats_2utils_8hpp_1ad6f86e5d75de739afc699bcc7dea6a42.html">Function usb_cam::formats::YUV2RGB</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_formats_2utils_8hpp_1ad6f86e5d75de739afc699bcc7dea6a42.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_utils_8hpp_1aa38c0b3548303a371783efed6e5010af.html">Function usb_cam::utils::calc_img_timestamp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_utils_8hpp_1aa38c0b3548303a371783efed6e5010af.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_utils_8hpp_1abaf7c69b89725f7b79c8121775e7a367.html">Function usb_cam::utils::get_epoch_time_shift_us</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_utils_8hpp_1abaf7c69b89725f7b79c8121775e7a367.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_utils_8hpp_1a51b47dc1e3c9acf7dae6b65b01aea5fe.html">Function usb_cam::utils::io_method_from_string</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_utils_8hpp_1a51b47dc1e3c9acf7dae6b65b01aea5fe.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_utils_8hpp_1ac14be315c62b979dec6e1a74a9be55c3.html">Function usb_cam::utils::xioctl</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_utils_8hpp_1ac14be315c62b979dec6e1a74a9be55c3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#variables">Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1ae5bf58d8c38a5ce08e0ed2e173463de4.html">Variable usb_cam::constants::BAYER_BGGR16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1ae5bf58d8c38a5ce08e0ed2e173463de4.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a1c6360016903823d5635e8977f4e938d.html">Variable usb_cam::constants::BAYER_BGGR8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a1c6360016903823d5635e8977f4e938d.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1aeb0aa4fe5fea5bc945924049212fd575.html">Variable usb_cam::constants::BAYER_GBRG16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1aeb0aa4fe5fea5bc945924049212fd575.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a9f8895c771d240fe2cee65ebb1e5d82e.html">Variable usb_cam::constants::BAYER_GBRG8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a9f8895c771d240fe2cee65ebb1e5d82e.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1abe5cf4c12a81fffd36ba721d8e383a5a.html">Variable usb_cam::constants::BAYER_GRBG16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1abe5cf4c12a81fffd36ba721d8e383a5a.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a6a6444a98cbaa7fb61ca4221ab217995.html">Variable usb_cam::constants::BAYER_GRBG8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a6a6444a98cbaa7fb61ca4221ab217995.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a909a63eabbe2185be2e693541ba3dc64.html">Variable usb_cam::constants::BAYER_RGGB16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a909a63eabbe2185be2e693541ba3dc64.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a83e93718675e15f2345f7f27bae626ff.html">Variable usb_cam::constants::BAYER_RGGB8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a83e93718675e15f2345f7f27bae626ff.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1aa57b25bbcad14645edef5e2c5f841356.html">Variable usb_cam::constants::BGR16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1aa57b25bbcad14645edef5e2c5f841356.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a76516a06808e8bada2effa19cdc0acab.html">Variable usb_cam::constants::BGR8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a76516a06808e8bada2effa19cdc0acab.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a079770954da12339d8498113c8dd6d95.html">Variable usb_cam::constants::BGRA16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a079770954da12339d8498113c8dd6d95.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a8df712966f049ac78d26cd20ede6fb5b.html">Variable usb_cam::constants::BGRA8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a8df712966f049ac78d26cd20ede6fb5b.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a60d4d54ce0e0f9071085040fa1fda96a.html">Variable usb_cam::constants::clipping_table_offset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a60d4d54ce0e0f9071085040fa1fda96a.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1aee35b4e36288afa62c3409371efd1277.html">Variable usb_cam::constants::MONO16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1aee35b4e36288afa62c3409371efd1277.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a3c4c5b088cf86b4bce8508cb0e68c865.html">Variable usb_cam::constants::MONO8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a3c4c5b088cf86b4bce8508cb0e68c865.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a6f0b083ae93d413acb44ac3ecb3c6bbf.html">Variable usb_cam::constants::NV21</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a6f0b083ae93d413acb44ac3ecb3c6bbf.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a83fe2b4377ea77e65e4e7a62d0aaed87.html">Variable usb_cam::constants::NV24</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a83fe2b4377ea77e65e4e7a62d0aaed87.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1ade07ead51eef8f7ff9e68de73b2119c7.html">Variable usb_cam::constants::RGB16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1ade07ead51eef8f7ff9e68de73b2119c7.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a70ac35ebc5ba03fe6c3354607f80f629.html">Variable usb_cam::constants::RGB8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a70ac35ebc5ba03fe6c3354607f80f629.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1aa5493d526915e8fec08a70a2d341bedd.html">Variable usb_cam::constants::RGBA16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1aa5493d526915e8fec08a70a2d341bedd.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a7816537550b303999a7d311c4b881546.html">Variable usb_cam::constants::RGBA8</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a7816537550b303999a7d311c4b881546.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1aec6ba68b1caad5d8e4292180a04329fc.html">Variable usb_cam::constants::TYPE_16SC1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1aec6ba68b1caad5d8e4292180a04329fc.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a0d13cfadce0ab3f1dd57c6c41f0cda93.html">Variable usb_cam::constants::TYPE_16SC2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a0d13cfadce0ab3f1dd57c6c41f0cda93.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1ab5d1cd65dbcf51e5f857e95889885637.html">Variable usb_cam::constants::TYPE_16SC3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1ab5d1cd65dbcf51e5f857e95889885637.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1acdcc0201ec76d95cc6fe6338eb5f00ea.html">Variable usb_cam::constants::TYPE_16SC4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1acdcc0201ec76d95cc6fe6338eb5f00ea.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1aae71741e97b247484c4a987cff4c5eed.html">Variable usb_cam::constants::TYPE_16UC1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1aae71741e97b247484c4a987cff4c5eed.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1ac9e91002ab53640a76e9cf8596e5ab49.html">Variable usb_cam::constants::TYPE_16UC2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1ac9e91002ab53640a76e9cf8596e5ab49.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a9de39792fe4acd11626054df25c6c23f.html">Variable usb_cam::constants::TYPE_16UC3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a9de39792fe4acd11626054df25c6c23f.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a45b0f6c6579b3bbdd96831a538e4e55f.html">Variable usb_cam::constants::TYPE_16UC4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a45b0f6c6579b3bbdd96831a538e4e55f.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a7ebcd6bec36b5e714c358b04f4d0893d.html">Variable usb_cam::constants::TYPE_32FC1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a7ebcd6bec36b5e714c358b04f4d0893d.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1abc1295436e6a8589ca53005c6546c63c.html">Variable usb_cam::constants::TYPE_32FC2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1abc1295436e6a8589ca53005c6546c63c.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a9e024997cd7da638d23b31352bd77b4f.html">Variable usb_cam::constants::TYPE_32FC3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a9e024997cd7da638d23b31352bd77b4f.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a61defc8a77801b8ba517421b76a244ac.html">Variable usb_cam::constants::TYPE_32FC4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a61defc8a77801b8ba517421b76a244ac.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1aadfd8d673adb27f56e55165aa4a97e92.html">Variable usb_cam::constants::TYPE_32SC1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1aadfd8d673adb27f56e55165aa4a97e92.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1aad9445f1bfa56d9c1762eb21dd501dbc.html">Variable usb_cam::constants::TYPE_32SC2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1aad9445f1bfa56d9c1762eb21dd501dbc.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a3792a8b1922957d8d9ee9b10da12e99d.html">Variable usb_cam::constants::TYPE_32SC3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a3792a8b1922957d8d9ee9b10da12e99d.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a626d1603e12e41e362b4a2ff8d57b87d.html">Variable usb_cam::constants::TYPE_32SC4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a626d1603e12e41e362b4a2ff8d57b87d.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a14799c5002b74652fc588ba3f0bf586f.html">Variable usb_cam::constants::TYPE_64FC1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a14799c5002b74652fc588ba3f0bf586f.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a8a015e816bb01df875e0aca4a369d55c.html">Variable usb_cam::constants::TYPE_64FC2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a8a015e816bb01df875e0aca4a369d55c.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1acfd32b4450998434b95a95b82075b053.html">Variable usb_cam::constants::TYPE_64FC3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1acfd32b4450998434b95a95b82075b053.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a57f65e04c2a15492639301c795d50731.html">Variable usb_cam::constants::TYPE_64FC4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a57f65e04c2a15492639301c795d50731.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a63c59a1a4720dace1995c68521d52dbb.html">Variable usb_cam::constants::TYPE_8SC1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a63c59a1a4720dace1995c68521d52dbb.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1adfd4cb8706712f3e1e92cde8a180d193.html">Variable usb_cam::constants::TYPE_8SC2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1adfd4cb8706712f3e1e92cde8a180d193.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a47134638f2cb679a44d7d6e294a9b9a2.html">Variable usb_cam::constants::TYPE_8SC3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a47134638f2cb679a44d7d6e294a9b9a2.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a6ad471e52e16cebfb70b416914e382ee.html">Variable usb_cam::constants::TYPE_8SC4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a6ad471e52e16cebfb70b416914e382ee.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1ad4a0a55cffee0bf1af09d25dd164c48c.html">Variable usb_cam::constants::TYPE_8UC1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1ad4a0a55cffee0bf1af09d25dd164c48c.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a9ebb652a684f62e4b8194b3a0e168cdb.html">Variable usb_cam::constants::TYPE_8UC2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a9ebb652a684f62e4b8194b3a0e168cdb.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a38bd8646a6f3bf9c321d84f8ba60d9b2.html">Variable usb_cam::constants::TYPE_8UC3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a38bd8646a6f3bf9c321d84f8ba60d9b2.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a345c8984071f0e0b66326070b1e55ff0.html">Variable usb_cam::constants::TYPE_8UC4</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a345c8984071f0e0b66326070b1e55ff0.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a03be27859b08ec926e404f674f14d1fb.html">Variable usb_cam::constants::uchar_clipping_table</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a03be27859b08ec926e404f674f14d1fb.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a87da6c127cdbc608417b89aedd41c017.html">Variable usb_cam::constants::UNKNOWN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a87da6c127cdbc608417b89aedd41c017.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a0da9f2ed1e3c3299c1122957c4918ba3.html">Variable usb_cam::constants::YUV422</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a0da9f2ed1e3c3299c1122957c4918ba3.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_constants_8hpp_1a4f2169619a4ff038b7684e24af03e1e8.html">Variable usb_cam::constants::YUV422_YUY2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_constants_8hpp_1a4f2169619a4ff038b7684e24af03e1e8.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_mjpeg_8hpp_1a786132414c30f947907be33a4c28125a.html">Define __STDC_CONSTANT_MACROS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_mjpeg_8hpp_1a786132414c30f947907be33a4c28125a.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src.html">Directory src</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_usb_cam.html">Directory usb_cam</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_usb_cam.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_usb_cam_include.html">Directory include</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_usb_cam_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_usb_cam_include_usb_cam.html">Directory usb_cam</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_usb_cam_include_usb_cam.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_usb_cam_include_usb_cam.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_usb_cam_include_usb_cam_formats.html">Directory formats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_usb_cam_include_usb_cam_formats.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_constants.hpp.html">File constants.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_constants.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-constants-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/constants.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_constants.hpp.html">Program Listing for File constants.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_constants.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_constants.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_constants.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_constants.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_conversions.hpp.html">File conversions.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_conversions.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-conversions-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/conversions.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_conversions.hpp.html">Program Listing for File conversions.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_conversions.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_conversions.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_conversions.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_m420.hpp.html">File m420.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_m420.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-formats-m420-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/formats/m420.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_formats_m420.hpp.html">Program Listing for File m420.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_m420.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_m420.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_m420.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_m420.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mjpeg.hpp.html">File mjpeg.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mjpeg.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-formats-mjpeg-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/formats/mjpeg.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_formats_mjpeg.hpp.html">Program Listing for File mjpeg.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mjpeg.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mjpeg.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mjpeg.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mjpeg.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mjpeg.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mono.hpp.html">File mono.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mono.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-formats-mono-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/formats/mono.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_formats_mono.hpp.html">Program Listing for File mono.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mono.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mono.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mono.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_mono.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_pixel_format_base.hpp.html">File pixel_format_base.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_pixel_format_base.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-formats-pixel-format-base-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/formats/pixel_format_base.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_formats_pixel_format_base.hpp.html">Program Listing for File pixel_format_base.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_pixel_format_base.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_pixel_format_base.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_pixel_format_base.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_pixel_format_base.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_rgb.hpp.html">File rgb.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_rgb.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-formats-rgb-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/formats/rgb.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_formats_rgb.hpp.html">Program Listing for File rgb.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_rgb.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_rgb.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_rgb.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_rgb.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam.hpp.html">File usb_cam.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-usb-cam-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/usb_cam.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam.hpp.html">Program Listing for File usb_cam.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam_node.hpp.html">File usb_cam_node.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam_node.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-usb-cam-node-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/usb_cam_node.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam_node.hpp.html">Program Listing for File usb_cam_node.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam_node.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam_node.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam_node.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_usb_cam_node.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_utils.hpp.html">File utils.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_utils.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-formats-utils-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/formats/utils.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_formats_utils.hpp.html">Program Listing for File utils.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_utils.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_utils.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_utils.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_utils.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_utils.hpp.html">File utils.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_utils.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-utils-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/utils.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_utils.hpp.html">Program Listing for File utils.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_utils.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_utils.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_utils.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_utils.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_utils.hpp.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_utils.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_uyvy.hpp.html">File uyvy.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_uyvy.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-formats-uyvy-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/formats/uyvy.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_formats_uyvy.hpp.html">Program Listing for File uyvy.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_uyvy.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_uyvy.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_uyvy.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_uyvy.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_yuyv.hpp.html">File yuyv.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_yuyv.hpp.html#definition-tmp-ws-src-usb-cam-include-usb-cam-formats-yuyv-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/usb_cam/include/usb_cam/formats/yuyv.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_usb_cam_include_usb_cam_formats_yuyv.hpp.html">Program Listing for File yuyv.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_yuyv.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_yuyv.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_yuyv.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_usb_cam_include_usb_cam_formats_yuyv.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">usb_cam</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the documentation for usb_cam</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-documentation-for-usb-cam">
+<h1>Welcome to the documentation for usb_cam<a class="headerlink" href="#welcome-to-the-documentation-for-usb-cam" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#variables">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-search">
+<h1>Indices and Search<a class="headerlink" href="#indices-and-search" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/index.html" class="btn btn-neutral float-right" title="Class Hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, BSD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

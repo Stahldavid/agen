@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rclpy.impl.rcutils_logger module &mdash; rclpy 3.2.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=eb155f5e"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rclpy.lifecycle package" href="rclpy.lifecycle.html" />
+    <link rel="prev" title="rclpy.impl.logging_severity module" href="rclpy.impl.logging_severity.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            rclpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">rclpy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="rclpy.html">rclpy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="rclpy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="rclpy.action.html">rclpy.action package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="rclpy.impl.html">rclpy.impl package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.lifecycle.html">rclpy.lifecycle package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#module-rclpy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">rclpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">rclpy</a></li>
+          <li class="breadcrumb-item"><a href="rclpy.html">rclpy package</a></li>
+          <li class="breadcrumb-item"><a href="rclpy.impl.html">rclpy.impl package</a></li>
+      <li class="breadcrumb-item active">rclpy.impl.rcutils_logger module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rclpy.impl.rcutils_logger.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rclpy.impl.rcutils_logger">
+<span id="rclpy-impl-rcutils-logger-module"></span><h1>rclpy.impl.rcutils_logger module<a class="headerlink" href="#module-rclpy.impl.rcutils_logger" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.CallerId">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.impl.rcutils_logger.</span></span><span class="sig-name descname"><span class="pre">CallerId</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.CallerId" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rclpy.impl.rcutils_logger.CallerId" title="rclpy.impl.rcutils_logger.CallerId"><code class="xref py py-class docutils literal notranslate"><span class="pre">CallerId</span></code></a></p>
+<p>Create new instance of CallerId(function_name, file_path, line_number, last_index)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.LoggingFilter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.impl.rcutils_logger.</span></span><span class="sig-name descname"><span class="pre">LoggingFilter</span></span><a class="headerlink" href="#rclpy.impl.rcutils_logger.LoggingFilter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for logging filters.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.LoggingFilter.initialize_context">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initialize_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.LoggingFilter.initialize_context" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.LoggingFilter.params">
+<span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#rclpy.impl.rcutils_logger.LoggingFilter.params" title="Link to this definition"></a></dt>
+<dd><p>Initialize the context of a logging call, e.g. declare variables needed for
+determining the log condition and add them to the context.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.LoggingFilter.should_log">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">should_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.LoggingFilter.should_log" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.Once">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.impl.rcutils_logger.</span></span><span class="sig-name descname"><span class="pre">Once</span></span><a class="headerlink" href="#rclpy.impl.rcutils_logger.Once" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rclpy.impl.rcutils_logger.LoggingFilter" title="rclpy.impl.rcutils_logger.LoggingFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggingFilter</span></code></a></p>
+<p>Ignore all log calls except the first one.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.Once.initialize_context">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initialize_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.Once.initialize_context" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.Once.params">
+<span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'once':</span> <span class="pre">None}</span></em><a class="headerlink" href="#rclpy.impl.rcutils_logger.Once.params" title="Link to this definition"></a></dt>
+<dd><p>Initialize the context of a logging call, e.g. declare variables needed for
+determining the log condition and add them to the context.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.Once.should_log">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">should_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.Once.should_log" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.impl.rcutils_logger.</span></span><span class="sig-name descname"><span class="pre">RcutilsLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.debug" title="Link to this definition"></a></dt>
+<dd><p>Log a message with <cite>DEBUG</cite> severity via :py:classmethod:RcutilsLogger.log:.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.error">
+<span class="sig-name descname"><span class="pre">error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.error" title="Link to this definition"></a></dt>
+<dd><p>Log a message with <cite>ERROR</cite> severity via :py:classmethod:RcutilsLogger.log:.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.fatal">
+<span class="sig-name descname"><span class="pre">fatal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.fatal" title="Link to this definition"></a></dt>
+<dd><p>Log a message with <cite>FATAL</cite> severity via :py:classmethod:RcutilsLogger.log:.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.get_child">
+<span class="sig-name descname"><span class="pre">get_child</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.get_child" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.get_effective_level">
+<span class="sig-name descname"><span class="pre">get_effective_level</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.get_effective_level" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.info" title="Link to this definition"></a></dt>
+<dd><p>Log a message with <cite>INFO</cite> severity via :py:classmethod:RcutilsLogger.log:.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.is_enabled_for">
+<span class="sig-name descname"><span class="pre">is_enabled_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">severity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.is_enabled_for" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.log">
+<span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">severity</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.log" title="Link to this definition"></a></dt>
+<dd><p>Log a message with the specified severity.</p>
+<dl class="simple">
+<dt>The message will not be logged if:</dt><dd><ul class="simple">
+<li><p>the logger is not enabled for the message’s severity (the message severity is less than
+the level of the logger), or</p></li>
+<li><p>a logging filter causes the message to be skipped.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Logging filters will only be evaluated if the logger is enabled for the message’s
+severity.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>str</strong> (<em>name</em>) – message to log.</p></li>
+<li><p><strong>severity</strong> (<em>:py:class:LoggingSeverity</em>) – severity of the message.</p></li>
+<li><p><strong>str</strong> – name of the logger to use.</p></li>
+<li><p><strong>**kwargs</strong> – optional parameters for logging filters (see below).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><em>throttle_duration_sec</em> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) –
+Duration of the throttle interval for the :py:class:Throttle: filter.</p></li>
+<li><p><em>throttle_time_source_type</em> (<code class="docutils literal notranslate"><span class="pre">str</span></code>) –
+Optional time source type for the :py:class:Throttle: filter (default of
+<code class="docutils literal notranslate"><span class="pre">RCUTILS_STEADY_TIME</span></code>)</p></li>
+<li><p><em>skip_first</em> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) –
+If True, enable the :py:class:SkipFirst: filter.</p></li>
+<li><p><em>once</em> (<code class="docutils literal notranslate"><span class="pre">bool</span></code>) –
+If True, enable the :py:class:Once: filter.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>False if a filter caused the message to not be logged; True otherwise.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>TypeError on invalid filter parameter combinations.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ValueError on invalid parameters values.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.set_level">
+<span class="sig-name descname"><span class="pre">set_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.set_level" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.warn">
+<span class="sig-name descname"><span class="pre">warn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.warn" title="Link to this definition"></a></dt>
+<dd><p>Log a message with <cite>WARN</cite> severity via :py:classmethod:RcutilsLogger.log:.</p>
+<p>Deprecated in favor of :py:classmethod:RcutilsLogger.warning:.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.RcutilsLogger.warning">
+<span class="sig-name descname"><span class="pre">warning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.RcutilsLogger.warning" title="Link to this definition"></a></dt>
+<dd><p>Log a message with <cite>WARN</cite> severity via :py:classmethod:RcutilsLogger.log:.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.SkipFirst">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.impl.rcutils_logger.</span></span><span class="sig-name descname"><span class="pre">SkipFirst</span></span><a class="headerlink" href="#rclpy.impl.rcutils_logger.SkipFirst" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rclpy.impl.rcutils_logger.LoggingFilter" title="rclpy.impl.rcutils_logger.LoggingFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggingFilter</span></code></a></p>
+<p>Ignore the first log call but process all subsequent calls.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.SkipFirst.initialize_context">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initialize_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.SkipFirst.initialize_context" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.SkipFirst.params">
+<span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'skip_first':</span> <span class="pre">None}</span></em><a class="headerlink" href="#rclpy.impl.rcutils_logger.SkipFirst.params" title="Link to this definition"></a></dt>
+<dd><p>Initialize the context of a logging call, e.g. declare variables needed for
+determining the log condition and add them to the context.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.SkipFirst.should_log">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">should_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.SkipFirst.should_log" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.Throttle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.impl.rcutils_logger.</span></span><span class="sig-name descname"><span class="pre">Throttle</span></span><a class="headerlink" href="#rclpy.impl.rcutils_logger.Throttle" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rclpy.impl.rcutils_logger.LoggingFilter" title="rclpy.impl.rcutils_logger.LoggingFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggingFilter</span></code></a></p>
+<p>Ignore log calls if the last call is not longer ago than the specified duration.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.Throttle.initialize_context">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initialize_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.Throttle.initialize_context" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.Throttle.params">
+<span class="sig-name descname"><span class="pre">params</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'throttle_duration_sec':</span> <span class="pre">None,</span> <span class="pre">'throttle_time_source_type':</span> <span class="pre">rclpy.clock.Clock}</span></em><a class="headerlink" href="#rclpy.impl.rcutils_logger.Throttle.params" title="Link to this definition"></a></dt>
+<dd><p>Initialize the context of a logging call, e.g. declare variables needed for
+determining the log condition and add them to the context.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.Throttle.should_log">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">should_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.Throttle.should_log" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.impl.rcutils_logger.get_filters_from_kwargs">
+<span class="sig-prename descclassname"><span class="pre">rclpy.impl.rcutils_logger.</span></span><span class="sig-name descname"><span class="pre">get_filters_from_kwargs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.impl.rcutils_logger.get_filters_from_kwargs" title="Link to this definition"></a></dt>
+<dd><p>Determine which filters have had parameters specified in the given keyword arguments.</p>
+<p>Returns the list of filters using the order specified by <cite>supported_filters</cite>.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rclpy.impl.logging_severity.html" class="btn btn-neutral float-left" title="rclpy.impl.logging_severity module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rclpy.lifecycle.html" class="btn btn-neutral float-right" title="rclpy.lifecycle package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Open Source Robotics Foundation, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

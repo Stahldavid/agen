@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the documentation for rmf_task_sequence &mdash; rmf_task_sequence 2.2.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Class Hierarchy" href="generated/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            rmf_task_sequence
+          </a>
+              <div class="version">
+                2.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_nlohmann.html">Namespace nlohmann</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_nlohmann.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_nlohmann__json_schema.html">Namespace nlohmann::json_schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rmf_task.html">Namespace rmf_task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rmf_task_sequence.html">Namespace rmf_task_sequence</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rmf_task_sequence.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rmf_task_sequence.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rmf_task_sequence.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rmf_task_sequence__detail.html">Namespace rmf_task_sequence::detail</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rmf_task_sequence__detail.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rmf_task_sequence__events.html">Namespace rmf_task_sequence::events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rmf_task_sequence__events.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rmf_task_sequence__phases.html">Namespace rmf_task_sequence::phases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rmf_task_sequence__phases.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rmf_task_sequence__schemas.html">Namespace rmf_task_sequence::schemas</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rmf_task_sequence__schemas.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrmf__task__sequence_1_1schemas_1_1ErrorHandler_1_1Info.html">Struct ErrorHandler::Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrmf__task__sequence_1_1schemas_1_1ErrorHandler_1_1Info.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrmf__task__sequence_1_1schemas_1_1ErrorHandler_1_1Info.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity.html">Class Activity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Active.html">Class Activity::Active</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Active.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Active.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Active.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Active.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Description.html">Class Activity::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Description.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Model.html">Class Activity::Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Model.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Model.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Model.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1Model.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1SequenceModel.html">Class Activity::SequenceModel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1SequenceModel.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1SequenceModel.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1SequenceModel.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Activity_1_1SequenceModel.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1detail_1_1Backup.html">Class Backup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1detail_1_1Backup.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event.html">Class Event</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event.html#base-type">Base Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Active.html">Class Event::Active</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Active.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Active.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Active.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Active.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Initializer.html">Class Event::Initializer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Initializer.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Initializer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Standby.html">Class Event::Standby</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Standby.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Event_1_1Standby.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle.html">Class Bundle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle_1_1Description.html">Class Bundle::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle_1_1Description.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Bundle_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1DropOff.html">Class DropOff</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1DropOff.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1DropOff.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1DropOff.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1DropOff_1_1Description.html">Class DropOff::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1DropOff_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1DropOff_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1DropOff_1_1Description.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1DropOff_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1GoToPlace.html">Class GoToPlace</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1GoToPlace.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1GoToPlace.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1GoToPlace.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1GoToPlace_1_1Description.html">Class GoToPlace::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1GoToPlace_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1GoToPlace_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1GoToPlace_1_1Description.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1GoToPlace_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PerformAction.html">Class PerformAction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PerformAction.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PerformAction.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PerformAction.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PerformAction_1_1Description.html">Class PerformAction::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PerformAction_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PerformAction_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PerformAction_1_1Description.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PerformAction_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PickUp.html">Class PickUp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PickUp.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PickUp.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PickUp.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PickUp_1_1Description.html">Class PickUp::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PickUp_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PickUp_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PickUp_1_1Description.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1PickUp_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Placeholder.html">Class Placeholder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Placeholder.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Placeholder.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Placeholder.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Placeholder_1_1Description.html">Class Placeholder::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Placeholder_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Placeholder_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Placeholder_1_1Description.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1Placeholder_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1WaitFor.html">Class WaitFor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1WaitFor.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1WaitFor.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1WaitFor.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1WaitFor_1_1Description.html">Class WaitFor::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1WaitFor_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1WaitFor_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1WaitFor_1_1Description.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1events_1_1WaitFor_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase.html">Class Phase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase.html#base-type">Base Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Activator.html">Class Phase::Activator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Activator.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Activator.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Active.html">Class Phase::Active</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Active.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Active.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Active.html#base-types">Base Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Active.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Description.html">Class Phase::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Description.html#base-type">Base Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Description.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Phase_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase.html">Class SimplePhase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase_1_1Description.html">Class SimplePhase::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase_1_1Description.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1phases_1_1SimplePhase_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1schemas_1_1ErrorHandler.html">Class ErrorHandler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1schemas_1_1ErrorHandler.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1schemas_1_1ErrorHandler.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1schemas_1_1ErrorHandler.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1schemas_1_1ErrorHandler.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1schemas_1_1ErrorHandler.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task.html">Class Task</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task_1_1Builder.html">Class Task::Builder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task_1_1Builder.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task_1_1Builder.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task_1_1Description.html">Class Task::Description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task_1_1Description.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task_1_1Description.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task_1_1Description.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrmf__task__sequence_1_1Task_1_1Description.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#typedefs">Typedefs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedefs_8hpp_1acbdd68da8c6a8a7bb9a2f831368bc157.html">Typedef rmf_task_sequence::ConstParametersPtr</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedefs_8hpp_1acbdd68da8c6a8a7bb9a2f831368bc157.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedefs_8hpp_1ad752ecd13eaf062c4c1a5b839f876ce3.html">Typedef rmf_task_sequence::Constraints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedefs_8hpp_1ad752ecd13eaf062c4c1a5b839f876ce3.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedefs_8hpp_1a150edcc72ce5d26cbce250c31bd26d82.html">Typedef rmf_task_sequence::Estimate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedefs_8hpp_1a150edcc72ce5d26cbce250c31bd26d82.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedefs_8hpp_1ae02d236d9884327f6159ea53495d51ed.html">Typedef rmf_task_sequence::Header</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedefs_8hpp_1ae02d236d9884327f6159ea53495d51ed.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedefs_8hpp_1abd96c53f73290903d6a14ce7fbddcd68.html">Typedef rmf_task_sequence::Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedefs_8hpp_1abd96c53f73290903d6a14ce7fbddcd68.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedefs_8hpp_1adc295db6d3a646570e498e6b0ad2ac17.html">Typedef rmf_task_sequence::Payload</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedefs_8hpp_1adc295db6d3a646570e498e6b0ad2ac17.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedefs_8hpp_1a0b8d324ead5dd7983549fe36a106cbb3.html">Typedef rmf_task_sequence::State</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedefs_8hpp_1a0b8d324ead5dd7983549fe36a106cbb3.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedefs_8hpp_1ae76f7e4efd60620bd7b546aed1a6e300.html">Typedef rmf_task_sequence::TravelEstimator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedefs_8hpp_1ae76f7e4efd60620bd7b546aed1a6e300.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src.html">Directory src</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task.html">Directory rmf_task</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence.html">Directory rmf_task_sequence</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include.html">Directory include</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence.html">Directory rmf_task_sequence</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail.html">Directory detail</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events.html">Directory events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_detail.html">Directory detail</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_detail.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_phases.html">Directory phases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_phases.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_schemas.html">Directory schemas</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_schemas.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Activity.hpp.html">File Activity.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Activity.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-activity-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/Activity.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Activity.hpp.html">Program Listing for File Activity.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Activity.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Activity.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Activity.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Activity.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_Backup.hpp.html">File Backup.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_Backup.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-detail-backup-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/detail/Backup.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_Backup.hpp.html">Program Listing for File Backup.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_Backup.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_Backup.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_Backup.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_Backup.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Bundle.hpp.html">File Bundle.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Bundle.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-events-bundle-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/events/Bundle.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Bundle.hpp.html">Program Listing for File Bundle.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Bundle.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Bundle.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Bundle.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Bundle.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_DropOff.hpp.html">File DropOff.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_DropOff.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-events-dropoff-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/events/DropOff.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_DropOff.hpp.html">Program Listing for File DropOff.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_DropOff.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_DropOff.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_DropOff.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_schemas_ErrorHandler.hpp.html">File ErrorHandler.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_schemas_ErrorHandler.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-schemas-errorhandler-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/schemas/ErrorHandler.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_schemas_ErrorHandler.hpp.html">Program Listing for File ErrorHandler.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_schemas_ErrorHandler.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_schemas_ErrorHandler.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_schemas_ErrorHandler.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Event.hpp.html">File Event.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Event.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-event-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/Event.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Event.hpp.html">Program Listing for File Event.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Event.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Event.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Event.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Event.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_GoToPlace.hpp.html">File GoToPlace.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_GoToPlace.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-events-gotoplace-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/events/GoToPlace.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_GoToPlace.hpp.html">Program Listing for File GoToPlace.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_GoToPlace.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_GoToPlace.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_GoToPlace.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_detail_impl_Bundle.hpp.html">File impl_Bundle.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_detail_impl_Bundle.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-events-detail-impl-bundle-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/events/detail/impl_Bundle.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_detail_impl_Bundle.hpp.html">Program Listing for File impl_Bundle.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_detail_impl_Bundle.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_detail_impl_Bundle.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_detail_impl_Bundle.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Event.hpp.html">File impl_Event.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Event.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-detail-impl-event-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/detail/impl_Event.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Event.hpp.html">Program Listing for File impl_Event.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Event.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Event.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Event.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Phase.hpp.html">File impl_Phase.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Phase.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-detail-impl-phase-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/detail/impl_Phase.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Phase.hpp.html">Program Listing for File impl_Phase.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Phase.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Phase.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Phase.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Task.hpp.html">File impl_Task.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Task.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-detail-impl-task-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/detail/impl_Task.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Task.hpp.html">Program Listing for File impl_Task.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Task.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Task.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_detail_impl_Task.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PerformAction.hpp.html">File PerformAction.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PerformAction.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-events-performaction-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/events/PerformAction.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PerformAction.hpp.html">Program Listing for File PerformAction.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PerformAction.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PerformAction.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PerformAction.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Phase.hpp.html">File Phase.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Phase.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-phase-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/Phase.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Phase.hpp.html">Program Listing for File Phase.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Phase.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Phase.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Phase.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Phase.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PickUp.hpp.html">File PickUp.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PickUp.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-events-pickup-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/events/PickUp.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PickUp.hpp.html">Program Listing for File PickUp.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PickUp.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PickUp.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_PickUp.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Placeholder.hpp.html">File Placeholder.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Placeholder.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-events-placeholder-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/events/Placeholder.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Placeholder.hpp.html">Program Listing for File Placeholder.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Placeholder.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Placeholder.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_Placeholder.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_phases_SimplePhase.hpp.html">File SimplePhase.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_phases_SimplePhase.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-phases-simplephase-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/phases/SimplePhase.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_phases_SimplePhase.hpp.html">Program Listing for File SimplePhase.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_phases_SimplePhase.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_phases_SimplePhase.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_phases_SimplePhase.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Task.hpp.html">File Task.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Task.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-task-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/Task.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Task.hpp.html">Program Listing for File Task.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Task.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Task.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Task.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_Task.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_typedefs.hpp.html">File typedefs.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_typedefs.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-typedefs-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/typedefs.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_typedefs.hpp.html">Program Listing for File typedefs.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_typedefs.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_typedefs.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_typedefs.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_typedefs.hpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_WaitFor.hpp.html">File WaitFor.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_WaitFor.hpp.html#definition-tmp-ws-src-rmf-task-rmf-task-sequence-include-rmf-task-sequence-events-waitfor-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rmf_task/rmf_task_sequence/include/rmf_task_sequence/events/WaitFor.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_WaitFor.hpp.html">Program Listing for File WaitFor.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_WaitFor.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_WaitFor.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rmf_task_rmf_task_sequence_include_rmf_task_sequence_events_WaitFor.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">rmf_task_sequence</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the documentation for rmf_task_sequence</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-documentation-for-rmf-task-sequence">
+<h1>Welcome to the documentation for rmf_task_sequence<a class="headerlink" href="#welcome-to-the-documentation-for-rmf-task-sequence" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#typedefs">Typedefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-search">
+<h1>Indices and Search<a class="headerlink" href="#indices-and-search" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/index.html" class="btn btn-neutral float-right" title="Class Hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Apache License 2.0.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

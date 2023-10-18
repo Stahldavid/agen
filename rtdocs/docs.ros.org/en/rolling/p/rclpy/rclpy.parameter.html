@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rclpy.parameter module &mdash; rclpy 3.2.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=eb155f5e"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rclpy.parameter_client module" href="rclpy.parameter_client.html" />
+    <link rel="prev" title="rclpy.node module" href="rclpy.node.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            rclpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">rclpy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="rclpy.html">rclpy package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="rclpy.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="rclpy.callback_groups.html">rclpy.callback_groups module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.client.html">rclpy.client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.clock.html">rclpy.clock module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.constants.html">rclpy.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.context.html">rclpy.context module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.duration.html">rclpy.duration module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.event_handler.html">rclpy.event_handler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.exceptions.html">rclpy.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.executors.html">rclpy.executors module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.expand_topic_name.html">rclpy.expand_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.guard_condition.html">rclpy.guard_condition module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.logging.html">rclpy.logging module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.logging_service.html">rclpy.logging_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.node.html">rclpy.node module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">rclpy.parameter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_client.html">rclpy.parameter_client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_event_handler.html">rclpy.parameter_event_handler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_service.html">rclpy.parameter_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.publisher.html">rclpy.publisher module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos.html">rclpy.qos module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos_event.html">rclpy.qos_event module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos_overriding_options.html">rclpy.qos_overriding_options module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.serialization.html">rclpy.serialization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.service.html">rclpy.service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.service_introspection.html">rclpy.service_introspection module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.signals.html">rclpy.signals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.subscription.html">rclpy.subscription module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.task.html">rclpy.task module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.time.html">rclpy.time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.time_source.html">rclpy.time_source module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.timer.html">rclpy.timer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.topic_endpoint_info.html">rclpy.topic_endpoint_info module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.topic_or_service_is_hidden.html">rclpy.topic_or_service_is_hidden module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_description_service.html">rclpy.type_description_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_hash.html">rclpy.type_hash module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_support.html">rclpy.type_support module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.utilities.html">rclpy.utilities module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_full_topic_name.html">rclpy.validate_full_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_namespace.html">rclpy.validate_namespace module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_node_name.html">rclpy.validate_node_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_parameter_name.html">rclpy.validate_parameter_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_topic_name.html">rclpy.validate_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.wait_for_message.html">rclpy.wait_for_message module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.waitable.html">rclpy.waitable module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#module-rclpy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">rclpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">rclpy</a></li>
+          <li class="breadcrumb-item"><a href="rclpy.html">rclpy package</a></li>
+      <li class="breadcrumb-item active">rclpy.parameter module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rclpy.parameter.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rclpy.parameter">
+<span id="rclpy-parameter-module"></span><h1>rclpy.parameter module<a class="headerlink" href="#module-rclpy.parameter" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.parameter.</span></span><span class="sig-name descname"><span class="pre">Parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.parameter.Parameter" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter.Type">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.parameter.Parameter.Type" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter.Type.check">
+<span class="sig-name descname"><span class="pre">check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.parameter.Parameter.Type.check" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter.Type.from_parameter_value">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_parameter_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.parameter.Parameter.Type.from_parameter_value" title="Link to this definition"></a></dt>
+<dd><p>Get a Parameter.Type from a given variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A Parameter.Type corresponding to the instance type of the given value.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>TypeError if the conversion to a type was not possible.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter.from_parameter_msg">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_parameter_msg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param_msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.parameter.Parameter.from_parameter_msg" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter.get_parameter_value">
+<span class="sig-name descname"><span class="pre">get_parameter_value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.parameter.Parameter.get_parameter_value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#rclpy.parameter.Parameter.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter.to_parameter_msg">
+<span class="sig-name descname"><span class="pre">to_parameter_msg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.parameter.Parameter.to_parameter_msg" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter.type_">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">type_</span></span><a class="headerlink" href="#rclpy.parameter.Parameter.type_" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.parameter.Parameter.value">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value</span></span><a class="headerlink" href="#rclpy.parameter.Parameter.value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.parameter.get_parameter_value">
+<span class="sig-prename descclassname"><span class="pre">rclpy.parameter.</span></span><span class="sig-name descname"><span class="pre">get_parameter_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">rcl_interfaces.msg.ParameterValue</span></span></span><a class="headerlink" href="#rclpy.parameter.get_parameter_value" title="Link to this definition"></a></dt>
+<dd><p>Guess the desired type of the parameter based on the string value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>string_value</strong> – The string value to be converted to a ParameterValue.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The ParameterValue.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.parameter.parameter_dict_from_yaml_file">
+<span class="sig-prename descclassname"><span class="pre">rclpy.parameter.</span></span><span class="sig-name descname"><span class="pre">parameter_dict_from_yaml_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_wildcard</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">rcl_interfaces.msg.Parameter</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rclpy.parameter.parameter_dict_from_yaml_file" title="Link to this definition"></a></dt>
+<dd><p>Build a dict of parameters from a YAML file.</p>
+<p>Will load all parameters if <code class="docutils literal notranslate"><span class="pre">target_nodes</span></code> is None or empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>RuntimeError</strong> – if a target node is not in the file</p></li>
+<li><p><strong>RuntimeError</strong> – if the is not a valid ROS parameter file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>parameter_file</strong> – Path to the YAML file to load parameters from.</p></li>
+<li><p><strong>use_wildcard</strong> – Use wildcard matching for the target nodes.</p></li>
+<li><p><strong>target_nodes</strong> – List of nodes in the YAML file to load parameters from.</p></li>
+<li><p><strong>namespace</strong> – Namespace to prepend to all parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dict of Parameter messages keyed by the parameter names</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.parameter.parameter_value_to_python">
+<span class="sig-prename descclassname"><span class="pre">rclpy.parameter.</span></span><span class="sig-name descname"><span class="pre">parameter_value_to_python</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rcl_interfaces.msg.ParameterValue</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.parameter.parameter_value_to_python" title="Link to this definition"></a></dt>
+<dd><p>Get the value for the Python builtin type from a rcl_interfaces/msg/ParameterValue object.</p>
+<p>Returns the value member of the message based on the <code class="docutils literal notranslate"><span class="pre">type</span></code> member.
+Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> if the parameter is “NOT_SET”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>parameter_value</strong> – The message to get the value from.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – if the member <code class="docutils literal notranslate"><span class="pre">type</span></code> has an unexpected value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rclpy.node.html" class="btn btn-neutral float-left" title="rclpy.node module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rclpy.parameter_client.html" class="btn btn-neutral float-right" title="rclpy.parameter_client module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Open Source Robotics Foundation, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

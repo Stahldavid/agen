@@ -1,0 +1,1 @@
+This is a yaml configuration file for the variable impedance control system. Based on other files and context, it should contain configurable parameters like spring stiffness, damping coefficient etc. for the controller.

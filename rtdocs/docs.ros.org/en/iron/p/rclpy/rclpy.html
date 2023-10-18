@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rclpy package &mdash; rclpy 3.2.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=eb155f5e"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rclpy.action package" href="rclpy.action.html" />
+    <link rel="prev" title="rclpy" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            rclpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">rclpy</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">rclpy package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.action.html">rclpy.action package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.html">rclpy.impl package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.lifecycle.html">rclpy.lifecycle package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.callback_groups.html">rclpy.callback_groups module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.client.html">rclpy.client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.clock.html">rclpy.clock module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.constants.html">rclpy.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.context.html">rclpy.context module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.duration.html">rclpy.duration module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.event_handler.html">rclpy.event_handler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.exceptions.html">rclpy.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.executors.html">rclpy.executors module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.expand_topic_name.html">rclpy.expand_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.guard_condition.html">rclpy.guard_condition module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.logging.html">rclpy.logging module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.logging_service.html">rclpy.logging_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.node.html">rclpy.node module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter.html">rclpy.parameter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_client.html">rclpy.parameter_client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_service.html">rclpy.parameter_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.publisher.html">rclpy.publisher module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos.html">rclpy.qos module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos_event.html">rclpy.qos_event module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos_overriding_options.html">rclpy.qos_overriding_options module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.serialization.html">rclpy.serialization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.service.html">rclpy.service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.service_introspection.html">rclpy.service_introspection module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.signals.html">rclpy.signals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.subscription.html">rclpy.subscription module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.task.html">rclpy.task module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.time.html">rclpy.time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.time_source.html">rclpy.time_source module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.timer.html">rclpy.timer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.topic_endpoint_info.html">rclpy.topic_endpoint_info module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.topic_or_service_is_hidden.html">rclpy.topic_or_service_is_hidden module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_description_service.html">rclpy.type_description_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_hash.html">rclpy.type_hash module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_support.html">rclpy.type_support module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.utilities.html">rclpy.utilities module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_full_topic_name.html">rclpy.validate_full_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_namespace.html">rclpy.validate_namespace module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_node_name.html">rclpy.validate_node_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_parameter_name.html">rclpy.validate_parameter_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_topic_name.html">rclpy.validate_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.wait_for_message.html">rclpy.wait_for_message module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.waitable.html">rclpy.waitable module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-rclpy">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.create_node"><code class="docutils literal notranslate"><span class="pre">create_node()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.get_global_executor"><code class="docutils literal notranslate"><span class="pre">get_global_executor()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.init"><code class="docutils literal notranslate"><span class="pre">init()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.shutdown"><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.spin"><code class="docutils literal notranslate"><span class="pre">spin()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.spin_once"><code class="docutils literal notranslate"><span class="pre">spin_once()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.spin_until_future_complete"><code class="docutils literal notranslate"><span class="pre">spin_until_future_complete()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">rclpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">rclpy</a></li>
+      <li class="breadcrumb-item active">rclpy package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rclpy.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rclpy-package">
+<h1>rclpy package<a class="headerlink" href="#rclpy-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.action.html">rclpy.action package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.action.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.action.client.html">rclpy.action.client module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.action.client.html#rclpy.action.client.ActionClient"><code class="docutils literal notranslate"><span class="pre">ActionClient</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.action.client.html#rclpy.action.client.ClientGoalHandle"><code class="docutils literal notranslate"><span class="pre">ClientGoalHandle</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.action.graph.html">rclpy.action.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.action.server.html">rclpy.action.server module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.action.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.impl.html">rclpy.impl package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.impl.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.impl.implementation_singleton.html">rclpy.impl.implementation_singleton module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.impl.logging_severity.html">rclpy.impl.logging_severity module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.logging_severity.html#rclpy.impl.logging_severity.LoggingSeverity"><code class="docutils literal notranslate"><span class="pre">LoggingSeverity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.impl.rcutils_logger.html">rclpy.impl.rcutils_logger module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.CallerId"><code class="docutils literal notranslate"><span class="pre">CallerId</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.LoggingFilter"><code class="docutils literal notranslate"><span class="pre">LoggingFilter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.Once"><code class="docutils literal notranslate"><span class="pre">Once</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.RcutilsLogger"><code class="docutils literal notranslate"><span class="pre">RcutilsLogger</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.SkipFirst"><code class="docutils literal notranslate"><span class="pre">SkipFirst</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.Throttle"><code class="docutils literal notranslate"><span class="pre">Throttle</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.rcutils_logger.html#rclpy.impl.rcutils_logger.get_filters_from_kwargs"><code class="docutils literal notranslate"><span class="pre">get_filters_from_kwargs()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.impl.html#module-rclpy.impl">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.lifecycle.html">rclpy.lifecycle package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.lifecycle.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.lifecycle.managed_entity.html">rclpy.lifecycle.managed_entity module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.lifecycle.managed_entity.html#rclpy.lifecycle.managed_entity.ManagedEntity"><code class="docutils literal notranslate"><span class="pre">ManagedEntity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.lifecycle.managed_entity.html#rclpy.lifecycle.managed_entity.SimpleManagedEntity"><code class="docutils literal notranslate"><span class="pre">SimpleManagedEntity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.lifecycle.node.html">rclpy.lifecycle.node module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.lifecycle.publisher.html">rclpy.lifecycle.publisher module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.lifecycle.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.callback_groups.html">rclpy.callback_groups module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup"><code class="docutils literal notranslate"><span class="pre">CallbackGroup</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.add_entity"><code class="docutils literal notranslate"><span class="pre">CallbackGroup.add_entity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.beginning_execution"><code class="docutils literal notranslate"><span class="pre">CallbackGroup.beginning_execution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.can_execute"><code class="docutils literal notranslate"><span class="pre">CallbackGroup.can_execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.ending_execution"><code class="docutils literal notranslate"><span class="pre">CallbackGroup.ending_execution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.has_entity"><code class="docutils literal notranslate"><span class="pre">CallbackGroup.has_entity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.MutuallyExclusiveCallbackGroup"><code class="docutils literal notranslate"><span class="pre">MutuallyExclusiveCallbackGroup</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.MutuallyExclusiveCallbackGroup.beginning_execution"><code class="docutils literal notranslate"><span class="pre">MutuallyExclusiveCallbackGroup.beginning_execution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.MutuallyExclusiveCallbackGroup.can_execute"><code class="docutils literal notranslate"><span class="pre">MutuallyExclusiveCallbackGroup.can_execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.MutuallyExclusiveCallbackGroup.ending_execution"><code class="docutils literal notranslate"><span class="pre">MutuallyExclusiveCallbackGroup.ending_execution()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.ReentrantCallbackGroup"><code class="docutils literal notranslate"><span class="pre">ReentrantCallbackGroup</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.ReentrantCallbackGroup.beginning_execution"><code class="docutils literal notranslate"><span class="pre">ReentrantCallbackGroup.beginning_execution()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.ReentrantCallbackGroup.can_execute"><code class="docutils literal notranslate"><span class="pre">ReentrantCallbackGroup.can_execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.ReentrantCallbackGroup.ending_execution"><code class="docutils literal notranslate"><span class="pre">ReentrantCallbackGroup.ending_execution()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.client.html">rclpy.client module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client.call"><code class="docutils literal notranslate"><span class="pre">Client.call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client.call_async"><code class="docutils literal notranslate"><span class="pre">Client.call_async()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client.configure_introspection"><code class="docutils literal notranslate"><span class="pre">Client.configure_introspection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client.destroy"><code class="docutils literal notranslate"><span class="pre">Client.destroy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client.get_pending_request"><code class="docutils literal notranslate"><span class="pre">Client.get_pending_request()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client.handle"><code class="docutils literal notranslate"><span class="pre">Client.handle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client.remove_pending_request"><code class="docutils literal notranslate"><span class="pre">Client.remove_pending_request()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client.service_is_ready"><code class="docutils literal notranslate"><span class="pre">Client.service_is_ready()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.client.html#rclpy.client.Client.wait_for_service"><code class="docutils literal notranslate"><span class="pre">Client.wait_for_service()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.clock.html">rclpy.clock module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.constants.html">rclpy.constants module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.context.html">rclpy.context module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context"><code class="docutils literal notranslate"><span class="pre">Context</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context.destroy"><code class="docutils literal notranslate"><span class="pre">Context.destroy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context.get_domain_id"><code class="docutils literal notranslate"><span class="pre">Context.get_domain_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context.handle"><code class="docutils literal notranslate"><span class="pre">Context.handle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context.init"><code class="docutils literal notranslate"><span class="pre">Context.init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context.ok"><code class="docutils literal notranslate"><span class="pre">Context.ok()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context.on_shutdown"><code class="docutils literal notranslate"><span class="pre">Context.on_shutdown()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context.shutdown"><code class="docutils literal notranslate"><span class="pre">Context.shutdown()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context.try_shutdown"><code class="docutils literal notranslate"><span class="pre">Context.try_shutdown()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.duration.html">rclpy.duration module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.event_handler.html">rclpy.event_handler module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.EventHandler"><code class="docutils literal notranslate"><span class="pre">EventHandler</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.EventHandler.add_to_wait_set"><code class="docutils literal notranslate"><span class="pre">EventHandler.add_to_wait_set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.EventHandler.destroy"><code class="docutils literal notranslate"><span class="pre">EventHandler.destroy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.EventHandler.execute"><code class="docutils literal notranslate"><span class="pre">EventHandler.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.EventHandler.get_num_entities"><code class="docutils literal notranslate"><span class="pre">EventHandler.get_num_entities()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.EventHandler.is_ready"><code class="docutils literal notranslate"><span class="pre">EventHandler.is_ready()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.EventHandler.take_data"><code class="docutils literal notranslate"><span class="pre">EventHandler.take_data()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.IncompatibleTypeInfo"><code class="docutils literal notranslate"><span class="pre">IncompatibleTypeInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.PublisherEventCallbacks"><code class="docutils literal notranslate"><span class="pre">PublisherEventCallbacks</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.PublisherEventCallbacks.create_event_handlers"><code class="docutils literal notranslate"><span class="pre">PublisherEventCallbacks.create_event_handlers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.QoSEventHandler"><code class="docutils literal notranslate"><span class="pre">QoSEventHandler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.QoSPublisherMatchedInfo"><code class="docutils literal notranslate"><span class="pre">QoSPublisherMatchedInfo</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.SubscriptionEventCallbacks"><code class="docutils literal notranslate"><span class="pre">SubscriptionEventCallbacks</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.event_handler.html#rclpy.event_handler.SubscriptionEventCallbacks.create_event_handlers"><code class="docutils literal notranslate"><span class="pre">SubscriptionEventCallbacks.create_event_handlers()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.exceptions.html">rclpy.exceptions module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.InvalidNamespaceException"><code class="docutils literal notranslate"><span class="pre">InvalidNamespaceException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.InvalidNodeNameException"><code class="docutils literal notranslate"><span class="pre">InvalidNodeNameException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.InvalidParameterException"><code class="docutils literal notranslate"><span class="pre">InvalidParameterException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.InvalidParameterTypeException"><code class="docutils literal notranslate"><span class="pre">InvalidParameterTypeException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.InvalidParameterValueException"><code class="docutils literal notranslate"><span class="pre">InvalidParameterValueException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.InvalidServiceNameException"><code class="docutils literal notranslate"><span class="pre">InvalidServiceNameException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.InvalidTopicNameException"><code class="docutils literal notranslate"><span class="pre">InvalidTopicNameException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.NameValidationException"><code class="docutils literal notranslate"><span class="pre">NameValidationException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.NoTypeSupportImportedException"><code class="docutils literal notranslate"><span class="pre">NoTypeSupportImportedException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.NotInitializedException"><code class="docutils literal notranslate"><span class="pre">NotInitializedException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.ParameterAlreadyDeclaredException"><code class="docutils literal notranslate"><span class="pre">ParameterAlreadyDeclaredException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.ParameterException"><code class="docutils literal notranslate"><span class="pre">ParameterException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.ParameterImmutableException"><code class="docutils literal notranslate"><span class="pre">ParameterImmutableException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.ParameterNotDeclaredException"><code class="docutils literal notranslate"><span class="pre">ParameterNotDeclaredException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.ParameterUninitializedException"><code class="docutils literal notranslate"><span class="pre">ParameterUninitializedException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.exceptions.html#rclpy.exceptions.ROSInterruptException"><code class="docutils literal notranslate"><span class="pre">ROSInterruptException</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.executors.html">rclpy.executors module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.ConditionReachedException"><code class="docutils literal notranslate"><span class="pre">ConditionReachedException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor"><code class="docutils literal notranslate"><span class="pre">Executor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.add_node"><code class="docutils literal notranslate"><span class="pre">Executor.add_node()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.can_execute"><code class="docutils literal notranslate"><span class="pre">Executor.can_execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.context"><code class="docutils literal notranslate"><span class="pre">Executor.context</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.create_task"><code class="docutils literal notranslate"><span class="pre">Executor.create_task()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.get_nodes"><code class="docutils literal notranslate"><span class="pre">Executor.get_nodes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.remove_node"><code class="docutils literal notranslate"><span class="pre">Executor.remove_node()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.shutdown"><code class="docutils literal notranslate"><span class="pre">Executor.shutdown()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.spin"><code class="docutils literal notranslate"><span class="pre">Executor.spin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.spin_once"><code class="docutils literal notranslate"><span class="pre">Executor.spin_once()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.spin_once_until_future_complete"><code class="docutils literal notranslate"><span class="pre">Executor.spin_once_until_future_complete()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.spin_until_future_complete"><code class="docutils literal notranslate"><span class="pre">Executor.spin_until_future_complete()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.wait_for_ready_callbacks"><code class="docutils literal notranslate"><span class="pre">Executor.wait_for_ready_callbacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor._wait_for_ready_callbacks"><code class="docutils literal notranslate"><span class="pre">Executor._wait_for_ready_callbacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor.wake"><code class="docutils literal notranslate"><span class="pre">Executor.wake()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.ExternalShutdownException"><code class="docutils literal notranslate"><span class="pre">ExternalShutdownException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.MultiThreadedExecutor"><code class="docutils literal notranslate"><span class="pre">MultiThreadedExecutor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.MultiThreadedExecutor.spin_once"><code class="docutils literal notranslate"><span class="pre">MultiThreadedExecutor.spin_once()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.MultiThreadedExecutor.spin_once_until_future_complete"><code class="docutils literal notranslate"><span class="pre">MultiThreadedExecutor.spin_once_until_future_complete()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.ShutdownException"><code class="docutils literal notranslate"><span class="pre">ShutdownException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.SingleThreadedExecutor"><code class="docutils literal notranslate"><span class="pre">SingleThreadedExecutor</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.SingleThreadedExecutor.spin_once"><code class="docutils literal notranslate"><span class="pre">SingleThreadedExecutor.spin_once()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.SingleThreadedExecutor.spin_once_until_future_complete"><code class="docutils literal notranslate"><span class="pre">SingleThreadedExecutor.spin_once_until_future_complete()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.TimeoutException"><code class="docutils literal notranslate"><span class="pre">TimeoutException</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.await_or_execute"><code class="docutils literal notranslate"><span class="pre">await_or_execute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.expand_topic_name.html">rclpy.expand_topic_name module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.expand_topic_name.html#rclpy.expand_topic_name.expand_topic_name"><code class="docutils literal notranslate"><span class="pre">expand_topic_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.guard_condition.html">rclpy.guard_condition module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.guard_condition.html#rclpy.guard_condition.GuardCondition"><code class="docutils literal notranslate"><span class="pre">GuardCondition</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.guard_condition.html#rclpy.guard_condition.GuardCondition.destroy"><code class="docutils literal notranslate"><span class="pre">GuardCondition.destroy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.guard_condition.html#rclpy.guard_condition.GuardCondition.handle"><code class="docutils literal notranslate"><span class="pre">GuardCondition.handle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.guard_condition.html#rclpy.guard_condition.GuardCondition.trigger"><code class="docutils literal notranslate"><span class="pre">GuardCondition.trigger()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.logging.html">rclpy.logging module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging.html#rclpy.logging.clear_config"><code class="docutils literal notranslate"><span class="pre">clear_config()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging.html#rclpy.logging.get_logger"><code class="docutils literal notranslate"><span class="pre">get_logger()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging.html#rclpy.logging.get_logger_effective_level"><code class="docutils literal notranslate"><span class="pre">get_logger_effective_level()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging.html#rclpy.logging.get_logger_level"><code class="docutils literal notranslate"><span class="pre">get_logger_level()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging.html#rclpy.logging.get_logging_directory"><code class="docutils literal notranslate"><span class="pre">get_logging_directory()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging.html#rclpy.logging.get_logging_severity_from_string"><code class="docutils literal notranslate"><span class="pre">get_logging_severity_from_string()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging.html#rclpy.logging.initialize"><code class="docutils literal notranslate"><span class="pre">initialize()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging.html#rclpy.logging.set_logger_level"><code class="docutils literal notranslate"><span class="pre">set_logger_level()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging.html#rclpy.logging.shutdown"><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.logging_service.html">rclpy.logging_service module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.logging_service.html#rclpy.logging_service.LoggingService"><code class="docutils literal notranslate"><span class="pre">LoggingService</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.node.html">rclpy.node module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.parameter.html">rclpy.parameter module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter"><code class="docutils literal notranslate"><span class="pre">Parameter</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter.Type"><code class="docutils literal notranslate"><span class="pre">Parameter.Type</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter.Type.check"><code class="docutils literal notranslate"><span class="pre">Parameter.Type.check()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter.Type.from_parameter_value"><code class="docutils literal notranslate"><span class="pre">Parameter.Type.from_parameter_value()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter.from_parameter_msg"><code class="docutils literal notranslate"><span class="pre">Parameter.from_parameter_msg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter.get_parameter_value"><code class="docutils literal notranslate"><span class="pre">Parameter.get_parameter_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter.name"><code class="docutils literal notranslate"><span class="pre">Parameter.name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter.to_parameter_msg"><code class="docutils literal notranslate"><span class="pre">Parameter.to_parameter_msg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter.type_"><code class="docutils literal notranslate"><span class="pre">Parameter.type_</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter.value"><code class="docutils literal notranslate"><span class="pre">Parameter.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.get_parameter_value"><code class="docutils literal notranslate"><span class="pre">get_parameter_value()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.parameter_dict_from_yaml_file"><code class="docutils literal notranslate"><span class="pre">parameter_dict_from_yaml_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.parameter_value_to_python"><code class="docutils literal notranslate"><span class="pre">parameter_value_to_python()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.parameter_client.html">rclpy.parameter_client module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.parameter_service.html">rclpy.parameter_service module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.parameter_service.html#rclpy.parameter_service.ParameterService"><code class="docutils literal notranslate"><span class="pre">ParameterService</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.publisher.html">rclpy.publisher module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.publisher.html#rclpy.publisher.Publisher"><code class="docutils literal notranslate"><span class="pre">Publisher</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.publisher.html#rclpy.publisher.Publisher.assert_liveliness"><code class="docutils literal notranslate"><span class="pre">Publisher.assert_liveliness()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.publisher.html#rclpy.publisher.Publisher.destroy"><code class="docutils literal notranslate"><span class="pre">Publisher.destroy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.publisher.html#rclpy.publisher.Publisher.get_subscription_count"><code class="docutils literal notranslate"><span class="pre">Publisher.get_subscription_count()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.publisher.html#rclpy.publisher.Publisher.handle"><code class="docutils literal notranslate"><span class="pre">Publisher.handle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.publisher.html#rclpy.publisher.Publisher.publish"><code class="docutils literal notranslate"><span class="pre">Publisher.publish()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.publisher.html#rclpy.publisher.Publisher.topic_name"><code class="docutils literal notranslate"><span class="pre">Publisher.topic_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.publisher.html#rclpy.publisher.Publisher.wait_for_all_acked"><code class="docutils literal notranslate"><span class="pre">Publisher.wait_for_all_acked()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.qos.html">rclpy.qos module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.qos_event.html">rclpy.qos_event module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.qos_overriding_options.html">rclpy.qos_overriding_options module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.qos_overriding_options.html#rclpy.qos_overriding_options.InvalidQosOverridesError"><code class="docutils literal notranslate"><span class="pre">InvalidQosOverridesError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.qos_overriding_options.html#rclpy.qos_overriding_options.QoSOverridingOptions"><code class="docutils literal notranslate"><span class="pre">QoSOverridingOptions</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.qos_overriding_options.html#rclpy.qos_overriding_options.QoSOverridingOptions.callback"><code class="docutils literal notranslate"><span class="pre">QoSOverridingOptions.callback</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.qos_overriding_options.html#rclpy.qos_overriding_options.QoSOverridingOptions.entity_id"><code class="docutils literal notranslate"><span class="pre">QoSOverridingOptions.entity_id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.qos_overriding_options.html#rclpy.qos_overriding_options.QoSOverridingOptions.policy_kinds"><code class="docutils literal notranslate"><span class="pre">QoSOverridingOptions.policy_kinds</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.qos_overriding_options.html#rclpy.qos_overriding_options.QoSOverridingOptions.with_default_policies"><code class="docutils literal notranslate"><span class="pre">QoSOverridingOptions.with_default_policies()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.serialization.html">rclpy.serialization module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.serialization.html#rclpy.serialization.deserialize_message"><code class="docutils literal notranslate"><span class="pre">deserialize_message()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.serialization.html#rclpy.serialization.serialize_message"><code class="docutils literal notranslate"><span class="pre">serialize_message()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.service.html">rclpy.service module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.service.html#rclpy.service.Service"><code class="docutils literal notranslate"><span class="pre">Service</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.service.html#rclpy.service.Service.configure_introspection"><code class="docutils literal notranslate"><span class="pre">Service.configure_introspection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.service.html#rclpy.service.Service.destroy"><code class="docutils literal notranslate"><span class="pre">Service.destroy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.service.html#rclpy.service.Service.handle"><code class="docutils literal notranslate"><span class="pre">Service.handle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.service.html#rclpy.service.Service.send_response"><code class="docutils literal notranslate"><span class="pre">Service.send_response()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.service_introspection.html">rclpy.service_introspection module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.signals.html">rclpy.signals module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.signals.html#rclpy.signals.SignalHandlerGuardCondition"><code class="docutils literal notranslate"><span class="pre">SignalHandlerGuardCondition</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.signals.html#rclpy.signals.SignalHandlerGuardCondition.destroy"><code class="docutils literal notranslate"><span class="pre">SignalHandlerGuardCondition.destroy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.signals.html#rclpy.signals.get_current_signal_handlers_options"><code class="docutils literal notranslate"><span class="pre">get_current_signal_handlers_options()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.signals.html#rclpy.signals.install_signal_handlers"><code class="docutils literal notranslate"><span class="pre">install_signal_handlers()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.signals.html#rclpy.signals.uninstall_signal_handlers"><code class="docutils literal notranslate"><span class="pre">uninstall_signal_handlers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.subscription.html">rclpy.subscription module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.subscription.html#rclpy.subscription.Subscription"><code class="docutils literal notranslate"><span class="pre">Subscription</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.subscription.html#rclpy.subscription.Subscription.CallbackType"><code class="docutils literal notranslate"><span class="pre">Subscription.CallbackType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.subscription.html#rclpy.subscription.Subscription.CallbackType.MessageOnly"><code class="docutils literal notranslate"><span class="pre">Subscription.CallbackType.MessageOnly</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.subscription.html#rclpy.subscription.Subscription.CallbackType.WithMessageInfo"><code class="docutils literal notranslate"><span class="pre">Subscription.CallbackType.WithMessageInfo</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.subscription.html#rclpy.subscription.Subscription.callback"><code class="docutils literal notranslate"><span class="pre">Subscription.callback</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.subscription.html#rclpy.subscription.Subscription.destroy"><code class="docutils literal notranslate"><span class="pre">Subscription.destroy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.subscription.html#rclpy.subscription.Subscription.get_publisher_count"><code class="docutils literal notranslate"><span class="pre">Subscription.get_publisher_count()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.subscription.html#rclpy.subscription.Subscription.handle"><code class="docutils literal notranslate"><span class="pre">Subscription.handle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.subscription.html#rclpy.subscription.Subscription.topic_name"><code class="docutils literal notranslate"><span class="pre">Subscription.topic_name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.task.html">rclpy.task module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future"><code class="docutils literal notranslate"><span class="pre">Future</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future.add_done_callback"><code class="docutils literal notranslate"><span class="pre">Future.add_done_callback()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future.cancel"><code class="docutils literal notranslate"><span class="pre">Future.cancel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future.cancelled"><code class="docutils literal notranslate"><span class="pre">Future.cancelled()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future.done"><code class="docutils literal notranslate"><span class="pre">Future.done()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future.exception"><code class="docutils literal notranslate"><span class="pre">Future.exception()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future.result"><code class="docutils literal notranslate"><span class="pre">Future.result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future.set_exception"><code class="docutils literal notranslate"><span class="pre">Future.set_exception()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future.set_result"><code class="docutils literal notranslate"><span class="pre">Future.set_result()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.task.html#rclpy.task.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.task.html#rclpy.task.Task.executing"><code class="docutils literal notranslate"><span class="pre">Task.executing()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.time.html">rclpy.time module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.time.html#rclpy.time.Time"><code class="docutils literal notranslate"><span class="pre">Time</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time.html#rclpy.time.Time.clock_type"><code class="docutils literal notranslate"><span class="pre">Time.clock_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time.html#rclpy.time.Time.from_msg"><code class="docutils literal notranslate"><span class="pre">Time.from_msg()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time.html#rclpy.time.Time.nanoseconds"><code class="docutils literal notranslate"><span class="pre">Time.nanoseconds</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time.html#rclpy.time.Time.seconds_nanoseconds"><code class="docutils literal notranslate"><span class="pre">Time.seconds_nanoseconds()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time.html#rclpy.time.Time.to_msg"><code class="docutils literal notranslate"><span class="pre">Time.to_msg()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.time_source.html">rclpy.time_source module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.time_source.html#rclpy.time_source.TimeSource"><code class="docutils literal notranslate"><span class="pre">TimeSource</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time_source.html#rclpy.time_source.TimeSource.attach_clock"><code class="docutils literal notranslate"><span class="pre">TimeSource.attach_clock()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time_source.html#rclpy.time_source.TimeSource.attach_node"><code class="docutils literal notranslate"><span class="pre">TimeSource.attach_node()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time_source.html#rclpy.time_source.TimeSource.clock_callback"><code class="docutils literal notranslate"><span class="pre">TimeSource.clock_callback()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time_source.html#rclpy.time_source.TimeSource.detach_node"><code class="docutils literal notranslate"><span class="pre">TimeSource.detach_node()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.time_source.html#rclpy.time_source.TimeSource.ros_time_is_active"><code class="docutils literal notranslate"><span class="pre">TimeSource.ros_time_is_active</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.timer.html">rclpy.timer module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Rate"><code class="docutils literal notranslate"><span class="pre">Rate</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Rate.destroy"><code class="docutils literal notranslate"><span class="pre">Rate.destroy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Rate.sleep"><code class="docutils literal notranslate"><span class="pre">Rate.sleep()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer"><code class="docutils literal notranslate"><span class="pre">Timer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.cancel"><code class="docutils literal notranslate"><span class="pre">Timer.cancel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.clock"><code class="docutils literal notranslate"><span class="pre">Timer.clock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.destroy"><code class="docutils literal notranslate"><span class="pre">Timer.destroy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.handle"><code class="docutils literal notranslate"><span class="pre">Timer.handle</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.is_canceled"><code class="docutils literal notranslate"><span class="pre">Timer.is_canceled()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.is_ready"><code class="docutils literal notranslate"><span class="pre">Timer.is_ready()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.reset"><code class="docutils literal notranslate"><span class="pre">Timer.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.time_since_last_call"><code class="docutils literal notranslate"><span class="pre">Timer.time_since_last_call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.time_until_next_call"><code class="docutils literal notranslate"><span class="pre">Timer.time_until_next_call()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.timer.html#rclpy.timer.Timer.timer_period_ns"><code class="docutils literal notranslate"><span class="pre">Timer.timer_period_ns</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.topic_endpoint_info.html">rclpy.topic_endpoint_info module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointInfo"><code class="docutils literal notranslate"><span class="pre">TopicEndpointInfo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointInfo.endpoint_gid"><code class="docutils literal notranslate"><span class="pre">TopicEndpointInfo.endpoint_gid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointInfo.endpoint_type"><code class="docutils literal notranslate"><span class="pre">TopicEndpointInfo.endpoint_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointInfo.node_name"><code class="docutils literal notranslate"><span class="pre">TopicEndpointInfo.node_name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointInfo.node_namespace"><code class="docutils literal notranslate"><span class="pre">TopicEndpointInfo.node_namespace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointInfo.qos_profile"><code class="docutils literal notranslate"><span class="pre">TopicEndpointInfo.qos_profile</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointInfo.topic_type"><code class="docutils literal notranslate"><span class="pre">TopicEndpointInfo.topic_type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointInfo.topic_type_hash"><code class="docutils literal notranslate"><span class="pre">TopicEndpointInfo.topic_type_hash</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointTypeEnum"><code class="docutils literal notranslate"><span class="pre">TopicEndpointTypeEnum</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointTypeEnum.INVALID"><code class="docutils literal notranslate"><span class="pre">TopicEndpointTypeEnum.INVALID</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointTypeEnum.PUBLISHER"><code class="docutils literal notranslate"><span class="pre">TopicEndpointTypeEnum.PUBLISHER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.topic_endpoint_info.html#rclpy.topic_endpoint_info.TopicEndpointTypeEnum.SUBSCRIPTION"><code class="docutils literal notranslate"><span class="pre">TopicEndpointTypeEnum.SUBSCRIPTION</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.topic_or_service_is_hidden.html">rclpy.topic_or_service_is_hidden module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.topic_or_service_is_hidden.html#rclpy.topic_or_service_is_hidden.topic_or_service_is_hidden"><code class="docutils literal notranslate"><span class="pre">topic_or_service_is_hidden()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.type_description_service.html">rclpy.type_description_service module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.type_hash.html">rclpy.type_hash module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.type_hash.html#rclpy.type_hash.TypeHash"><code class="docutils literal notranslate"><span class="pre">TypeHash</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.type_hash.html#rclpy.type_hash.TypeHash.value"><code class="docutils literal notranslate"><span class="pre">TypeHash.value</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.type_hash.html#rclpy.type_hash.TypeHash.version"><code class="docutils literal notranslate"><span class="pre">TypeHash.version</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.type_support.html">rclpy.type_support module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.type_support.html#rclpy.type_support.check_for_type_support"><code class="docutils literal notranslate"><span class="pre">check_for_type_support()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.type_support.html#rclpy.type_support.check_is_valid_msg_type"><code class="docutils literal notranslate"><span class="pre">check_is_valid_msg_type()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.type_support.html#rclpy.type_support.check_is_valid_srv_type"><code class="docutils literal notranslate"><span class="pre">check_is_valid_srv_type()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.utilities.html">rclpy.utilities module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.get_available_rmw_implementations"><code class="docutils literal notranslate"><span class="pre">get_available_rmw_implementations()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.get_default_context"><code class="docutils literal notranslate"><span class="pre">get_default_context()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.get_rmw_implementation_identifier"><code class="docutils literal notranslate"><span class="pre">get_rmw_implementation_identifier()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.ok"><code class="docutils literal notranslate"><span class="pre">ok()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.remove_ros_args"><code class="docutils literal notranslate"><span class="pre">remove_ros_args()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.shutdown"><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.timeout_sec_to_nsec"><code class="docutils literal notranslate"><span class="pre">timeout_sec_to_nsec()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.try_shutdown"><code class="docutils literal notranslate"><span class="pre">try_shutdown()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.validate_full_topic_name.html">rclpy.validate_full_topic_name module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.validate_full_topic_name.html#rclpy.validate_full_topic_name.validate_full_topic_name"><code class="docutils literal notranslate"><span class="pre">validate_full_topic_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.validate_namespace.html">rclpy.validate_namespace module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.validate_namespace.html#rclpy.validate_namespace.validate_namespace"><code class="docutils literal notranslate"><span class="pre">validate_namespace()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.validate_node_name.html">rclpy.validate_node_name module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.validate_node_name.html#rclpy.validate_node_name.validate_node_name"><code class="docutils literal notranslate"><span class="pre">validate_node_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.validate_parameter_name.html">rclpy.validate_parameter_name module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.validate_parameter_name.html#rclpy.validate_parameter_name.validate_parameter_name"><code class="docutils literal notranslate"><span class="pre">validate_parameter_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.validate_topic_name.html">rclpy.validate_topic_name module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.validate_topic_name.html#rclpy.validate_topic_name.validate_topic_name"><code class="docutils literal notranslate"><span class="pre">validate_topic_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.wait_for_message.html">rclpy.wait_for_message module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rclpy.waitable.html">rclpy.waitable module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.NumberOfEntities"><code class="docutils literal notranslate"><span class="pre">NumberOfEntities</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.NumberOfEntities.num_clients"><code class="docutils literal notranslate"><span class="pre">NumberOfEntities.num_clients</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.NumberOfEntities.num_events"><code class="docutils literal notranslate"><span class="pre">NumberOfEntities.num_events</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.NumberOfEntities.num_guard_conditions"><code class="docutils literal notranslate"><span class="pre">NumberOfEntities.num_guard_conditions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.NumberOfEntities.num_services"><code class="docutils literal notranslate"><span class="pre">NumberOfEntities.num_services</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.NumberOfEntities.num_subscriptions"><code class="docutils literal notranslate"><span class="pre">NumberOfEntities.num_subscriptions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.NumberOfEntities.num_timers"><code class="docutils literal notranslate"><span class="pre">NumberOfEntities.num_timers</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable"><code class="docutils literal notranslate"><span class="pre">Waitable</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable.add_future"><code class="docutils literal notranslate"><span class="pre">Waitable.add_future()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable.add_to_wait_set"><code class="docutils literal notranslate"><span class="pre">Waitable.add_to_wait_set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable.execute"><code class="docutils literal notranslate"><span class="pre">Waitable.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable.get_num_entities"><code class="docutils literal notranslate"><span class="pre">Waitable.get_num_entities()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable.is_ready"><code class="docutils literal notranslate"><span class="pre">Waitable.is_ready()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable.remove_future"><code class="docutils literal notranslate"><span class="pre">Waitable.remove_future()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable.take_data"><code class="docutils literal notranslate"><span class="pre">Waitable.take_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-rclpy">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-rclpy" title="Link to this heading"></a></h2>
+<p>A collection of functions for writing a ROS program.</p>
+<p>A typical ROS program consists of the following operations:</p>
+<ol class="arabic simple">
+<li><p>Initialization</p></li>
+<li><p>Create one or more ROS nodes</p></li>
+<li><p>Process node callbacks</p></li>
+<li><p>Shutdown</p></li>
+</ol>
+<p>Inititalization is done by calling <a class="reference internal" href="#rclpy.init" title="rclpy.init"><code class="xref py py-func docutils literal notranslate"><span class="pre">init()</span></code></a> for a particular <a class="reference internal" href="rclpy.context.html#rclpy.context.Context" title="rclpy.context.Context"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a>.
+This must be done before any ROS nodes can be created.</p>
+<p>Creating a ROS node is done by calling <a class="reference internal" href="#rclpy.create_node" title="rclpy.create_node"><code class="xref py py-func docutils literal notranslate"><span class="pre">create_node()</span></code></a> or by instantiating a
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code>.
+A node can be used to create common ROS entities like publishers, subscriptions, services,
+and actions.</p>
+<p>After a node is created, items of work can be done (e.g. subscription callbacks) by <em>spinning</em> on
+the node.
+The following functions can be used to process work that is waiting to be executed: <a class="reference internal" href="#rclpy.spin" title="rclpy.spin"><code class="xref py py-func docutils literal notranslate"><span class="pre">spin()</span></code></a>,
+<a class="reference internal" href="#rclpy.spin_once" title="rclpy.spin_once"><code class="xref py py-func docutils literal notranslate"><span class="pre">spin_once()</span></code></a>, and <a class="reference internal" href="#rclpy.spin_until_future_complete" title="rclpy.spin_until_future_complete"><code class="xref py py-func docutils literal notranslate"><span class="pre">spin_until_future_complete()</span></code></a>.</p>
+<p>When finished with a previously initialized <a class="reference internal" href="rclpy.context.html#rclpy.context.Context" title="rclpy.context.Context"><code class="xref py py-class docutils literal notranslate"><span class="pre">Context</span></code></a> (ie. done using
+all ROS nodes associated with the context), the <a class="reference internal" href="#rclpy.shutdown" title="rclpy.shutdown"><code class="xref py py-func docutils literal notranslate"><span class="pre">shutdown()</span></code></a> function should be called.
+This will invalidate all entities derived from the context.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.create_node">
+<span class="sig-prename descclassname"><span class="pre">rclpy.</span></span><span class="sig-name descname"><span class="pre">create_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context" title="rclpy.context.Context"><span class="pre">Context</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_global_arguments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_rosout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_parameter_services</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter_overrides</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter" title="rclpy.parameter.Parameter"><span class="pre">Parameter</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_undeclared_parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">automatically_declare_parameters_from_overrides</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_logger_service</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Node</span></span></span><a class="headerlink" href="#rclpy.create_node" title="Link to this definition"></a></dt>
+<dd><p>Create an instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node_name</strong> – A name to give to the node.</p></li>
+<li><p><strong>context</strong> – The context to associated with the node, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for the default global
+context.</p></li>
+<li><p><strong>cli_args</strong> – Command line arguments to be used by the node. Being specific to a ROS node,
+an implicit <cite>–ros-args</cite> scope flag always precedes these arguments.</p></li>
+<li><p><strong>namespace</strong> – The namespace prefix to apply to entities associated with the node
+(node name, topics, etc).</p></li>
+<li><p><strong>use_global_arguments</strong> – <code class="docutils literal notranslate"><span class="pre">False</span></code> if the node should ignore process-wide command line
+arguments.</p></li>
+<li><p><strong>enable_rosout</strong> – <code class="docutils literal notranslate"><span class="pre">False</span></code> if the node should ignore rosout logging.</p></li>
+<li><p><strong>start_parameter_services</strong> – <code class="docutils literal notranslate"><span class="pre">False</span></code> if the node should not create parameter services.</p></li>
+<li><p><strong>parameter_overrides</strong> – A list of <a class="reference internal" href="rclpy.parameter.html#rclpy.parameter.Parameter" title="rclpy.parameter.Parameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></a> which are used to override the
+initial values of parameters declared on this node.</p></li>
+<li><p><strong>allow_undeclared_parameters</strong> – if True undeclared parameters are allowed, default False.
+This option doesn’t affect <cite>parameter_overrides</cite>.</p></li>
+<li><p><strong>automatically_declare_parameters_from_overrides</strong> – If True, the “parameter overrides” will
+be used to implicitly declare parameters on the node during creation, default False.</p></li>
+<li><p><strong>enable_logger_service</strong> – <code class="docutils literal notranslate"><span class="pre">True</span></code> if ROS2 services are created to allow external nodes
+to get and set logger levels of this node. Otherwise, logger levels are only managed
+locally. That is, logger levels cannot be changed remotely.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of the newly created node.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.get_global_executor">
+<span class="sig-prename descclassname"><span class="pre">rclpy.</span></span><span class="sig-name descname"><span class="pre">get_global_executor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor" title="rclpy.executors.Executor"><span class="pre">Executor</span></a></span></span><a class="headerlink" href="#rclpy.get_global_executor" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.init">
+<span class="sig-prename descclassname"><span class="pre">rclpy.</span></span><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context" title="rclpy.context.Context"><span class="pre">Context</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_handler_options</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rpyutils.import_c_library.SignalHandlerOptions</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.init" title="Link to this definition"></a></dt>
+<dd><p>Initialize ROS communications for a given context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – List of command line arguments.</p></li>
+<li><p><strong>context</strong> – The context to initialize. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, then the default context is used
+(see <a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.get_default_context" title="rclpy.utilities.get_default_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_context()</span></code></a>).</p></li>
+<li><p><strong>domain_id</strong> – ROS domain id.</p></li>
+<li><p><strong>signal_handler_options</strong> – Indicate which signal handlers to install.
+If <cite>None</cite>, SIGINT and SIGTERM will be installed when initializing the default context.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.shutdown">
+<span class="sig-prename descclassname"><span class="pre">rclpy.</span></span><span class="sig-name descname"><span class="pre">shutdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.context.html#rclpy.context.Context" title="rclpy.context.Context"><span class="pre">Context</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uninstall_handlers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.shutdown" title="Link to this definition"></a></dt>
+<dd><p>Shutdown a previously initialized context.</p>
+<p>This will also shutdown the global executor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – The context to invalidate. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, then the default context is used
+(see <a class="reference internal" href="rclpy.utilities.html#rclpy.utilities.get_default_context" title="rclpy.utilities.get_default_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_default_context()</span></code></a>).</p></li>
+<li><p><strong>uninstall_handlers</strong> – If <cite>None</cite>, signal handlers will be uninstalled when shutting down the default context.
+If <cite>True</cite>, signal handlers will be uninstalled.
+If not, signal handlers won’t be uninstalled.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.spin">
+<span class="sig-prename descclassname"><span class="pre">rclpy.</span></span><span class="sig-name descname"><span class="pre">spin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">executor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor" title="rclpy.executors.Executor"><span class="pre">Executor</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.spin" title="Link to this definition"></a></dt>
+<dd><p>Execute work and block until the context associated with the executor is shutdown.</p>
+<p>Callbacks will be executed by the provided executor.</p>
+<p>This function blocks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> – A node to add to the executor to check for work.</p></li>
+<li><p><strong>executor</strong> – The executor to use, or the global executor if <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.spin_once">
+<span class="sig-prename descclassname"><span class="pre">rclpy.</span></span><span class="sig-name descname"><span class="pre">spin_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Node</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">executor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor" title="rclpy.executors.Executor"><span class="pre">Executor</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.spin_once" title="Link to this definition"></a></dt>
+<dd><p>Execute one item of work or wait until a timeout expires.</p>
+<p>One callback will be executed by the provided executor as long as that callback is ready
+before the timeout expires.</p>
+<p>If no executor is provided (ie. <code class="docutils literal notranslate"><span class="pre">None</span></code>), then the global executor is used.
+It is possible the work done is for a node other than the one provided if the global executor
+has a partially completed coroutine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> – A node to add to the executor to check for work.</p></li>
+<li><p><strong>executor</strong> – The executor to use, or the global executor if <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>timeout_sec</strong> – Seconds to wait. Block forever if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative. Don’t wait if 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.spin_until_future_complete">
+<span class="sig-prename descclassname"><span class="pre">rclpy.</span></span><span class="sig-name descname"><span class="pre">spin_until_future_complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.task.html#rclpy.task.Future" title="rclpy.task.Future"><span class="pre">Future</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">executor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.executors.html#rclpy.executors.Executor" title="rclpy.executors.Executor"><span class="pre">Executor</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.spin_until_future_complete" title="Link to this definition"></a></dt>
+<dd><p>Execute work until the future is complete.</p>
+<p>Callbacks and other work will be executed by the provided executor until <code class="docutils literal notranslate"><span class="pre">future.done()</span></code>
+returns <code class="docutils literal notranslate"><span class="pre">True</span></code> or the context associated with the executor is shutdown.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> – A node to add to the executor to check for work.</p></li>
+<li><p><strong>future</strong> – The future object to wait on.</p></li>
+<li><p><strong>executor</strong> – The executor to use, or the global executor if <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>timeout_sec</strong> – Seconds to wait. Block until the future is complete
+if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative. Don’t wait if 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="rclpy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rclpy.action.html" class="btn btn-neutral float-right" title="rclpy.action package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Open Source Robotics Foundation, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

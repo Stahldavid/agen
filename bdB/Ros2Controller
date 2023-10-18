@@ -1,0 +1,8 @@
+class Ros2Controller:
+    def __init__(self):
+        # TODO: Initialize ros2 controller
+        pass
+
+    def run(self):
+        # TODO: Run ros2 controller
+        pass

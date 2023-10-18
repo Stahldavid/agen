@@ -1,0 +1,622 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>capabilities.discovery &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/_modules/capabilities/discovery.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for capabilities.discovery</h1><div class="highlight"><pre>
+<span class="c"># Software License Agreement (BSD License)</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) 2013, Open Source Robotics Foundation, Inc.</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c"># modification, are permitted provided that the following conditions</span>
+<span class="c"># are met:</span>
+<span class="c">#</span>
+<span class="c">#  * Redistributions of source code must retain the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c">#  * Redistributions in binary form must reproduce the above</span>
+<span class="c">#    copyright notice, this list of conditions and the following</span>
+<span class="c">#    disclaimer in the documentation and/or other materials provided</span>
+<span class="c">#    with the distribution.</span>
+<span class="c">#  * Neither the name of Open Source Robotics Foundation, Inc. nor</span>
+<span class="c">#    the names of its contributors may be used to endorse or promote</span>
+<span class="c">#    products derived from this software without specific prior</span>
+<span class="c">#    written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c"># &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="c"># FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="c"># COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="c"># INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="c"># BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="c"># LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="c"># LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="c"># ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="c"># Author: Tully Foote &lt;tfoote@osrfoundation.org&gt;</span>
+<span class="c"># Author: William Woodall &lt;william@osrfoundation.org&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module implements discovery of packages which export various spec files.</span>
+
+<span class="sd">You can use this API as follows, (examples assume use of the</span>
+<span class="sd">&#39;test/discovery_workspaces/minimal&#39; workspace::</span>
+
+<span class="sd">    &gt;&gt;&gt; from pprint import pprint</span>
+<span class="sd">    &gt;&gt;&gt; from capabilities.discovery import package_index_from_package_path</span>
+<span class="sd">    &gt;&gt;&gt; from capabilities.discovery import spec_file_index_from_package_index</span>
+<span class="sd">    &gt;&gt;&gt; from capabilities.discovery import spec_index_from_spec_file_index</span>
+<span class="sd">    &gt;&gt;&gt; workspaces = [&#39;test/discovery_workspaces/minimal&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; package_index = package_index_from_package_path(workspaces)</span>
+<span class="sd">    &gt;&gt;&gt; spec_file_index = spec_file_index_from_package_index(package_index)</span>
+<span class="sd">    &gt;&gt;&gt; pprint(spec_file_index)</span>
+<span class="sd">    {&#39;minimal_pkg&#39;: {</span>
+<span class="sd">        &#39;capability_interface&#39;: [&#39;test/discovery_workspaces/minimal/minimal_pkg/interfaces/Minimal.yaml&#39;],</span>
+<span class="sd">        &#39;capability_provider&#39;: [</span>
+<span class="sd">            &#39;test/discovery_workspaces/minimal/minimal_pkg/providers/minimal.yaml&#39;,</span>
+<span class="sd">            &#39;test/discovery_workspaces/minimal/minimal_pkg/providers/specific_minimal.yaml&#39;],</span>
+<span class="sd">        &#39;package&#39;: &lt;catkin_pkg.package.Package object at 0x10bb28df8&gt;,</span>
+<span class="sd">        &#39;semantic_capability_interface&#39;: [</span>
+<span class="sd">            &#39;test/discovery_workspaces/minimal/minimal_pkg/interfaces/SpecificMinimal.yaml&#39;]}}</span>
+
+<span class="sd">    &gt;&gt;&gt; spec_index, errors = spec_index_from_spec_file_index(spec_file_index)</span>
+<span class="sd">    &gt;&gt;&gt; print(errors)</span>
+<span class="sd">    []</span>
+<span class="sd">    &gt;&gt;&gt; spec_index.names</span>
+<span class="sd">    [minimal_pkg/specific_minimal,</span>
+<span class="sd">     minimal_pkg/Minimal,</span>
+<span class="sd">     minimal_pkg/SpecificMinimal,</span>
+<span class="sd">     minimal_pkg/minimal]</span>
+<span class="sd">    &gt;&gt;&gt; pprint(spec_index.specs)</span>
+<span class="sd">    {minimal_pkg/minimal:</span>
+<span class="sd">        &lt;capabilities.specs.provider.CapabilityProvider object at 0x10391ce50&gt;,</span>
+<span class="sd">     minimal_pkg/specific_minimal:</span>
+<span class="sd">        &lt;capabilities.specs.provider.CapabilityProvider object at 0x10391cd10&gt;,</span>
+<span class="sd">     minimal_pkg/Minimal:</span>
+<span class="sd">        &lt;capabilities.specs.interface.CapabilityInterface object at 0x103952f90&gt;,</span>
+<span class="sd">     minimal_pkg/SpecificMinimal:</span>
+<span class="sd">        &lt;capabilities.specs.semantic_interface.SemanticCapabilityInterface object at 0x103952b50&gt;}</span>
+<span class="sd">    &gt;&gt;&gt; spec_index.interface_names</span>
+<span class="sd">    [minimal_pkg/Minimal]</span>
+<span class="sd">    &gt;&gt;&gt; spec_index.interfaces</span>
+<span class="sd">    {minimal_pkg/Minimal: &lt;capabilities.specs.interface.CapabilityInterface at 0x103952f90&gt;}</span>
+<span class="sd">    &gt;&gt;&gt; spec_index.interfaces[&#39;Minimal&#39;]</span>
+<span class="sd">    &lt;capabilities.specs.interface.CapabilityInterface object at 0x10b7e3410&gt;</span>
+<span class="sd">    &gt;&gt;&gt; spec_index.semantic_interfaces</span>
+<span class="sd">    {&#39;SpecificMinimal&#39;: &lt;capabilities.specs.semantic_interface.SemanticCapabilityInterface object at 0x10b7bf3d0&gt;}</span>
+<span class="sd">    &gt;&gt;&gt; pprint(spec_index.providers)</span>
+<span class="sd">    {&#39;minimal&#39;: &lt;capabilities.specs.provider.CapabilityProvider object at 0x10b7bf750&gt;,</span>
+<span class="sd">     &#39;specific_minimal&#39;: &lt;capabilities.specs.provider.CapabilityProvider object at 0x10b7bfd10&gt;}</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">catkin_pkg.packages</span> <span class="kn">import</span> <span class="n">find_packages</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.specs.interface</span> <span class="kn">import</span> <span class="n">capability_interface_from_file_path</span>
+<span class="kn">from</span> <span class="nn">capabilities.specs.interface</span> <span class="kn">import</span> <span class="n">InvalidInterface</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.specs.provider</span> <span class="kn">import</span> <span class="n">capability_provider_from_file_path</span>
+<span class="kn">from</span> <span class="nn">capabilities.specs.provider</span> <span class="kn">import</span> <span class="n">InvalidProvider</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.specs.semantic_interface</span> <span class="kn">import</span> <span class="n">semantic_capability_interface_from_file_path</span>
+<span class="kn">from</span> <span class="nn">capabilities.specs.semantic_interface</span> <span class="kn">import</span> <span class="n">InvalidSemanticInterface</span>
+
+
+<div class="viewcode-block" id="DuplicateNameException"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.DuplicateNameException">[docs]</a><span class="k">class</span> <span class="nc">DuplicateNameException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Raised when multiple specs with the same name are discovered</span>
+
+<span class="sd">    :ivar str spec_name: name of the spec&#39;s which collided</span>
+<span class="sd">    :ivar str package: package in which the colliding spec is defined</span>
+<span class="sd">    :ivar str spec_type: type of the colliding spec one of:</span>
+<span class="sd">        capability_interface, semantic_capability_interface, capability_provider</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">colliding_package</span><span class="p">,</span> <span class="n">spec_type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spec_name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">package</span> <span class="o">=</span> <span class="n">colliding_package</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spec_type</span> <span class="o">=</span> <span class="n">spec_type</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Spec named &#39;{0}&#39; is defined twice in the &#39;{1}&#39; package.&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">colliding_package</span><span class="p">)</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="InterfaceNameNotFoundException"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.InterfaceNameNotFoundException">[docs]</a><span class="k">class</span> <span class="nc">InterfaceNameNotFoundException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Raised when a referenced interface spec is not found</span>
+
+<span class="sd">    This can happen, for example, when a provider depends on an interface</span>
+<span class="sd">    which is not defined anywhere.</span>
+
+<span class="sd">    :ivar str spec_name: name of the spec&#39;s which referenced the non existent</span>
+<span class="sd">        interface</span>
+<span class="sd">    :ivar str package: package in which offending spec resides</span>
+<span class="sd">    :ivar str spec_type: type of the offending spec one of:</span>
+<span class="sd">        capability_interface, semantic_capability_interface, capability_provider</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">spec_name</span><span class="p">,</span> <span class="n">spec_type</span><span class="p">,</span> <span class="n">spec_package</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spec_name</span> <span class="o">=</span> <span class="n">spec_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">package</span> <span class="o">=</span> <span class="n">spec_package</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spec_type</span> <span class="o">=</span> <span class="n">spec_type</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="package_index_from_package_path"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.package_index_from_package_path">[docs]</a><span class="k">def</span> <span class="nf">package_index_from_package_path</span><span class="p">(</span><span class="n">package_paths</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Finds all packages on the given list of paths.</span>
+
+<span class="sd">    Iterates over the given list of paths in reverse order so that packages</span>
+<span class="sd">    found in the paths at the beginning of the list get overlaid onto packages</span>
+<span class="sd">    with the same name which were found in paths farther back in the list.</span>
+
+<span class="sd">    The resulting dictionary is keyed by the package name (so packages with</span>
+<span class="sd">    duplicate names are overlaid) and the values are the</span>
+<span class="sd">    :py:class:`catkin_pkg.package.Package` class</span>
+
+<span class="sd">    :param list ros_package_path: list of paths to search</span>
+<span class="sd">    :returns: dictionary of package objects keyed by name of the package</span>
+<span class="sd">    :rtype: :py:obj:`dict`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">package_paths</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">package_path</span><span class="p">,</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">find_packages</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">package</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">package</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+</div>
+<div class="viewcode-block" id="spec_file_index_from_package_index"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.spec_file_index_from_package_index">[docs]</a><span class="k">def</span> <span class="nf">spec_file_index_from_package_index</span><span class="p">(</span><span class="n">package_index</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates an index of spec files by package.</span>
+
+<span class="sd">    Takes a dict of package objects keyed by package name.</span>
+
+<span class="sd">    Returns a dict structured like this:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        {</span>
+<span class="sd">            &#39;&lt;package_name&gt;&#39;: {</span>
+<span class="sd">                &#39;package&#39;: package_obj,</span>
+<span class="sd">                &#39;capability_interface&#39;: [&#39;path to spec file&#39;, ...],</span>
+<span class="sd">                &#39;capability_provider&#39;: [&#39;path to spec file&#39;, ...],</span>
+<span class="sd">                &#39;semantic_capability_interface&#39;: [&#39;path to spec file&#39;, ...]</span>
+<span class="sd">            },</span>
+<span class="sd">            ...</span>
+<span class="sd">        }</span>
+
+<span class="sd">    This dict contains a dict for each package, keyed by package name.</span>
+<span class="sd">    Those dicts contain the parsed package object, and a list of relative paths</span>
+<span class="sd">    for spec files, separated by spec type.</span>
+
+<span class="sd">    :param package_index: dict of :py:class:`catkin_pkg.package.Package`&#39;s</span>
+<span class="sd">        keyed by package name to be processed</span>
+<span class="sd">    :type package_index: dict</span>
+<span class="sd">    :returns: spec file index strucutre</span>
+<span class="sd">    :rtype: :py:obj:`dict`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">spec_file_index</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">package_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">spec_file_index</span><span class="p">[</span><span class="n">package_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;package&#39;</span><span class="p">:</span> <span class="n">package</span><span class="p">,</span>
+            <span class="s">&#39;capability_interface&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s">&#39;capability_provider&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+        <span class="n">package_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">package</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">export</span> <span class="ow">in</span> <span class="n">package</span><span class="o">.</span><span class="n">exports</span><span class="p">:</span>
+            <span class="n">tag</span> <span class="o">=</span> <span class="n">export</span><span class="o">.</span><span class="n">tagname</span>
+            <span class="k">if</span> <span class="n">tag</span> <span class="o">!=</span> <span class="s">&#39;package&#39;</span> <span class="ow">and</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">spec_file_index</span><span class="p">[</span><span class="n">package_name</span><span class="p">]:</span>
+                <span class="n">spec_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">package_path</span><span class="p">,</span> <span class="n">export</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+                <span class="n">spec_file_index</span><span class="p">[</span><span class="n">package_name</span><span class="p">][</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spec_file_path</span><span class="p">)</span>
+        <span class="c"># Prune packages with no specs</span>
+        <span class="k">if</span> <span class="p">(</span>
+                <span class="ow">not</span> <span class="n">spec_file_index</span><span class="p">[</span><span class="n">package_name</span><span class="p">][</span><span class="s">&#39;capability_interface&#39;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="ow">not</span> <span class="n">spec_file_index</span><span class="p">[</span><span class="n">package_name</span><span class="p">][</span><span class="s">&#39;capability_provider&#39;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="ow">not</span> <span class="n">spec_file_index</span><span class="p">[</span><span class="n">package_name</span><span class="p">][</span><span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="k">del</span> <span class="n">spec_file_index</span><span class="p">[</span><span class="n">package_name</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">spec_file_index</span>
+
+</div>
+<span class="k">def</span> <span class="nf">_spec_loader</span><span class="p">(</span><span class="n">spec_thing_index</span><span class="p">,</span> <span class="n">spec_thing_loaders</span><span class="p">):</span>
+    <span class="n">spec_index</span> <span class="o">=</span> <span class="n">SpecIndex</span><span class="p">()</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">error_types</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">InterfaceNameNotFoundException</span><span class="p">,</span>
+        <span class="n">DuplicateNameException</span><span class="p">,</span>
+        <span class="n">InvalidInterface</span><span class="p">,</span>
+        <span class="n">InvalidSemanticInterface</span><span class="p">,</span>
+        <span class="n">InvalidProvider</span>
+    <span class="p">)</span>
+    <span class="c"># First load and process CapabilityInterface&#39;s</span>
+    <span class="k">for</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">package_dict</span> <span class="ow">in</span> <span class="n">spec_thing_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">interface_things</span> <span class="o">=</span> <span class="n">package_dict</span><span class="p">[</span><span class="s">&#39;capability_interface&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">thing</span> <span class="ow">in</span> <span class="n">interface_things</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">spec_thing_loaders</span><span class="p">[</span><span class="s">&#39;capability_interface&#39;</span><span class="p">](</span><span class="n">thing</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">spec_index</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">error_types</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c"># Then load the SemanticCapabilityInterface&#39;s</span>
+    <span class="k">for</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">package_dict</span> <span class="ow">in</span> <span class="n">spec_thing_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">semantic_interface_things</span> <span class="o">=</span> <span class="n">package_dict</span><span class="p">[</span><span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">thing</span> <span class="ow">in</span> <span class="n">semantic_interface_things</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">spec_thing_loaders</span><span class="p">[</span><span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">](</span><span class="n">thing</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">spec_index</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">error_types</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="c"># Finally load the CapabilityProvider&#39;s</span>
+    <span class="k">for</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">package_dict</span> <span class="ow">in</span> <span class="n">spec_thing_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">capability_provider_things</span> <span class="o">=</span> <span class="n">package_dict</span><span class="p">[</span><span class="s">&#39;capability_provider&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">thing</span> <span class="ow">in</span> <span class="n">capability_provider_things</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">spec_thing_loaders</span><span class="p">[</span><span class="s">&#39;capability_provider&#39;</span><span class="p">](</span><span class="n">thing</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">spec_index</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">error_types</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">spec_index</span><span class="p">,</span> <span class="n">errors</span>
+
+
+<div class="viewcode-block" id="spec_index_from_spec_file_index"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.spec_index_from_spec_file_index">[docs]</a><span class="k">def</span> <span class="nf">spec_index_from_spec_file_index</span><span class="p">(</span><span class="n">spec_file_index</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Builds a :py:class:`SpecIndex` from a spec file index</span>
+
+<span class="sd">    Goes through each spec paths foreach package of the given spec file index</span>
+<span class="sd">    and parses them into objects. The objects are stored in a</span>
+<span class="sd">    :py:class:`SpecIndex` before being returned.</span>
+
+<span class="sd">    Duplicate Names are not allowed, even between different spec types</span>
+<span class="sd">    and packages. Any duplicate names will be raised as a</span>
+<span class="sd">    :py:exc:`DuplicateNameException`.</span>
+
+<span class="sd">    Any other errors encountered during spec file processing will be returned</span>
+<span class="sd">    as a list along with the :py:class:`SpecIndex`.</span>
+<span class="sd">    Caught errors include:</span>
+
+<span class="sd">    - :py:exc:`capabilities.discovery.InterfaceNameNotFoundException`</span>
+<span class="sd">    - :py:exc:`capabilities.discovery.DuplicateNameException`</span>
+<span class="sd">    - :py:exc:`capabilities.specs.interface.InvalidInterface`</span>
+<span class="sd">    - :py:exc:`capabilities.specs.semantic_interface.InvalidSemanticInterface`</span>
+<span class="sd">    - :py:exc:`capabilities.specs.provider.InvalidProvide`</span>
+
+<span class="sd">    :param spec_file_index: spec_file_index, see</span>
+<span class="sd">        :py:func:`spec_file_index_from_package_index`</span>
+<span class="sd">    :type spec_file_index: dict</span>
+<span class="sd">    :returns: :py:class:`SpecIndex` (which contains all the loaded specs)</span>
+<span class="sd">        and a :py:obj:`list` of any errors encountered while loading the spec files</span>
+<span class="sd">    :rtype: :py:class:`SpecIndex`, :py:obj:`list` (:py:obj:`Exception`&#39;s)</span>
+<span class="sd">    :raises: :py:exc:`DuplicateNameException` when two interfaces have the same name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">capability_interface_loader</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">spec_index</span><span class="p">):</span>
+        <span class="n">interface</span> <span class="o">=</span> <span class="n">capability_interface_from_file_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">spec_index</span><span class="o">.</span><span class="n">add_interface</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">package_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">semantic_capability_loader</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">spec_index</span><span class="p">):</span>
+        <span class="n">si</span> <span class="o">=</span> <span class="n">semantic_capability_interface_from_file_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">spec_index</span><span class="o">.</span><span class="n">add_semantic_interface</span><span class="p">(</span><span class="n">si</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">package_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">capability_provider_loader</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">spec_index</span><span class="p">):</span>
+        <span class="n">provider</span> <span class="o">=</span> <span class="n">capability_provider_from_file_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">spec_index</span><span class="o">.</span><span class="n">add_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">package_name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_spec_loader</span><span class="p">(</span><span class="n">spec_file_index</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s">&#39;capability_interface&#39;</span><span class="p">:</span> <span class="n">capability_interface_loader</span><span class="p">,</span>
+        <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">:</span> <span class="n">semantic_capability_loader</span><span class="p">,</span>
+        <span class="s">&#39;capability_provider&#39;</span><span class="p">:</span> <span class="n">capability_provider_loader</span>
+    <span class="p">})</span>
+
+</div>
+<div class="viewcode-block" id="SpecIndex"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex">[docs]</a><span class="k">class</span> <span class="nc">SpecIndex</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Container for capability spec file locations and respective spec classes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__packages</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__interfaces</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__providers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__semantic_interfaces</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">__add_package</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">package_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__packages</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__packages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SpecIndex.add_interface"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.add_interface">[docs]</a>    <span class="k">def</span> <span class="nf">add_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">package_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a loaded CapabilityInterface object into the repository</span>
+
+<span class="sd">        Used by :py:func:`spec_index_from_spec_file_index` to build the :py:class:`SpecIndex`.</span>
+
+<span class="sd">        :param interface: CapabilityInterface object which was loaded using a</span>
+<span class="sd">            factory function</span>
+<span class="sd">        :type interface: :py:class:`.specs.interface.CapabilityInterface`</span>
+<span class="sd">        :param str file_path: path to the interface spec file that was loaded</span>
+<span class="sd">        :param str package_name: name of the package which contains the interface</span>
+<span class="sd">        :raises: :py:exc:`DuplicateNameException` if there is a name collision</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">interface_name</span> <span class="o">=</span> <span class="s">&#39;{package}/{name}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">interface</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">interface</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">interface_name</span>
+        <span class="k">if</span> <span class="n">interface_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DuplicateNameException</span><span class="p">(</span>
+                <span class="n">interface_name</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span>
+                <span class="s">&#39;capability_interface&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_package</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__interfaces</span><span class="p">[</span><span class="n">interface_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;path&#39;</span><span class="p">:</span> <span class="n">file_path</span><span class="p">,</span>
+            <span class="s">&#39;instance&#39;</span><span class="p">:</span> <span class="n">interface</span>
+        <span class="p">}</span>
+</div>
+<div class="viewcode-block" id="SpecIndex.remove_interface"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.remove_interface">[docs]</a>    <span class="k">def</span> <span class="nf">remove_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Removes a capability interface by name</span>
+
+<span class="sd">        :param str interface_name: name of the interface to remove</span>
+<span class="sd">        :raises: :py:exc:`KeyError` if there is no interface by that name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__interfaces</span><span class="p">[</span><span class="n">interface_name</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="SpecIndex.add_semantic_interface"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.add_semantic_interface">[docs]</a>    <span class="k">def</span> <span class="nf">add_semantic_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">semantic_interface</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">package_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a loaded SemanticCapabilityInterface object into the repository</span>
+
+<span class="sd">        Used by :py:func:`spec_index_from_spec_file_index` to build the :py:class:`SpecIndex`.</span>
+
+<span class="sd">        :param semantic_interface: SemanticCapabilityInterface object which was</span>
+<span class="sd">            loaded using a factory function</span>
+<span class="sd">        :type semantic_interface:</span>
+<span class="sd">            :py:class:`.specs.semantic_interface.SemanticCapabilityInterface`</span>
+<span class="sd">        :param str file_path: path to the semantic interface spec file that</span>
+<span class="sd">            was loaded</span>
+<span class="sd">        :param str package_name: name of the package which contains the</span>
+<span class="sd">            semantic interface</span>
+<span class="sd">        :raises: :py:exc:`DuplicateNameException` if there is a name collision</span>
+<span class="sd">        :raises: :py:exc:`InterfaceNameNotFoundException` if the interface which</span>
+<span class="sd">            this semantic capability interface redefines is not found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">semantic_interface_name</span> <span class="o">=</span> <span class="s">&#39;{package}/{name}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">semantic_interface</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">semantic_interface</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">semantic_interface_name</span>
+        <span class="k">if</span> <span class="n">semantic_interface_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DuplicateNameException</span><span class="p">(</span>
+                <span class="n">semantic_interface_name</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span>
+                <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">semantic_interface</span><span class="o">.</span><span class="n">redefines</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface_names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InterfaceNameNotFoundException</span><span class="p">(</span>
+                <span class="s">&quot;Semantic capability interface &#39;{0}&#39; redefines &#39;{1}&#39;, but the &#39;{1}&#39; interface was not found.&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">semantic_interface_name</span><span class="p">,</span> <span class="n">semantic_interface</span><span class="o">.</span><span class="n">redefines</span><span class="p">),</span>
+                <span class="n">semantic_interface_name</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span>
+                <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_package</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__semantic_interfaces</span><span class="p">[</span><span class="n">semantic_interface_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;path&#39;</span><span class="p">:</span> <span class="n">file_path</span><span class="p">,</span>
+            <span class="s">&#39;instance&#39;</span><span class="p">:</span> <span class="n">semantic_interface</span>
+        <span class="p">}</span>
+</div>
+<div class="viewcode-block" id="SpecIndex.remove_semantic_interface"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.remove_semantic_interface">[docs]</a>    <span class="k">def</span> <span class="nf">remove_semantic_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">semantic_interface_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Removes a semantic capability interface by name</span>
+
+<span class="sd">        :param str semantic_interface_name: name of the interface to remove</span>
+<span class="sd">        :raises: :py:exc:`KeyError` if there is no interface by that name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__semantic_interfaces</span><span class="p">[</span><span class="n">semantic_interface_name</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="SpecIndex.add_provider"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.add_provider">[docs]</a>    <span class="k">def</span> <span class="nf">add_provider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">package_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a loaded CapabilityProvider object into the repository</span>
+
+<span class="sd">        Used by :py:func:`spec_index_from_spec_file_index` to build the :py:class:`SpecIndex`.</span>
+
+<span class="sd">        :param provider: CapabilityProvider object which was loaded using a</span>
+<span class="sd">            factory function</span>
+<span class="sd">        :type provider: :py:class:`.specs.provider.CapabilityProvider`</span>
+<span class="sd">        :param str file_path: path to the provider spec file that was loaded</span>
+<span class="sd">        :param str package_name: name of the package which contains the provider</span>
+<span class="sd">        :raises: :py:exc:`DuplicateNameException` if there is a name collision</span>
+<span class="sd">        :raises: :py:exc:`InterfaceNameNotFoundException` if the interface which</span>
+<span class="sd">            this capability provider implements is not found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">provider_name</span> <span class="o">=</span> <span class="s">&#39;{package}/{name}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">provider</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">provider_name</span>
+        <span class="k">if</span> <span class="n">provider_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">DuplicateNameException</span><span class="p">(</span>
+                <span class="n">provider_name</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span>
+                <span class="s">&#39;capability_provider&#39;</span><span class="p">)</span>
+        <span class="n">interfaces</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_names</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">semantic_interface_names</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">provider</span><span class="o">.</span><span class="n">implements</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">interfaces</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InterfaceNameNotFoundException</span><span class="p">(</span>
+                <span class="s">&quot;Capability provider &#39;{0}&#39; implements &#39;{1}&#39;, but the &#39;{1}&#39; interface was not found.&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">provider_name</span><span class="p">,</span> <span class="n">provider</span><span class="o">.</span><span class="n">implements</span><span class="p">),</span>
+                <span class="n">provider_name</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span>
+                <span class="s">&#39;capability_provider&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__add_package</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__providers</span><span class="p">[</span><span class="n">provider_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;path&#39;</span><span class="p">:</span> <span class="n">file_path</span><span class="p">,</span>
+            <span class="s">&#39;instance&#39;</span><span class="p">:</span> <span class="n">provider</span>
+        <span class="p">}</span>
+</div>
+<div class="viewcode-block" id="SpecIndex.remove_provider"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.remove_provider">[docs]</a>    <span class="k">def</span> <span class="nf">remove_provider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Removes a capability provider by name</span>
+
+<span class="sd">        :param str provider_name: name of the interface to remove</span>
+<span class="sd">        :raises: :py:exc:`KeyError` if there is no interface by that name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__providers</span><span class="p">[</span><span class="n">provider_name</span><span class="p">]</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.names"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.names">[docs]</a>    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of the names for all specs of all types</span>
+<span class="sd">        :rtype: :py:obj:`list` (:py:obj:`str`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">semantic_interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.specs"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.specs">[docs]</a>    <span class="k">def</span> <span class="nf">specs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Possible spec types:</span>
+
+<span class="sd">        - :py:class:`.specs.interface.CapabilityInterface`</span>
+<span class="sd">        - :py:class:`.specs.semantic_interface.SemanticCapabilityInterface`</span>
+<span class="sd">        - :py:class:`.specs.provider.CapabilityProvider`</span>
+
+<span class="sd">        :returns: dict of specs, keyed by name</span>
+<span class="sd">        :rtype: :py:obj:`dict` {:py:obj:`str`: spec}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c"># There should be no key collisions as collisions are found on insertion</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interfaces</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">semantic_interfaces</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.interface_names"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.interface_names">[docs]</a>    <span class="k">def</span> <span class="nf">interface_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of capability interface names</span>
+<span class="sd">        :rtype: :py:obj:`list` (:py:obj:`str`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.interfaces"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.interfaces">[docs]</a>    <span class="k">def</span> <span class="nf">interfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: dict of capability interfaces, keyed by name</span>
+<span class="sd">        :rtype: :py:obj:`dict` {:py:obj:`str`: :py:class:`.specs.interface.CapabilityInterface`}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;instance&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__interfaces</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.interface_paths"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.interface_paths">[docs]</a>    <span class="k">def</span> <span class="nf">interface_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: dict of capability interface spec paths, keyed by name</span>
+<span class="sd">        :rtype: :py:obj:`dict` {:py:obj:`str`: :py:obj:`str`}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;path&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__interfaces</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.provider_names"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.provider_names">[docs]</a>    <span class="k">def</span> <span class="nf">provider_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of capability provider names</span>
+<span class="sd">        :rtype: :py:obj:`list` (:py:obj:`str`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__providers</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.providers"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.providers">[docs]</a>    <span class="k">def</span> <span class="nf">providers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: dict of capability providers, keyed by name</span>
+<span class="sd">        :rtype: :py:obj:`dict` {:py:obj:`str`: :py:class:`.specs.provider.CapabilityProvider`}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;instance&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__providers</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.provider_paths"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.provider_paths">[docs]</a>    <span class="k">def</span> <span class="nf">provider_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: dict of capability provider spec paths, keyed by name</span>
+<span class="sd">        :rtype: :py:obj:`dict` {:py:obj:`str`: :py:obj:`str`}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;path&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__providers</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.semantic_interface_names"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.semantic_interface_names">[docs]</a>    <span class="k">def</span> <span class="nf">semantic_interface_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of semantic capability interface names</span>
+<span class="sd">        :rtype: :py:obj:`list` (:py:obj:`str`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__semantic_interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.semantic_interfaces"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.semantic_interfaces">[docs]</a>    <span class="k">def</span> <span class="nf">semantic_interfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: dict of semantic capability interfaces, keyed by name</span>
+<span class="sd">        :rtype: :py:obj:`dict` {:py:obj:`str`: :py:class:`.specs.semantic_interface.SemanticCapabilityInterface`}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;instance&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__semantic_interfaces</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+</div>
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="SpecIndex.semantic_interface_paths"><a class="viewcode-back" href="../../capabilities.discovery.html#capabilities.discovery.SpecIndex.semantic_interface_paths">[docs]</a>    <span class="k">def</span> <span class="nf">semantic_interface_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: dict of semantic capability interface spec paths, keyed by name</span>
+<span class="sd">        :rtype: :py:obj:`dict` {:py:obj:`str`: :py:obj:`str`}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="s">&#39;path&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__semantic_interfaces</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

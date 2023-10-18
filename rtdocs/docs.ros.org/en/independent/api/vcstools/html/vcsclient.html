@@ -1,0 +1,320 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>General VCS/SCM API &#8212; vcstools 0.1.42 documentation</title>
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developer’s Guide" href="developers_guide.html" />
+    <link rel="prev" title="vcstools documentation" href="index.html" /> 
+  </head><body>
+      <div class="header" role="banner"><h1 class="heading"><a href="index.html">
+          <span>vcstools 0.1.42 documentation</span></a></h1>
+        <h2 class="heading"><span>General VCS/SCM API</span></h2>
+      </div>
+      <div class="topnav" role="navigation" aria-label="top navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">vcstools documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="developers_guide.html">Developer’s Guide</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="general-vcs-scm-api">
+<h1>General VCS/SCM API<a class="headerlink" href="#general-vcs-scm-api" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#vcstools.VcsClient" title="vcstools.VcsClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">VcsClient</span></code></a> class provides a generic API for</p>
+<ul class="simple">
+<li>Subversion (<code class="docutils literal notranslate"><span class="pre">svn</span></code>)</li>
+<li>Mercurial (<code class="docutils literal notranslate"><span class="pre">hg</span></code>)</li>
+<li>Git (<code class="docutils literal notranslate"><span class="pre">git</span></code>)</li>
+<li>Bazaar (<code class="docutils literal notranslate"><span class="pre">bzr</span></code>)</li>
+</ul>
+<dl class="class">
+<dt id="vcstools.VcsClient">
+<em class="property">class </em><code class="descclassname">vcstools.</code><code class="descname">VcsClient</code><span class="sig-paren">(</span><em>vcs_type</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#vcstools.VcsClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>API for interacting with source-controlled paths independent of
+actual version-control implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>vcs_type</strong> – type of VCS to use (e.g. ‘svn’, ‘hg’, ‘bzr’, ‘git’), <code class="docutils literal notranslate"><span class="pre">str</span></code></li>
+<li><strong>path</strong> – filesystem path where code is/will be checked out , <code class="docutils literal notranslate"><span class="pre">str</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="vcstools.VcsClient.path_exists">
+<code class="descname">path_exists</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#vcstools.VcsClient.path_exists" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if path exists on disk.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.get_path">
+<code class="descname">get_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#vcstools.VcsClient.get_path" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">filesystem path this client is initialized with.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.url_matches">
+<code class="descname">url_matches</code><span class="sig-paren">(</span><em>self</em>, <em>url</em>, <em>url_or_shortcut</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#vcstools.VcsClient.url_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>client can decide whether the url and the other url are equivalent.
+Checks string equality by default</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>url_or_shortcut</strong> – url or shortcut (e.g. bzr launchpad url)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">bool if params are equivalent</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.get_version">
+<code class="descname">get_version</code><span class="sig-paren">(</span><span class="optional">[</span><em>spec=None</em><span class="optional">]</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#vcstools.VcsClient.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>spec</strong> – <p>token for identifying repository revision
+desired.  Token might be a tagname, branchname, version-id,
+or SHA-ID depending on the VCS implementation.</p>
+<ul class="simple">
+<li>svn: anything accepted by <code class="docutils literal notranslate"><span class="pre">svn</span> <span class="pre">info</span> <span class="pre">--help</span></code>,
+e.g. a <code class="docutils literal notranslate"><span class="pre">revnumber</span></code>, <code class="docutils literal notranslate"><span class="pre">{date}</span></code>, <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>, <code class="docutils literal notranslate"><span class="pre">BASE</span></code>, <code class="docutils literal notranslate"><span class="pre">PREV</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">COMMITTED</span></code></li>
+<li>git: anything accepted by <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>, e.g. a tagname,
+branchname, or sha-id.</li>
+<li>hg: anything accepted by <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">log</span> <span class="pre">-r</span></code>, e.g. a tagname, sha-ID,
+revision-number</li>
+<li>bzr: revisionspec as returned by <code class="docutils literal notranslate"><span class="pre">bzr</span> <span class="pre">help</span> <span class="pre">revisionspec</span></code>,
+e.g. a tagname or <code class="docutils literal notranslate"><span class="pre">revno:&lt;number&gt;</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">current revision number of the repository.  Or if
+spec is provided, the globally unique identifier
+(e.g. revision number, or SHA-ID) of a revision specified by
+some token.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.get_remote_version">
+<code class="descname">get_remote_version</code><span class="sig-paren">(</span><em>self</em>, <em>fatch=False</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#vcstools.VcsClient.get_remote_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find an identifier for the current revision on remote.
+Token spec might be a tagname,
+version-id, SHA-ID, … depending on the VCS implementation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fetch</strong> – if False, only local information may be used</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">current revision number of the remote repository.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.get_current_version_label">
+<code class="descname">get_current_version_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#vcstools.VcsClient.get_current_version_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find an description for the current local version.
+Token spec might be a branchname,
+version-id, SHA-ID, … depending on the VCS implementation.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body">short description of local version (e.g. branchname, tagename).</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.checkout">
+<code class="descname">checkout</code><span class="sig-paren">(</span><em>url</em><span class="optional">[</span>, <em>version=''</em><span class="optional">]</span><span class="optional">[</span>, <em>verbose=False</em><span class="optional">]</span><span class="optional">[</span>, <em>shallow=False</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#vcstools.VcsClient.checkout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checkout the given URL to the path associated with this client.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>url</strong> – URL of source control to check out</li>
+<li><strong>version</strong> – specific version to check out</li>
+<li><strong>verbose</strong> – flag to run verbosely</li>
+<li><strong>shallow</strong> – flag to create shallow clone without history</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>version</em><span class="sig-paren">)</span><a class="headerlink" href="#vcstools.VcsClient.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the local checkout from upstream source control.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.detect_presence">
+<code class="descname">detect_presence</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#vcstools.VcsClient.detect_presence" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if path has a checkout with matching VCS type,
+e.g. if the type of this client is ‘svn’, the checkout at
+the path is managed by Subversion.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.get_vcs_type_name">
+<code class="descname">get_vcs_type_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#vcstools.VcsClient.get_vcs_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">type of VCS this client is initialized with.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.get_url">
+<code class="descname">get_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#vcstools.VcsClient.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Upstream URL that this code was checked out from.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.get_branch_parent">
+<code class="descname">get_branch_parent</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#vcstools.VcsClient.get_branch_parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>(Git Only)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">parent branch.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.get_diff">
+<code class="descname">get_diff</code><span class="sig-paren">(</span><span class="optional">[</span><em>basepath=None</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#vcstools.VcsClient.get_diff" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>basepath</strong> – compute diff relative to this path, if provided</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A string showing local differences</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="vcstools.VcsClient.get_status">
+<code class="descname">get_status</code><span class="sig-paren">(</span><span class="optional">[</span><em>basepath=None</em><span class="optional">[</span>, <em>untracked=False</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#vcstools.VcsClient.get_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls scm status command. semantics of untracked are difficult
+to generalize. In SVN, this would be new files only. In git,
+hg, bzr, this would be changes that have not been added for
+commit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>basepath</strong> – status path will be relative to this, if provided.</li>
+<li><strong>untracked</strong> – If True, also show changes that would not commit</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A string summarizing locally modified files</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+      <div class="bottomnav" role="navigation" aria-label="bottom navigation">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">vcstools documentation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="developers_guide.html">Developer’s Guide</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010, Willow Garage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+class Ros2WebotsInterface:
+    def __init__(self):
+        # TODO: Initialize ROS 2 and Webots interface
+        pass
+
+    def run(self):
+        # TODO: Run ROS 2 and Webots interface
+        pass

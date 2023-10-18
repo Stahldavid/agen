@@ -1,1 +1,0 @@
-This code is establishing a communication between ROS2 and webots. It initializes a ROS2 node with the name 'ros2_webots_bridge' and the bridge runs as long as the rclpy is okay. We need to see how to improve this code to establish a more optimised communication.

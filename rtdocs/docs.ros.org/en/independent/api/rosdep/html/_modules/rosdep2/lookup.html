@@ -1,0 +1,746 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rosdep2.lookup &#8212; rosdep 0.22.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../contents.html">rosdep 0.22.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../contents.html">
+              <img class="logo" src="../../_static/ros.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for rosdep2.lookup</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2011, Willow Garage, Inc.</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1">#</span>
+<span class="c1">#     * Redistributions of source code must retain the above copyright</span>
+<span class="c1">#       notice, this list of conditions and the following disclaimer.</span>
+<span class="c1">#     * Redistributions in binary form must reproduce the above copyright</span>
+<span class="c1">#       notice, this list of conditions and the following disclaimer in the</span>
+<span class="c1">#       documentation and/or other materials provided with the distribution.</span>
+<span class="c1">#     * Neither the name of the Willow Garage, Inc. nor the names of its</span>
+<span class="c1">#       contributors may be used to endorse or promote products derived from</span>
+<span class="c1">#       this software without specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
+<span class="c1"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="c1"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
+<span class="c1"># ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE</span>
+<span class="c1"># LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
+<span class="c1"># CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
+<span class="c1"># SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
+<span class="c1"># INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
+<span class="c1"># CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
+<span class="c1"># ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c1"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="c1"># Author Tully Foote/tfoote@willowgarage.com, Ken Conley/kwc@willowgarage.com</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
+
+<span class="kn">from</span> <span class="nn">rospkg</span> <span class="k">import</span> <span class="n">RosPack</span><span class="p">,</span> <span class="n">RosStack</span><span class="p">,</span> <span class="n">ResourceNotFound</span>
+
+<span class="kn">from</span> <span class="nn">.core</span> <span class="k">import</span> <span class="n">RosdepInternalError</span><span class="p">,</span> <span class="n">InvalidData</span><span class="p">,</span> <span class="n">rd_debug</span>
+<span class="kn">from</span> <span class="nn">.model</span> <span class="k">import</span> <span class="n">RosdepDatabase</span>
+<span class="kn">from</span> <span class="nn">.rospkg_loader</span> <span class="k">import</span> <span class="n">RosPkgLoader</span>
+<span class="kn">from</span> <span class="nn">.dependency_graph</span> <span class="k">import</span> <span class="n">DependencyGraph</span>
+
+<span class="kn">from</span> <span class="nn">.sources_list</span> <span class="k">import</span> <span class="n">SourcesListLoader</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">catkin_packages</span>
+
+
+<div class="viewcode-block" id="RosdepDefinition"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepDefinition">[docs]</a><span class="k">class</span> <span class="nc">RosdepDefinition</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Single rosdep dependency definition.  This data is stored as the</span>
+<span class="sd">    raw dictionary definition for the dependency.</span>
+
+<span class="sd">    See REP 111, &#39;Multiple Package Manager Support for Rosdep&#39; for a</span>
+<span class="sd">    discussion of this raw format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_key</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;&lt;dynamic&gt;&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param rosdep_key: key/name of rosdep dependency</span>
+<span class="sd">        :param data: raw rosdep data for a single rosdep dependency, ``dict``</span>
+<span class="sd">        :param origin: string that indicates where data originates from (e.g. filename)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_key</span> <span class="o">=</span> <span class="n">rosdep_key</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidData</span><span class="p">(</span><span class="s1">&#39;rosdep data for [</span><span class="si">%s</span><span class="s1">] must be a dictionary&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rosdep_key</span><span class="p">),</span> <span class="n">origin</span><span class="o">=</span><span class="n">origin</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">origin</span> <span class="o">=</span> <span class="n">origin</span>
+
+<div class="viewcode-block" id="RosdepDefinition.reverse_merge"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepDefinition.reverse_merge">[docs]</a>    <span class="k">def</span> <span class="nf">reverse_merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_data</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;&lt;dynamic&gt;&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merge two definitions together, with existing rules taking precendence.</span>
+<span class="sd">        Definitions are merged at the os_name level, meaning that if two rules</span>
+<span class="sd">        exist with the same os_name, the first one wins.</span>
+
+<span class="sd">        :param data: raw rosdep data for a single rosdep dependency, ``dict``</span>
+<span class="sd">        :param origin: string that indicates where this new data comes from (e.g. filename)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">rules</span> <span class="ow">in</span> <span class="n">new_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">os_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] adding rules for os [</span><span class="si">%s</span><span class="s1">] to [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_key</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">os_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">rules</span>
+            <span class="k">elif</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] ignoring [</span><span class="si">%s</span><span class="s1">] for os [</span><span class="si">%s</span><span class="s1">], already loaded&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">os_name</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RosdepDefinition.get_rule_for_platform"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepDefinition.get_rule_for_platform">[docs]</a>    <span class="k">def</span> <span class="nf">get_rule_for_platform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">,</span> <span class="n">installer_keys</span><span class="p">,</span> <span class="n">default_installer_key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get installer_key and rule for the specified rule.  See REP 111 for precedence rules.</span>
+
+<span class="sd">        :param os_name: OS name to get rule for</span>
+<span class="sd">        :param os_version: OS version to get rule for</span>
+<span class="sd">        :param installer_keys: Keys of installers for platform, ``[str]``</span>
+<span class="sd">        :param default_installer_key: Default installer key for platform, ``[str]``</span>
+<span class="sd">        :returns: (installer_key, rosdep_args_dict), ``(str, dict)``</span>
+
+<span class="sd">        :raises: :exc:`ResolutionError` If no rule is available</span>
+<span class="sd">        :raises: :exc:`InvalidData` If rule data is not valid</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rosdep_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_key</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">queried_os</span> <span class="o">=</span> <span class="n">os_name</span>
+        <span class="n">queried_ver</span> <span class="o">=</span> <span class="n">os_version</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidData</span><span class="p">(</span><span class="s1">&#39;rosdep value for [</span><span class="si">%s</span><span class="s1">] must be a dictionary&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rosdep_key</span><span class="p">),</span> <span class="n">origin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;*&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ResolutionError</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">queried_os</span><span class="p">,</span> <span class="n">queried_ver</span><span class="p">,</span> <span class="s1">&#39;No definition of [</span><span class="si">%s</span><span class="s1">] for OS [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">os_name</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">dict</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidData</span><span class="p">(</span><span class="s1">&#39;rosdep value under OS wildcard for [</span><span class="si">%s</span><span class="s1">] must specify a package manager&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rosdep_key</span><span class="p">))</span>
+            <span class="n">os_name</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">os_name</span><span class="p">]</span>
+        <span class="n">return_key</span> <span class="o">=</span> <span class="n">default_installer_key</span>
+
+        <span class="c1"># REP 111: rosdep first interprets the key as a</span>
+        <span class="c1"># PACKAGE_MANAGER. If this test fails, it will be interpreted</span>
+        <span class="c1"># as an OS_VERSION_CODENAME.</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">installer_key</span> <span class="ow">in</span> <span class="n">installer_keys</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">installer_key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">installer_key</span><span class="p">]</span>
+                    <span class="n">return_key</span> <span class="o">=</span> <span class="n">installer_key</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># data must be a dictionary, string, or list</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+                    <span class="c1"># check for</span>
+                    <span class="c1">#   hardy:</span>
+                    <span class="c1">#     apt:</span>
+                    <span class="c1">#       stuff</span>
+
+                    <span class="c1"># we&#39;ve already checked for PACKAGE_MANAGER_KEY, so</span>
+                    <span class="c1"># version key must be present here for data to be valid</span>
+                    <span class="c1"># dictionary value.</span>
+                    <span class="c1"># if the os_version is not defined and there is no wildcard</span>
+                    <span class="k">if</span> <span class="n">os_version</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="s1">&#39;*&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">ResolutionError</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">queried_os</span><span class="p">,</span> <span class="n">queried_ver</span><span class="p">,</span> <span class="s1">&#39;No definition of [</span><span class="si">%s</span><span class="s1">] for OS version [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">os_version</span><span class="p">))</span>
+                    <span class="c1"># if the os_version has the value None</span>
+                    <span class="k">if</span> <span class="n">os_version</span> <span class="ow">in</span> <span class="n">data</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="n">os_version</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">ResolutionError</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">queried_os</span><span class="p">,</span> <span class="n">queried_ver</span><span class="p">,</span> <span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] defined as &quot;not available&quot; for OS version [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">os_version</span><span class="p">))</span>
+                    <span class="c1"># if os version is not defined (and there is a wildcard) fallback to the wildcard</span>
+                    <span class="k">if</span> <span class="n">os_version</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                        <span class="n">os_version</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">os_version</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">installer_key</span> <span class="ow">in</span> <span class="n">installer_keys</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">installer_key</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                                <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">installer_key</span><span class="p">]</span>
+                                <span class="n">return_key</span> <span class="o">=</span> <span class="n">installer_key</span>
+                                <span class="k">break</span>
+
+        <span class="c1"># Check if the rule is null</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ResolutionError</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">queried_os</span><span class="p">,</span> <span class="n">queried_ver</span><span class="p">,</span> <span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] defined as &quot;not available&quot; for OS version [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">os_version</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="s1">&#39;str&#39;</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">InvalidData</span><span class="p">(</span><span class="s1">&#39;rosdep OS definition for [</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">] must be a dictionary, string, or list: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">data</span><span class="p">),</span> <span class="n">origin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">return_key</span><span class="p">,</span> <span class="n">data</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">:</span><span class="se">\n</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">origin</span><span class="p">,</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span></div>
+
+
+<span class="k">class</span> <span class="nc">ResolutionError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_key</span><span class="p">,</span> <span class="n">rosdep_data</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_key</span> <span class="o">=</span> <span class="n">rosdep_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_data</span> <span class="o">=</span> <span class="n">rosdep_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_name</span> <span class="o">=</span> <span class="n">os_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_version</span> <span class="o">=</span> <span class="n">os_version</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResolutionError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_data</span><span class="p">:</span>
+            <span class="n">pretty_data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rosdep_data</span><span class="p">,</span> <span class="n">default_flow_style</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pretty_data</span> <span class="o">=</span> <span class="s1">&#39;&lt;no data&gt;&#39;</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;&quot;</span><span class="si">%s</span><span class="s2"></span>
+<span class="se">\t</span><span class="s2">rosdep key : </span><span class="si">%s</span><span class="s2"></span>
+<span class="se">\t</span><span class="s2">OS name    : </span><span class="si">%s</span><span class="s2"></span>
+<span class="se">\t</span><span class="s2">OS version : </span><span class="si">%s</span><span class="s2"></span>
+<span class="se">\t</span><span class="s2">Data:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_version</span><span class="p">,</span> <span class="n">pretty_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n\t\t</span><span class="s1">&#39;</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="RosdepView"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepView">[docs]</a><span class="k">class</span> <span class="nc">RosdepView</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View of :class:`RosdepDatabase`.  Unlike :class:`RosdepDatabase`,</span>
+<span class="sd">    which stores :class:`RosdepDatabaseEntry` data for all stacks, a</span>
+<span class="sd">    view merges entries for a particular stack.  This view can then be</span>
+<span class="sd">    queried to lookup and resolve individual rosdep dependencies.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_defs</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># {str: RosdepDefinition}</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_defs</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+
+<div class="viewcode-block" id="RosdepView.lookup"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepView.lookup">[docs]</a>    <span class="k">def</span> <span class="nf">lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: :class:`RosdepDefinition`</span>
+<span class="sd">        :raises: :exc:`KeyError` If *rosdep_name* is not declared</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_defs</span><span class="p">[</span><span class="n">rosdep_name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="RosdepView.keys"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepView.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of rosdep names in this view</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_defs</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="RosdepView.merge"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepView.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update_entry</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merge rosdep database update into main database.  Merge rules</span>
+<span class="sd">        are first entry to declare a key wins.  There are no</span>
+<span class="sd">        conflicts.  This rule logic is modelled after the apt sources</span>
+<span class="sd">        list.</span>
+
+<span class="sd">        :param override: Ignore first-one-wins rules and instead</span>
+<span class="sd">            always use rules from update_entry</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;view[</span><span class="si">%s</span><span class="s1">]: merging from cache of [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">update_entry</span><span class="o">.</span><span class="n">origin</span><span class="p">))</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_defs</span>
+
+        <span class="k">for</span> <span class="n">dep_name</span><span class="p">,</span> <span class="n">dep_data</span> <span class="ow">in</span> <span class="n">update_entry</span><span class="o">.</span><span class="n">rosdep_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># convert data into RosdepDefinition model</span>
+            <span class="n">update_definition</span> <span class="o">=</span> <span class="n">RosdepDefinition</span><span class="p">(</span><span class="n">dep_name</span><span class="p">,</span> <span class="n">dep_data</span><span class="p">,</span> <span class="n">update_entry</span><span class="o">.</span><span class="n">origin</span><span class="p">)</span>
+            <span class="c1"># First rule wins or override, no rule-merging.</span>
+            <span class="k">if</span> <span class="n">override</span> <span class="ow">or</span> <span class="n">dep_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">db</span><span class="p">:</span>
+                <span class="n">db</span><span class="p">[</span><span class="n">dep_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">update_definition</span>
+            <span class="k">elif</span> <span class="n">dep_name</span> <span class="ow">in</span> <span class="n">db</span><span class="p">:</span>
+                <span class="n">db</span><span class="p">[</span><span class="n">dep_name</span><span class="p">]</span><span class="o">.</span><span class="n">reverse_merge</span><span class="p">(</span><span class="n">dep_data</span><span class="p">,</span> <span class="n">update_entry</span><span class="o">.</span><span class="n">origin</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">prune_catkin_packages</span><span class="p">(</span><span class="n">rosdep_keys</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">workspace_pkgs</span> <span class="o">=</span> <span class="n">catkin_packages</span><span class="o">.</span><span class="n">get_workspace_packages</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">workspace_pkgs</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rosdep_keys</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rosdep_key</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">rosdep_keys</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">rosdep_key</span> <span class="ow">in</span> <span class="n">workspace_pkgs</span><span class="p">:</span>
+            <span class="c1"># If workspace packages listed (--catkin-workspace)</span>
+            <span class="c1"># and if the rosdep_key is a package in that</span>
+            <span class="c1"># workspace, then skip it rather than resolve it</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rosdep key &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">)</span> <span class="o">+</span>
+                      <span class="s1">&#39; is in the catkin workspace, skipping.&#39;</span><span class="p">,</span>
+                      <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+            <span class="k">del</span> <span class="n">rosdep_keys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">rosdep_keys</span>
+
+
+<span class="k">def</span> <span class="nf">prune_skipped_packages</span><span class="p">(</span><span class="n">rosdep_keys</span><span class="p">,</span> <span class="n">skipped_keys</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">skipped_keys</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rosdep_keys</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rosdep_key</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">rosdep_keys</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">rosdep_key</span> <span class="ow">in</span> <span class="n">skipped_keys</span><span class="p">:</span>
+            <span class="c1"># If the key is in the list of keys to explicitly skip, skip it</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;rosdep key &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">)</span> <span class="o">+</span>
+                      <span class="s1">&#39; was listed in the skipped packages, skipping.&#39;</span><span class="p">,</span>
+                      <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+            <span class="k">del</span> <span class="n">rosdep_keys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">rosdep_keys</span>
+
+
+<div class="viewcode-block" id="RosdepLookup"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup">[docs]</a><span class="k">class</span> <span class="nc">RosdepLookup</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Lookup rosdep definitions.  Provides API for most</span>
+<span class="sd">    non-install-related commands for rosdep.</span>
+
+<span class="sd">    :class:`RosdepLookup` caches data as it is loaded, so changes made</span>
+<span class="sd">    on the filesystem will not be reflected if the rosdep information</span>
+<span class="sd">    has already been loaded.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_db</span><span class="p">,</span> <span class="n">loader</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param loader: Loader to use for loading rosdep data by stack</span>
+<span class="sd">          name, ``RosdepLoader``</span>
+<span class="sd">        :param rosdep_db: Database to load definitions into, :class:`RosdepDatabase`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_db</span> <span class="o">=</span> <span class="n">rosdep_db</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loader</span> <span class="o">=</span> <span class="n">loader</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_view_cache</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># {str: {RosdepView}}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_cache</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># {str : (os_name, os_version, installer_key, resolution, dependencies)}</span>
+
+        <span class="c1"># some APIs that deal with the entire environment save errors</span>
+        <span class="c1"># in to self.errors instead of raising them in order to be</span>
+        <span class="c1"># robust to single-stack faults.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># flag for turning on printing to console</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">skipped_keys</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">get_loader</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span>
+
+<div class="viewcode-block" id="RosdepLookup.get_errors"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.get_errors">[docs]</a>    <span class="k">def</span> <span class="nf">get_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve error state for API calls that do not directly report</span>
+<span class="sd">        error state.  This is the case for APIs like</span>
+<span class="sd">        :meth:`RosdepLookup.where_defined` that are meant to be</span>
+<span class="sd">        fault-tolerant to single-stack failures.</span>
+
+<span class="sd">        :returns: List of exceptions, ``[Exception]``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="p">[:]</span></div>
+
+<div class="viewcode-block" id="RosdepLookup.get_rosdeps"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.get_rosdeps">[docs]</a>    <span class="k">def</span> <span class="nf">get_rosdeps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_name</span><span class="p">,</span> <span class="n">implicit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get rosdeps that *resource_name* (e.g. package) requires.</span>
+
+<span class="sd">        :param implicit: If ``True``, include implicit rosdep</span>
+<span class="sd">          dependencies. Default: ``True``.</span>
+
+<span class="sd">        :returns: list of rosdep names, ``[str]``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">get_rosdeps</span><span class="p">(</span><span class="n">resource_name</span><span class="p">,</span> <span class="n">implicit</span><span class="o">=</span><span class="n">implicit</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RosdepLookup.get_resources_that_need"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.get_resources_that_need">[docs]</a>    <span class="k">def</span> <span class="nf">get_resources_that_need</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param rosdep_name: name of rosdep dependency</span>
+
+<span class="sd">        :returns: list of package names that require rosdep, ``[str]``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">get_loadable_resources</span><span class="p">()</span> <span class="k">if</span> <span class="n">rosdep_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rosdeps</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">implicit</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span></div>
+
+<div class="viewcode-block" id="RosdepLookup.create_from_rospkg"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.create_from_rospkg">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_from_rospkg</span><span class="p">(</span><span class="n">rospack</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rosstack</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">sources_loader</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dependency_types</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create :class:`RosdepLookup` based on current ROS package</span>
+<span class="sd">        environment.</span>
+
+<span class="sd">        :param rospack: (optional) Override :class:`rospkg.RosPack`</span>
+<span class="sd">          instance used to crawl ROS packages.</span>
+<span class="sd">        :param rosstack: (optional) Override :class:`rospkg.RosStack`</span>
+<span class="sd">          instance used to crawl ROS stacks.</span>
+<span class="sd">        :param sources_loader: (optional) Override SourcesLoader used</span>
+<span class="sd">            for managing sources.list data sources.</span>
+<span class="sd">        :param dependency_types: (optional) List of dependency types.</span>
+<span class="sd">            Allowed: {&#39;build&#39;, &#39;buildtool&#39;, &#39;build_export&#39;, &#39;buildtool_export&#39;, &#39;exec&#39;, &#39;test&#39;, &#39;doc&#39;}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># initialize the loader</span>
+        <span class="k">if</span> <span class="n">rospack</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rospack</span> <span class="o">=</span> <span class="n">RosPack</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">rosstack</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rosstack</span> <span class="o">=</span> <span class="n">RosStack</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">sources_loader</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sources_loader</span> <span class="o">=</span> <span class="n">SourcesListLoader</span><span class="o">.</span><span class="n">create_default</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dependency_types</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dependency_types</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">rosdep_db</span> <span class="o">=</span> <span class="n">RosdepDatabase</span><span class="p">()</span>
+
+        <span class="c1"># Use sources list to initialize rosdep_db.  Underlay has no</span>
+        <span class="c1"># notion of specific resources, and its view keys are just the</span>
+        <span class="c1"># individual sources it can load from.  SourcesListLoader</span>
+        <span class="c1"># cannot do delayed evaluation of OS setting due to matcher.</span>
+        <span class="n">underlay_key</span> <span class="o">=</span> <span class="n">SourcesListLoader</span><span class="o">.</span><span class="n">ALL_VIEW_KEY</span>
+
+        <span class="c1"># Create the rospkg loader on top of the underlay</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">RosPkgLoader</span><span class="p">(</span><span class="n">rospack</span><span class="o">=</span><span class="n">rospack</span><span class="p">,</span> <span class="n">rosstack</span><span class="o">=</span><span class="n">rosstack</span><span class="p">,</span>
+                              <span class="n">underlay_key</span><span class="o">=</span><span class="n">underlay_key</span><span class="p">,</span> <span class="n">dependency_types</span><span class="o">=</span><span class="n">dependency_types</span><span class="p">)</span>
+
+        <span class="c1"># create our actual instance</span>
+        <span class="n">lookup</span> <span class="o">=</span> <span class="n">RosdepLookup</span><span class="p">(</span><span class="n">rosdep_db</span><span class="p">,</span> <span class="n">loader</span><span class="p">)</span>
+
+        <span class="c1"># load in the underlay</span>
+        <span class="n">lookup</span><span class="o">.</span><span class="n">_load_all_views</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">sources_loader</span><span class="p">)</span>
+        <span class="c1"># use dependencies to implement precedence</span>
+        <span class="n">view_dependencies</span> <span class="o">=</span> <span class="n">sources_loader</span><span class="o">.</span><span class="n">get_loadable_views</span><span class="p">()</span>
+        <span class="n">rosdep_db</span><span class="o">.</span><span class="n">set_view_data</span><span class="p">(</span><span class="n">underlay_key</span><span class="p">,</span> <span class="p">{},</span> <span class="n">view_dependencies</span><span class="p">,</span> <span class="n">underlay_key</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">lookup</span></div>
+
+<div class="viewcode-block" id="RosdepLookup.resolve_all"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.resolve_all">[docs]</a>    <span class="k">def</span> <span class="nf">resolve_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">installer_context</span><span class="p">,</span> <span class="n">implicit</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resolve all the rosdep dependencies for *resources* using *installer_context*.</span>
+
+<span class="sd">        :param resources: list of resources (e.g. packages), ``[str]``</span>
+<span class="sd">        :param installer_context: :class:`InstallerContext`</span>
+<span class="sd">        :param implicit: Install implicit (recursive) dependencies of</span>
+<span class="sd">            resources.  Default ``False``.</span>
+
+<span class="sd">        :returns: (resolutions, errors), ``([(str, [str])], {str: ResolutionError})``.  resolutions provides</span>
+<span class="sd">          an ordered list of resolution tuples.  A resolution tuple&#39;s first element is the installer</span>
+<span class="sd">          key (e.g.: apt or homebrew) and the second element is a list of opaque resolution values for that</span>
+<span class="sd">          installer. errors maps package names to an :exc:`ResolutionError` or :exc:`KeyError` exception.</span>
+
+<span class="sd">        :raises: :exc:`RosdepInternalError` if unexpected error in constructing dependency graph</span>
+<span class="sd">        :raises: :exc:`InvalidData` if a cycle occurs in constructing dependency graph</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">depend_graph</span> <span class="o">=</span> <span class="n">DependencyGraph</span><span class="p">()</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># TODO: resolutions dictionary should be replaced with resolution model instead of mapping (undefined) keys.</span>
+        <span class="k">for</span> <span class="n">resource_name</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">rosdep_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rosdeps</span><span class="p">(</span><span class="n">resource_name</span><span class="p">,</span> <span class="n">implicit</span><span class="o">=</span><span class="n">implicit</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;resolve_all: resource [</span><span class="si">%s</span><span class="s1">] requires rosdep keys [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">resource_name</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rosdep_keys</span><span class="p">)),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+                <span class="n">rosdep_keys</span> <span class="o">=</span> <span class="n">prune_catkin_packages</span><span class="p">(</span><span class="n">rosdep_keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+                <span class="n">rosdep_keys</span> <span class="o">=</span> <span class="n">prune_skipped_packages</span><span class="p">(</span><span class="n">rosdep_keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">skipped_keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">rosdep_key</span> <span class="ow">in</span> <span class="n">rosdep_keys</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">installer_key</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">dependencies</span> <span class="o">=</span> \
+                            <span class="bp">self</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">resource_name</span><span class="p">,</span> <span class="n">installer_context</span><span class="p">)</span>
+                        <span class="n">depend_graph</span><span class="p">[</span><span class="n">rosdep_key</span><span class="p">][</span><span class="s1">&#39;installer_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">installer_key</span>
+                        <span class="n">depend_graph</span><span class="p">[</span><span class="n">rosdep_key</span><span class="p">][</span><span class="s1">&#39;install_keys&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
+                        <span class="n">depend_graph</span><span class="p">[</span><span class="n">rosdep_key</span><span class="p">][</span><span class="s1">&#39;dependencies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dependencies</span><span class="p">)</span>
+                        <span class="k">while</span> <span class="n">dependencies</span><span class="p">:</span>
+                            <span class="n">depend_rosdep_key</span> <span class="o">=</span> <span class="n">dependencies</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                            <span class="c1"># prevent infinite loop</span>
+                            <span class="k">if</span> <span class="n">depend_rosdep_key</span> <span class="ow">in</span> <span class="n">depend_graph</span><span class="p">:</span>
+                                <span class="k">continue</span>
+                            <span class="n">installer_key</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">more_dependencies</span> <span class="o">=</span> \
+                                <span class="bp">self</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">depend_rosdep_key</span><span class="p">,</span> <span class="n">resource_name</span><span class="p">,</span> <span class="n">installer_context</span><span class="p">)</span>
+                            <span class="n">dependencies</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">more_dependencies</span><span class="p">)</span>
+                            <span class="n">depend_graph</span><span class="p">[</span><span class="n">depend_rosdep_key</span><span class="p">][</span><span class="s1">&#39;installer_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">installer_key</span>
+                            <span class="n">depend_graph</span><span class="p">[</span><span class="n">depend_rosdep_key</span><span class="p">][</span><span class="s1">&#39;install_keys&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
+                            <span class="n">depend_graph</span><span class="p">[</span><span class="n">depend_rosdep_key</span><span class="p">][</span><span class="s1">&#39;dependencies&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">more_dependencies</span><span class="p">)</span>
+
+                    <span class="k">except</span> <span class="n">ResolutionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="n">errors</span><span class="p">[</span><span class="n">resource_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span>
+            <span class="k">except</span> <span class="n">ResourceNotFound</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">errors</span><span class="p">[</span><span class="n">resource_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># TODO: I really don&#39;t like AssertionErrors here; this should be modeled as &#39;CyclicGraphError&#39;</span>
+            <span class="c1"># or something more explicit. No need to continue if this API errors.</span>
+            <span class="n">resolutions_flat</span> <span class="o">=</span> <span class="n">depend_graph</span><span class="o">.</span><span class="n">get_ordered_dependency_list</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidData</span><span class="p">(</span><span class="s1">&#39;cycle in dependency graph detected: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RosdepInternalError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">resolutions_flat</span><span class="p">,</span> <span class="n">errors</span></div>
+
+<div class="viewcode-block" id="RosdepLookup.resolve"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.resolve">[docs]</a>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_key</span><span class="p">,</span> <span class="n">resource_name</span><span class="p">,</span> <span class="n">installer_context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resolve a :class:`RosdepDefinition` for a particular</span>
+<span class="sd">        os/version spec.</span>
+
+<span class="sd">        :param resource_name: resource (e.g. ROS package) to resolve key within</span>
+<span class="sd">        :param rosdep_key: rosdep key to resolve</span>
+<span class="sd">        :param os_name: OS name to use for resolution</span>
+<span class="sd">        :param os_version: OS name to use for resolution</span>
+
+<span class="sd">        :returns: *(installer_key, resolution, dependencies)*, ``(str,</span>
+<span class="sd">          [opaque], [str])``.  *resolution* are the system</span>
+<span class="sd">          dependencies for the specified installer.  The value is an</span>
+<span class="sd">          opaque list and meant to be interpreted by the</span>
+<span class="sd">          installer. *dependencies* is a list of rosdep keys that the</span>
+<span class="sd">          definition depends on.</span>
+
+<span class="sd">        :raises: :exc:`ResolutionError` If *rosdep_key* cannot be resolved for *resource_name* in *installer_context*</span>
+<span class="sd">        :raises: :exc:`rospkg.ResourceNotFound` if *resource_name* cannot be located</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span> <span class="o">=</span> <span class="n">installer_context</span><span class="o">.</span><span class="n">get_os_name_and_version</span><span class="p">()</span>
+
+        <span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rosdep_view_for_resource</span><span class="p">(</span><span class="n">resource_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">view</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ResolutionError</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">,</span> <span class="s1">&#39;[</span><span class="si">%s</span><span class="s1">] does not have a rosdep view&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">resource_name</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># print(&quot;KEYS&quot;, view.rosdep_defs.keys())</span>
+            <span class="n">definition</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">rd_debug</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ResolutionError</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">,</span> <span class="s1">&#39;Cannot locate rosdep definition for [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rosdep_key</span><span class="p">))</span>
+
+        <span class="c1"># check cache: the main motivation for the cache is that</span>
+        <span class="c1"># source rosdeps are expensive to resolve</span>
+        <span class="k">if</span> <span class="n">rosdep_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_cache</span><span class="p">:</span>
+            <span class="n">cache_value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_cache</span><span class="p">[</span><span class="n">rosdep_key</span><span class="p">]</span>
+            <span class="n">cache_os_name</span> <span class="o">=</span> <span class="n">cache_value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">cache_os_version</span> <span class="o">=</span> <span class="n">cache_value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">cache_view_name</span> <span class="o">=</span> <span class="n">cache_value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">cache_os_name</span> <span class="o">==</span> <span class="n">os_name</span> <span class="ow">and</span>
+                <span class="n">cache_os_version</span> <span class="o">==</span> <span class="n">os_version</span> <span class="ow">and</span>
+                <span class="n">cache_view_name</span> <span class="o">==</span> <span class="n">view</span><span class="o">.</span><span class="n">name</span>
+            <span class="p">):</span>
+                <span class="k">return</span> <span class="n">cache_value</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+
+        <span class="c1"># get the rosdep data for the platform</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">installer_keys</span> <span class="o">=</span> <span class="n">installer_context</span><span class="o">.</span><span class="n">get_os_installer_keys</span><span class="p">(</span><span class="n">os_name</span><span class="p">)</span>
+            <span class="n">default_key</span> <span class="o">=</span> <span class="n">installer_context</span><span class="o">.</span><span class="n">get_default_os_installer_key</span><span class="p">(</span><span class="n">os_name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ResolutionError</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">definition</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">,</span> <span class="s1">&#39;Unsupported OS [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">os_name</span><span class="p">))</span>
+        <span class="n">installer_key</span><span class="p">,</span> <span class="n">rosdep_args_dict</span> <span class="o">=</span> <span class="n">definition</span><span class="o">.</span><span class="n">get_rule_for_platform</span><span class="p">(</span><span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">,</span> <span class="n">installer_keys</span><span class="p">,</span> <span class="n">default_key</span><span class="p">)</span>
+
+        <span class="c1"># resolve the rosdep data for the platform</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">installer</span> <span class="o">=</span> <span class="n">installer_context</span><span class="o">.</span><span class="n">get_installer</span><span class="p">(</span><span class="n">installer_key</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ResolutionError</span><span class="p">(</span><span class="n">rosdep_key</span><span class="p">,</span> <span class="n">definition</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">,</span> <span class="s1">&#39;Unsupported installer [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">installer_key</span><span class="p">))</span>
+        <span class="n">resolution</span> <span class="o">=</span> <span class="n">installer</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">rosdep_args_dict</span><span class="p">)</span>
+        <span class="n">dependencies</span> <span class="o">=</span> <span class="n">installer</span><span class="o">.</span><span class="n">get_depends</span><span class="p">(</span><span class="n">rosdep_args_dict</span><span class="p">)</span>
+
+        <span class="c1"># cache value</span>
+        <span class="c1"># the dependencies list is copied to prevent mutation before next cache hit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_cache</span><span class="p">[</span><span class="n">rosdep_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">,</span> <span class="n">view</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">dependencies</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">dependencies</span></div>
+
+    <span class="k">def</span> <span class="nf">_load_all_views</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loader</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load all available view keys.  In general, this is equivalent</span>
+<span class="sd">        to loading all stacks on the package path.  If</span>
+<span class="sd">        :exc:`InvalidData` errors occur while loading a view,</span>
+<span class="sd">        they will be saved in the *errors* field.</span>
+
+<span class="sd">        :param loader: override self.loader</span>
+<span class="sd">        :raises: :exc:`RosdepInternalError`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">resource_name</span> <span class="ow">in</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_loadable_views</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_load_view_dependencies</span><span class="p">(</span><span class="n">resource_name</span><span class="p">,</span> <span class="n">loader</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">ResourceNotFound</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">InvalidData</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_load_view_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view_key</span><span class="p">,</span> <span class="n">loader</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize internal :exc:`RosdepDatabase` on demand.  Not</span>
+<span class="sd">        thread-safe.</span>
+
+<span class="sd">        :param view_key: name of view to load dependencies for.</span>
+
+<span class="sd">        :raises: :exc:`rospkg.ResourceNotFound` If view cannot be located</span>
+<span class="sd">        :raises: :exc:`InvalidData` if view&#39;s data is invaid</span>
+<span class="sd">        :raises: :exc:`RosdepInternalError`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rd_debug</span><span class="p">(</span><span class="s1">&#39;_load_view_dependencies[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">view_key</span><span class="p">))</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_db</span>
+        <span class="k">if</span> <span class="n">db</span><span class="o">.</span><span class="n">is_loaded</span><span class="p">(</span><span class="n">view_key</span><span class="p">):</span>
+            <span class="k">return</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">loader</span><span class="o">.</span><span class="n">load_view</span><span class="p">(</span><span class="n">view_key</span><span class="p">,</span> <span class="n">db</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_view_data</span><span class="p">(</span><span class="n">view_key</span><span class="p">)</span>
+            <span class="n">rd_debug</span><span class="p">(</span><span class="s1">&#39;_load_view_dependencies[</span><span class="si">%s</span><span class="s1">]: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">view_key</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">view_dependencies</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">view_dependencies</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_load_view_dependencies</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">loader</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">InvalidData</span><span class="p">:</span>
+            <span class="c1"># mark view as loaded: as we are caching, the valid</span>
+            <span class="c1"># behavior is to not attempt loading this view ever</span>
+            <span class="c1"># again.</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">mark_loaded</span><span class="p">(</span><span class="n">view_key</span><span class="p">)</span>
+            <span class="c1"># re-raise</span>
+            <span class="k">raise</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">RosdepInternalError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RosdepLookup.create_rosdep_view"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.create_rosdep_view">[docs]</a>    <span class="k">def</span> <span class="nf">create_rosdep_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view_name</span><span class="p">,</span> <span class="n">view_keys</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param view_name: name of view to create</span>
+<span class="sd">        :param view_keys: order list of view names to merge, first one wins</span>
+<span class="sd">        :param verbose: print debugging output</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create view and initialize with dbs from all of the</span>
+        <span class="c1"># dependencies.</span>
+        <span class="n">view</span> <span class="o">=</span> <span class="n">RosdepView</span><span class="p">(</span><span class="n">view_name</span><span class="p">)</span>
+
+        <span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_db</span>
+        <span class="k">for</span> <span class="n">view_key</span> <span class="ow">in</span> <span class="n">view_keys</span><span class="p">:</span>
+            <span class="n">db_entry</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_view_data</span><span class="p">(</span><span class="n">view_key</span><span class="p">)</span>
+            <span class="n">view</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">db_entry</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;View [</span><span class="si">%s</span><span class="s1">], merged views:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">view_name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39; * </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">view_key</span> <span class="k">for</span> <span class="n">view_key</span> <span class="ow">in</span> <span class="n">view_keys</span><span class="p">]),</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">view</span></div>
+
+<div class="viewcode-block" id="RosdepLookup.get_rosdep_view_for_resource"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.get_rosdep_view_for_resource">[docs]</a>    <span class="k">def</span> <span class="nf">get_rosdep_view_for_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_name</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a :class:`RosdepView` for a specific ROS resource *resource_name*.</span>
+<span class="sd">        Views can be queries to resolve rosdep keys to</span>
+<span class="sd">        definitions.</span>
+
+<span class="sd">        :param resource_name: Name of ROS resource (e.g. stack,</span>
+<span class="sd">          package) to create view for, ``str``.</span>
+
+<span class="sd">        :returns: :class:`RosdepView` for specific ROS resource</span>
+<span class="sd">          *resource_name*, or ``None`` if no view is associated with this resource.</span>
+
+<span class="sd">        :raises: :exc:`RosdepConflict` if view cannot be created due</span>
+<span class="sd">          to conflict rosdep definitions.</span>
+<span class="sd">        :raises: :exc:`rospkg.ResourceNotFound` if *view_key* cannot be located</span>
+<span class="sd">        :raises: :exc:`RosdepInternalError`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">view_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="o">.</span><span class="n">get_view_key</span><span class="p">(</span><span class="n">resource_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">view_key</span><span class="p">:</span>
+            <span class="c1"># NOTE: this may not be the right behavior and this happens</span>
+            <span class="c1"># for packages that are not in a stack.</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_rosdep_view</span><span class="p">(</span><span class="n">view_key</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RosdepLookup.get_rosdep_view"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.get_rosdep_view">[docs]</a>    <span class="k">def</span> <span class="nf">get_rosdep_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view_key</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get a :class:`RosdepView` associated with *view_key*.  Views</span>
+<span class="sd">        can be queries to resolve rosdep keys to definitions.</span>
+
+<span class="sd">        :param view_key: Name of rosdep view (e.g. ROS stack name), ``str``</span>
+
+<span class="sd">        :raises: :exc:`RosdepConflict` if view cannot be created due</span>
+<span class="sd">          to conflict rosdep definitions.</span>
+<span class="sd">        :raises: :exc:`rospkg.ResourceNotFound` if *view_key* cannot be located</span>
+<span class="sd">        :raises: :exc:`RosdepInternalError`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">view_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_view_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_view_cache</span><span class="p">[</span><span class="n">view_key</span><span class="p">]</span>
+
+        <span class="c1"># lazy-init</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_view_dependencies</span><span class="p">(</span><span class="n">view_key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="p">)</span>
+
+        <span class="c1"># use dependencies to create view</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dependencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_db</span><span class="o">.</span><span class="n">get_view_dependencies</span><span class="p">(</span><span class="n">view_key</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># convert to ResourceNotFound.  This should be decoupled</span>
+            <span class="c1"># in the future</span>
+            <span class="k">raise</span> <span class="n">ResourceNotFound</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="c1"># load views in order</span>
+        <span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_rosdep_view</span><span class="p">(</span><span class="n">view_key</span><span class="p">,</span> <span class="n">dependencies</span> <span class="o">+</span> <span class="p">[</span><span class="n">view_key</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_view_cache</span><span class="p">[</span><span class="n">view_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">view</span>
+        <span class="k">return</span> <span class="n">view</span></div>
+
+<div class="viewcode-block" id="RosdepLookup.get_views_that_define"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.RosdepLookup.get_views_that_define">[docs]</a>    <span class="k">def</span> <span class="nf">get_views_that_define</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Locate all views that directly define *rosdep_name*.  A</span>
+<span class="sd">        side-effect of this method is that all available rosdep files</span>
+<span class="sd">        in the configuration will be loaded into memory.</span>
+
+<span class="sd">        Error state from single-stack failures</span>
+<span class="sd">        (e.g. :exc:`InvalidData`, :exc:`ResourceNotFound`) are</span>
+<span class="sd">        not propagated.  Caller must check</span>
+<span class="sd">        :meth:`RosdepLookup.get_errors` to check for single-stack</span>
+<span class="sd">        error state.  Error state does not reset -- it accumulates.</span>
+
+<span class="sd">        :param rosdep_name: name of rosdep to lookup</span>
+<span class="sd">        :returns: list of (stack_name, origin) where rosdep is defined.</span>
+
+<span class="sd">        :raises: :exc:`RosdepInternalError`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODOXXX: change this to return errors object so that caller cannot ignore</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_all_views</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="p">)</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rosdep_db</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">view_name</span> <span class="ow">in</span> <span class="n">db</span><span class="o">.</span><span class="n">get_view_names</span><span class="p">():</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">get_view_data</span><span class="p">(</span><span class="n">view_name</span><span class="p">)</span>
+            <span class="c1"># not much abstraction in the entry object</span>
+            <span class="k">if</span> <span class="n">rosdep_name</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">rosdep_data</span><span class="p">:</span>
+                <span class="n">retval</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">view_name</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">origin</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">retval</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../contents.html">rosdep 0.22.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011, Willow Garage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

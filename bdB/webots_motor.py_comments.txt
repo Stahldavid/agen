@@ -1,0 +1,1 @@
+The code defines a class for controlling motors in Webots with ROS2. It includes methods to set the force and torque of the motors, and to get the torque feedback. The class requires a tag to identify each motor instance.

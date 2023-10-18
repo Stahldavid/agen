@@ -1,0 +1,1 @@
+It's a force feedback publisher in python. It is expected to publish the force feedback readings. There is an unfinished TODO for implementing the main loop.

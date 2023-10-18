@@ -1,0 +1,1 @@
+This code creates an interface with Webots using ros2. It allows you to publish joint_state messages to the '/joint_states' topic. However, it is not yet connecting to Webots to get the actual joint states. Furthermore, ros2 is not yet being initialized and the update_joint_states function is never being called.

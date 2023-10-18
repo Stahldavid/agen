@@ -1,0 +1,615 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Discovery Module &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="The Service Discovery Module" href="capabilities.service_discovery.html" />
+    <link rel="prev" title="The Client Module" href="capabilities.client.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/capabilities.discovery.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.service_discovery.html" title="The Service Discovery Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="capabilities.client.html" title="The Client Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-capabilities.discovery">
+<span id="the-discovery-module"></span><h1>The Discovery Module<a class="headerlink" href="#module-capabilities.discovery" title="Permalink to this headline">¶</a></h1>
+<p>This module implements discovery of packages which export various spec files.</p>
+<p>You can use this API as follows, (examples assume use of the
+&#8216;test/discovery_workspaces/minimal&#8217; workspace:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">capabilities.discovery</span> <span class="kn">import</span> <span class="n">package_index_from_package_path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">capabilities.discovery</span> <span class="kn">import</span> <span class="n">spec_file_index_from_package_index</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">capabilities.discovery</span> <span class="kn">import</span> <span class="n">spec_index_from_spec_file_index</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">workspaces</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;test/discovery_workspaces/minimal&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">package_index</span> <span class="o">=</span> <span class="n">package_index_from_package_path</span><span class="p">(</span><span class="n">workspaces</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec_file_index</span> <span class="o">=</span> <span class="n">spec_file_index_from_package_index</span><span class="p">(</span><span class="n">package_index</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">spec_file_index</span><span class="p">)</span>
+<span class="go">{&#39;minimal_pkg&#39;: {</span>
+<span class="go">    &#39;capability_interface&#39;: [&#39;test/discovery_workspaces/minimal/minimal_pkg/interfaces/Minimal.yaml&#39;],</span>
+<span class="go">    &#39;capability_provider&#39;: [</span>
+<span class="go">        &#39;test/discovery_workspaces/minimal/minimal_pkg/providers/minimal.yaml&#39;,</span>
+<span class="go">        &#39;test/discovery_workspaces/minimal/minimal_pkg/providers/specific_minimal.yaml&#39;],</span>
+<span class="go">    &#39;package&#39;: &lt;catkin_pkg.package.Package object at 0x10bb28df8&gt;,</span>
+<span class="go">    &#39;semantic_capability_interface&#39;: [</span>
+<span class="go">        &#39;test/discovery_workspaces/minimal/minimal_pkg/interfaces/SpecificMinimal.yaml&#39;]}}</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec_index</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="n">spec_index_from_spec_file_index</span><span class="p">(</span><span class="n">spec_file_index</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+<span class="go">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec_index</span><span class="o">.</span><span class="n">names</span>
+<span class="go">[minimal_pkg/specific_minimal,</span>
+<span class="go"> minimal_pkg/Minimal,</span>
+<span class="go"> minimal_pkg/SpecificMinimal,</span>
+<span class="go"> minimal_pkg/minimal]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">spec_index</span><span class="o">.</span><span class="n">specs</span><span class="p">)</span>
+<span class="go">{minimal_pkg/minimal:</span>
+<span class="go">    &lt;capabilities.specs.provider.CapabilityProvider object at 0x10391ce50&gt;,</span>
+<span class="go"> minimal_pkg/specific_minimal:</span>
+<span class="go">    &lt;capabilities.specs.provider.CapabilityProvider object at 0x10391cd10&gt;,</span>
+<span class="go"> minimal_pkg/Minimal:</span>
+<span class="go">    &lt;capabilities.specs.interface.CapabilityInterface object at 0x103952f90&gt;,</span>
+<span class="go"> minimal_pkg/SpecificMinimal:</span>
+<span class="go">    &lt;capabilities.specs.semantic_interface.SemanticCapabilityInterface object at 0x103952b50&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec_index</span><span class="o">.</span><span class="n">interface_names</span>
+<span class="go">[minimal_pkg/Minimal]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec_index</span><span class="o">.</span><span class="n">interfaces</span>
+<span class="go">{minimal_pkg/Minimal: &lt;capabilities.specs.interface.CapabilityInterface at 0x103952f90&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec_index</span><span class="o">.</span><span class="n">interfaces</span><span class="p">[</span><span class="s">&#39;Minimal&#39;</span><span class="p">]</span>
+<span class="go">&lt;capabilities.specs.interface.CapabilityInterface object at 0x10b7e3410&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">spec_index</span><span class="o">.</span><span class="n">semantic_interfaces</span>
+<span class="go">{&#39;SpecificMinimal&#39;: &lt;capabilities.specs.semantic_interface.SemanticCapabilityInterface object at 0x10b7bf3d0&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">spec_index</span><span class="o">.</span><span class="n">providers</span><span class="p">)</span>
+<span class="go">{&#39;minimal&#39;: &lt;capabilities.specs.provider.CapabilityProvider object at 0x10b7bf750&gt;,</span>
+<span class="go"> &#39;specific_minimal&#39;: &lt;capabilities.specs.provider.CapabilityProvider object at 0x10b7bfd10&gt;}</span>
+</pre></div>
+</div>
+<dl class="exception">
+<dt id="capabilities.discovery.DuplicateNameException">
+<em class="property">exception </em><tt class="descclassname">capabilities.discovery.</tt><tt class="descname">DuplicateNameException</tt><big>(</big><em>name</em>, <em>colliding_package</em>, <em>spec_type</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#DuplicateNameException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.DuplicateNameException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when multiple specs with the same name are discovered</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>spec_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the spec&#8217;s which collided</li>
+<li><strong>package</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; package in which the colliding spec is defined</li>
+<li><strong>spec_type</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; type of the colliding spec one of:
+capability_interface, semantic_capability_interface, capability_provider</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="exception">
+<dt id="capabilities.discovery.InterfaceNameNotFoundException">
+<em class="property">exception </em><tt class="descclassname">capabilities.discovery.</tt><tt class="descname">InterfaceNameNotFoundException</tt><big>(</big><em>msg</em>, <em>spec_name</em>, <em>spec_type</em>, <em>spec_package</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#InterfaceNameNotFoundException"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.InterfaceNameNotFoundException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raised when a referenced interface spec is not found</p>
+<p>This can happen, for example, when a provider depends on an interface
+which is not defined anywhere.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>spec_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the spec&#8217;s which referenced the non existent
+interface</li>
+<li><strong>package</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; package in which offending spec resides</li>
+<li><strong>spec_type</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; type of the offending spec one of:
+capability_interface, semantic_capability_interface, capability_provider</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="capabilities.discovery.SpecIndex">
+<em class="property">class </em><tt class="descclassname">capabilities.discovery.</tt><tt class="descname">SpecIndex</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Container for capability spec file locations and respective spec classes</p>
+<dl class="method">
+<dt id="capabilities.discovery.SpecIndex.add_interface">
+<tt class="descname">add_interface</tt><big>(</big><em>interface</em>, <em>file_path</em>, <em>package_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.add_interface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.add_interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a loaded CapabilityInterface object into the repository</p>
+<p>Used by <a class="reference internal" href="#capabilities.discovery.spec_index_from_spec_file_index" title="capabilities.discovery.spec_index_from_spec_file_index"><tt class="xref py py-func docutils literal"><span class="pre">spec_index_from_spec_file_index()</span></tt></a> to build the <a class="reference internal" href="#capabilities.discovery.SpecIndex" title="capabilities.discovery.SpecIndex"><tt class="xref py py-class docutils literal"><span class="pre">SpecIndex</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>interface</strong> (<a class="reference internal" href="capabilities.specs.html#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">specs.interface.CapabilityInterface</span></tt></a>) &#8211; CapabilityInterface object which was loaded using a
+factory function</li>
+<li><strong>file_path</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; path to the interface spec file that was loaded</li>
+<li><strong>package_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the package which contains the interface</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><a class="reference internal" href="#capabilities.discovery.DuplicateNameException" title="capabilities.discovery.DuplicateNameException"><tt class="xref py py-exc docutils literal"><span class="pre">DuplicateNameException</span></tt></a> if there is a name collision</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.discovery.SpecIndex.add_provider">
+<tt class="descname">add_provider</tt><big>(</big><em>provider</em>, <em>file_path</em>, <em>package_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.add_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.add_provider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a loaded CapabilityProvider object into the repository</p>
+<p>Used by <a class="reference internal" href="#capabilities.discovery.spec_index_from_spec_file_index" title="capabilities.discovery.spec_index_from_spec_file_index"><tt class="xref py py-func docutils literal"><span class="pre">spec_index_from_spec_file_index()</span></tt></a> to build the <a class="reference internal" href="#capabilities.discovery.SpecIndex" title="capabilities.discovery.SpecIndex"><tt class="xref py py-class docutils literal"><span class="pre">SpecIndex</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>provider</strong> (<a class="reference internal" href="capabilities.specs.html#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">specs.provider.CapabilityProvider</span></tt></a>) &#8211; CapabilityProvider object which was loaded using a
+factory function</li>
+<li><strong>file_path</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; path to the provider spec file that was loaded</li>
+<li><strong>package_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the package which contains the provider</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><a class="reference internal" href="#capabilities.discovery.DuplicateNameException" title="capabilities.discovery.DuplicateNameException"><tt class="xref py py-exc docutils literal"><span class="pre">DuplicateNameException</span></tt></a> if there is a name collision</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><a class="reference internal" href="#capabilities.discovery.InterfaceNameNotFoundException" title="capabilities.discovery.InterfaceNameNotFoundException"><tt class="xref py py-exc docutils literal"><span class="pre">InterfaceNameNotFoundException</span></tt></a> if the interface which
+this capability provider implements is not found.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.discovery.SpecIndex.add_semantic_interface">
+<tt class="descname">add_semantic_interface</tt><big>(</big><em>semantic_interface</em>, <em>file_path</em>, <em>package_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.add_semantic_interface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.add_semantic_interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a loaded SemanticCapabilityInterface object into the repository</p>
+<p>Used by <a class="reference internal" href="#capabilities.discovery.spec_index_from_spec_file_index" title="capabilities.discovery.spec_index_from_spec_file_index"><tt class="xref py py-func docutils literal"><span class="pre">spec_index_from_spec_file_index()</span></tt></a> to build the <a class="reference internal" href="#capabilities.discovery.SpecIndex" title="capabilities.discovery.SpecIndex"><tt class="xref py py-class docutils literal"><span class="pre">SpecIndex</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>semantic_interface</strong> (<a class="reference internal" href="capabilities.specs.html#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">specs.semantic_interface.SemanticCapabilityInterface</span></tt></a>) &#8211; SemanticCapabilityInterface object which was
+loaded using a factory function</li>
+<li><strong>file_path</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; path to the semantic interface spec file that
+was loaded</li>
+<li><strong>package_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the package which contains the
+semantic interface</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><a class="reference internal" href="#capabilities.discovery.DuplicateNameException" title="capabilities.discovery.DuplicateNameException"><tt class="xref py py-exc docutils literal"><span class="pre">DuplicateNameException</span></tt></a> if there is a name collision</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><a class="reference internal" href="#capabilities.discovery.InterfaceNameNotFoundException" title="capabilities.discovery.InterfaceNameNotFoundException"><tt class="xref py py-exc docutils literal"><span class="pre">InterfaceNameNotFoundException</span></tt></a> if the interface which
+this semantic capability interface redefines is not found.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.interface_names">
+<tt class="descname">interface_names</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.interface_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.interface_names" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of capability interface names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.interface_paths">
+<tt class="descname">interface_paths</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.interface_paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.interface_paths" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict of capability interface spec paths, keyed by name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> {<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>: <a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.interfaces">
+<tt class="descname">interfaces</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.interfaces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.interfaces" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict of capability interfaces, keyed by name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> {<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>: <a class="reference internal" href="capabilities.specs.html#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">specs.interface.CapabilityInterface</span></tt></a>}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.names">
+<tt class="descname">names</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.names" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of the names for all specs of all types</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.provider_names">
+<tt class="descname">provider_names</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.provider_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.provider_names" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of capability provider names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.provider_paths">
+<tt class="descname">provider_paths</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.provider_paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.provider_paths" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict of capability provider spec paths, keyed by name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> {<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>: <a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.providers">
+<tt class="descname">providers</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.providers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.providers" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict of capability providers, keyed by name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> {<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>: <a class="reference internal" href="capabilities.specs.html#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">specs.provider.CapabilityProvider</span></tt></a>}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.discovery.SpecIndex.remove_interface">
+<tt class="descname">remove_interface</tt><big>(</big><em>interface_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.remove_interface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.remove_interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a capability interface by name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>interface_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the interface to remove</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">KeyError</span></tt> if there is no interface by that name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.discovery.SpecIndex.remove_provider">
+<tt class="descname">remove_provider</tt><big>(</big><em>provider_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.remove_provider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.remove_provider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a capability provider by name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>provider_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the interface to remove</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">KeyError</span></tt> if there is no interface by that name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.discovery.SpecIndex.remove_semantic_interface">
+<tt class="descname">remove_semantic_interface</tt><big>(</big><em>semantic_interface_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.remove_semantic_interface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.remove_semantic_interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a semantic capability interface by name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>semantic_interface_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the interface to remove</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">KeyError</span></tt> if there is no interface by that name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.semantic_interface_names">
+<tt class="descname">semantic_interface_names</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.semantic_interface_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.semantic_interface_names" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of semantic capability interface names</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.semantic_interface_paths">
+<tt class="descname">semantic_interface_paths</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.semantic_interface_paths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.semantic_interface_paths" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict of semantic capability interface spec paths, keyed by name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> {<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>: <a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.semantic_interfaces">
+<tt class="descname">semantic_interfaces</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.semantic_interfaces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.semantic_interfaces" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict of semantic capability interfaces, keyed by name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> {<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>: <a class="reference internal" href="capabilities.specs.html#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">specs.semantic_interface.SemanticCapabilityInterface</span></tt></a>}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.discovery.SpecIndex.specs">
+<tt class="descname">specs</tt><a class="reference internal" href="_modules/capabilities/discovery.html#SpecIndex.specs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.SpecIndex.specs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Possible spec types:</p>
+<ul class="simple">
+<li><a class="reference internal" href="capabilities.specs.html#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">specs.interface.CapabilityInterface</span></tt></a></li>
+<li><a class="reference internal" href="capabilities.specs.html#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">specs.semantic_interface.SemanticCapabilityInterface</span></tt></a></li>
+<li><a class="reference internal" href="capabilities.specs.html#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">specs.provider.CapabilityProvider</span></tt></a></li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">dict of specs, keyed by name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a> {<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a>: spec}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.discovery.package_index_from_package_path">
+<tt class="descclassname">capabilities.discovery.</tt><tt class="descname">package_index_from_package_path</tt><big>(</big><em>package_paths</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#package_index_from_package_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.package_index_from_package_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds all packages on the given list of paths.</p>
+<p>Iterates over the given list of paths in reverse order so that packages
+found in the paths at the beginning of the list get overlaid onto packages
+with the same name which were found in paths farther back in the list.</p>
+<p>The resulting dictionary is keyed by the package name (so packages with
+duplicate names are overlaid) and the values are the
+<tt class="xref py py-class docutils literal"><span class="pre">catkin_pkg.package.Package</span></tt> class</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>ros_package_path</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; list of paths to search</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dictionary of package objects keyed by name of the package</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.discovery.spec_file_index_from_package_index">
+<tt class="descclassname">capabilities.discovery.</tt><tt class="descname">spec_file_index_from_package_index</tt><big>(</big><em>package_index</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#spec_file_index_from_package_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.spec_file_index_from_package_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an index of spec files by package.</p>
+<p>Takes a dict of package objects keyed by package name.</p>
+<p>Returns a dict structured like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&#39;&lt;package_name&gt;&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&#39;package&#39;</span><span class="p">:</span> <span class="n">package_obj</span><span class="p">,</span>
+        <span class="s">&#39;capability_interface&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;path to spec file&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s">&#39;capability_provider&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;path to spec file&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+        <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;path to spec file&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This dict contains a dict for each package, keyed by package name.
+Those dicts contain the parsed package object, and a list of relative paths
+for spec files, separated by spec type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>package_index</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; dict of <tt class="xref py py-class docutils literal"><span class="pre">catkin_pkg.package.Package</span></tt>&#8216;s
+keyed by package name to be processed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">spec file index strucutre</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">dict</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.discovery.spec_index_from_spec_file_index">
+<tt class="descclassname">capabilities.discovery.</tt><tt class="descname">spec_index_from_spec_file_index</tt><big>(</big><em>spec_file_index</em><big>)</big><a class="reference internal" href="_modules/capabilities/discovery.html#spec_index_from_spec_file_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.discovery.spec_index_from_spec_file_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builds a <a class="reference internal" href="#capabilities.discovery.SpecIndex" title="capabilities.discovery.SpecIndex"><tt class="xref py py-class docutils literal"><span class="pre">SpecIndex</span></tt></a> from a spec file index</p>
+<p>Goes through each spec paths foreach package of the given spec file index
+and parses them into objects. The objects are stored in a
+<a class="reference internal" href="#capabilities.discovery.SpecIndex" title="capabilities.discovery.SpecIndex"><tt class="xref py py-class docutils literal"><span class="pre">SpecIndex</span></tt></a> before being returned.</p>
+<p>Duplicate Names are not allowed, even between different spec types
+and packages. Any duplicate names will be raised as a
+<a class="reference internal" href="#capabilities.discovery.DuplicateNameException" title="capabilities.discovery.DuplicateNameException"><tt class="xref py py-exc docutils literal"><span class="pre">DuplicateNameException</span></tt></a>.</p>
+<p>Any other errors encountered during spec file processing will be returned
+as a list along with the <a class="reference internal" href="#capabilities.discovery.SpecIndex" title="capabilities.discovery.SpecIndex"><tt class="xref py py-class docutils literal"><span class="pre">SpecIndex</span></tt></a>.
+Caught errors include:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#capabilities.discovery.InterfaceNameNotFoundException" title="capabilities.discovery.InterfaceNameNotFoundException"><tt class="xref py py-exc docutils literal"><span class="pre">capabilities.discovery.InterfaceNameNotFoundException</span></tt></a></li>
+<li><a class="reference internal" href="#capabilities.discovery.DuplicateNameException" title="capabilities.discovery.DuplicateNameException"><tt class="xref py py-exc docutils literal"><span class="pre">capabilities.discovery.DuplicateNameException</span></tt></a></li>
+<li><a class="reference internal" href="capabilities.specs.html#capabilities.specs.interface.InvalidInterface" title="capabilities.specs.interface.InvalidInterface"><tt class="xref py py-exc docutils literal"><span class="pre">capabilities.specs.interface.InvalidInterface</span></tt></a></li>
+<li><a class="reference internal" href="capabilities.specs.html#capabilities.specs.semantic_interface.InvalidSemanticInterface" title="capabilities.specs.semantic_interface.InvalidSemanticInterface"><tt class="xref py py-exc docutils literal"><span class="pre">capabilities.specs.semantic_interface.InvalidSemanticInterface</span></tt></a></li>
+<li><tt class="xref py py-exc docutils literal"><span class="pre">capabilities.specs.provider.InvalidProvide</span></tt></li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>spec_file_index</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; spec_file_index, see
+<a class="reference internal" href="#capabilities.discovery.spec_file_index_from_package_index" title="capabilities.discovery.spec_file_index_from_package_index"><tt class="xref py py-func docutils literal"><span class="pre">spec_file_index_from_package_index()</span></tt></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="#capabilities.discovery.SpecIndex" title="capabilities.discovery.SpecIndex"><tt class="xref py py-class docutils literal"><span class="pre">SpecIndex</span></tt></a> (which contains all the loaded specs)
+and a <a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> of any errors encountered while loading the spec files</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#capabilities.discovery.SpecIndex" title="capabilities.discovery.SpecIndex"><tt class="xref py py-class docutils literal"><span class="pre">SpecIndex</span></tt></a>, <a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> (<tt class="xref py py-obj docutils literal"><span class="pre">Exception</span></tt>&#8216;s)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><a class="reference internal" href="#capabilities.discovery.DuplicateNameException" title="capabilities.discovery.DuplicateNameException"><tt class="xref py py-exc docutils literal"><span class="pre">DuplicateNameException</span></tt></a> when two interfaces have the same name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="capabilities.client.html"
+                        title="previous chapter">The Client Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="capabilities.service_discovery.html"
+                        title="next chapter">The Service Discovery Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/capabilities.discovery.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.service_discovery.html" title="The Service Discovery Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="capabilities.client.html" title="The Client Module"
+             >previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

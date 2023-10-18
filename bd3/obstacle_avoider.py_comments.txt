@@ -1,0 +1,1 @@
+The code for the obstacle avoider. It has to avoid obstacles by publishing twist commands based on the sensor readings. It uses the ROS2 framework.

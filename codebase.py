@@ -30,6 +30,29 @@ openai.api_key = openai_api_key
 logging.basicConfig(level=logging.INFO)
 GPT_MODEL = "gpt-3.5-turbo-16k-0613"
 
+import time
+import json
+import openai
+
+# Define a function to handle errors with exponential wait and retry
+def handle_error(func):
+    def wrapper(*args, **kwargs):
+        wait_time = 1
+        max_attempts = 5
+        attempts = 0
+
+        while attempts < max_attempts:
+            try:
+                return func(*args, **kwargs)
+            except openai.error.OpenAIError as e:
+                print(f"Encountered an error: {e}. Retrying in {wait_time} seconds...")
+                time.sleep(wait_time)
+                attempts += 1
+                wait_time *= 2
+
+        raise Exception(f"Failed after {max_attempts} attempts")
+
+    return wrapper
 
 
 
@@ -70,30 +93,43 @@ def chat_completion_request(messages, functions=None, function_call=None, model=
 
 
 
+# def write_to_file(content, file_path):
+#     """
+#     Writes the given content to the file at the given file path.
+
+#     Args:
+#         content (str): The content to write to the file.
+#         file_path (str): The path of the file to write to, relative to /bd/.
+#     """
+#     with open('/bd/' + file_path, 'w') as f:
+#         f.write(content)
+
+import os
+
 def write_to_file(content, file_path):
     """
     Writes the given content to the file at the given file path.
 
     Args:
         content (str): The content to write to the file.
-        file_path (str): The path of the file to write to, relative to /bd/.
+        file_path (str): The path of the file to write to, relative to /home/stahlubuntu/coder_agent/bd/.
     """
-    with open('/bd/' + file_path, 'w') as f:
+    if not os.path.exists('/home/stahlubuntu/coder_agent/bd/' + file_path):
+        open('/home/stahlubuntu/coder_agent/bd/' + file_path, 'w').close()
+    with open('/home/stahlubuntu/coder_agent/bd/' + file_path, 'w') as f:
         f.write(content)
-
-
 
 def read_file(file_path):
     """
     Reads the contents of the file at the given file path.
 
     Args:
-        file_path (str): The path of the file to read from, relative to /bd/.
+        file_path (str): The path of the file to read from, relative to /home/stahlubuntu/coder_agent/bd/.
 
     Returns:
         str: The contents of the file.
     """
-    with open('/bd/' + file_path, 'r') as f:
+    with open('/home/stahlubuntu/coder_agent/bd/' + file_path, 'r') as f:
         return f.read()
 
 def pretty_print_conversation(messages):
@@ -168,76 +204,124 @@ def remove_messages_by_indices(conversation, indices):
 
 
 
-import ast
-import json
-import astor
+# import ast
+# import json
+# import astor
 
-import ast
-import astor
+# import ast
+# import astor
 
-def ast_tool(code, action):
+# def ast_tool(code, action):
+#     """
+# Performs various AST based operations on the provided Python code.
+
+# Args:
+#     code (str): The Python code to analyze. Can be a filename or code string.
+#     action (dict): The action to perform. Supported actions are:
+#         - analyze: Analyzes the code and returns extracted information.
+#         - modify: Modifies names in the AST.
+#         - generate: Generates code from a provided AST.
+#         - optimize: Removes specified code from the AST.
+#         - detect_patterns: Detects specified patterns in the AST.
+#         - visualize: Returns a string representation of the AST.
+
+# Returns:
+#     str: The result of the requested action on the code. For analyze and 
+#     detect_patterns this is a dict. For the rest this is the modified code string.
+#     """
+#     # Determine if code is a filename or Python code
+#     if code.endswith('.py'):
+#         with open(code, 'r') as file:
+#             code_content = file.read()
+#     else:
+#         code_content = code
+
+#     # Parse the code into an AST
+#     tree = ast.parse(code_content)
+
+#     # Analyze the code
+#     if action.get('analyze', {}).get('enabled', False):
+#         functions = [node.name for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)]
+#         return {"functions": functions}
+
+#     # Modify variable or function names
+#     if action.get('modify', {}).get('enabled', False):
+#         old_name = action['modify']['old_name']
+#         new_name = action['modify']['new_name']
+#         # Implement renaming logic here
+#         return astor.to_source(tree)
+
+#     # Generate code from AST
+#     if action.get('generate', {}).get('enabled', False):
+#         tree_to_generate = action['generate']['tree']
+#         return astor.to_source(ast.parse(tree_to_generate))
+
+#     # Optimize code (remove specified code snippet)
+#     if action.get('optimize', {}).get('enabled', False):
+#         code_to_remove = action['optimize']['code_to_remove']
+#         tree = ast.fix_missing_locations(tree)
+#         optimized_code = astor.to_source(tree).replace(code_to_remove, '')
+#         return optimized_code
+
+#     # Detect specific patterns or code smells (example: detect print statements)
+#     if action.get('detect_patterns', False):
+#         patterns_detected = [node for node in ast.walk(tree) if isinstance(node, ast.Print)]
+#         return {"print_statements": len(patterns_detected)}
+
+#     # Visualize the AST (returning as a string for simplicity)
+#     if action.get('visualize', False):
+#         return ast.dump(tree)
+
+#     return "Invalid action provided"
+
+
+# Redefining the Python function ast_tool with specific parameters instead of a generic params dictionary
+
+
+def ast_tool(code: str, analyze_functions: bool = False, analyze_variables: bool = False, analyze_control_flow: bool = False) -> str:
     """
-Performs various AST based operations on the provided Python code.
-
-Args:
-    code (str): The Python code to analyze. Can be a filename or code string.
-    action (dict): The action to perform. Supported actions are:
-        - analyze: Analyzes the code and returns extracted information.
-        - modify: Modifies names in the AST.
-        - generate: Generates code from a provided AST.
-        - optimize: Removes specified code from the AST.
-        - detect_patterns: Detects specified patterns in the AST.
-        - visualize: Returns a string representation of the AST.
-
-Returns:
-    str: The result of the requested action on the code. For analyze and 
-    detect_patterns this is a dict. For the rest this is the modified code string.
+    Analyzes the Abstract Syntax Tree (AST) of a given Python code.
+    
+    Parameters:
+    - code (str): The Python code that needs to be analyzed.
+    - analyze_functions (bool): Whether to analyze function calls in the code.
+    - analyze_variables (bool): Whether to analyze variable assignments in the code.
+    - analyze_control_flow (bool): Whether to analyze control flow structures like loops and conditionals.
+    
+    Returns:
+    - str: A string representation of a dictionary containing the analysis results.
     """
-    # Determine if code is a filename or Python code
-    if code.endswith('.py'):
-        with open(code, 'r') as file:
-            code_content = file.read()
-    else:
-        code_content = code
-
+    
     # Parse the code into an AST
-    tree = ast.parse(code_content)
-
-    # Analyze the code
-    if action.get('analyze', {}).get('enabled', False):
-        functions = [node.name for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)]
-        return {"functions": functions}
-
-    # Modify variable or function names
-    if action.get('modify', {}).get('enabled', False):
-        old_name = action['modify']['old_name']
-        new_name = action['modify']['new_name']
-        # Implement renaming logic here
-        return astor.to_source(tree)
-
-    # Generate code from AST
-    if action.get('generate', {}).get('enabled', False):
-        tree_to_generate = action['generate']['tree']
-        return astor.to_source(ast.parse(tree_to_generate))
-
-    # Optimize code (remove specified code snippet)
-    if action.get('optimize', {}).get('enabled', False):
-        code_to_remove = action['optimize']['code_to_remove']
-        tree = ast.fix_missing_locations(tree)
-        optimized_code = astor.to_source(tree).replace(code_to_remove, '')
-        return optimized_code
-
-    # Detect specific patterns or code smells (example: detect print statements)
-    if action.get('detect_patterns', False):
-        patterns_detected = [node for node in ast.walk(tree) if isinstance(node, ast.Print)]
-        return {"print_statements": len(patterns_detected)}
-
-    # Visualize the AST (returning as a string for simplicity)
-    if action.get('visualize', False):
-        return ast.dump(tree)
-
-    return "Invalid action provided"
-
+    tree = ast.parse(code)
+    
+    # Initialize results dictionary
+    results = {
+        'functions': [],
+        'variables': [],
+        'control_flow': []
+    }
+    
+    # Walk through the AST nodes
+    for node in ast.walk(tree):
+        if analyze_functions and isinstance(node, ast.Call):
+            results['functions'].append(node.func.id if hasattr(node.func, 'id') else str(node.func))
+        if analyze_variables and isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name):
+                    results['variables'].append(target.id)
+        if analyze_control_flow:
+            if isinstance(node, ast.If):
+                results['control_flow'].append('if_statement')
+            elif isinstance(node, ast.For):
+                results['control_flow'].append('for_loop')
+            elif isinstance(node, ast.While):
+                results['control_flow'].append('while_loop')
+    
+    # Convert the results dictionary to a string
+    results_str = json.dumps(results, indent=4)
+    
+    return results_str
 
 import pdb
 import json
@@ -246,63 +330,364 @@ import json
 import pdb
 import json
 
-def pdb_tool(json_input):
-    """
-Uses the Python debugger (pdb) to perform actions on provided code.
 
-Args:
-    json_input (str): A JSON string containing the code/filename and action.
-        The JSON should have keys:
-        - 'code_or_filename': The code string or a filename. 
-        - 'action': The debugger action to perform.
-        Actions: 
-            - 'set_breakpoint': Set a breakpoint at the given line number.
-            - 'step': Step through the code line-by-line.
-            - 'continue': Continue execution until next breakpoint.
-            - 'inspect': Print the value of the given variable.
 
-Returns: 
-    str: A message indicating the result of the debugger action.
-"""
-    # Parse the JSON input
-    params = json.loads(json_input)
-    code_or_filename = params['code_or_filename']
-    action = params['action']
 
-    # Define the folder path
+# import pdb
+
+# # Define the folder path (Note: this is a placeholder, as the folder path will vary based on the environment)
+# folder_path = "/home/stahlubuntu/coder_agent/bd/"
+
+# def pdb_tool(code_or_filename: str, debug_operations: dict) -> str:
+#     """
+#     A tool for interacting with the Python Debugger (PDB). Allows setting breakpoints, stepping through code, 
+#     continuing execution, and inspecting variables.
+
+#     Parameters:
+#     - code_or_filename (str): The Python code to be debugged or the filename of the Python file to be debugged.
+#     - debug_operations (dict): A dictionary containing debugging operations, each of which can have specific parameters.
+
+#     Returns:
+#     str: A description of the debugging actions taken.
+#     """
+#     # Initialize the result messages list
+#     result_messages = []
+
+#     # Validate code_or_filename
+#     if not isinstance(code_or_filename, str):
+#         raise ValueError("code_or_filename must be a string")
+
+#     # Check if code input is a filename
+#     if code_or_filename.endswith('.py'):
+#         with open(folder_path + code_or_filename, 'r') as file:
+#             code = file.read()
+#     else:
+#         code = code_or_filename
+
+#     # Create debugger instance
+#     debugger = pdb.Pdb()
+
+#     # Handle set breakpoints
+#     if "set_breakpoints" in debug_operations:
+#         for bp in debug_operations["set_breakpoints"]:
+#             if not isinstance(bp, int):
+#                 raise ValueError("Each breakpoint must be an integer")
+#             debugger.set_break(code, bp)
+#             result_messages.append(f"Breakpoint set at line {bp}")
+
+#     # Handle step
+#     if "step" in debug_operations and debug_operations["step"]:
+#         debugger.run(code)
+#         result_messages.append("Stepping through code")
+
+#     # Handle continue
+#     if "continue" in debug_operations and debug_operations["continue"]:
+#         debugger.do_continue()
+#         result_messages.append("Continuing execution")
+
+#     # Handle inspect
+#     if "inspect" in debug_operations:
+#         for var in debug_operations["inspect"]:
+#             if not isinstance(var, str):
+#                 raise ValueError("Each variable to inspect must be a string")
+#             value = debugger.eval(var)
+#             result_messages.append(f"Inspecting variable {var}: {value}")
+
+#     return "\n".join(result_messages)
+
+# def pdb_tool(code_or_filename: str, debug_operations: dict) -> str:
+#     # Initialize the result messages list
+#     result_messages = []
+    
+#     # Validate code_or_filename
+#     if not isinstance(code_or_filename, str):
+#         raise ValueError("code_or_filename must be a string")
+    
+#     result_messages.append(f"Debugging target: {code_or_filename}")
+    
+#     # Check if code input is a filename
+#     if code_or_filename.endswith('.py'):
+#         result_messages.append(f"Reading file {code_or_filename}")
+#     else:
+#         result_messages.append(f"Debugging code snippet")
+    
+#     # Include debugging operations in result
+#     result_messages.append(f"Debugging operations: {debug_operations}")
+    
+#     # Simulate setting breakpoints
+#     if "set_breakpoints" in debug_operations:
+#         for bp in debug_operations["set_breakpoints"]:
+#             result_messages.append(f"Breakpoint set at line {bp}")
+
+#     # Simulate stepping through code
+#     if "step" in debug_operations and debug_operations["step"]:
+#         result_messages.append("Stepping through code")
+
+#     # Simulate continuing execution
+#     if "continue" in debug_operations and debug_operations["continue"]:
+#         result_messages.append("Continuing execution")
+
+#     # Simulate inspecting variables
+#     if "inspect" in debug_operations:
+#         for var in debug_operations["inspect"]:
+#             result_messages.append(f"Inspecting variable {var}")
+    
+#     return "\n".join(result_messages)
+
+
+
+# import pdb
+# import sys
+# import io
+# from contextlib import redirect_stdout
+
+# def pdb_tool(code_or_filename: str, debug_operations: dict) -> str:
+#     # Initialize the result messages list
+#     result_messages = []
+    
+#     # Validate code_or_filename
+#     if not isinstance(code_or_filename, str):
+#         raise ValueError("code_or_filename must be a string")
+    
+#     result_messages.append(f"Debugging target: {code_or_filename}")
+    
+#     # Initialize PDB
+#     debugger = pdb.Pdb()
+    
+#     # Check if code input is a filename
+#     if code_or_filename.endswith('.py'):
+#         result_messages.append(f"Reading file {code_or_filename}")
+#         with open(code_or_filename, 'r') as f:
+#             code = f.read()
+#     else:
+#         result_messages.append(f"Debugging code snippet")
+#         code = code_or_filename
+    
+#     # Include debugging operations in result
+#     result_messages.append(f"Debugging operations: {debug_operations}")
+    
+#     # Redirect stdout to capture PDB output
+#     with io.StringIO() as buffer, redirect_stdout(buffer):
+        
+#         # Simulate setting breakpoints
+#         if "set_breakpoints" in debug_operations:
+#             for bp in debug_operations["set_breakpoints"]:
+#                 debugger.set_break(bp)
+#                 result_messages.append(f"Breakpoint set at line {bp}")
+        
+#         # Simulate stepping through code
+#         if "step" in debug_operations and debug_operations["step"]:
+#             debugger.onecmd('step')
+#             result_messages.append("Stepping through code")
+
+#         # Simulate continuing execution
+#         if "continue" in debug_operations and debug_operations["continue"]:
+#             debugger.onecmd('continue')
+#             result_messages.append("Continuing execution")
+
+#         # Simulate inspecting variables
+#         if "inspect" in debug_operations:
+#             for var in debug_operations["inspect"]:
+#                 debugger.onecmd(f"p {var}")
+#                 result_messages.append(f"Inspecting variable {var}")
+
+#         # Run the code
+#         debugger.run(code)
+
+#     # Append any PDB output
+#     pdb_output = buffer.getvalue()
+#     if pdb_output:
+#         result_messages.append(f"PDB Output:\n{pdb_output}")
+
+#     return "\n".join(result_messages)
+
+
+
+# import io
+# from contextlib import redirect_stdout
+
+# def pdb_tool(code_or_filename: str, debug_operations: dict) -> str:
+#     # Initialize the result messages list
+#     result_messages = []
+    
+#     # Folder path for code files
+#     folder_path = "/home/stahlubuntu/coder_agent/bd/"
+    
+#     # Validate code_or_filename
+#     if not isinstance(code_or_filename, str):
+#         raise ValueError("code_or_filename must be a string")
+    
+#     # Check if code input is a filename
+#     if code_or_filename.endswith('.py'):
+#         with open(folder_path + code_or_filename, 'r') as file:
+#             code = file.read()
+#         result_messages.append(f"Reading file {code_or_filename}")
+#     else:
+#         code = code_or_filename
+#         result_messages.append(f"Debugging code snippet")
+    
+#     result_messages.append(f"Debugging target: {code_or_filename}")
+
+#     # Include debugging operations in result
+#     result_messages.append(f"Debugging operations: {debug_operations}")
+
+#     # Prepare PDB commands
+#     pdb_commands = []
+
+#     # Validate and set breakpoints
+#     if "set_breakpoints" in debug_operations:
+#         for bp in debug_operations["set_breakpoints"]:
+#             if not isinstance(bp, int):
+#                 raise ValueError("Each breakpoint must be an integer")
+#             pdb_commands.append(f"b {bp}")
+#             result_messages.append(f"Breakpoint set at line {bp}")
+
+#     # Validate and step through code
+#     if "step" in debug_operations and debug_operations["step"]:
+#         if not isinstance(debug_operations["step"], bool):
+#             raise ValueError("Step operation must be a boolean")
+#         pdb_commands.append("s")
+#         result_messages.append("Stepping through code")
+
+#     # Validate and continue execution
+#     if "continue" in debug_operations and debug_operations["continue"]:
+#         if not isinstance(debug_operations["continue"], bool):
+#             raise ValueError("Continue operation must be a boolean")
+#         pdb_commands.append("c")
+#         result_messages.append("Continuing execution")
+
+#     # Validate and inspect variables
+#     if "inspect" in debug_operations:
+#         for var in debug_operations["inspect"]:
+#             if not isinstance(var, str):
+#                 raise ValueError("Each variable to inspect must be a string")
+#             pdb_commands.append(f"p {var}")
+#             result_messages.append(f"Inspecting variable {var}")
+
+#     # Note to execute the PDB commands in a proper debugging session
+#     if pdb_commands:
+#         result_messages.append(f"Prepared PDB commands: {'; '.join(pdb_commands)}")
+
+#     return "\n".join(result_messages)
+import pdb
+import io
+from contextlib import redirect_stdout
+
+def pdb_tool(code_or_filename: str, debug_operations: dict) -> str:
+    # Initialize the result messages list
+    result_messages = []
+    
+    # Folder path for code files
     folder_path = "/home/stahlubuntu/coder_agent/bd/"
-
+    
+    # Validate code_or_filename
+    if not isinstance(code_or_filename, str):
+        raise ValueError("code_or_filename must be a string")
+    
     # Check if code input is a filename
     if code_or_filename.endswith('.py'):
         with open(folder_path + code_or_filename, 'r') as file:
             code = file.read()
+        result_messages.append(f"Reading file {code_or_filename}")
     else:
         code = code_or_filename
+        result_messages.append(f"Debugging code snippet")
+    
+    result_messages.append(f"Debugging target: {code_or_filename}")
 
-    # Create a PDB instance
-    debugger = pdb.Pdb()
+    # Prepare PDB commands
+    pdb_commands = []
 
-    # Handle the action
-    if action == 'set_breakpoint':
-        line_number = params.get('line_number', None)
-        if line_number is None:
-            return "Error: line_number is required for 'set_breakpoint' action."
-        debugger.set_break(code, line_number)
-        result = f"Breakpoint set at line {line_number}"
-    elif action == 'step':
+    # Validate and set breakpoints
+    if "set_breakpoints" in debug_operations:
+        for bp in debug_operations["set_breakpoints"]:
+            if not isinstance(bp, int):
+                raise ValueError("Each breakpoint must be an integer")
+            pdb_commands.append(f"b {bp}")
+            result_messages.append(f"Breakpoint set at line {bp}")
+
+    # Validate and step through code
+    if "step" in debug_operations and debug_operations["step"]:
+        if not isinstance(debug_operations["step"], bool):
+            raise ValueError("Step operation must be a boolean")
+        pdb_commands.append("s")
+        result_messages.append("Stepping through code")
+
+    # Validate and continue execution
+    if "continue" in debug_operations and debug_operations["continue"]:
+        if not isinstance(debug_operations["continue"], bool):
+            raise ValueError("Continue operation must be a boolean")
+        pdb_commands.append("c")
+        result_messages.append("Continuing execution")
+
+    # Validate and inspect variables
+    if "inspect" in debug_operations:
+        for var in debug_operations["inspect"]:
+            if not isinstance(var, str):
+                raise ValueError("Each variable to inspect must be a string")
+            pdb_commands.append(f"p {var}")
+            result_messages.append(f"Inspecting variable {var}")
+
+    # Run the PDB session with prepared commands
+    with io.StringIO() as buffer, redirect_stdout(buffer):
+        debugger = pdb.Pdb(stdin=io.StringIO("\n".join(pdb_commands)), stdout=buffer)
         debugger.run(code)
-        result = f"Stepping through code: {code}"
-    elif action == 'continue':
-        debugger.do_continue()
-        result = "Continuing execution"
-    elif action == 'inspect':
-        variable_name = params.get('variable_name', None)
-        if variable_name is None:
-            return "Error: variable_name is required for 'inspect' action."
-        value = debugger.eval(variable_name)
-        result = f"Inspecting variable {variable_name}: {value}"
 
-    return result
+        # Append any PDB output
+        pdb_output = buffer.getvalue()
+        if pdb_output:
+            result_messages.append(f"PDB Output:\n{pdb_output}")
+
+    return "\n".join(result_messages)
+
+
+
+
+# Changing the function name to `automated_code_reviewer` as requested, while keeping the string output format.
+
+import subprocess
+
+
+def automated_code_reviewer(code_or_filename):
+    """
+    Perform an automated code review using Pylint and return all categories as a string.
+
+    Parameters:
+        code_or_filename (str): The Python code or filename to review.
+
+    Returns:
+        str: String-formatted review feedback.
+    """
+    
+    # Initialize the review_feedback dictionary
+    review_feedback = {}
+    
+    # Constant folder path for code files
+    FOLDER_PATH = "/home/stahlubuntu/coder_agent/bd/"
+
+    try:
+        # Check if code input is a filename
+        if code_or_filename.endswith('.py'):
+            with open(f"{FOLDER_PATH}{code_or_filename}", 'r') as file:
+                code = file.read()
+        else:
+            code = code_or_filename
+
+        # Save code to a temporary file to run pylint
+        with open("temp_code.py", "w") as temp_file:
+            temp_file.write(code)
+
+        # Run pylint on the code and capture its output
+        pylint_output = subprocess.getoutput(f"pylint temp_code.py")
+
+        return pylint_output
+    
+    except FileNotFoundError:
+        return "Error: File not found."
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+
 
 
 
@@ -333,10 +718,13 @@ Returns:
 """
 
 
+
 import json
 import openai
 from code_search import similarity_search
-
+from metaphor import metaphor_web_search
+from code_reviwer import automated_code_reviewer
+from scrape import scrape_web_pages
 query = "Variable impedance control for force feedback"
 results_string = similarity_search(query)
 print(results_string)
@@ -637,6 +1025,7 @@ from termcolor import colored
 from dotenv import load_dotenv
 from code_search import similarity_search
 import openai
+from testt import unit_test_runner
 
 
 # Define the GPT models to be used
@@ -790,20 +1179,175 @@ conversation = messages
 
 
 
+# while True:
+#     user_input = input("Enter message: ")  
+    
+#     # Check for slash commands
+#     if user_input == "/chat_history":
+#         print_numerated_history(conversation)
+#         continue
+#     elif user_input.startswith("/clean_chat_history"):
+#         if len(user_input) > 19:
+#             indices_str = user_input[20:].strip("[]").split(";")
+#             try:
+#                 indices = [int(idx) for idx in indices_str]
+#                 conversation = remove_messages_by_indices(conversation, indices)
+#                 print(f"Messages at indices {', '.join(indices_str)} have been removed!")
+#             except ValueError:
+#                 print("Invalid format. Use /clean_chat_history [index1;index2;...]")
+#         else:
+#             conversation = []
+#             print("Chat history cleared!")
+#         continue
+#     elif user_input == "/token":
+#         tokens = num_tokens_from_messages(conversation)
+#         print(f"Current chat history has {tokens} tokens.")
+#         continue
+#     elif user_input == "/help":
+#         print("/chat_history - View the chat history (numerated)")
+#         print("/clean_chat_history - Clear the chat history")
+#         print("/clean_chat_history [index1;index2;...] - Clear specific messages from the chat history")
+#         print("/token - Display the number of tokens in the chat history")
+#         print("/help - Display the available slash commands")
+#         continue
+    
+#     conversation.append({"role": "user", "content": user_input})
+#     conv_history_tokens = num_tokens_from_messages(conversation)
+
+#     while conv_history_tokens + max_response_tokens >= token_limit:
+#         del conversation[1] 
+#         conv_history_tokens = num_tokens_from_messages(conversation)
+
+#     chat_response = openai.ChatCompletion.create(
+#         model="gpt-4-0613",
+#         messages=conversation,
+#         functions=functions3,
+#         temperature=0.7,
+#         max_tokens=max_response_tokens,
+#         function_call="auto"
+#     )
+
+#     assistant_message = chat_response['choices'][0].get('message')
+
+#     if assistant_message['content'] is not None:
+#         conversation.append({"role": "assistant", "content": assistant_message['content']})
+#         pretty_print_conversation(conversation)
+#     else:
+#         if assistant_message.get("function_call"):
+#             function_name = assistant_message["function_call"]["name"]
+#             arguments = json.loads(assistant_message["function_call"]["arguments"])
+
+#             if function_name == "similarity_search":
+#                 results = similarity_search(arguments['query'], arguments['directories'])
+#                 function_response = f"code search content: {results}"
+#             elif function_name == "write_to_file":
+#                 write_to_file(arguments['content'], arguments['file_path'])
+#                 function_response = f"File successfully written at {arguments['file_path']}"
+#             elif function_name == "read_file":
+#                 content = read_file(arguments['file_path'])
+#                 function_response = content
+#             elif function_name == "ast_tool":
+#                 function_response = ast_tool(arguments['code'], arguments['analyze_functions'], arguments['analyze_variables'], arguments['analyze_control_flow'])
+#             elif function_name == "pdb_tool":
+#                 result = pdb_tool(arguments['code_or_filename'], arguments['debug_operations'])
+#                 function_response = result
+
+#             # Add assistant and function response to conversation
+#             conversation.append({
+#                 "role": "assistant",
+#                 "function_call": {
+#                     "name": function_name,
+#                     "arguments": assistant_message["function_call"]["arguments"]
+#                 },
+#                 "content": None
+#             })
+#             conversation.append({
+#                 "role": "function",
+#                 "name": function_name,
+#                 "content": function_response
+#             })
+
+#             # Second API call to get the final assistant response
+#             second_response = openai.ChatCompletion.create(
+#                 model="gpt-4-0613",
+#                 messages=conversation,
+#                 functions=functions3
+#             )
+#             final_message = second_response["choices"][0]["message"]
+#             if final_message['content'] is not None:
+#                 conversation.append({"role": "assistant", "content": final_message['content']})
+#                 pretty_print_conversation(conversation)
+
+from tenacity import retry, wait_random_exponential, stop_after_attempt
+
+# @retry(wait=wait_random_exponential(multiplier=1, max=60), stop=stop_after_attempt(15))
+# def api_call(messages, functions3, max_response_tokens):
+#     try:
+#         return openai.ChatCompletion.create(
+#             model="gpt-4-0613",
+#             messages=messages,
+#             functions=functions3,
+#             temperature=0.7,
+#             max_tokens=max_response_tokens,
+#             function_call="auto"
+#         )
+#     except openai.error.RateLimitError as e:
+#         print(f"Rate limit exceeded: {e}")
+#         raise
+#     except Exception as e:
+#         print(f"An unexpected error occurred: {e}")
+#         raise
+
+
+import time
+import random
+import openai
+
+# def api_call(messages, functions3, max_response_tokens):
+#     for i in range(15):
+#         try:
+#             return openai.ChatCompletion.create(
+#                 model="gpt-4-0613",
+#                 messages=messages,
+#                 functions=functions3,
+#                 temperature=0.7,
+#                 max_tokens=max_response_tokens,
+#                 function_call="auto"
+#             )
+#         except openai.error.RateLimitError as e:
+#             print(f"Rate limit exceeded: {e}")
+#             wait_time = 2 ** i + random.random()
+#             print(f"Waiting for {wait_time} seconds before retrying...")
+#             time.sleep(wait_time)
+#         except Exception as e:
+#             print(f"An unexpected error occurred: {e}")
+#             raise
+#     print("Maximum number of retries exceeded. Aborting...")
+
+
+def api_call(messages, functions3, max_response_tokens):
+            return openai.ChatCompletion.create(
+                model="gpt-3.5-turbo-16k-0613",
+                messages=messages,
+                functions=functions3,
+                temperature=0.7,
+                max_tokens=max_response_tokens,
+                function_call="auto"
+            )
 
 while True:
     user_input = input("Enter message: ")  
     
     # Check for slash commands
     if user_input == "/chat_history":
-        print_numerated_history(conversation)
+        pretty_print_conversation(conversation)
         continue
     elif user_input.startswith("/clean_chat_history"):
         if len(user_input) > 19:
             indices_str = user_input[20:].strip("[]").split(";")
             try:
                 indices = [int(idx) for idx in indices_str]
-                conversation = remove_messages_by_indices(conversation, indices)
+                conversation = [msg for idx, msg in enumerate(conversation) if idx not in indices]
                 print(f"Messages at indices {', '.join(indices_str)} have been removed!")
             except ValueError:
                 print("Invalid format. Use /clean_chat_history [index1;index2;...]")
@@ -816,7 +1360,7 @@ while True:
         print(f"Current chat history has {tokens} tokens.")
         continue
     elif user_input == "/help":
-        print("/chat_history - View the chat history (numerated)")
+        print("/chat_history - View the chat history")
         print("/clean_chat_history - Clear the chat history")
         print("/clean_chat_history [index1;index2;...] - Clear specific messages from the chat history")
         print("/token - Display the number of tokens in the chat history")
@@ -830,15 +1374,10 @@ while True:
         del conversation[1] 
         conv_history_tokens = num_tokens_from_messages(conversation)
 
-    chat_response = openai.ChatCompletion.create(
-        model="gpt-4-0613",
-        messages=conversation,
-        functions=functions3,
-        temperature=0.7,
-        max_tokens=max_response_tokens,
-    )
+    chat_response = api_call(conversation, functions3, max_response_tokens)
 
     assistant_message = chat_response['choices'][0].get('message')
+
     if assistant_message['content'] is not None:
         conversation.append({"role": "assistant", "content": assistant_message['content']})
         pretty_print_conversation(conversation)
@@ -847,51 +1386,82 @@ while True:
             function_name = assistant_message["function_call"]["name"]
             arguments = json.loads(assistant_message["function_call"]["arguments"])
 
+            # Implement the functions here
             if function_name == "similarity_search":
                 results = similarity_search(arguments['query'], arguments['directories'])
-                function_message = {
-                    "role": "function",
-                    "name": function_name,
-                    "content":  f"code search content: {results}"
-                }
-                conversation.append(function_message)
-                pretty_print_conversation(conversation)
+                function_response = f"Code search content: {results}"
             elif function_name == "write_to_file":
+                # Assuming you have a write_to_file function somewhere
                 write_to_file(arguments['content'], arguments['file_path'])
-                function_message = {
-                    "role": "function",
-                    "name": function_name,
-                    "content": f"File successfully written at {arguments['file_path']}"
-                }
-                conversation.append(function_message)
-                pretty_print_conversation(conversation)
+                function_response = f"File successfully written at {arguments['file_path']}"
             elif function_name == "read_file":
+                # Assuming you have a read_file function somewhere
                 content = read_file(arguments['file_path'])
-                function_message = {
-                    "role": "function",
-                    "name": function_name,
-                    "content": content
-                }
-                conversation.append(function_message)
-                pretty_print_conversation(conversation)
+                function_response = content
             elif function_name == "ast_tool":
-                result = ast_tool(**arguments)
-                function_message = {
-                    "role": "function",
-                    "name": function_name,
-                    "content": f"Result: {result}, Input Arguments: {arguments}"
-                }
-                conversation.append(function_message)
-                pretty_print_conversation(conversation)
+                # Assuming you have an ast_tool function somewhere
+                function_response = ast_tool(arguments['code'], arguments['analyze_functions'], arguments['analyze_variables'], arguments['analyze_control_flow'])
             elif function_name == "pdb_tool":
-                result = pdb_tool(**arguments)
-                function_message = {
-                    "role": "function",
+                # Assuming you have a pdb_tool function somewhere
+                result = pdb_tool(arguments['code_or_filename'], arguments['debug_operations'])
+                function_response = result
+            elif function_name == "scrape_web_pages":
+                # Assuming you have a scrape_web_pages function somewhere
+                function_response = scrape_web_pages(arguments['urls'])
+
+            elif function_name == "unit_test_runner":
+                # Assuming you have a unit_test_runner function somewhere
+                function_response = unit_test_runner(arguments['code_or_filename'], arguments['test_code_or_filename'])
+
+                        
+    
+
+            elif function_name == "automated_code_reviewer":
+                # Assuming you have an automated_code_reviewer function somewhere
+                feedback = automated_code_reviewer(arguments['code_or_filename'])
+                function_response = feedback
+
+            elif function_name == "metaphor_web_search":
+                # Assuming you have an automated_code_reviewer function somewhere
+                #feedback = metaphor_web_search(arguments['query'], arguments['num_results'], arguments['start_published_date'], arguments['end_published_date'])
+                if 'start_published_date' in arguments:
+                    start_date = arguments['start_published_date']
+                else:
+                    start_date = None
+
+                if 'end_published_date' in arguments:
+                    end_date = arguments['end_published_date']
+                else:
+                    end_date = None
+
+                feedback = metaphor_web_search(arguments['query'], arguments['num_results'], start_date, end_date)
+                function_response = feedback
+
+            # Add assistant and function response to conversation
+            conversation.append({
+                "role": "assistant",
+                "function_call": {
                     "name": function_name,
-                    "content": result
-                }
-                conversation.append(function_message)
+                    "arguments": assistant_message["function_call"]["arguments"]
+                },
+                "content": None
+            })
+            conversation.append({
+                "role": "function",
+                "name": function_name,
+                "content": function_response
+            })
+
+            # Optional: Make a second API call to get the final assistant response
+            second_response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo-16k-0613",
+                messages=conversation,
+                functions=functions3
+            )
+
+            # Second API call to get the final assistant response
+            #chat_response = api_call(conversation, functions3, max_response_tokens)
+            final_message = second_response["choices"][0]["message"]
+            if final_message['content'] is not None:
+                conversation.append({"role": "assistant", "content": final_message['content']})
                 pretty_print_conversation(conversation)
-
-
-

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the documentation for fuse_loss &mdash; fuse_loss 1.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Class Hierarchy" href="generated/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            fuse_loss
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_ceres.html">Namespace ceres</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_ceres.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_fuse_core.html">Namespace fuse_core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_fuse_loss.html">Namespace fuse_loss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_fuse_loss.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/classceres_1_1DCSLoss.html">Class DCSLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classceres_1_1DCSLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classceres_1_1DCSLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classceres_1_1DCSLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classceres_1_1FairLoss.html">Class FairLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classceres_1_1FairLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classceres_1_1FairLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classceres_1_1FairLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classceres_1_1GemanMcClureLoss.html">Class GemanMcClureLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classceres_1_1GemanMcClureLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classceres_1_1GemanMcClureLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classceres_1_1GemanMcClureLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classceres_1_1WelschLoss.html">Class WelschLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classceres_1_1WelschLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classceres_1_1WelschLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classceres_1_1WelschLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1ArctanLoss.html">Class ArctanLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1ArctanLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1ArctanLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1ArctanLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1CauchyLoss.html">Class CauchyLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1CauchyLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1CauchyLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1CauchyLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1ComposedLoss.html">Class ComposedLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1ComposedLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1ComposedLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1ComposedLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1DCSLoss.html">Class DCSLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1DCSLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1DCSLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1DCSLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1FairLoss.html">Class FairLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1FairLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1FairLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1FairLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1GemanMcClureLoss.html">Class GemanMcClureLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1GemanMcClureLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1GemanMcClureLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1GemanMcClureLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1HSVColormap.html">Class HSVColormap</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1HSVColormap.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1HuberLoss.html">Class HuberLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1HuberLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1HuberLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1HuberLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1LossEvaluator.html">Class LossEvaluator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1LossEvaluator.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1QwtLossPlot.html">Class QwtLossPlot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1QwtLossPlot.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1ScaledLoss.html">Class ScaledLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1ScaledLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1ScaledLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1ScaledLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1SoftLOneLoss.html">Class SoftLOneLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1SoftLOneLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1SoftLOneLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1SoftLOneLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1TolerantLoss.html">Class TolerantLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1TolerantLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1TolerantLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1TolerantLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1TrivialLoss.html">Class TrivialLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1TrivialLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1TrivialLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1TrivialLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1TukeyLoss.html">Class TukeyLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1TukeyLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1TukeyLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1TukeyLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classfuse__loss_1_1WelschLoss.html">Class WelschLoss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1WelschLoss.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classfuse__loss_1_1WelschLoss.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classfuse__loss_1_1WelschLoss.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_arctan__loss_8hpp_1a079704c08f77e293a409cca6429b6911.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::ArctanLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_arctan__loss_8hpp_1a079704c08f77e293a409cca6429b6911.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_cauchy__loss_8hpp_1abc1eb2b76b06a7dcca65eaff2afe4360.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::CauchyLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_cauchy__loss_8hpp_1abc1eb2b76b06a7dcca65eaff2afe4360.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_composed__loss_8hpp_1a13b894e546370124f313deef3075affe.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::ComposedLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_composed__loss_8hpp_1a13b894e546370124f313deef3075affe.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_dcs__loss_8hpp_1a1643661bd21e3de21a40063c8edaf380.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::DCSLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_dcs__loss_8hpp_1a1643661bd21e3de21a40063c8edaf380.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_fair__loss_8hpp_1a55b131cdb7787c396b4d14f0aced6abb.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::FairLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_fair__loss_8hpp_1a55b131cdb7787c396b4d14f0aced6abb.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_geman__mcclure__loss_8hpp_1ab9b9eb62121514ecacf10b430c0aba08.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::GemanMcClureLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_geman__mcclure__loss_8hpp_1ab9b9eb62121514ecacf10b430c0aba08.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_huber__loss_8hpp_1acdd363eb2230760b3ec6b37d44d11892.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::HuberLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_huber__loss_8hpp_1acdd363eb2230760b3ec6b37d44d11892.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_scaled__loss_8hpp_1a3dc32f0282f5d015f726aab38ab5d07f.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::ScaledLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_scaled__loss_8hpp_1a3dc32f0282f5d015f726aab38ab5d07f.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_softlone__loss_8hpp_1a2f748a170856d277788fce08fd3a32c1.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::SoftLOneLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_softlone__loss_8hpp_1a2f748a170856d277788fce08fd3a32c1.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_tolerant__loss_8hpp_1a58ea5600d2e019fd407fa21bc9e4b1ae.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::TolerantLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_tolerant__loss_8hpp_1a58ea5600d2e019fd407fa21bc9e4b1ae.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_trivial__loss_8hpp_1a539a3a37aa4caeae8127f15b89b24ca3.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::TrivialLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_trivial__loss_8hpp_1a539a3a37aa4caeae8127f15b89b24ca3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_tukey__loss_8hpp_1ae41f2b759dd1705cf4236f9864067542.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::TukeyLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_tukey__loss_8hpp_1ae41f2b759dd1705cf4236f9864067542.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_welsch__loss_8hpp_1a329f3af176249101dbfe6fe51f9c5f68.html">Function BOOST_CLASS_EXPORT_KEY(fuse_loss::WelschLoss)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_welsch__loss_8hpp_1a329f3af176249101dbfe6fe51f9c5f68.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src.html">Directory src</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_fuse.html">Directory fuse</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_fuse.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_fuse_fuse_loss.html">Directory fuse_loss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_fuse_fuse_loss.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_fuse_fuse_loss_include.html">Directory include</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_fuse_fuse_loss_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_fuse_fuse_loss_include_fuse_loss.html">Directory fuse_loss</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_fuse_fuse_loss_include_fuse_loss.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.h.html">File arctan_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-arctan-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/arctan_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.h.html">Program Listing for File arctan_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.hpp.html">File arctan_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-arctan-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/arctan_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.hpp.html">Program Listing for File arctan_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_arctan_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.h.html">File cauchy_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-cauchy-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/cauchy_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.h.html">Program Listing for File cauchy_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.hpp.html">File cauchy_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-cauchy-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/cauchy_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.hpp.html">Program Listing for File cauchy_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_cauchy_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.h.html">File composed_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-composed-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/composed_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.h.html">Program Listing for File composed_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.hpp.html">File composed_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-composed-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/composed_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.hpp.html">Program Listing for File composed_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_composed_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.h.html">File dcs_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-dcs-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/dcs_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.h.html">Program Listing for File dcs_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.hpp.html">File dcs_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-dcs-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/dcs_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.hpp.html">Program Listing for File dcs_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_dcs_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.h.html">File fair_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-fair-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/fair_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.h.html">Program Listing for File fair_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.hpp.html">File fair_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-fair-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/fair_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.hpp.html">Program Listing for File fair_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_fair_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.h.html">File geman_mcclure_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-geman-mcclure-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/geman_mcclure_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.h.html">Program Listing for File geman_mcclure_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.hpp.html">File geman_mcclure_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-geman-mcclure-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/geman_mcclure_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.hpp.html">Program Listing for File geman_mcclure_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_geman_mcclure_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.h.html">File huber_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-huber-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/huber_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.h.html">Program Listing for File huber_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.hpp.html">File huber_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-huber-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/huber_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.hpp.html">Program Listing for File huber_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_huber_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.h.html">File loss_function.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-loss-function-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/loss_function.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.h.html">Program Listing for File loss_function.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.hpp.html">File loss_function.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-loss-function-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/loss_function.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.hpp.html">Program Listing for File loss_function.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_loss_function.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.h.html">File qwt_loss_plot.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-qwt-loss-plot-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/qwt_loss_plot.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.h.html">Program Listing for File qwt_loss_plot.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.hpp.html">File qwt_loss_plot.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-qwt-loss-plot-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/qwt_loss_plot.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.hpp.html">Program Listing for File qwt_loss_plot.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_qwt_loss_plot.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.h.html">File scaled_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-scaled-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/scaled_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.h.html">Program Listing for File scaled_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.hpp.html">File scaled_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-scaled-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/scaled_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.hpp.html">Program Listing for File scaled_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_scaled_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.h.html">File softlone_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-softlone-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/softlone_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.h.html">Program Listing for File softlone_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.hpp.html">File softlone_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-softlone-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/softlone_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.hpp.html">Program Listing for File softlone_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_softlone_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.h.html">File tolerant_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-tolerant-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/tolerant_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.h.html">Program Listing for File tolerant_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.hpp.html">File tolerant_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-tolerant-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/tolerant_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.hpp.html">Program Listing for File tolerant_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tolerant_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.h.html">File trivial_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-trivial-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/trivial_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.h.html">Program Listing for File trivial_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.hpp.html">File trivial_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-trivial-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/trivial_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.hpp.html">Program Listing for File trivial_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_trivial_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.h.html">File tukey_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-tukey-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/tukey_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.h.html">Program Listing for File tukey_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.hpp.html">File tukey_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-tukey-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/tukey_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.hpp.html">Program Listing for File tukey_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_tukey_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.h.html">File welsch_loss.h</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.h.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-welsch-loss-h">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/welsch_loss.h</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.h.html">Program Listing for File welsch_loss.h</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.hpp.html">File welsch_loss.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.hpp.html#definition-tmp-ws-src-fuse-fuse-loss-include-fuse-loss-welsch-loss-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/fuse/fuse_loss/include/fuse_loss/welsch_loss.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.hpp.html">Program Listing for File welsch_loss.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_fuse_fuse_loss_include_fuse_loss_welsch_loss.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">fuse_loss</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the documentation for fuse_loss</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-documentation-for-fuse-loss">
+<h1>Welcome to the documentation for fuse_loss<a class="headerlink" href="#welcome-to-the-documentation-for-fuse-loss" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-search">
+<h1>Indices and Search<a class="headerlink" href="#indices-and-search" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/index.html" class="btn btn-neutral float-right" title="Class Hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, BSD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

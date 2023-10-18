@@ -1,0 +1,294 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Client Module &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="The Discovery Module" href="capabilities.discovery.html" />
+    <link rel="prev" title="The capability_server ROS Node" href="capability_server.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/capabilities.client.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.discovery.html" title="The Discovery Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="capability_server.html" title="The capability_server ROS Node"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-capabilities.client">
+<span id="the-client-module"></span><h1>The Client Module<a class="headerlink" href="#module-capabilities.client" title="Permalink to this headline">¶</a></h1>
+<p>Provides a simple Python interface for interacting with the capability server.</p>
+<p>Typical usage:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">capabilities.client</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Use the line below if the capability_server has a different name</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># client = Client(capability_server_node_name=&#39;/capability_server_node_name&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="ow">not</span> <span class="n">client</span><span class="o">.</span><span class="n">wait_for_services</span><span class="p">(</span><span class="mf">3.0</span><span class="p">):</span>  <span class="c"># Wait upto 3.0 seconds for the required ROS services</span>
+<span class="gp">... </span>    <span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">... </span>    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s">&quot;capability_server, called &#39;{0}&#39;, failed to come up.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">_name</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">use_capability</span><span class="p">(</span><span class="s">&#39;foo_pkg/Foo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">use_capability</span><span class="p">(</span><span class="s">&#39;foo_pkg/Foo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">free_capability</span><span class="p">(</span><span class="s">&#39;foo_pkg/Foo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">client</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="capabilities.client.CapabilitiesClient">
+<em class="property">class </em><tt class="descclassname">capabilities.client.</tt><tt class="descname">CapabilitiesClient</tt><big>(</big><em>capability_server_node_name='/capability_server'</em><big>)</big><a class="reference internal" href="_modules/capabilities/client.html#CapabilitiesClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.client.CapabilitiesClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Single point of entry for interacting with a remote capability server.</p>
+<p>Instantiation of this class does not check to see if the underlying
+services are available, call <a class="reference internal" href="#capabilities.client.CapabilitiesClient.wait_for_services" title="capabilities.client.CapabilitiesClient.wait_for_services"><tt class="xref py py-meth docutils literal"><span class="pre">wait_for_services()</span></tt></a> if you want
+to ensure that the services are available before continuing.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>capability_server_node_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the remote capability server</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="capabilities.client.CapabilitiesClient.establish_bond">
+<tt class="descname">establish_bond</tt><big>(</big><em>timeout=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/client.html#CapabilitiesClient.establish_bond"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.client.CapabilitiesClient.establish_bond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Establishes a bond using the <tt class="docutils literal"><span class="pre">~establish_bond</span></tt> service call</p>
+<p>The bond id which is returned by the service call is stored internally
+and used implicitly by the use/free capabilities functions.</p>
+<p>If <a class="reference internal" href="#capabilities.client.CapabilitiesClient.establish_bond" title="capabilities.client.CapabilitiesClient.establish_bond"><tt class="xref py py-meth docutils literal"><span class="pre">establish_bond()</span></tt></a> had previously been called, then the old bond will be
+broken, which will result in any capability uses under that bond to be
+implicitly freed.</p>
+<p>This function is called implicitly by <a class="reference internal" href="#capabilities.client.CapabilitiesClient.use_capability" title="capabilities.client.CapabilitiesClient.use_capability"><tt class="xref py py-meth docutils literal"><span class="pre">use_capability()</span></tt></a> if
+no bond exists.</p>
+<p>This function will block waiting for the service call to become
+available and to wait for the bond to be established. In both cases
+the timeout parameter is used.</p>
+<p>None is returned if the timeout occurs while waiting on the service
+to become available or while waiting for the bond to form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>timeout</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; time in seconds to wait for the service to be available</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the bond_id received from the server or <a class="reference external" href="http://docs.python.org/library/constants.html#None" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">None</span></tt></a> on failure</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.client.CapabilitiesClient.free_capability">
+<tt class="descname">free_capability</tt><big>(</big><em>capability_interface</em>, <em>timeout=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/client.html#CapabilitiesClient.free_capability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.client.CapabilitiesClient.free_capability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Free&#8217;s a previously used capability.</p>
+<p>Calls the <tt class="docutils literal"><span class="pre">~free_capability</span></tt> service, which effectively decrements
+the internal reference count for that capability in the remote
+capability server.</p>
+<p>If that results in a reference count of zero,
+then the capability server will shutdown that capability automatically.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>capability_interface</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the capability interface to free up</li>
+<li><strong>timeout</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; time to wait on service to be available (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/constants.html#True" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">True</span></tt></a> if successful, otherwise <a class="reference external" href="http://docs.python.org/library/constants.html#False" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">False</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first">CapabilityNotInUseException if the capability has not been previously used</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first">CapabilityNotRunningException if the capability has already been stopped
+which can be caused by a capability it depends on stopping</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last">ServiceNotAvailableException if the required service is not available
+after the timeout has expired</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.client.CapabilitiesClient.shutdown">
+<tt class="descname">shutdown</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/capabilities/client.html#CapabilitiesClient.shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.client.CapabilitiesClient.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cleanly frees any used capabilities.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.client.CapabilitiesClient.use_capability">
+<tt class="descname">use_capability</tt><big>(</big><em>capability_interface</em>, <em>preferred_provider=None</em>, <em>timeout=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/client.html#CapabilitiesClient.use_capability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.client.CapabilitiesClient.use_capability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Declares that this capability is being used.</p>
+<p>Calls the <tt class="docutils literal"><span class="pre">~use_capability</span></tt> service, and opens a bond with capability server if none exists.
+This will cause the capability to be started, if it has not been already, and the
+internal reference count for that capability in the capability server is incremented.</p>
+<p>If the bond fails (i.e. this program crashes) then the reference is decremented automatically.
+The reference is also decremented if <a class="reference internal" href="#capabilities.client.CapabilitiesClient.free_capability" title="capabilities.client.CapabilitiesClient.free_capability"><tt class="xref py py-meth docutils literal"><span class="pre">free_capability()</span></tt></a> is called.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>capability_interface</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the capability interface to use</li>
+<li><strong>preferred_provider</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; preferred provider or None for default provider (optional)</li>
+<li><strong>timeout</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; time to wait on service to be available (optional)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/constants.html#True" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">True</span></tt></a> if successful, otherwise <a class="reference external" href="http://docs.python.org/library/constants.html#False" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">False</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first">ServiceNotAvailableException if the required service is not available
+after the timeout has expired</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raise :</th><td class="field-body"><p class="first last">CannotEstablishBondException is the bond with the capability_server cannot be established</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.client.CapabilitiesClient.wait_for_services">
+<tt class="descname">wait_for_services</tt><big>(</big><em>timeout=None</em>, <em>services=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/client.html#CapabilitiesClient.wait_for_services"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.client.CapabilitiesClient.wait_for_services" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blocks until the requested services are available.</p>
+<p>Services are waited on one at a time. Therefore, if a non-None value
+for timeout is given, and one or more services are being waited on,
+the full timeout will be given to each wait, meaning that the total
+run time of this function can exceed the timeout provided.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>timeout</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#float" title="(in Python v2.7)"><em>float</em></a>) &#8211; Seconds to wait for the services before returning False.
+If None is passed, then this will block indefinitely until the
+services are available.</li>
+<li><strong>services</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><em>list</em></a>) &#8211; List of services to wait on.
+If None is passed, then this will check all the services.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.python.org/library/constants.html#True" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">True</span></tt></a> is the services are available, <a class="reference external" href="http://docs.python.org/library/constants.html#False" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">False</span></tt></a> otherwise (timeout)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#bool" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">bool</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="capability_server.html"
+                        title="previous chapter">The <tt class="docutils literal"><span class="pre">capability_server</span></tt> ROS Node</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="capabilities.discovery.html"
+                        title="next chapter">The Discovery Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/capabilities.client.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.discovery.html" title="The Discovery Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="capability_server.html" title="The capability_server ROS Node"
+             >previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

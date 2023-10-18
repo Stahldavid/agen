@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the documentation for ros2_ouster &mdash; ros2_ouster 0.2.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Class Hierarchy" href="generated/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            ros2_ouster
+          </a>
+              <div class="version">
+                0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_image_os.html">Namespace image_os</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_image_os.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_lifecycle_interface.html">Namespace lifecycle_interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_lifecycle_interface.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_lifecycle_interface.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_OS1.html">Namespace OS1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_OS1.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_OS1.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_OS1.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_OS1.html#typedefs">Typedefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_OS1.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_point_os.html">Namespace point_os</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_point_os.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rclcpp_lifecycle.html">Namespace rclcpp_lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_ros2_ouster.html">Namespace ros2_ouster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_ros2_ouster.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_ros2_ouster.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_ros2_ouster.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_ros2_ouster.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_scan_os.html">Namespace scan_os</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_scan_os.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_std.html">Namespace std</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/structimage__os_1_1ImageOS.html">Struct ImageOS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structimage__os_1_1ImageOS.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structOS1_1_1client.html">Struct client</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structOS1_1_1client.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structOS1_1_1version.html">Struct version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structOS1_1_1version.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structpoint__os_1_1PointOS.html">Struct PointOS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structpoint__os_1_1PointOS.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structros2__ouster_1_1Configuration.html">Struct Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structros2__ouster_1_1Configuration.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structros2__ouster_1_1Metadata.html">Struct Metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structros2__ouster_1_1Metadata.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structscan__os_1_1ScanOS.html">Struct ScanOS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structscan__os_1_1ScanOS.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classlifecycle__interface_1_1LifecycleInterface.html">Class LifecycleInterface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classlifecycle__interface_1_1LifecycleInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classlifecycle__interface_1_1LifecycleInterface.html#base-type">Base Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/classlifecycle__interface_1_1LifecycleInterface.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classlifecycle__interface_1_1LifecycleInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classOS1_1_1ImageProcessor.html">Class ImageProcessor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1ImageProcessor.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classOS1_1_1ImageProcessor.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1ImageProcessor.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classOS1_1_1IMUProcessor.html">Class IMUProcessor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1IMUProcessor.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classOS1_1_1IMUProcessor.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1IMUProcessor.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classOS1_1_1OS1Sensor.html">Class OS1Sensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1OS1Sensor.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classOS1_1_1OS1Sensor.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1OS1Sensor.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classOS1_1_1PointcloudProcessor.html">Class PointcloudProcessor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1PointcloudProcessor.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classOS1_1_1PointcloudProcessor.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1PointcloudProcessor.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classOS1_1_1ScanProcessor.html">Class ScanProcessor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1ScanProcessor.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classOS1_1_1ScanProcessor.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classOS1_1_1ScanProcessor.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classros2__ouster_1_1DataProcessorInterface.html">Class DataProcessorInterface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1DataProcessorInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classros2__ouster_1_1DataProcessorInterface.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1DataProcessorInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classros2__ouster_1_1OS1Driver.html">Class OS1Driver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1OS1Driver.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classros2__ouster_1_1OS1Driver.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1OS1Driver.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classros2__ouster_1_1OusterDriver.html">Class OusterDriver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1OusterDriver.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classros2__ouster_1_1OusterDriver.html#base-type">Base Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/classros2__ouster_1_1OusterDriver.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1OusterDriver.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classros2__ouster_1_1OusterDriverException.html">Class OusterDriverException</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1OusterDriverException.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classros2__ouster_1_1OusterDriverException.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1OusterDriverException.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classros2__ouster_1_1SensorInterface.html">Class SensorInterface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1SensorInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classros2__ouster_1_1SensorInterface.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classros2__ouster_1_1SensorInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_namespaceOS1_1a4b77e4ca3e0d2bf5d3a20ec1db71042b.html">Enum lidar_mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_namespaceOS1_1a4b77e4ca3e0d2bf5d3a20ec1db71042b.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_namespaceOS1_1a555d2e4b667a006656a5adef9dfcf808.html">Enum timestamp_mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_namespaceOS1_1a555d2e4b667a006656a5adef9dfcf808.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_namespaceros2__ouster_1a1dbe29e97abdc7b53bc6d071593f5f0a.html">Enum ClientState</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_namespaceros2__ouster_1a1dbe29e97abdc7b53bc6d071593f5f0a.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a050e2ef970b7160574422523bd8ab1f7.html">Template Function OS1::batch_to_iter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a050e2ef970b7160574422523bd8ab1f7.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1ac90302127883e8fd3b0cf91b4c996e51.html">Function OS1::cfg_socket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1ac90302127883e8fd3b0cf91b4c996e51.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a77c9ffe7683eb472d526900f77ac0fce.html">Function OS1::col_frame_id</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a77c9ffe7683eb472d526900f77ac0fce.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a381cc0c4519f1128db16b09cbe2c302b.html">Function OS1::col_h_angle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a381cc0c4519f1128db16b09cbe2c302b.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a3e40eec2e5a244e4d1c0d3fd57b09abe.html">Function OS1::col_h_encoder_count</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a3e40eec2e5a244e4d1c0d3fd57b09abe.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1ada7957e0593499e1e48e111bb2c931d7.html">Function OS1::col_measurement_id</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1ada7957e0593499e1e48e111bb2c931d7.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a2c8699ee8ddbdf7d5fb9d2cf9d2fa783.html">Function OS1::col_timestamp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a2c8699ee8ddbdf7d5fb9d2cf9d2fa783.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1aa9988d350f80072c554688f33b97aed3.html">Function OS1::col_valid</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1aa9988d350f80072c554688f33b97aed3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a54400d0393364c3a4187a75e8002d52d.html">Function OS1::do_tcp_cmd</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a54400d0393364c3a4187a75e8002d52d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a100d59bc2fd89ef273c82e7284b1c8c8.html">Function OS1::get_metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a100d59bc2fd89ef273c82e7284b1c8c8.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a5027b5e4fa1b7519f5106b8be58a52d0.html">Function OS1::get_px_offset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a5027b5e4fa1b7519f5106b8be58a52d0.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1ab9a61ed3a5e255a10cf5720bcb745f17.html">Function OS1::imu_accel_ts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1ab9a61ed3a5e255a10cf5720bcb745f17.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1ad949d0e0d141aabdb3e71437b1f30d38.html">Function OS1::imu_av_x</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1ad949d0e0d141aabdb3e71437b1f30d38.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1ade623e3cbae85aff543f6183db9c018f.html">Function OS1::imu_av_y</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1ade623e3cbae85aff543f6183db9c018f.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1ae14e445e5df06063be9f9d53fe63cb1a.html">Function OS1::imu_av_z</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1ae14e445e5df06063be9f9d53fe63cb1a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1ac4727cade04341d8172d7ad51ba2f8c3.html">Function OS1::imu_gyro_ts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1ac4727cade04341d8172d7ad51ba2f8c3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a3841c9b414ee039a21a25aa65ed2f3be.html">Function OS1::imu_la_x</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a3841c9b414ee039a21a25aa65ed2f3be.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a638def663d71f5997fe62698555b3f92.html">Function OS1::imu_la_y</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a638def663d71f5997fe62698555b3f92.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1acb081421744afa782d930a9d3f368c01.html">Function OS1::imu_la_z</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1acb081421744afa782d930a9d3f368c01.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a770e56b4a8c7b43206bb8730bbcd37ec.html">Function OS1::imu_sys_ts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a770e56b4a8c7b43206bb8730bbcd37ec.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1abdb6e9814c30eb4d9c53019bcc944aa9.html">Function OS1::init_client(int, int)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1abdb6e9814c30eb4d9c53019bcc944aa9.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a62b8e27486d29533e8131307c009efd7.html">Function OS1::init_client(const std::string&amp;, const std::string&amp;, lidar_mode, timestamp_mode, int, int)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a62b8e27486d29533e8131307c009efd7.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a56ecd7bb1da4dd8abb17eecde62fdc58.html">Function OS1::lidar_mode_of_string</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a56ecd7bb1da4dd8abb17eecde62fdc58.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a43d54ae8fd8bf6623be114ff4ca8b1a5.html">Function OS1::make_xyz_lut</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a43d54ae8fd8bf6623be114ff4ca8b1a5.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1acb5991e32128a28d92e89f2d1ef6d16b.html">Function OS1::n_cols_of_lidar_mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1acb5991e32128a28d92e89f2d1ef6d16b.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a0772825c0109e06853ed7b46015faecb.html">Function OS1::nth_col</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a0772825c0109e06853ed7b46015faecb.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a819b725e8f9804accd2a857f01f1fb3f.html">Function OS1::nth_px</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a819b725e8f9804accd2a857f01f1fb3f.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1af9057ff709e9cbe56a9e3e8bed9943f2.html">Function OS1::operator&lt;</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1af9057ff709e9cbe56a9e3e8bed9943f2.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a129491fb74ff44a083bf53331a3ea91e.html">Function OS1::operator&lt;=</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a129491fb74ff44a083bf53331a3ea91e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1aa4d9d60dcb7123ee4b53b201ca0b01c4.html">Function OS1::operator==</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1aa4d9d60dcb7123ee4b53b201ca0b01c4.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1aea8c4cfaa0f0c8e6a3668ace534f80df.html">Function OS1::parse_metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1aea8c4cfaa0f0c8e6a3668ace534f80df.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a03a4750c03af929f0a29f441c9278942.html">Function OS1::poll_client</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a03a4750c03af929f0a29f441c9278942.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1af38f2b25cfecbcb34d7b4dc9eb57b4a4.html">Function OS1::px_noise_photons</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1af38f2b25cfecbcb34d7b4dc9eb57b4a4.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a5e145ebc3159190e4994a1fc4e44e6f9.html">Function OS1::px_range</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a5e145ebc3159190e4994a1fc4e44e6f9.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a0ffb50c910f3d318c01c264ee43a9083.html">Function OS1::px_reflectivity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a0ffb50c910f3d318c01c264ee43a9083.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a0fc684f4169c3ffa891ce6193774476a.html">Function OS1::px_signal_photons</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a0fc684f4169c3ffa891ce6193774476a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1ae433a16a2cf1482cab1350190dc2fb08.html">Function OS1::read_imu_packet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1ae433a16a2cf1482cab1350190dc2fb08.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a0b7b956d9d26b9c3e3951080f5a1c442.html">Function OS1::read_lidar_packet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a0b7b956d9d26b9c3e3951080f5a1c442.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a9782136f9bb8e8f265cab2cc83e69fcd.html">Function OS1::recv_fixed</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a9782136f9bb8e8f265cab2cc83e69fcd.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1aeaeeae076b307dd4ea5e64e7dacf4fd4.html">Function OS1::timestamp_mode_of_string</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1aeaeeae076b307dd4ea5e64e7dacf4fd4.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1aa722f8e07d04438556c2d4de7be46e74.html">Function OS1::to_string(version)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1aa722f8e07d04438556c2d4de7be46e74.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a1abec1fce605df5d1825ca6c0ae5a784.html">Function OS1::to_string(lidar_mode)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a1abec1fce605df5d1825ca6c0ae5a784.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1aaae2ac84dbab528776c561022983104e.html">Function OS1::to_string(timestamp_mode)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1aaae2ac84dbab528776c561022983104e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a3331c9bf77485752ebb5ea37d81e343b.html">Function OS1::udp_data_socket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a3331c9bf77485752ebb5ea37d81e343b.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a1698060d76a2dcc08da7ca8f8829e3e4.html">Function OS1::update_json_obj</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a1698060d76a2dcc08da7ca8f8829e3e4.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceOS1_1a547f05216fae363bd538909fbf6ee72c.html">Function OS1::version_of_string</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceOS1_1a547f05216fae363bd538909fbf6ee72c.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a2bf2d1acfbb2a6a8c55ad6d8329cbbe3.html">Function ros2_ouster::createImageProcessor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a2bf2d1acfbb2a6a8c55ad6d8329cbbe3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a3cd549f57acd3c90d33d2eeec9d85f69.html">Function ros2_ouster::createIMUProcessor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a3cd549f57acd3c90d33d2eeec9d85f69.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1ac5b197634ddd490a38cc0e1b6fd41e06.html">Function ros2_ouster::createPointcloudProcessor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1ac5b197634ddd490a38cc0e1b6fd41e06.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a15b8bc510adf0392173f75a6c55cb8b4.html">Function ros2_ouster::createProcessors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a15b8bc510adf0392173f75a6c55cb8b4.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1ac5513278478857959aa54e464be999cd.html">Function ros2_ouster::createScanProcessor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1ac5513278478857959aa54e464be999cd.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1af93471925e18c115ca51b7f94dc7f56b.html">Function ros2_ouster::ltrim</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1af93471925e18c115ca51b7f94dc7f56b.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a4e87b7a123342fb9cedbbb5a340af09e.html">Function ros2_ouster::rtrim</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a4e87b7a123342fb9cedbbb5a340af09e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a46b53780e62c8ec75009b7bcb4390a03.html">Function ros2_ouster::split</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a46b53780e62c8ec75009b7bcb4390a03.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1af3abe1b95b9903674a507f1c2ba8a517.html">Function ros2_ouster::toMsg(const ros2_ouster::Metadata&amp;)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1af3abe1b95b9903674a507f1c2ba8a517.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1ad83fc0950a3a778426f2337c4fd0aaa7.html">Function ros2_ouster::toMsg(const std::vector&lt;double&gt;&amp;, const std::string&amp;, const std::string&amp;, const rclcpp::Time&amp;)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1ad83fc0950a3a778426f2337c4fd0aaa7.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1acea12f822097d8ad0cd7e5fec9d77a7b.html">Function ros2_ouster::toMsg(const uint8_t *, const std::string&amp;, uint64_t)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1acea12f822097d8ad0cd7e5fec9d77a7b.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1ae6b27d4c2cb72b078e531541d983243f.html">Function ros2_ouster::toMsg(const pcl::PointCloud&lt;point_os::PointOS&gt;&amp;, std::chrono::nanoseconds, const std::string&amp;)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1ae6b27d4c2cb72b078e531541d983243f.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a4da5cc8047c4317d47495cbe83bd2163.html">Function ros2_ouster::toMsg(const std::vector&lt;scan_os::ScanOS&gt;&amp;, std::chrono::nanoseconds, const std::string&amp;, const ros2_ouster::Metadata&amp;, const uint8_t)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a4da5cc8047c4317d47495cbe83bd2163.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a52413e5ee104bb08a4a686381dd36e09.html">Function ros2_ouster::toProcMask</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a52413e5ee104bb08a4a686381dd36e09.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a4e8ce22a2f3b8455c9bf708d39e9b1ac.html">Function ros2_ouster::toString</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a4e8ce22a2f3b8455c9bf708d39e9b1ac.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a73eaef4a55cfa7d2b204b1a918f9de5e.html">Function ros2_ouster::trim</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespaceros2__ouster_1a73eaef4a55cfa7d2b204b1a918f9de5e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#variables">Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1ac880b3e47597f8133670e6bfc912ccec.html">Variable OS1::column_bytes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1ac880b3e47597f8133670e6bfc912ccec.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1ac1a79332cbb6c3f2c8f8da2c82c9e634.html">Variable OS1::columns_per_buffer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1ac1a79332cbb6c3f2c8f8da2c82c9e634.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1af2e7fce0a34b4b253eb7084280facd47.html">Variable OS1::encoder_ticks_per_rev</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1af2e7fce0a34b4b253eb7084280facd47.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1a8b5faa6efb2697c2065deaf8f344cddb.html">Variable OS1::imu_packet_bytes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1a8b5faa6efb2697c2065deaf8f344cddb.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1af3ac4b8bd93056e196e4c9717a63ab06.html">Variable OS1::invalid_version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1af3ac4b8bd93056e196e4c9717a63ab06.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1a856353de5281417ae3b7a273be96c816.html">Variable OS1::lidar_mode_strings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1a856353de5281417ae3b7a273be96c816.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1a3909b1283dadb01e658ba70d54f639d1.html">Variable OS1::lidar_packet_bytes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1a3909b1283dadb01e658ba70d54f639d1.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1a4336f0862f15853f3503675d00acf39d.html">Variable OS1::min_version</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1a4336f0862f15853f3503675d00acf39d.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1acb2ffcdaa25cf050a0098bde7677dd34.html">Variable OS1::pixel_bytes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1acb2ffcdaa25cf050a0098bde7677dd34.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1aad55e5a15b015e45db07e04b7a1c421f.html">Variable OS1::pixels_per_column</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1aad55e5a15b015e45db07e04b7a1c421f.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceOS1_1af171bf3390e6740a25abb9f335054f8e.html">Variable OS1::timestamp_mode_strings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceOS1_1af171bf3390e6740a25abb9f335054f8e.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1a2981b22f8dd3a376a1b5dbd94d2801d4.html">Variable ros2_ouster::IS_BIGENDIAN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1a2981b22f8dd3a376a1b5dbd94d2801d4.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1a5734efebf57ba0dfc195e0880485649b.html">Variable ros2_ouster::OS1_DEFAULT_PROC_MASK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1a5734efebf57ba0dfc195e0880485649b.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1ab2f7c041ed210db6945972d580d8629b.html">Variable ros2_ouster::OS1_PROC_IMG</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1ab2f7c041ed210db6945972d580d8629b.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1adb45db1255f68be1b8fce355fd12a0fd.html">Variable ros2_ouster::OS1_PROC_IMU</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1adb45db1255f68be1b8fce355fd12a0fd.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1a6791e986124be715e39534287c05e956.html">Variable ros2_ouster::OS1_PROC_PCL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1a6791e986124be715e39534287c05e956.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1afca896c61effec0022effbbc08d7a740.html">Variable ros2_ouster::OS1_PROC_SCAN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_namespaceros2__ouster_1afca896c61effec0022effbbc08d7a740.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_point__os_8hpp_1adf799d3fdc3e86716e9188debf724bbf.html">Define PCL_NO_PRECOMPILE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_point__os_8hpp_1adf799d3fdc3e86716e9188debf724bbf.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_scan__os_8hpp_1adf799d3fdc3e86716e9188debf724bbf.html">Define PCL_NO_PRECOMPILE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_scan__os_8hpp_1adf799d3fdc3e86716e9188debf724bbf.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#typedefs">Typedefs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedef_namespacelifecycle__interface_1aafa11f6a8213028795f4d57529d40450.html">Typedef lifecycle_interface::CallbackReturn</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_namespacelifecycle__interface_1aafa11f6a8213028795f4d57529d40450.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedef_namespaceOS1_1a62a518ab3c79cd75eb4395632a7bc884.html">Typedef OS1::ns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_namespaceOS1_1a62a518ab3c79cd75eb4395632a7bc884.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir_include.html">Directory include</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir_include_ros2_ouster.html">Directory ros2_ouster</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir_include_ros2_ouster.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir_include_ros2_ouster.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir_include_ros2_ouster_interfaces.html">Directory interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir_include_ros2_ouster_interfaces.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir_include_ros2_ouster_OS1.html">Directory OS1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir_include_ros2_ouster_OS1.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir_include_ros2_ouster_OS1.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir_include_ros2_ouster_OS1_processors.html">Directory processors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir_include_ros2_ouster_OS1_processors.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_configuration.hpp.html">File configuration.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_configuration.hpp.html#definition-include-ros2-ouster-interfaces-configuration-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/interfaces/configuration.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_interfaces_configuration.hpp.html">Program Listing for File configuration.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_configuration.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_configuration.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_configuration.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_configuration.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_conversions.hpp.html">File conversions.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_conversions.hpp.html#definition-include-ros2-ouster-conversions-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/conversions.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_conversions.hpp.html">Program Listing for File conversions.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_conversions.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_conversions.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_conversions.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_conversions.hpp.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_conversions.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_data_processor_interface.hpp.html">File data_processor_interface.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_data_processor_interface.hpp.html#definition-include-ros2-ouster-interfaces-data-processor-interface-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/interfaces/data_processor_interface.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_interfaces_data_processor_interface.hpp.html">Program Listing for File data_processor_interface.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_data_processor_interface.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_data_processor_interface.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_data_processor_interface.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_data_processor_interface.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_driver_types.hpp.html">File driver_types.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_driver_types.hpp.html#definition-include-ros2-ouster-driver-types-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/driver_types.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_driver_types.hpp.html">Program Listing for File driver_types.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_driver_types.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_driver_types.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_driver_types.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_exception.hpp.html">File exception.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_exception.hpp.html#definition-include-ros2-ouster-exception-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/exception.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_exception.hpp.html">Program Listing for File exception.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_exception.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_exception.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_exception.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_image_os.hpp.html">File image_os.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_image_os.hpp.html#definition-include-ros2-ouster-image-os-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/image_os.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_image_os.hpp.html">Program Listing for File image_os.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_image_os.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_image_os.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_image_os.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_image_processor.hpp.html">File image_processor.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_image_processor.hpp.html#definition-include-ros2-ouster-os1-processors-image-processor-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/OS1/processors/image_processor.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_OS1_processors_image_processor.hpp.html">Program Listing for File image_processor.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_image_processor.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_image_processor.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_image_processor.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_image_processor.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_imu_processor.hpp.html">File imu_processor.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_imu_processor.hpp.html#definition-include-ros2-ouster-os1-processors-imu-processor-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/OS1/processors/imu_processor.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_OS1_processors_imu_processor.hpp.html">Program Listing for File imu_processor.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_imu_processor.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_imu_processor.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_imu_processor.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_imu_processor.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_lifecycle_interface.hpp.html">File lifecycle_interface.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_lifecycle_interface.hpp.html#definition-include-ros2-ouster-interfaces-lifecycle-interface-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/interfaces/lifecycle_interface.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_interfaces_lifecycle_interface.hpp.html">Program Listing for File lifecycle_interface.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_lifecycle_interface.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_lifecycle_interface.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_lifecycle_interface.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_lifecycle_interface.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_lifecycle_interface.hpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_metadata.hpp.html">File metadata.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_metadata.hpp.html#definition-include-ros2-ouster-interfaces-metadata-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/interfaces/metadata.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_interfaces_metadata.hpp.html">Program Listing for File metadata.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_metadata.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_metadata.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_metadata.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_metadata.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_metadata.hpp.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html">File OS1.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html#definition-include-ros2-ouster-os1-os1-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/OS1/OS1.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_OS1_OS1.hpp.html">Program Listing for File OS1.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html#typedefs">Typedefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_packet.hpp.html">File OS1_packet.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_packet.hpp.html#definition-include-ros2-ouster-os1-os1-packet-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/OS1/OS1_packet.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_OS1_OS1_packet.hpp.html">Program Listing for File OS1_packet.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_packet.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_packet.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_packet.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_packet.hpp.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_packet.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_sensor.hpp.html">File OS1_sensor.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_sensor.hpp.html#definition-include-ros2-ouster-os1-os1-sensor-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/OS1/OS1_sensor.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_OS1_OS1_sensor.hpp.html">Program Listing for File OS1_sensor.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_sensor.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_sensor.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_sensor.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_util.hpp.html">File OS1_util.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_util.hpp.html#definition-include-ros2-ouster-os1-os1-util-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/OS1/OS1_util.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_OS1_OS1_util.hpp.html">Program Listing for File OS1_util.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_util.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_util.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_util.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_OS1_util.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_ouster_driver.hpp.html">File ouster_driver.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_ouster_driver.hpp.html#definition-include-ros2-ouster-ouster-driver-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/ouster_driver.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_ouster_driver.hpp.html">Program Listing for File ouster_driver.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_ouster_driver.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_ouster_driver.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_ouster_driver.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_ouster_driver.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_point_os.hpp.html">File point_os.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_point_os.hpp.html#definition-include-ros2-ouster-point-os-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/point_os.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_point_os.hpp.html">Program Listing for File point_os.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_point_os.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_point_os.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_point_os.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_point_os.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_point_os.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_pointcloud_processor.hpp.html">File pointcloud_processor.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_pointcloud_processor.hpp.html#definition-include-ros2-ouster-os1-processors-pointcloud-processor-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/OS1/processors/pointcloud_processor.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_OS1_processors_pointcloud_processor.hpp.html">Program Listing for File pointcloud_processor.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_pointcloud_processor.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_pointcloud_processor.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_pointcloud_processor.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_pointcloud_processor.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processor_factories.hpp.html">File processor_factories.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processor_factories.hpp.html#definition-include-ros2-ouster-os1-processor-factories-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/OS1/processor_factories.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_OS1_processor_factories.hpp.html">Program Listing for File processor_factories.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processor_factories.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processor_factories.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processor_factories.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processor_factories.hpp.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processor_factories.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_scan_os.hpp.html">File scan_os.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_scan_os.hpp.html#definition-include-ros2-ouster-scan-os-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/scan_os.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_scan_os.hpp.html">Program Listing for File scan_os.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_scan_os.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_scan_os.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_scan_os.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_scan_os.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_scan_os.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_scan_processor.hpp.html">File scan_processor.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_scan_processor.hpp.html#definition-include-ros2-ouster-os1-processors-scan-processor-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/OS1/processors/scan_processor.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_OS1_processors_scan_processor.hpp.html">Program Listing for File scan_processor.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_scan_processor.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_scan_processor.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_scan_processor.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_OS1_processors_scan_processor.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_sensor_interface.hpp.html">File sensor_interface.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_sensor_interface.hpp.html#definition-include-ros2-ouster-interfaces-sensor-interface-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/interfaces/sensor_interface.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_interfaces_sensor_interface.hpp.html">Program Listing for File sensor_interface.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_sensor_interface.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_sensor_interface.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_sensor_interface.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_interfaces_sensor_interface.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file_include_ros2_ouster_string_utils.hpp.html">File string_utils.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_string_utils.hpp.html#definition-include-ros2-ouster-string-utils-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/ros2_ouster/string_utils.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file_include_ros2_ouster_string_utils.hpp.html">Program Listing for File string_utils.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_string_utils.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_string_utils.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_string_utils.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_ros2_ouster_string_utils.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ros2_ouster</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the documentation for ros2_ouster</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-documentation-for-ros2-ouster">
+<h1>Welcome to the documentation for ros2_ouster<a class="headerlink" href="#welcome-to-the-documentation-for-ros2-ouster" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#variables">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#typedefs">Typedefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-search">
+<h1>Indices and Search<a class="headerlink" href="#indices-and-search" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/index.html" class="btn btn-neutral float-right" title="Class Hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Apache-2.0.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

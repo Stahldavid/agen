@@ -1,0 +1,1 @@
+The current code lacks the implementation of controller loading, unloading, switching, and listing operations, and also the control loop action. The mentioned functionality should be added for a more complete ROS2 controller manager.

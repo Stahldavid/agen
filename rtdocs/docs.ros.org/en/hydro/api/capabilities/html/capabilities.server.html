@@ -1,0 +1,283 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Server Module &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="The Launch Manager Module" href="capabilities.launch_manager.html" />
+    <link rel="prev" title="The Specs Package" href="capabilities.specs.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/capabilities.server.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.launch_manager.html" title="The Launch Manager Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="capabilities.specs.html" title="The Specs Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-capabilities.server">
+<span id="the-server-module"></span><h1>The Server Module<a class="headerlink" href="#module-capabilities.server" title="Permalink to this headline">¶</a></h1>
+<p>This module implements the Capability server.</p>
+<p>The Capability server provides access to queries and services related
+to capabilities.</p>
+<dl class="class">
+<dt id="capabilities.server.CapabilityInstance">
+<em class="property">class </em><tt class="descclassname">capabilities.server.</tt><tt class="descname">CapabilityInstance</tt><big>(</big><em>provider</em>, <em>provider_path</em>, <em>started_by='unknown'</em><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityInstance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityInstance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encapsulates the state of an instance of a Capability Provider</p>
+<p>This class encapsulates the state of the capability instance and
+provides methods for changing the states of the instance.</p>
+<dl class="method">
+<dt id="capabilities.server.CapabilityInstance.cancel">
+<tt class="descname">cancel</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityInstance.cancel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityInstance.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancels the instance, which can only be done while it is still &#8216;waiting&#8217;</p>
+<p>Fails to cancel if the current state is not &#8216;waiting&#8217;.
+&#8220;Canceling&#8221; is achieved by setting the canceled member variable to True.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if canceling is successful, False otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.server.CapabilityInstance.launch">
+<tt class="descname">launch</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityInstance.launch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityInstance.launch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change to the &#8216;launching&#8217; state</p>
+<p>Fails to transition if the current state is not &#8216;waiting&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if transition is successful, False otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.server.CapabilityInstance.launched">
+<tt class="descname">launched</tt><big>(</big><em>pid</em><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityInstance.launched"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityInstance.launched" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called once the instance is &#8220;launched&#8221;, changes state to &#8216;running&#8217;</p>
+<p>Fails to transition if the current state is not &#8216;launching&#8217;.
+If successful, the state changes to &#8216;running&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pid</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) &#8211; process ID of the instance being tracked</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if transition is successful, False otherwise</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="capabilities.server.CapabilityInstance.state">
+<tt class="descname">state</tt><a class="reference internal" href="_modules/capabilities/server.html#CapabilityInstance.state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityInstance.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current state of the CapabilityInstance</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.server.CapabilityInstance.stopped">
+<tt class="descname">stopped</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityInstance.stopped"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityInstance.stopped" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change to the &#8216;stopping&#8217; state</p>
+<p>Fails to transition if the current state is not either &#8216;running&#8217; or &#8216;launching&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if transition is successful, False otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.server.CapabilityInstance.terminated">
+<tt class="descname">terminated</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityInstance.terminated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityInstance.terminated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called when the instance has terminated, transitions to the &#8216;terminated&#8217; state</p>
+<p>Fails to transition if the current state is not &#8216;stopping&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if transition is successful, False otherwise</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="capabilities.server.CapabilityServer">
+<em class="property">class </em><tt class="descclassname">capabilities.server.</tt><tt class="descname">CapabilityServer</tt><big>(</big><em>package_paths</em>, <em>screen=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to expose the <tt class="xref py py-class docutils literal"><span class="pre">discovery.SpecIndex</span></tt> over a ROS API</p>
+<dl class="method">
+<dt id="capabilities.server.CapabilityServer.handle_capability_events">
+<tt class="descname">handle_capability_events</tt><big>(</big><em>event</em><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityServer.handle_capability_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityServer.handle_capability_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback for handling messages (events) from the /events topic</p>
+<p>This callback only process events generated by this node.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<tt class="xref py py-class docutils literal"><span class="pre">capabilities.msgs.CapabilityEvent</span></tt>) &#8211; ROS message encapsulating an event</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.server.CapabilityServer.shutdown">
+<tt class="descname">shutdown</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityServer.shutdown"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityServer.shutdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the capability server and cleans up any running processes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.server.CapabilityServer.spin">
+<tt class="descname">spin</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#CapabilityServer.spin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.CapabilityServer.spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the capability server by setting up ROS comms, then spins</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.server.get_reverse_depends">
+<tt class="descclassname">capabilities.server.</tt><tt class="descname">get_reverse_depends</tt><big>(</big><em>name</em>, <em>capability_instances</em><big>)</big><a class="reference internal" href="_modules/capabilities/server.html#get_reverse_depends"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.server.get_reverse_depends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the reverse dependencies of a given Capability</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the Capability which the instances might depend on</li>
+<li><strong>capability_instances</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> of <a class="reference internal" href="#capabilities.server.CapabilityInstance" title="capabilities.server.CapabilityInstance"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInstance</span></tt></a>) &#8211; list of instances to search for having a
+dependency on the given Capability</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of <a class="reference internal" href="#capabilities.server.CapabilityInstance" title="capabilities.server.CapabilityInstance"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInstance</span></tt></a>&#8216;s which depend on the
+given Capability name</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.python.org/library/functions.html#list" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">list</span></tt></a> of <a class="reference internal" href="#capabilities.server.CapabilityInstance" title="capabilities.server.CapabilityInstance"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInstance</span></tt></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="capabilities.specs.html"
+                        title="previous chapter">The Specs Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="capabilities.launch_manager.html"
+                        title="next chapter">The Launch Manager Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/capabilities.server.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.launch_manager.html" title="The Launch Manager Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="capabilities.specs.html" title="The Specs Package"
+             >previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

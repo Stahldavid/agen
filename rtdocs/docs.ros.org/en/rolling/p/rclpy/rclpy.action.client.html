@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rclpy.action.client module &mdash; rclpy 3.2.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=eb155f5e"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rclpy.action.graph module" href="rclpy.action.graph.html" />
+    <link rel="prev" title="rclpy.action package" href="rclpy.action.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            rclpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">rclpy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="rclpy.html">rclpy package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="rclpy.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="rclpy.action.html">rclpy.action package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.impl.html">rclpy.impl package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.lifecycle.html">rclpy.lifecycle package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#module-rclpy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">rclpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">rclpy</a></li>
+          <li class="breadcrumb-item"><a href="rclpy.html">rclpy package</a></li>
+          <li class="breadcrumb-item"><a href="rclpy.action.html">rclpy.action package</a></li>
+      <li class="breadcrumb-item active">rclpy.action.client module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rclpy.action.client.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rclpy.action.client">
+<span id="rclpy-action-client-module"></span><h1>rclpy.action.client module<a class="headerlink" href="#module-rclpy.action.client" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.action.client.</span></span><span class="sig-name descname"><span class="pre">ActionClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback_group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal_service_qos_profile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">rclpy.qos.qos_profile_services_default</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_service_qos_profile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">rclpy.qos.qos_profile_services_default</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cancel_service_qos_profile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">rclpy.qos.qos_profile_services_default</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_sub_qos_profile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">rclpy.qos.QoSProfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status_sub_qos_profile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">rclpy.qos.qos_profile_action_status_default</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable" title="rclpy.waitable.Waitable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Waitable</span></code></a></p>
+<p>ROS Action client.</p>
+<p>Create an ActionClient.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node</strong> – The ROS node to add the action client to.</p></li>
+<li><p><strong>action_type</strong> – Type of the action.</p></li>
+<li><p><strong>action_name</strong> – Name of the action.
+Used as part of the underlying topic and service names.</p></li>
+<li><p><strong>callback_group</strong> – Callback group to add the action client to.
+If None, then the node’s default callback group is used.</p></li>
+<li><p><strong>goal_service_qos_profile</strong> – QoS profile for the goal service.</p></li>
+<li><p><strong>result_service_qos_profile</strong> – QoS profile for the result service.</p></li>
+<li><p><strong>cancel_service_qos_profile</strong> – QoS profile for the cancel service.</p></li>
+<li><p><strong>feedback_sub_qos_profile</strong> – QoS profile for the feedback subscriber.</p></li>
+<li><p><strong>status_sub_qos_profile</strong> – QoS profile for the status subscriber.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.add_to_wait_set">
+<span class="sig-name descname"><span class="pre">add_to_wait_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait_set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.add_to_wait_set" title="Link to this definition"></a></dt>
+<dd><p>Add entities to wait set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.destroy">
+<span class="sig-name descname"><span class="pre">destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.destroy" title="Link to this definition"></a></dt>
+<dd><p>Destroy the underlying action client handle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.execute">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taken_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.execute" title="Link to this definition"></a></dt>
+<dd><p>Execute work after data has been taken from a ready wait set.</p>
+<p>This will set results for Future objects for any received service responses and
+call any user-defined callbacks (e.g. feedback).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.get_num_entities">
+<span class="sig-name descname"><span class="pre">get_num_entities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.get_num_entities" title="Link to this definition"></a></dt>
+<dd><p>Return number of each type of entity used in the wait set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.is_ready">
+<span class="sig-name descname"><span class="pre">is_ready</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait_set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.is_ready" title="Link to this definition"></a></dt>
+<dd><p>Return True if one or more entities are ready in the wait set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.send_goal">
+<span class="sig-name descname"><span class="pre">send_goal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.send_goal" title="Link to this definition"></a></dt>
+<dd><p>Send a goal and wait for the result.</p>
+<p>Do not call this method in a callback or a deadlock may occur.</p>
+<p>See <a class="reference internal" href="#rclpy.action.client.ActionClient.send_goal_async" title="rclpy.action.client.ActionClient.send_goal_async"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send_goal_async()</span></code></a> for more info about keyword arguments.</p>
+<p>Unlike <a class="reference internal" href="#rclpy.action.client.ActionClient.send_goal_async" title="rclpy.action.client.ActionClient.send_goal_async"><code class="xref py py-meth docutils literal notranslate"><span class="pre">send_goal_async()</span></code></a>, this method returns the final result of the
+action (not a goal handle).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>goal</strong> (<em>action_type.Goal</em>) – The goal request.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result response.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>action_type.Result</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>TypeError if the type of the passed goal isn’t an instance of
+the Goal type of the provided action when the service was
+constructed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.send_goal_async">
+<span class="sig-name descname"><span class="pre">send_goal_async</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_callback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal_uuid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.send_goal_async" title="Link to this definition"></a></dt>
+<dd><p>Send a goal and asynchronously get the result.</p>
+<p>The result of the returned Future is set to a ClientGoalHandle when receipt of the goal
+is acknowledged by an action server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>goal</strong> (<em>action_type.Goal</em>) – The goal request.</p></li>
+<li><p><strong>feedback_callback</strong> (<em>function</em>) – Callback function for feedback associated with the goal.</p></li>
+<li><p><strong>goal_uuid</strong> – Universally unique identifier for the goal.
+If None, then a random UUID is generated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>unique_identifier_msgs.UUID</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a Future instance to a goal handle that completes when the goal request
+has been accepted or rejected.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="rclpy.task.html#rclpy.task.Future" title="rclpy.task.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">rclpy.task.Future</span></code></a> instance</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p>TypeError if the type of the passed goal isn’t an instance of
+the Goal type of the provided action when the service was
+constructed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.server_is_ready">
+<span class="sig-name descname"><span class="pre">server_is_ready</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.server_is_ready" title="Link to this definition"></a></dt>
+<dd><p>Check if there is an action server ready to process requests from this client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if an action server is ready, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.take_data">
+<span class="sig-name descname"><span class="pre">take_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.take_data" title="Link to this definition"></a></dt>
+<dd><p>Take stuff from lower level so the wait set doesn’t immediately wake again.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ActionClient.wait_for_server">
+<span class="sig-name descname"><span class="pre">wait_for_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ActionClient.wait_for_server" title="Link to this definition"></a></dt>
+<dd><p>Wait for an action sever to be ready.</p>
+<p>Returns as soon as an action server is ready for this client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout_sec</strong> – Number of seconds to wait until an action server is available.
+If None, then wait indefinitely.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if an action server is available, False if the timeout is exceeded.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.action.client.ClientGoalHandle">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.action.client.</span></span><span class="sig-name descname"><span class="pre">ClientGoalHandle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action_client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">goal_response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ClientGoalHandle" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Goal handle for working with Action Clients.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.action.client.ClientGoalHandle.accepted">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accepted</span></span><a class="headerlink" href="#rclpy.action.client.ClientGoalHandle.accepted" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ClientGoalHandle.cancel_goal">
+<span class="sig-name descname"><span class="pre">cancel_goal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ClientGoalHandle.cancel_goal" title="Link to this definition"></a></dt>
+<dd><p>Send a cancel request for the goal and wait for the response.</p>
+<p>Do not call this method in a callback or a deadlock may occur.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The cancel response.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ClientGoalHandle.cancel_goal_async">
+<span class="sig-name descname"><span class="pre">cancel_goal_async</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ClientGoalHandle.cancel_goal_async" title="Link to this definition"></a></dt>
+<dd><p>Asynchronous request for the goal be canceled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a Future instance that completes when the server responds.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="rclpy.task.html#rclpy.task.Future" title="rclpy.task.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">rclpy.task.Future</span></code></a> instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ClientGoalHandle.get_result">
+<span class="sig-name descname"><span class="pre">get_result</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ClientGoalHandle.get_result" title="Link to this definition"></a></dt>
+<dd><p>Request the result for the goal and wait for the response.</p>
+<p>Do not call this method in a callback or a deadlock may occur.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The result response.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.action.client.ClientGoalHandle.get_result_async">
+<span class="sig-name descname"><span class="pre">get_result_async</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.action.client.ClientGoalHandle.get_result_async" title="Link to this definition"></a></dt>
+<dd><p>Asynchronously request the goal result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a Future instance that completes when the result is ready.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="rclpy.task.html#rclpy.task.Future" title="rclpy.task.Future"><code class="xref py py-class docutils literal notranslate"><span class="pre">rclpy.task.Future</span></code></a> instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.action.client.ClientGoalHandle.goal_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">goal_id</span></span><a class="headerlink" href="#rclpy.action.client.ClientGoalHandle.goal_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.action.client.ClientGoalHandle.stamp">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stamp</span></span><a class="headerlink" href="#rclpy.action.client.ClientGoalHandle.stamp" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.action.client.ClientGoalHandle.status">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#rclpy.action.client.ClientGoalHandle.status" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rclpy.action.html" class="btn btn-neutral float-left" title="rclpy.action package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rclpy.action.graph.html" class="btn btn-neutral float-right" title="rclpy.action.graph module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Open Source Robotics Foundation, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,694 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rosdep2.installers &#8212; rosdep 0.22.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../contents.html">rosdep 0.22.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../contents.html">
+              <img class="logo" src="../../_static/ros.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for rosdep2.installers</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) 2009, Willow Garage, Inc.</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c1">#</span>
+<span class="c1">#     * Redistributions of source code must retain the above copyright</span>
+<span class="c1">#       notice, this list of conditions and the following disclaimer.</span>
+<span class="c1">#     * Redistributions in binary form must reproduce the above copyright</span>
+<span class="c1">#       notice, this list of conditions and the following disclaimer in the</span>
+<span class="c1">#       documentation and/or other materials provided with the distribution.</span>
+<span class="c1">#     * Neither the name of the Willow Garage, Inc. nor the names of its</span>
+<span class="c1">#       contributors may be used to endorse or promote products derived from</span>
+<span class="c1">#       this software without specific prior written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
+<span class="c1"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="c1"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
+<span class="c1"># ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE</span>
+<span class="c1"># LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
+<span class="c1"># CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
+<span class="c1"># SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
+<span class="c1"># INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
+<span class="c1"># CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
+<span class="c1"># ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c1"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="c1"># Author Tully Foote/tfoote@willowgarage.com, Ken Conley/kwc@willowgarage.com</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="kn">from</span> <span class="nn">rospkg.os_detect</span> <span class="k">import</span> <span class="n">OsDetect</span>
+
+<span class="kn">from</span> <span class="nn">.core</span> <span class="k">import</span> <span class="n">rd_debug</span><span class="p">,</span> <span class="n">RosdepInternalError</span><span class="p">,</span> <span class="n">InstallFailed</span><span class="p">,</span> <span class="n">print_bold</span><span class="p">,</span> <span class="n">InvalidData</span>
+
+<span class="c1"># kwc: InstallerContext is basically just a bunch of dictionaries with</span>
+<span class="c1"># defined lookup methods.  It really encompasses two facets of a</span>
+<span class="c1"># rosdep configuration: the pluggable nature of installers and</span>
+<span class="c1"># platforms, as well as the resolution of the operating system for a</span>
+<span class="c1"># specific machine.  It is possible to decouple those two notions,</span>
+<span class="c1"># though there are some touch points over how this interfaces with the</span>
+<span class="c1"># rospkg.os_detect library, i.e. how platforms can tweak these</span>
+<span class="c1"># detectors and how the higher-level APIs can override them.</span>
+
+
+<div class="viewcode-block" id="InstallerContext"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext">[docs]</a><span class="k">class</span> <span class="nc">InstallerContext</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :class:`InstallerContext` manages the context of execution for rosdep as it</span>
+<span class="sd">    relates to the installers, OS detectors, and other extensible</span>
+<span class="sd">    APIs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_detect</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param os_detect: (optional)</span>
+<span class="sd">        :class:`rospkg.os_detect.OsDetect` instance to use for</span>
+<span class="sd">          detecting platforms.  If `None`, default instance will be</span>
+<span class="sd">          used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># platform configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">installers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_os_installer</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># stores configuration of which value to use for the OS version key (version number or codename)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_version_type</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># OS detection and override</span>
+        <span class="k">if</span> <span class="n">os_detect</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">os_detect</span> <span class="o">=</span> <span class="n">OsDetect</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_detect</span> <span class="o">=</span> <span class="n">os_detect</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_override</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">set_verbose</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+
+<div class="viewcode-block" id="InstallerContext.set_os_override"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.set_os_override">[docs]</a>    <span class="k">def</span> <span class="nf">set_os_override</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Override the OS detector with *os_name* and *os_version*.  See</span>
+<span class="sd">        :meth:`InstallerContext.detect_os`.</span>
+
+<span class="sd">        :param os_name: OS name value to use, ``str``</span>
+<span class="sd">        :param os_version: OS version value to use, ``str``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;overriding OS to [</span><span class="si">%s</span><span class="s1">:</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_override</span> <span class="o">=</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span></div>
+
+    <span class="k">def</span> <span class="nf">get_os_version_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_version_type</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">os_name</span><span class="p">,</span> <span class="n">OsDetect</span><span class="o">.</span><span class="n">get_version</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_os_version_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">version_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">version_type</span><span class="p">,</span> <span class="s1">&#39;__call__&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;version type should be a method&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">os_version_type</span><span class="p">[</span><span class="n">os_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">version_type</span>
+
+<div class="viewcode-block" id="InstallerContext.get_os_name_and_version"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.get_os_name_and_version">[docs]</a>    <span class="k">def</span> <span class="nf">get_os_name_and_version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the OS name and version key to use for resolution and</span>
+<span class="sd">        installation.  This will be the detected OS name/version</span>
+<span class="sd">        unless :meth:`InstallerContext.set_os_override()` has been</span>
+<span class="sd">        called.</span>
+
+<span class="sd">        :returns: (os_name, os_version), ``(str, str)``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_override</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_override</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">os_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_detect</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+            <span class="n">os_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_os_version_type</span><span class="p">(</span><span class="n">os_name</span><span class="p">)</span>
+            <span class="n">os_version</span> <span class="o">=</span> <span class="n">os_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">os_detect</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">os_name</span><span class="p">,</span> <span class="n">os_version</span></div>
+
+<div class="viewcode-block" id="InstallerContext.get_os_detect"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.get_os_detect">[docs]</a>    <span class="k">def</span> <span class="nf">get_os_detect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns os_detect: :class:`OsDetect` instance used for</span>
+<span class="sd">          detecting platforms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_detect</span></div>
+
+<div class="viewcode-block" id="InstallerContext.set_installer"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.set_installer">[docs]</a>    <span class="k">def</span> <span class="nf">set_installer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">installer</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the installer to use for *installer_key*.  This will</span>
+<span class="sd">        replace any existing installer associated with the key.</span>
+<span class="sd">        *installer_key* should be the same key used for the</span>
+<span class="sd">        ``rosdep.yaml`` package manager key.  If *installer* is</span>
+<span class="sd">        ``None``, this will delete any existing associated installer</span>
+<span class="sd">        from this context.</span>
+
+<span class="sd">        :param installer_key: key/name to associate with installer, ``str``</span>
+<span class="sd">        :param installer: :class:`Installer` implementation, ``class``.</span>
+<span class="sd">        :raises: :exc:`TypeError` if *installer* is not a subclass of</span>
+<span class="sd">          :class:`Installer`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">installer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">installers</span><span class="p">[</span><span class="n">installer_key</span><span class="p">]</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">installer</span><span class="p">,</span> <span class="n">Installer</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;installer must be a instance of Installer&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;registering installer [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">installer_key</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">installers</span><span class="p">[</span><span class="n">installer_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">installer</span></div>
+
+<div class="viewcode-block" id="InstallerContext.get_installer"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.get_installer">[docs]</a>    <span class="k">def</span> <span class="nf">get_installer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">installer_key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: :class:`Installer` class associated with *installer_key*.</span>
+<span class="sd">        :raises: :exc:`KeyError` If not associated installer</span>
+<span class="sd">        :raises: :exc:`InstallFailed` If installer cannot produce an install command (e.g. if installer is not installed)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">installers</span><span class="p">[</span><span class="n">installer_key</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="InstallerContext.get_installer_keys"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.get_installer_keys">[docs]</a>    <span class="k">def</span> <span class="nf">get_installer_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of registered installer keys</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">installers</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="InstallerContext.get_os_keys"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.get_os_keys">[docs]</a>    <span class="k">def</span> <span class="nf">get_os_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of OS keys that have registered with this context, ``[str]``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="InstallerContext.add_os_installer_key"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.add_os_installer_key">[docs]</a>    <span class="k">def</span> <span class="nf">add_os_installer_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_key</span><span class="p">,</span> <span class="n">installer_key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Register an installer for the specified OS.  This will fail</span>
+<span class="sd">        with a :exc:`KeyError` if no :class:`Installer` can be found</span>
+<span class="sd">        with the associated *installer_key*.</span>
+
+<span class="sd">        :param os_key: Key for OS</span>
+<span class="sd">        :param installer_key: Key for installer to add to OS</span>
+<span class="sd">        :raises: :exc:`KeyError`: if installer for *installer_key*</span>
+<span class="sd">          is not set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># validate, will throw KeyError</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_installer</span><span class="p">(</span><span class="n">installer_key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;add installer [</span><span class="si">%s</span><span class="s1">] to OS [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">installer_key</span><span class="p">,</span> <span class="n">os_key</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">os_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="p">[</span><span class="n">os_key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">installer_key</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="p">[</span><span class="n">os_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">installer_key</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="InstallerContext.get_os_installer_keys"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.get_os_installer_keys">[docs]</a>    <span class="k">def</span> <span class="nf">get_os_installer_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get list of installer keys registered for the specified OS.</span>
+<span class="sd">        These keys can be resolved by calling</span>
+<span class="sd">        :meth:`InstallerContext.get_installer`.</span>
+
+<span class="sd">        :param os_key: Key for OS</span>
+<span class="sd">        :raises: :exc:`KeyError`: if no information for OS *os_key* is registered.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="p">[</span><span class="n">os_key</span><span class="p">][:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">os_key</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="InstallerContext.set_default_os_installer_key"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.set_default_os_installer_key">[docs]</a>    <span class="k">def</span> <span class="nf">set_default_os_installer_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_key</span><span class="p">,</span> <span class="n">installer_key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the default OS installer to use for OS.</span>
+<span class="sd">        :meth:`InstallerContext.add_os_installer` must have previously</span>
+<span class="sd">        been called with the same arguments.</span>
+
+<span class="sd">        :param os_key: Key for OS</span>
+<span class="sd">        :param installer_key: Key for installer to add to OS</span>
+<span class="sd">        :raises: :exc:`KeyError`: if installer for *installer_key*</span>
+<span class="sd">          is not set or if OS for *os_key* has no associated installers.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;unknown OS: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">os_key</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">installer_key</span><span class="p">,</span> <span class="s1">&#39;__call__&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;version type should be a method&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">installer_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">os_detect</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="p">[</span><span class="n">os_key</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;installer [</span><span class="si">%s</span><span class="s1">] is not associated with OS [</span><span class="si">%s</span><span class="s1">]. call add_os_installer_key() first&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">installer_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">os_detect</span><span class="p">),</span> <span class="n">os_key</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;set default installer [</span><span class="si">%s</span><span class="s1">] for OS [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">installer_key</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">os_detect</span><span class="p">),</span> <span class="n">os_key</span><span class="p">,))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_os_installer</span><span class="p">[</span><span class="n">os_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">installer_key</span></div>
+
+<div class="viewcode-block" id="InstallerContext.get_default_os_installer_key"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.InstallerContext.get_default_os_installer_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_default_os_installer_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">os_key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the default OS installer key to use for OS, or ``None`` if</span>
+<span class="sd">        there is no default.</span>
+
+<span class="sd">        :param os_key: Key for OS</span>
+<span class="sd">        :returns: :class:`Installer`</span>
+<span class="sd">        :raises: :exc:`KeyError`: if no information for OS *os_key* is registered.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;unknown OS: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">os_key</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">installer_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_os_installer</span><span class="p">[</span><span class="n">os_key</span><span class="p">](</span><span class="bp">self</span><span class="o">.</span><span class="n">os_detect</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">installer_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">os_installers</span><span class="p">[</span><span class="n">os_key</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;installer [</span><span class="si">%s</span><span class="s1">] is not associated with OS [</span><span class="si">%s</span><span class="s1">]. call add_os_installer_key() first&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">installer_key</span><span class="p">,</span> <span class="n">os_key</span><span class="p">))</span>
+            <span class="c1"># validate, will throw KeyError</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_installer</span><span class="p">(</span><span class="n">installer_key</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">installer_key</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div></div>
+
+
+<div class="viewcode-block" id="Installer"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.Installer">[docs]</a><span class="k">class</span> <span class="nc">Installer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The :class:`Installer` API is designed around opaque *resolved*</span>
+<span class="sd">    parameters. These parameters can be any type of sequence object,</span>
+<span class="sd">    but they must obey set arithmetic.  They should also implement</span>
+<span class="sd">    ``__str__()`` methods so they can be pretty printed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Installer.is_installed"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.Installer.is_installed">[docs]</a>    <span class="k">def</span> <span class="nf">is_installed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolved_item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param resolved: resolved installation item. NOTE: this is a single item,</span>
+<span class="sd">          not a list of items like the other APIs, ``opaque``.</span>
+<span class="sd">        :returns: ``True`` if all of the *resolved* items are installed on</span>
+<span class="sd">          the local system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;is_installed&#39;</span><span class="p">,</span> <span class="n">resolved_item</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Installer.get_install_command"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.Installer.get_install_command">[docs]</a>    <span class="k">def</span> <span class="nf">get_install_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolved</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reinstall</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param resolved: list of resolved installation items, ``[opaque]``</span>
+<span class="sd">        :param interactive: If `False`, disable interactive prompts,</span>
+<span class="sd">          e.g. Pass through ``-y`` or equivalant to package manager.</span>
+<span class="sd">        :param reinstall: If `True`, install everything even if already installed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;get_package_install_command&#39;</span><span class="p">,</span> <span class="n">resolved</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">reinstall</span><span class="p">,</span> <span class="n">quiet</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Installer.get_depends"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.Installer.get_depends">[docs]</a>    <span class="k">def</span> <span class="nf">get_depends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of dependencies on other rosdep keys.  Only</span>
+<span class="sd">          necessary if the package manager doesn&#39;t handle</span>
+<span class="sd">          dependencies.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[]</span>  <span class="c1"># Default return empty list</span></div>
+
+<div class="viewcode-block" id="Installer.resolve"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.Installer.resolve">[docs]</a>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_args_dict</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param rosdep_args_dict: argument dictionary to the rosdep rule for this package manager</span>
+<span class="sd">        :returns: [resolutions].  resolved objects should be printable to a user, but are otherwise opaque.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Base class resolve&#39;</span><span class="p">,</span> <span class="n">rosdep_args_dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Installer.unique"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.Installer.unique">[docs]</a>    <span class="k">def</span> <span class="nf">unique</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">resolved_rules</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Combine the resolved rules into a unique list.  This</span>
+<span class="sd">        is meant to combine the results of multiple calls to</span>
+<span class="sd">        :meth:`PackageManagerInstaller.resolve`.</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            resolved1 = installer.resolve(args1)</span>
+<span class="sd">            resolved2 = installer.resolve(args2)</span>
+<span class="sd">            resolved = installer.unique(resolved1, resolved2)</span>
+
+<span class="sd">        :param resolved_rules: resolved arguments.  Resolved</span>
+<span class="sd">          arguments must all be from this :class:`Installer` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Base class unique&#39;</span><span class="p">,</span> <span class="n">resolved_rules</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PackageManagerInstaller"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.PackageManagerInstaller">[docs]</a><span class="k">class</span> <span class="nc">PackageManagerInstaller</span><span class="p">(</span><span class="n">Installer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    General form of a package manager :class:`Installer`</span>
+<span class="sd">    implementation that assumes:</span>
+
+<span class="sd">     - installer rosdep args spec is a list of package names stored with the key &quot;packages&quot;</span>
+<span class="sd">     - a detect function exists that can return a list of packages that are installed</span>
+
+<span class="sd">    Also, if *supports_depends* is set to ``True``:</span>
+
+<span class="sd">     - installer rosdep args spec can also include dependency specification with the key &quot;depends&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detect_fn</span><span class="p">,</span> <span class="n">supports_depends</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param supports_depends: package manager supports dependency key</span>
+<span class="sd">        :param detect_fn: function that for a given list of packages determines</span>
+<span class="sd">        the list of installed packages.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detect_fn</span> <span class="o">=</span> <span class="n">detect_fn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">supports_depends</span> <span class="o">=</span> <span class="n">supports_depends</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">as_root</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sudo_command</span> <span class="o">=</span> <span class="s1">&#39;sudo -H&#39;</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">os</span><span class="p">,</span> <span class="s1">&#39;geteuid&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">geteuid</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+
+<div class="viewcode-block" id="PackageManagerInstaller.elevate_priv"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.PackageManagerInstaller.elevate_priv">[docs]</a>    <span class="k">def</span> <span class="nf">elevate_priv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cmd</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Prepend *self.sudo_command* to the command if *self.as_root* is ``True``.</span>
+
+<span class="sd">        :param list cmd: list of strings comprising the command</span>
+<span class="sd">        :returns: a list of commands</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sudo_command</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_root</span> <span class="k">else</span> <span class="p">[])</span> <span class="o">+</span> <span class="n">cmd</span></div>
+
+<div class="viewcode-block" id="PackageManagerInstaller.resolve"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.PackageManagerInstaller.resolve">[docs]</a>    <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        See :meth:`Installer.resolve()`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">packages</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">rosdep_args</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="n">packages</span> <span class="o">=</span> <span class="n">rosdep_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;packages&#39;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">packages</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">packages</span> <span class="o">=</span> <span class="n">packages</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rosdep_args</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">packages</span> <span class="o">=</span> <span class="n">rosdep_args</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">rosdep_args</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">packages</span> <span class="o">=</span> <span class="n">rosdep_args</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidData</span><span class="p">(</span><span class="s1">&#39;Invalid rosdep args: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rosdep_args</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">packages</span></div>
+
+<div class="viewcode-block" id="PackageManagerInstaller.unique"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.PackageManagerInstaller.unique">[docs]</a>    <span class="k">def</span> <span class="nf">unique</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">resolved_rules</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        See :meth:`Installer.unique()`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">resolved</span> <span class="ow">in</span> <span class="n">resolved_rules</span><span class="p">:</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PackageManagerInstaller.get_packages_to_install"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.PackageManagerInstaller.get_packages_to_install">[docs]</a>    <span class="k">def</span> <span class="nf">get_packages_to_install</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolved</span><span class="p">,</span> <span class="n">reinstall</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of packages (out of *resolved*) that still need to get</span>
+<span class="sd">        installed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">reinstall</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">resolved</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">resolved</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">detected</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_fn</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">resolved</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">detected</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="PackageManagerInstaller.is_installed"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.PackageManagerInstaller.is_installed">[docs]</a>    <span class="k">def</span> <span class="nf">is_installed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolved_item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if a given package was installed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_packages_to_install</span><span class="p">([</span><span class="n">resolved_item</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="PackageManagerInstaller.get_version_strings"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.PackageManagerInstaller.get_version_strings">[docs]</a>    <span class="k">def</span> <span class="nf">get_version_strings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a list of version information strings.</span>
+
+<span class="sd">        Where each string is of the form &quot;&lt;installer&gt; &lt;version string&gt;&quot;.</span>
+<span class="sd">        For example, [&quot;apt-get x.y.z&quot;] or [&quot;pip x.y.z&quot;, &quot;setuptools x.y.z&quot;].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;subclasses must implement get_version_strings method&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PackageManagerInstaller.get_install_command"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.PackageManagerInstaller.get_install_command">[docs]</a>    <span class="k">def</span> <span class="nf">get_install_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolved</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">reinstall</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;subclasses must implement&#39;</span><span class="p">,</span> <span class="n">resolved</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">reinstall</span><span class="p">,</span> <span class="n">quiet</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PackageManagerInstaller.get_depends"><a class="viewcode-back" href="../../rosdep2_api.html#rosdep2.PackageManagerInstaller.get_depends">[docs]</a>    <span class="k">def</span> <span class="nf">get_depends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdep_args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :returns: list of dependencies on other rosdep keys.  Only</span>
+<span class="sd">          necessary if the package manager doesn&#39;t handle</span>
+<span class="sd">          dependencies.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">supports_depends</span> <span class="ow">and</span> <span class="nb">type</span><span class="p">(</span><span class="n">rosdep_args</span><span class="p">)</span> <span class="o">==</span> <span class="nb">dict</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rosdep_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;depends&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">return</span> <span class="p">[]</span>  <span class="c1"># Default return empty list</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">normalize_uninstalled_to_list</span><span class="p">(</span><span class="n">uninstalled</span><span class="p">):</span>
+    <span class="n">uninstalled_dependencies</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">pkg_or_list</span> <span class="ow">in</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">uninstalled</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pkg_or_list</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="n">pkg_or_list</span><span class="p">:</span>
+                <span class="n">uninstalled_dependencies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pkg</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">uninstalled_dependencies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pkg</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">uninstalled_dependencies</span>
+
+
+<span class="k">class</span> <span class="nc">RosdepInstaller</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">installer_context</span><span class="p">,</span> <span class="n">lookup</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">installer_context</span> <span class="o">=</span> <span class="n">installer_context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span> <span class="o">=</span> <span class="n">lookup</span>
+
+    <span class="k">def</span> <span class="nf">get_uninstalled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">implicit</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get list of system dependencies that have not been installed</span>
+<span class="sd">        as well as a list of errors from performing the resolution.</span>
+<span class="sd">        This is a bulk API in order to provide performance</span>
+<span class="sd">        optimizations in checking install state.</span>
+
+<span class="sd">        :param resources: List of resource names (e.g. ROS package names), ``[str]]``</span>
+<span class="sd">        :param implicit: Install implicit (recursive) dependencies of</span>
+<span class="sd">            resources.  Default ``False``.</span>
+
+<span class="sd">        :returns: (uninstalled, errors), ``({str: [opaque]}, {str: ResolutionError})``.</span>
+<span class="sd">          Uninstalled is a dictionary with the installer_key as the key.</span>
+<span class="sd">        :raises: :exc:`RosdepInternalError`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">installer_context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installer_context</span>
+
+        <span class="c1"># resolutions have been unique()d</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;resolving for resources [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">resources</span><span class="p">)))</span>
+        <span class="n">resolutions</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="o">.</span><span class="n">resolve_all</span><span class="p">(</span><span class="n">resources</span><span class="p">,</span> <span class="n">installer_context</span><span class="p">,</span> <span class="n">implicit</span><span class="o">=</span><span class="n">implicit</span><span class="p">)</span>
+
+        <span class="c1"># for each installer, figure out what is left to install</span>
+        <span class="n">uninstalled</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">resolutions</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="k">return</span> <span class="n">uninstalled</span><span class="p">,</span> <span class="n">errors</span>
+        <span class="k">for</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">resolved</span> <span class="ow">in</span> <span class="n">resolutions</span><span class="p">:</span>  <span class="c1"># py3k</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;resolution: </span><span class="si">%s</span><span class="s1"> [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">installer_key</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resolved</span><span class="p">])))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">installer</span> <span class="o">=</span> <span class="n">installer_context</span><span class="o">.</span><span class="n">get_installer</span><span class="p">(</span><span class="n">installer_key</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># lookup has to be buggy to cause this</span>
+                <span class="k">raise</span> <span class="n">RosdepInternalError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">packages_to_install</span> <span class="o">=</span> <span class="n">installer</span><span class="o">.</span><span class="n">get_packages_to_install</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">rd_debug</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
+                <span class="k">raise</span> <span class="n">RosdepInternalError</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s1">&#39;Bad installer [</span><span class="si">%s</span><span class="s1">]: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">installer_key</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+
+            <span class="c1"># only create key if there is something to do</span>
+            <span class="k">if</span> <span class="n">packages_to_install</span><span class="p">:</span>
+                <span class="n">uninstalled</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">installer_key</span><span class="p">,</span> <span class="n">packages_to_install</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;uninstalled: [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">packages_to_install</span><span class="p">])))</span>
+
+        <span class="k">return</span> <span class="n">uninstalled</span><span class="p">,</span> <span class="n">errors</span>
+
+    <span class="k">def</span> <span class="nf">install</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uninstalled</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">simulate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">continue_on_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reinstall</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Install the uninstalled rosdeps.  This API is for the bulk</span>
+<span class="sd">        workflow of rosdep (see example below).  For a more targeted</span>
+<span class="sd">        install API, see :meth:`RosdepInstaller.install_resolved`.</span>
+
+<span class="sd">        :param uninstalled: uninstalled value from</span>
+<span class="sd">          :meth:`RosdepInstaller.get_uninstalled`.  Value is a</span>
+<span class="sd">          dictionary mapping installer key to a dictionary with resolution</span>
+<span class="sd">          data, ``{str: {str: vals}}``</span>
+<span class="sd">        :param interactive: If ``False``, suppress</span>
+<span class="sd">          interactive prompts (e.g. by passing &#39;-y&#39; to ``apt``).</span>
+<span class="sd">        :param simulate: If ``False`` simulate installation</span>
+<span class="sd">          without actually executing.</span>
+<span class="sd">        :param continue_on_error: If ``True``, continue installation</span>
+<span class="sd">          even if an install fails.  Otherwise, stop after first</span>
+<span class="sd">          installation failure.</span>
+<span class="sd">        :param reinstall: If ``True``, install dependencies if even</span>
+<span class="sd">          already installed (default ``False``).</span>
+
+<span class="sd">        :raises: :exc:`InstallFailed` if any rosdeps fail to install</span>
+<span class="sd">          and *continue_on_error* is ``False``.</span>
+<span class="sd">        :raises: :exc:`KeyError` If *uninstalled* value has invalid</span>
+<span class="sd">          installer keys</span>
+
+<span class="sd">        Example::</span>
+
+<span class="sd">            uninstalled, errors = installer.get_uninstalled(packages)</span>
+<span class="sd">            installer.install(uninstalled)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s1">&#39;install options: reinstall[</span><span class="si">%s</span><span class="s1">] simulate[</span><span class="si">%s</span><span class="s1">] interactive[</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span>
+                <span class="p">(</span><span class="n">reinstall</span><span class="p">,</span> <span class="n">simulate</span><span class="p">,</span> <span class="n">interactive</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">uninstalled_list</span> <span class="o">=</span> <span class="n">normalize_uninstalled_to_list</span><span class="p">(</span><span class="n">uninstalled</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;install: uninstalled keys are </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">uninstalled_list</span><span class="p">))</span>
+
+        <span class="c1"># Squash uninstalled again, in case some dependencies were already installed</span>
+        <span class="n">squashed_uninstalled</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">previous_installer_key</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">resolved</span> <span class="ow">in</span> <span class="n">uninstalled</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">previous_installer_key</span> <span class="o">!=</span> <span class="n">installer_key</span><span class="p">:</span>
+                <span class="n">squashed_uninstalled</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">installer_key</span><span class="p">,</span> <span class="p">[]))</span>
+                <span class="n">previous_installer_key</span> <span class="o">=</span> <span class="n">installer_key</span>
+            <span class="n">squashed_uninstalled</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">resolved</span><span class="p">)</span>
+
+        <span class="n">failures</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">resolved</span> <span class="ow">in</span> <span class="n">squashed_uninstalled</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">install_resolved</span><span class="p">(</span><span class="n">installer_key</span><span class="p">,</span> <span class="n">resolved</span><span class="p">,</span> <span class="n">simulate</span><span class="o">=</span><span class="n">simulate</span><span class="p">,</span>
+                                      <span class="n">interactive</span><span class="o">=</span><span class="n">interactive</span><span class="p">,</span> <span class="n">reinstall</span><span class="o">=</span><span class="n">reinstall</span><span class="p">,</span> <span class="n">continue_on_error</span><span class="o">=</span><span class="n">continue_on_error</span><span class="p">,</span>
+                                      <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">InstallFailed</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">continue_on_error</span><span class="p">:</span>
+                    <span class="k">raise</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># accumulate errors</span>
+                    <span class="n">failures</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">failures</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">failures</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InstallFailed</span><span class="p">(</span><span class="n">failures</span><span class="o">=</span><span class="n">failures</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">install_resolved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">resolved</span><span class="p">,</span> <span class="n">simulate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="n">reinstall</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">continue_on_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Lower-level API for installing a rosdep dependency.  The</span>
+<span class="sd">        rosdep keys have already been resolved to *installer_key* and</span>
+<span class="sd">        *resolved* via :exc:`RosdepLookup` or other means.</span>
+
+<span class="sd">        :param installer_key: Key for installer to apply to *resolved*, ``str``</span>
+<span class="sd">        :param resolved: Opaque resolution list from :class:`RosdepLookup`.</span>
+<span class="sd">        :param interactive: If ``True``, allow interactive prompts (default ``True``)</span>
+<span class="sd">        :param simulate: If ``True``, don&#39;t execute installation commands, just print to screen.</span>
+<span class="sd">        :param reinstall: If ``True``, install dependencies if even</span>
+<span class="sd">          already installed (default ``False``).</span>
+<span class="sd">        :param verbose: If ``True``, print verbose output to screen (default ``False``)</span>
+<span class="sd">        :param quiet: If ``True``, supress output except for errors (default ``False``)</span>
+
+<span class="sd">        :raises: :exc:`InstallFailed` if any of *resolved* fail to install.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">installer_context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installer_context</span>
+        <span class="n">installer</span> <span class="o">=</span> <span class="n">installer_context</span><span class="o">.</span><span class="n">get_installer</span><span class="p">(</span><span class="n">installer_key</span><span class="p">)</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">installer</span><span class="o">.</span><span class="n">get_install_command</span><span class="p">(</span><span class="n">resolved</span><span class="p">,</span> <span class="n">interactive</span><span class="o">=</span><span class="n">interactive</span><span class="p">,</span> <span class="n">reinstall</span><span class="o">=</span><span class="n">reinstall</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="n">quiet</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">command</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#No packages to install&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">simulate</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#[</span><span class="si">%s</span><span class="s1">] Installation commands:&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">installer_key</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">sub_command</span> <span class="ow">in</span> <span class="n">command</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_command</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="n">sub_cmd_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub_command</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cmd</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sub_command</span><span class="p">):</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  &#39;</span><span class="si">%s</span><span class="s2">&#39; (alternative </span><span class="si">%d</span><span class="s2">/</span><span class="si">%d</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd</span><span class="p">),</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sub_cmd_len</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  &#39;</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sub_command</span><span class="p">))</span>
+
+        <span class="c1"># nothing left to do for simulation</span>
+        <span class="k">if</span> <span class="n">simulate</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">def</span> <span class="nf">run_command</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">failures</span><span class="p">,</span> <span class="n">verbose</span><span class="p">):</span>
+            <span class="c1"># always echo commands to screen</span>
+            <span class="n">print_bold</span><span class="p">(</span><span class="s1">&#39;executing command [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command</span><span class="p">))</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;command return code [</span><span class="si">%s</span><span class="s1">]: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command</span><span class="p">),</span> <span class="n">result</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">failures</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">installer_key</span><span class="p">,</span> <span class="s1">&#39;command [</span><span class="si">%s</span><span class="s1">] failed&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">command</span><span class="p">))))</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="c1"># run each install command set and collect errors</span>
+        <span class="n">failures</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sub_command</span> <span class="ow">in</span> <span class="n">command</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_command</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>  <span class="c1"># list of alternatives</span>
+                <span class="n">alt_failures</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">alt_command</span> <span class="ow">in</span> <span class="n">sub_command</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">run_command</span><span class="p">(</span><span class="n">alt_command</span><span class="p">,</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">alt_failures</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># one successsfull command is sufficient</span>
+                        <span class="n">alt_failures</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># clear failuers from other alternatives</span>
+                        <span class="k">break</span>
+                <span class="n">failures</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">alt_failures</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">run_command</span><span class="p">(</span><span class="n">sub_command</span><span class="p">,</span> <span class="n">installer_key</span><span class="p">,</span> <span class="n">failures</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">continue_on_error</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">InstallFailed</span><span class="p">(</span><span class="n">failures</span><span class="o">=</span><span class="n">failures</span><span class="p">)</span>
+
+        <span class="c1"># test installation of each</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resolved</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">installer</span><span class="o">.</span><span class="n">is_installed</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+                <span class="n">failures</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">installer_key</span><span class="p">,</span> <span class="s1">&#39;Failed to detect successful installation of [</span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">r</span><span class="p">)))</span>
+        <span class="c1"># finalize result</span>
+        <span class="k">if</span> <span class="n">failures</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InstallFailed</span><span class="p">(</span><span class="n">failures</span><span class="o">=</span><span class="n">failures</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#successfully installed&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../contents.html">rosdep 0.22.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011, Willow Garage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

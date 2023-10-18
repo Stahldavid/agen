@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Execution and Callbacks &mdash; rclpy 3.2.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=eb155f5e"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utilities" href="utilities.html" />
+    <link rel="prev" title="Context" href="context.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            rclpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="clock.html">Clock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="init_shutdown.html">Initialization, Shutdown, and Spinning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topics.html">Topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time.html">Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timers.html">Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="context.html">Context</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Execution and Callbacks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-rclpy.executors">Executors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.executors.ConditionReachedException"><code class="docutils literal notranslate"><span class="pre">ConditionReachedException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.executors.Executor"><code class="docutils literal notranslate"><span class="pre">Executor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.executors.ExternalShutdownException"><code class="docutils literal notranslate"><span class="pre">ExternalShutdownException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.executors.MultiThreadedExecutor"><code class="docutils literal notranslate"><span class="pre">MultiThreadedExecutor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.executors.ShutdownException"><code class="docutils literal notranslate"><span class="pre">ShutdownException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.executors.SingleThreadedExecutor"><code class="docutils literal notranslate"><span class="pre">SingleThreadedExecutor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.executors.TimeoutException"><code class="docutils literal notranslate"><span class="pre">TimeoutException</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.executors.await_or_execute"><code class="docutils literal notranslate"><span class="pre">await_or_execute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-rclpy.callback_groups">Callback Groups</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.callback_groups.CallbackGroup"><code class="docutils literal notranslate"><span class="pre">CallbackGroup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.callback_groups.MutuallyExclusiveCallbackGroup"><code class="docutils literal notranslate"><span class="pre">MutuallyExclusiveCallbackGroup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.callback_groups.ReentrantCallbackGroup"><code class="docutils literal notranslate"><span class="pre">ReentrantCallbackGroup</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qos.html">Quality of Service</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">rclpy</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rclpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API</a></li>
+      <li class="breadcrumb-item active">Execution and Callbacks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/execution_and_callbacks.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="execution-and-callbacks">
+<h1>Execution and Callbacks<a class="headerlink" href="#execution-and-callbacks" title="Link to this heading"></a></h1>
+<p>There are two components that control the execution of callbacks: <strong>executors</strong> and <strong>callback groups</strong>.</p>
+<p>Executors are responsible for the actual execution of callbacks and should extend the <a class="reference internal" href="../rclpy.executors.html#rclpy.executors.Executor" title="rclpy.executors.Executor"><code class="xref py py-class docutils literal notranslate"><span class="pre">Executor</span></code></a> class.</p>
+<p>Callback groups are used to enforce concurrency rules for callbacks and should extend the <a class="reference internal" href="../rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup" title="rclpy.callback_groups.CallbackGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">CallbackGroup</span></code></a> class.</p>
+<section id="module-rclpy.executors">
+<span id="executors"></span><h2>Executors<a class="headerlink" href="#module-rclpy.executors" title="Link to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="rclpy.executors.ConditionReachedException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.executors.</span></span><span class="sig-name descname"><span class="pre">ConditionReachedException</span></span><a class="headerlink" href="#rclpy.executors.ConditionReachedException" title="Link to this definition"></a></dt>
+<dd><p>Future has been completed.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.executors.Executor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.executors.</span></span><span class="sig-name descname"><span class="pre">Executor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.context.html#rclpy.context.Context" title="rclpy.context.Context"><span class="pre">Context</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.executors.Executor" title="Link to this definition"></a></dt>
+<dd><p>The base class for an executor.</p>
+<p>An executor controls the threading model used to process callbacks. Callbacks are units of work
+like subscription callbacks, timer callbacks, service calls, and received client responses. An
+executor controls which threads callbacks get executed in.</p>
+<p>A custom executor must define <a class="reference internal" href="../rclpy.executors.html#rclpy.executors.Executor.spin_once" title="rclpy.executors.Executor.spin_once"><code class="xref py py-meth docutils literal notranslate"><span class="pre">spin_once()</span></code></a>.
+If the executor has any cleanup then it should also define <a class="reference internal" href="../rclpy.executors.html#rclpy.executors.Executor.shutdown" title="rclpy.executors.Executor.shutdown"><code class="xref py py-meth docutils literal notranslate"><span class="pre">shutdown()</span></code></a>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>context</strong> – The context to be associated with, or <code class="docutils literal notranslate"><span class="pre">None</span></code> for the default global context.</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rclpy.executor</span> <span class="kn">import</span> <span class="n">Executor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Executor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">executor</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">Node</span><span class="p">(</span><span class="s1">&#39;example_node&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">executor</span><span class="o">.</span><span class="n">spin_once</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">len</span><span class="p">(</span><span class="n">executor</span><span class="o">.</span><span class="n">get_nodes</span><span class="p">())</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.add_node">
+<span class="sig-name descname"><span class="pre">add_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Node</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rclpy.executors.Executor.add_node" title="Link to this definition"></a></dt>
+<dd><p>Add a node whose callbacks should be managed by this executor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>node</strong> – The node to add to the executor.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the node was added, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.can_execute">
+<span class="sig-name descname"><span class="pre">can_execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WaitableEntityType</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rclpy.executors.Executor.can_execute" title="Link to this definition"></a></dt>
+<dd><p>Determine if a callback for an entity can be executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – Subscription, Timer, Guard condition, etc</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the entity callback can be executed, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.context">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">context</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="../rclpy.context.html#rclpy.context.Context" title="rclpy.context.Context"><span class="pre">Context</span></a></em><a class="headerlink" href="#rclpy.executors.Executor.context" title="Link to this definition"></a></dt>
+<dd><p>Get the context associated with the executor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.create_task">
+<span class="sig-name descname"><span class="pre">create_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Coroutine</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../rclpy.task.html#rclpy.task.Task" title="rclpy.task.Task"><span class="pre">Task</span></a></span></span><a class="headerlink" href="#rclpy.executors.Executor.create_task" title="Link to this definition"></a></dt>
+<dd><p>Add a callback or coroutine to be executed during <a class="reference internal" href="../rclpy.executors.html#rclpy.executors.Executor.spin" title="rclpy.executors.Executor.spin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">spin()</span></code></a> and return a Future.</p>
+<p>Arguments to this function are passed to the callback.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>callback</strong> – A callback to be run in the executor.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.get_nodes">
+<span class="sig-name descname"><span class="pre">get_nodes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Node</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rclpy.executors.Executor.get_nodes" title="Link to this definition"></a></dt>
+<dd><p>Return nodes that have been added to this executor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.remove_node">
+<span class="sig-name descname"><span class="pre">remove_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Node</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.Executor.remove_node" title="Link to this definition"></a></dt>
+<dd><p>Stop managing this node’s callbacks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>node</strong> – The node to remove from the executor.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.shutdown">
+<span class="sig-name descname"><span class="pre">shutdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rclpy.executors.Executor.shutdown" title="Link to this definition"></a></dt>
+<dd><p>Stop executing callbacks and wait for their completion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout_sec</strong> – Seconds to wait. Block forever if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative.
+Don’t wait if 0.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if all outstanding callbacks finished executing, or <code class="docutils literal notranslate"><span class="pre">False</span></code> if the
+timeot expires before all outstanding work is done.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.spin">
+<span class="sig-name descname"><span class="pre">spin</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.Executor.spin" title="Link to this definition"></a></dt>
+<dd><p>Execute callbacks until shutdown.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.spin_once">
+<span class="sig-name descname"><span class="pre">spin_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.Executor.spin_once" title="Link to this definition"></a></dt>
+<dd><p>Wait for and execute a single callback.</p>
+<p>A custom executor should use <a class="reference internal" href="../rclpy.executors.html#rclpy.executors.Executor.wait_for_ready_callbacks" title="rclpy.executors.Executor.wait_for_ready_callbacks"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wait_for_ready_callbacks()</span></code></a> to get work.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout_sec</strong> – Seconds to wait. Block forever if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative.
+Don’t wait if 0.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.spin_once_until_future_complete">
+<span class="sig-name descname"><span class="pre">spin_once_until_future_complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.task.html#rclpy.task.Future" title="rclpy.task.Future"><span class="pre">Future</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.Executor.spin_once_until_future_complete" title="Link to this definition"></a></dt>
+<dd><p>Wait for and execute a single callback.</p>
+<p>This should behave in the same way as <a class="reference internal" href="../rclpy.executors.html#rclpy.executors.Executor.spin_once" title="rclpy.executors.Executor.spin_once"><code class="xref py py-meth docutils literal notranslate"><span class="pre">spin_once()</span></code></a>.
+If needed by the implementation, it should awake other threads waiting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>future</strong> – The executor will wait until this future is done.</p></li>
+<li><p><strong>timeout_sec</strong> – Maximum seconds to wait. Block forever if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative.
+Don’t wait if 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.spin_until_future_complete">
+<span class="sig-name descname"><span class="pre">spin_until_future_complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.task.html#rclpy.task.Future" title="rclpy.task.Future"><span class="pre">Future</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.Executor.spin_until_future_complete" title="Link to this definition"></a></dt>
+<dd><p>Execute callbacks until a given future is done or a timeout occurs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.wait_for_ready_callbacks">
+<span class="sig-name descname"><span class="pre">wait_for_ready_callbacks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../rclpy.task.html#rclpy.task.Task" title="rclpy.task.Task"><span class="pre">Task</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">WaitableEntityType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Node</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rclpy.executors.Executor.wait_for_ready_callbacks" title="Link to this definition"></a></dt>
+<dd><p>Return callbacks that are ready to be executed.</p>
+<p>The arguments to this function are passed to the internal method
+<a class="reference internal" href="../rclpy.executors.html#rclpy.executors.Executor._wait_for_ready_callbacks" title="rclpy.executors.Executor._wait_for_ready_callbacks"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_wait_for_ready_callbacks()</span></code></a> to get a generator for ready callbacks:</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor._wait_for_ready_callbacks">
+<span class="sig-name descname"><span class="pre">_wait_for_ready_callbacks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_sec:</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nodes:</span> <span class="pre">~typing.List[Node]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition:</span> <span class="pre">~typing.Callable[[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bool]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">Executor.&lt;lambda&gt;&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Generator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../rclpy.task.html#rclpy.task.Task" title="rclpy.task.Task"><span class="pre">Task</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">WaitableEntityType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Node</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rclpy.executors.Executor._wait_for_ready_callbacks" title="Link to this definition"></a></dt>
+<dd><p>Yield callbacks that are ready to be executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="../rclpy.executors.html#rclpy.executors.TimeoutException" title="rclpy.executors.TimeoutException"><strong>TimeoutException</strong></a> – on timeout.</p></li>
+<li><p><a class="reference internal" href="../rclpy.executors.html#rclpy.executors.ShutdownException" title="rclpy.executors.ShutdownException"><strong>ShutdownException</strong></a> – on if executor was shut down.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>timeout_sec</strong> – Seconds to wait. Block forever if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative.
+Don’t wait if 0.</p></li>
+<li><p><strong>nodes</strong> – A list of nodes to wait on. Wait on all nodes if <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><strong>condition</strong> – A callable that makes the function return immediately when it evaluates
+to True.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.Executor.wake">
+<span class="sig-name descname"><span class="pre">wake</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.Executor.wake" title="Link to this definition"></a></dt>
+<dd><p>Wake the executor because something changed.</p>
+<p>This is used to tell the executor when entities are created or destroyed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rclpy.executors.ExternalShutdownException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.executors.</span></span><span class="sig-name descname"><span class="pre">ExternalShutdownException</span></span><a class="headerlink" href="#rclpy.executors.ExternalShutdownException" title="Link to this definition"></a></dt>
+<dd><p>Context has been shutdown.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.executors.MultiThreadedExecutor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.executors.</span></span><span class="sig-name descname"><span class="pre">MultiThreadedExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.context.html#rclpy.context.Context" title="rclpy.context.Context"><span class="pre">Context</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.executors.MultiThreadedExecutor" title="Link to this definition"></a></dt>
+<dd><p>Runs callbacks in a pool of threads.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_threads</strong> – number of worker threads in the pool.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, the number of threads will be automatically set by querying the underlying OS
+for the CPU affinity of the process space.
+If the OS doesn’t provide this information, defaults to 2.</p></li>
+<li><p><strong>context</strong> – The context associated with the executor.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.MultiThreadedExecutor.spin_once">
+<span class="sig-name descname"><span class="pre">spin_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.MultiThreadedExecutor.spin_once" title="Link to this definition"></a></dt>
+<dd><p>Wait for and execute a single callback.</p>
+<p>A custom executor should use <code class="xref py py-meth docutils literal notranslate"><span class="pre">wait_for_ready_callbacks()</span></code> to get work.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout_sec</strong> – Seconds to wait. Block forever if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative.
+Don’t wait if 0.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.MultiThreadedExecutor.spin_once_until_future_complete">
+<span class="sig-name descname"><span class="pre">spin_once_until_future_complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.task.html#rclpy.task.Future" title="rclpy.task.Future"><span class="pre">Future</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.MultiThreadedExecutor.spin_once_until_future_complete" title="Link to this definition"></a></dt>
+<dd><p>Wait for and execute a single callback.</p>
+<p>This should behave in the same way as <a class="reference internal" href="../rclpy.executors.html#rclpy.executors.MultiThreadedExecutor.spin_once" title="rclpy.executors.MultiThreadedExecutor.spin_once"><code class="xref py py-meth docutils literal notranslate"><span class="pre">spin_once()</span></code></a>.
+If needed by the implementation, it should awake other threads waiting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>future</strong> – The executor will wait until this future is done.</p></li>
+<li><p><strong>timeout_sec</strong> – Maximum seconds to wait. Block forever if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative.
+Don’t wait if 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rclpy.executors.ShutdownException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.executors.</span></span><span class="sig-name descname"><span class="pre">ShutdownException</span></span><a class="headerlink" href="#rclpy.executors.ShutdownException" title="Link to this definition"></a></dt>
+<dd><p>Signal that executor was shut down.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.executors.SingleThreadedExecutor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.executors.</span></span><span class="sig-name descname"><span class="pre">SingleThreadedExecutor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.context.html#rclpy.context.Context" title="rclpy.context.Context"><span class="pre">Context</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.executors.SingleThreadedExecutor" title="Link to this definition"></a></dt>
+<dd><p>Runs callbacks in the thread that calls <a class="reference internal" href="../rclpy.executors.html#rclpy.executors.Executor.spin" title="rclpy.executors.Executor.spin"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Executor.spin()</span></code></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.SingleThreadedExecutor.spin_once">
+<span class="sig-name descname"><span class="pre">spin_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.SingleThreadedExecutor.spin_once" title="Link to this definition"></a></dt>
+<dd><p>Wait for and execute a single callback.</p>
+<p>A custom executor should use <code class="xref py py-meth docutils literal notranslate"><span class="pre">wait_for_ready_callbacks()</span></code> to get work.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout_sec</strong> – Seconds to wait. Block forever if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative.
+Don’t wait if 0.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.executors.SingleThreadedExecutor.spin_once_until_future_complete">
+<span class="sig-name descname"><span class="pre">spin_once_until_future_complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">future</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.task.html#rclpy.task.Future" title="rclpy.task.Future"><span class="pre">Future</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout_sec</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.executors.SingleThreadedExecutor.spin_once_until_future_complete" title="Link to this definition"></a></dt>
+<dd><p>Wait for and execute a single callback.</p>
+<p>This should behave in the same way as <a class="reference internal" href="../rclpy.executors.html#rclpy.executors.SingleThreadedExecutor.spin_once" title="rclpy.executors.SingleThreadedExecutor.spin_once"><code class="xref py py-meth docutils literal notranslate"><span class="pre">spin_once()</span></code></a>.
+If needed by the implementation, it should awake other threads waiting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>future</strong> – The executor will wait until this future is done.</p></li>
+<li><p><strong>timeout_sec</strong> – Maximum seconds to wait. Block forever if <code class="docutils literal notranslate"><span class="pre">None</span></code> or negative.
+Don’t wait if 0.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rclpy.executors.TimeoutException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.executors.</span></span><span class="sig-name descname"><span class="pre">TimeoutException</span></span><a class="headerlink" href="#rclpy.executors.TimeoutException" title="Link to this definition"></a></dt>
+<dd><p>Signal that a timeout occurred.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rclpy.executors.await_or_execute">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.executors.</span></span><span class="sig-name descname"><span class="pre">await_or_execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Coroutine</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#rclpy.executors.await_or_execute" title="Link to this definition"></a></dt>
+<dd><p>Await a callback if it is a coroutine, else execute it.</p>
+</dd></dl>
+
+</section>
+<section id="module-rclpy.callback_groups">
+<span id="callback-groups"></span><h2>Callback Groups<a class="headerlink" href="#module-rclpy.callback_groups" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.callback_groups.CallbackGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.callback_groups.</span></span><span class="sig-name descname"><span class="pre">CallbackGroup</span></span><a class="headerlink" href="#rclpy.callback_groups.CallbackGroup" title="Link to this definition"></a></dt>
+<dd><p>The base class for a callback group.</p>
+<p>A callback group controls when callbacks are allowed to be executed.</p>
+<p>This class should not be instantiated.
+Instead, classes should extend it and implement <a class="reference internal" href="../rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.can_execute" title="rclpy.callback_groups.CallbackGroup.can_execute"><code class="xref py py-meth docutils literal notranslate"><span class="pre">can_execute()</span></code></a>,
+<a class="reference internal" href="../rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.beginning_execution" title="rclpy.callback_groups.CallbackGroup.beginning_execution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">beginning_execution()</span></code></a>, and <a class="reference internal" href="../rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.ending_execution" title="rclpy.callback_groups.CallbackGroup.ending_execution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ending_execution()</span></code></a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.CallbackGroup.add_entity">
+<span class="sig-name descname"><span class="pre">add_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.callback_groups.CallbackGroup.add_entity" title="Link to this definition"></a></dt>
+<dd><p>Add an entity to the callback group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.CallbackGroup.beginning_execution">
+<span class="sig-name descname"><span class="pre">beginning_execution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rclpy.callback_groups.CallbackGroup.beginning_execution" title="Link to this definition"></a></dt>
+<dd><p>Get permission for the callback from the group to begin executing an entity.</p>
+<p>If this returns <code class="docutils literal notranslate"><span class="pre">True</span></code> then <a class="reference internal" href="../rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.ending_execution" title="rclpy.callback_groups.CallbackGroup.ending_execution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CallbackGroup.ending_execution()</span></code></a> must be called after
+the callback has been executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the callback can be executed, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.CallbackGroup.can_execute">
+<span class="sig-name descname"><span class="pre">can_execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rclpy.callback_groups.CallbackGroup.can_execute" title="Link to this definition"></a></dt>
+<dd><p>Determine if an entity can be executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the entity can be executed, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.CallbackGroup.ending_execution">
+<span class="sig-name descname"><span class="pre">ending_execution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.callback_groups.CallbackGroup.ending_execution" title="Link to this definition"></a></dt>
+<dd><p>Notify group that a callback has finished executing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.CallbackGroup.has_entity">
+<span class="sig-name descname"><span class="pre">has_entity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rclpy.callback_groups.CallbackGroup.has_entity" title="Link to this definition"></a></dt>
+<dd><p>Determine if an entity has been added to this group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.callback_groups.MutuallyExclusiveCallbackGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.callback_groups.</span></span><span class="sig-name descname"><span class="pre">MutuallyExclusiveCallbackGroup</span></span><a class="headerlink" href="#rclpy.callback_groups.MutuallyExclusiveCallbackGroup" title="Link to this definition"></a></dt>
+<dd><p>Allow only one callback to be executing at a time.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.MutuallyExclusiveCallbackGroup.beginning_execution">
+<span class="sig-name descname"><span class="pre">beginning_execution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.callback_groups.MutuallyExclusiveCallbackGroup.beginning_execution" title="Link to this definition"></a></dt>
+<dd><p>Get permission for the callback from the group to begin executing an entity.</p>
+<p>If this returns <code class="docutils literal notranslate"><span class="pre">True</span></code> then <a class="reference internal" href="../rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.ending_execution" title="rclpy.callback_groups.CallbackGroup.ending_execution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CallbackGroup.ending_execution()</span></code></a> must be called after
+the callback has been executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the callback can be executed, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.MutuallyExclusiveCallbackGroup.can_execute">
+<span class="sig-name descname"><span class="pre">can_execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.callback_groups.MutuallyExclusiveCallbackGroup.can_execute" title="Link to this definition"></a></dt>
+<dd><p>Determine if an entity can be executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the entity can be executed, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.MutuallyExclusiveCallbackGroup.ending_execution">
+<span class="sig-name descname"><span class="pre">ending_execution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.callback_groups.MutuallyExclusiveCallbackGroup.ending_execution" title="Link to this definition"></a></dt>
+<dd><p>Notify group that a callback has finished executing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.callback_groups.ReentrantCallbackGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.callback_groups.</span></span><span class="sig-name descname"><span class="pre">ReentrantCallbackGroup</span></span><a class="headerlink" href="#rclpy.callback_groups.ReentrantCallbackGroup" title="Link to this definition"></a></dt>
+<dd><p>Allow callbacks to be executed in parallel without restriction.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.ReentrantCallbackGroup.beginning_execution">
+<span class="sig-name descname"><span class="pre">beginning_execution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.callback_groups.ReentrantCallbackGroup.beginning_execution" title="Link to this definition"></a></dt>
+<dd><p>Get permission for the callback from the group to begin executing an entity.</p>
+<p>If this returns <code class="docutils literal notranslate"><span class="pre">True</span></code> then <a class="reference internal" href="../rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup.ending_execution" title="rclpy.callback_groups.CallbackGroup.ending_execution"><code class="xref py py-meth docutils literal notranslate"><span class="pre">CallbackGroup.ending_execution()</span></code></a> must be called after
+the callback has been executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the callback can be executed, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.ReentrantCallbackGroup.can_execute">
+<span class="sig-name descname"><span class="pre">can_execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.callback_groups.ReentrantCallbackGroup.can_execute" title="Link to this definition"></a></dt>
+<dd><p>Determine if an entity can be executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the entity can be executed, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.callback_groups.ReentrantCallbackGroup.ending_execution">
+<span class="sig-name descname"><span class="pre">ending_execution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">entity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.callback_groups.ReentrantCallbackGroup.ending_execution" title="Link to this definition"></a></dt>
+<dd><p>Notify group that a callback has finished executing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>entity</strong> – a subscription, timer, client, service, or waitable instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="context.html" class="btn btn-neutral float-left" title="Context" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utilities.html" class="btn btn-neutral float-right" title="Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Open Source Robotics Foundation, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

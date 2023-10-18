@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rclpy.service module &mdash; rclpy 3.2.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=eb155f5e"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rclpy.service_introspection module" href="rclpy.service_introspection.html" />
+    <link rel="prev" title="rclpy.serialization module" href="rclpy.serialization.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            rclpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">rclpy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="rclpy.html">rclpy package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="rclpy.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="rclpy.callback_groups.html">rclpy.callback_groups module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.client.html">rclpy.client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.clock.html">rclpy.clock module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.constants.html">rclpy.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.context.html">rclpy.context module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.duration.html">rclpy.duration module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.event_handler.html">rclpy.event_handler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.exceptions.html">rclpy.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.executors.html">rclpy.executors module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.expand_topic_name.html">rclpy.expand_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.guard_condition.html">rclpy.guard_condition module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.logging.html">rclpy.logging module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.logging_service.html">rclpy.logging_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.node.html">rclpy.node module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter.html">rclpy.parameter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_client.html">rclpy.parameter_client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_event_handler.html">rclpy.parameter_event_handler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_service.html">rclpy.parameter_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.publisher.html">rclpy.publisher module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos.html">rclpy.qos module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos_event.html">rclpy.qos_event module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos_overriding_options.html">rclpy.qos_overriding_options module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.serialization.html">rclpy.serialization module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">rclpy.service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.service_introspection.html">rclpy.service_introspection module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.signals.html">rclpy.signals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.subscription.html">rclpy.subscription module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.task.html">rclpy.task module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.time.html">rclpy.time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.time_source.html">rclpy.time_source module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.timer.html">rclpy.timer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.topic_endpoint_info.html">rclpy.topic_endpoint_info module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.topic_or_service_is_hidden.html">rclpy.topic_or_service_is_hidden module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_description_service.html">rclpy.type_description_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_hash.html">rclpy.type_hash module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_support.html">rclpy.type_support module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.utilities.html">rclpy.utilities module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_full_topic_name.html">rclpy.validate_full_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_namespace.html">rclpy.validate_namespace module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_node_name.html">rclpy.validate_node_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_parameter_name.html">rclpy.validate_parameter_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_topic_name.html">rclpy.validate_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.wait_for_message.html">rclpy.wait_for_message module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.waitable.html">rclpy.waitable module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#module-rclpy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">rclpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">rclpy</a></li>
+          <li class="breadcrumb-item"><a href="rclpy.html">rclpy package</a></li>
+      <li class="breadcrumb-item active">rclpy.service module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rclpy.service.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rclpy.service">
+<span id="rclpy-service-module"></span><h1>rclpy.service module<a class="headerlink" href="#module-rclpy.service" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.service.Service">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.service.</span></span><span class="sig-name descname"><span class="pre">Service</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">service_impl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rpyutils.import_c_library.Service</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srv_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SrvType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">srv_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">SrvTypeRequest</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">SrvTypeResponse</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">SrvTypeResponse</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup" title="rclpy.callback_groups.CallbackGroup"><span class="pre">CallbackGroup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">qos_profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rclpy.qos.QoSProfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.service.Service" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create a container for a ROS service server.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Users should not create a service server with this constuctor, instead they
+should call <code class="xref py py-meth docutils literal notranslate"><span class="pre">Node.create_service()</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>service_impl</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">_rclpy.Service</span></code> wrapping the underlying <code class="docutils literal notranslate"><span class="pre">rcl_service_t</span></code>
+object.</p></li>
+<li><p><strong>srv_type</strong> – The service type.</p></li>
+<li><p><strong>srv_name</strong> – The name of the service.</p></li>
+<li><p><strong>callback</strong> – The callback that should be called to handle the request.</p></li>
+<li><p><strong>callback_group</strong> – The callback group for the service server. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, then the
+nodes default callback group is used.</p></li>
+<li><p><strong>qos_profile</strong> – The quality of service profile to apply the service server.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.service.Service.configure_introspection">
+<span class="sig-name descname"><span class="pre">configure_introspection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rclpy.clock.Clock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service_event_qos_profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rclpy.qos.QoSProfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">introspection_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rpyutils.import_c_library.service_introspection.ServiceIntrospectionState</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.service.Service.configure_introspection" title="Link to this definition"></a></dt>
+<dd><p>Configure service introspection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>clock</strong> – Clock to use for generating timestamps.</p></li>
+<li><p><strong>service_event_qos_profile</strong> – QoSProfile to use when creating service event publisher.</p></li>
+<li><p><strong>introspection_state</strong> – ServiceIntrospectionState to set introspection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.service.Service.destroy">
+<span class="sig-name descname"><span class="pre">destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.service.Service.destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.service.Service.handle">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle</span></span><a class="headerlink" href="#rclpy.service.Service.handle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.service.Service.send_response">
+<span class="sig-name descname"><span class="pre">send_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SrvTypeResponse</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.service.Service.send_response" title="Link to this definition"></a></dt>
+<dd><p>Send a service response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> – The service response.</p></li>
+<li><p><strong>header</strong> – Service header from the original request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>TypeError if the type of the passed response isn’t an instance
+of the Response type of the provided service when the service was
+constructed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.service.Service.service_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">service_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#rclpy.service.Service.service_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rclpy.serialization.html" class="btn btn-neutral float-left" title="rclpy.serialization module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rclpy.service_introspection.html" class="btn btn-neutral float-right" title="rclpy.service_introspection module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Open Source Robotics Foundation, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

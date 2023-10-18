@@ -1,0 +1,323 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rosdep command reference &#8212; rosdep 0.22.2 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing rosdep rules" href="contributing_rules.html" />
+    <link rel="prev" title="Overview" href="overview.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contributing_rules.html" title="Contributing rosdep rules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Overview"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="contents.html">rosdep 0.22.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="contents.html">
+              <img class="logo" src="_static/ros.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="contents.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">rosdep command reference</a><ul>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#commands">Commands</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#install-options">Install Options</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="previous chapter">Overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contributing_rules.html"
+                        title="next chapter">Contributing rosdep rules</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/commands.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rosdep-command-reference">
+<h1>rosdep command reference<a class="headerlink" href="#rosdep-command-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synopsis">
+<span id="rosdep-usage"></span><h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p><strong>rosdep</strong> &lt;<em>command</em>&gt; [<em>options</em>] [<em>args</em>]</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>rosdep</strong> command helps you install external dependencies in an
+OS-independent manner.  For example, what Debian packages do you need
+in order to get the OpenGL headers on Ubuntu? How about OS X? Fedora?
+rosdep can answer this question for your platform and install the
+necessary package(s).</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">rosdep</span> <span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">rosdep</span> <span class="pre">&lt;command&gt;</span> <span class="pre">-h</span></code> to access the built-in tool
+documentation.</p>
+</div>
+<div class="section" id="commands">
+<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">rosdep</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">args</span><span class="o">&gt;</span>
+
+<span class="n">Commands</span><span class="p">:</span>
+
+<span class="n">rosdep</span> <span class="n">check</span> <span class="o">&lt;</span><span class="n">stacks</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="n">packages</span><span class="o">&gt;...</span>
+  <span class="n">check</span> <span class="k">if</span> <span class="n">the</span> <span class="n">dependencies</span> <span class="n">of</span> <span class="n">package</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">have</span> <span class="n">been</span> <span class="n">met</span><span class="o">.</span>
+
+<span class="n">rosdep</span> <span class="n">install</span> <span class="o">&lt;</span><span class="n">stacks</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="n">packages</span><span class="o">&gt;...</span>
+  <span class="n">download</span> <span class="ow">and</span> <span class="n">install</span> <span class="n">the</span> <span class="n">dependencies</span> <span class="n">of</span> <span class="n">a</span> <span class="n">given</span> <span class="n">package</span> <span class="ow">or</span> <span class="n">packages</span><span class="o">.</span>
+
+<span class="n">rosdep</span> <span class="n">db</span>
+  <span class="n">generate</span> <span class="n">the</span> <span class="n">dependency</span> <span class="n">database</span> <span class="ow">and</span> <span class="nb">print</span> <span class="n">it</span> <span class="n">to</span> <span class="n">the</span> <span class="n">console</span><span class="o">.</span>
+
+<span class="n">rosdep</span> <span class="n">init</span>
+  <span class="n">initialize</span> <span class="n">rosdep</span> <span class="n">sources</span> <span class="ow">in</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ros</span><span class="o">/</span><span class="n">rosdep</span><span class="o">.</span>  <span class="n">May</span> <span class="n">require</span> <span class="n">sudo</span><span class="o">.</span>
+
+<span class="n">rosdep</span> <span class="n">keys</span> <span class="o">&lt;</span><span class="n">stacks</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="n">packages</span><span class="o">&gt;...</span>
+  <span class="nb">list</span> <span class="n">the</span> <span class="n">rosdep</span> <span class="n">keys</span> <span class="n">that</span> <span class="n">the</span> <span class="n">packages</span> <span class="n">depend</span> <span class="n">on</span><span class="o">.</span>
+
+<span class="n">rosdep</span> <span class="n">resolve</span> <span class="o">&lt;</span><span class="n">rosdeps</span><span class="o">&gt;</span>
+  <span class="n">resolve</span> <span class="o">&lt;</span><span class="n">rosdeps</span><span class="o">&gt;</span> <span class="n">to</span> <span class="n">system</span> <span class="n">dependencies</span>
+
+<span class="n">rosdep</span> <span class="n">update</span>
+  <span class="n">update</span> <span class="n">the</span> <span class="n">local</span> <span class="n">rosdep</span> <span class="n">database</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">rosdep</span> <span class="n">sources</span><span class="o">.</span>
+
+<span class="n">rosdep</span> <span class="n">what</span><span class="o">-</span><span class="n">needs</span> <span class="o">&lt;</span><span class="n">rosdeps</span><span class="o">&gt;...</span>
+  <span class="nb">print</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">packages</span> <span class="n">that</span> <span class="n">declare</span> <span class="n">a</span> <span class="n">rosdep</span> <span class="n">on</span> <span class="p">(</span><span class="n">at</span> <span class="n">least</span>
+  <span class="n">one</span> <span class="n">of</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">rosdeps</span><span class="o">&gt;</span>
+
+<span class="n">rosdep</span> <span class="n">where</span><span class="o">-</span><span class="n">defined</span> <span class="o">&lt;</span><span class="n">rosdeps</span><span class="o">&gt;...</span>
+  <span class="nb">print</span> <span class="n">a</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">yaml</span> <span class="n">files</span> <span class="n">that</span> <span class="n">declare</span> <span class="n">a</span> <span class="n">rosdep</span> <span class="n">on</span> <span class="p">(</span><span class="n">at</span> <span class="n">least</span>
+  <span class="n">one</span> <span class="n">of</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">rosdeps</span><span class="o">&gt;</span>
+
+<span class="n">rosdep</span> <span class="n">fix</span><span class="o">-</span><span class="n">permissions</span>
+  <span class="n">Recursively</span> <span class="n">change</span> <span class="n">the</span> <span class="n">permissions</span> <span class="n">of</span> <span class="n">the</span> <span class="n">user</span><span class="s1">&#39;s ros home directory.</span>
+  <span class="n">May</span> <span class="n">require</span> <span class="n">sudo</span><span class="o">.</span>  <span class="n">Can</span> <span class="n">be</span> <span class="n">useful</span> <span class="n">to</span> <span class="n">fix</span> <span class="n">permissions</span> <span class="n">after</span> <span class="n">calling</span>
+  <span class="s2">&quot;rosdep update&quot;</span> <span class="k">with</span> <span class="n">sudo</span> <span class="n">accidentally</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="options">
+<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+Options:
+  -h, --help            show this help message and exit
+  --os=OS_NAME:OS_VERSION
+                        Override OS name and version (colon-separated), e.g.
+                        ubuntu:lucid
+  -c SOURCES_CACHE_DIR, --sources-cache-dir=SOURCES_CACHE_DIR
+                        Override /home/buildfarm/.ros/rosdep/sources.cache
+  -v, --verbose         verbose display
+  --version             print just the rosdep version, then exit
+  --all-versions        print rosdep version and version of installers, then
+                        exit
+  --reinstall           (re)install all dependencies, even if already
+                        installed
+  -y, --default-yes     Tell the package manager to default to y or fail when
+                        installing
+  -s, --simulate        Simulate install
+  -r                    Continue installing despite errors.
+  -q                    Quiet. Suppress output except for errors.
+  -a, --all             select all packages
+  -n                    Do not consider implicit/recursive dependencies.  Only
+                        valid with &#39;keys&#39;, &#39;check&#39;, and &#39;install&#39; commands.
+  -i, --ignore-packages-from-source, --ignore-src
+                        Affects the &#39;check&#39;, &#39;install&#39;, and &#39;keys&#39; verbs. If
+                        specified then rosdep will ignore keys that are found
+                        to be catkin or ament packages anywhere in the
+                        ROS_PACKAGE_PATH, AMENT_PREFIX_PATH or in any of the
+                        directories given by the --from-paths option.
+  --skip-keys=SKIP_KEYS
+                        Affects the &#39;check&#39; and &#39;install&#39; verbs. The specified
+                        rosdep keys will be ignored, i.e. not resolved and not
+                        installed. The option can be supplied multiple times.
+                        A space separated list of rosdep keys can also be
+                        passed as a string. A more permanent solution to
+                        locally ignore a rosdep key is creating a local rosdep
+                        rule with an empty list of packages (include it in
+                        /etc/ros/rosdep/sources.list.d/ before the defaults).
+  --filter-for-installers=FILTER_FOR_INSTALLERS
+                        Affects the &#39;db&#39; verb. If supplied, the output of the
+                        &#39;db&#39; command is filtered to only list packages whose
+                        installer is in the provided list. The option can be
+                        supplied multiple times. A space separated list of
+                        installers can also be passed as a string. Example:
+                        `--filter-for-installers &quot;apt pip&quot;`
+  --from-paths          Affects the &#39;check&#39;, &#39;keys&#39;, and &#39;install&#39; verbs. If
+                        specified the arguments to those verbs will be
+                        considered paths to be searched, acting on all catkin
+                        packages found there in.
+  --rosdistro=ROS_DISTRO
+                        Explicitly sets the ROS distro to use, overriding the
+                        normal method of detecting the ROS distro using the
+                        ROS_DISTRO environment variable. When used with the
+                        &#39;update&#39; verb, only the specified distro will be
+                        updated.
+  --as-root=INSTALLER_KEY:&lt;bool&gt;
+                        Override whether sudo is used for a specific
+                        installer, e.g. &#39;--as-root pip:false&#39; or &#39;--as-root
+                        &quot;pip:no homebrew:yes&quot;&#39;. Can be specified multiple
+                        times.
+  --include-eol-distros
+                        Affects the &#39;update&#39; verb. If specified end-of-life
+                        distros are being fetched too.
+  -t DEPENDENCY_TYPES, --dependency-types=DEPENDENCY_TYPES
+                        Dependency types to install, can be given multiple
+                        times. Choose from {&#39;build_export&#39;, &#39;exec&#39;,
+                        &#39;buildtool_export&#39;, &#39;build&#39;, &#39;doc&#39;, &#39;test&#39;,
+                        &#39;buildtool&#39;}. Default: all except doc.
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-options">
+<h2>Install Options<a class="headerlink" href="#install-options" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+Options:
+  -h, --help            show this help message and exit
+  --os=OS_NAME:OS_VERSION
+                        Override OS name and version (colon-separated), e.g.
+                        ubuntu:lucid
+  -c SOURCES_CACHE_DIR, --sources-cache-dir=SOURCES_CACHE_DIR
+                        Override /home/buildfarm/.ros/rosdep/sources.cache
+  -v, --verbose         verbose display
+  --version             print just the rosdep version, then exit
+  --all-versions        print rosdep version and version of installers, then
+                        exit
+  --reinstall           (re)install all dependencies, even if already
+                        installed
+  -y, --default-yes     Tell the package manager to default to y or fail when
+                        installing
+  -s, --simulate        Simulate install
+  -r                    Continue installing despite errors.
+  -q                    Quiet. Suppress output except for errors.
+  -a, --all             select all packages
+  -n                    Do not consider implicit/recursive dependencies.  Only
+                        valid with &#39;keys&#39;, &#39;check&#39;, and &#39;install&#39; commands.
+  -i, --ignore-packages-from-source, --ignore-src
+                        Affects the &#39;check&#39;, &#39;install&#39;, and &#39;keys&#39; verbs. If
+                        specified then rosdep will ignore keys that are found
+                        to be catkin or ament packages anywhere in the
+                        ROS_PACKAGE_PATH, AMENT_PREFIX_PATH or in any of the
+                        directories given by the --from-paths option.
+  --skip-keys=SKIP_KEYS
+                        Affects the &#39;check&#39; and &#39;install&#39; verbs. The specified
+                        rosdep keys will be ignored, i.e. not resolved and not
+                        installed. The option can be supplied multiple times.
+                        A space separated list of rosdep keys can also be
+                        passed as a string. A more permanent solution to
+                        locally ignore a rosdep key is creating a local rosdep
+                        rule with an empty list of packages (include it in
+                        /etc/ros/rosdep/sources.list.d/ before the defaults).
+  --filter-for-installers=FILTER_FOR_INSTALLERS
+                        Affects the &#39;db&#39; verb. If supplied, the output of the
+                        &#39;db&#39; command is filtered to only list packages whose
+                        installer is in the provided list. The option can be
+                        supplied multiple times. A space separated list of
+                        installers can also be passed as a string. Example:
+                        `--filter-for-installers &quot;apt pip&quot;`
+  --from-paths          Affects the &#39;check&#39;, &#39;keys&#39;, and &#39;install&#39; verbs. If
+                        specified the arguments to those verbs will be
+                        considered paths to be searched, acting on all catkin
+                        packages found there in.
+  --rosdistro=ROS_DISTRO
+                        Explicitly sets the ROS distro to use, overriding the
+                        normal method of detecting the ROS distro using the
+                        ROS_DISTRO environment variable. When used with the
+                        &#39;update&#39; verb, only the specified distro will be
+                        updated.
+  --as-root=INSTALLER_KEY:&lt;bool&gt;
+                        Override whether sudo is used for a specific
+                        installer, e.g. &#39;--as-root pip:false&#39; or &#39;--as-root
+                        &quot;pip:no homebrew:yes&quot;&#39;. Can be specified multiple
+                        times.
+  --include-eol-distros
+                        Affects the &#39;update&#39; verb. If specified end-of-life
+                        distros are being fetched too.
+  -t DEPENDENCY_TYPES, --dependency-types=DEPENDENCY_TYPES
+                        Dependency types to install, can be given multiple
+                        times. Choose from {&#39;buildtool_export&#39;, &#39;test&#39;,
+                        &#39;exec&#39;, &#39;buildtool&#39;, &#39;build_export&#39;, &#39;doc&#39;, &#39;build&#39;}.
+                        Default: all except doc.
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contributing_rules.html" title="Contributing rosdep rules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Overview"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="contents.html">rosdep 0.22.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2011, Willow Garage.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

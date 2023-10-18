@@ -1,0 +1,1 @@
+The class requires initialization and functionality to run the ros2 controller. This includes importing necessary libraries and modules such as 'rclpy' and setting up ros2 nodes, along with the necessary functions to perform the required operations. The functionality should be added in the '__init__' and 'run' methods.

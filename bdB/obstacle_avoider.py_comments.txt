@@ -1,0 +1,1 @@
+The code presented is the basic setup for an obstacle avoidance code using ROS2. Current code has empty callbacks for sensor readings and the obstacle avoidance algorithm is also not implemented. The task is to complete the sensor callbacks and implement obstacle avoidance logic using the search results.

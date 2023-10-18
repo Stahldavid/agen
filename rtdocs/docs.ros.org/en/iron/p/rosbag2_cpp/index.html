@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the documentation for rosbag2_cpp &mdash; rosbag2_cpp 0.22.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Class Hierarchy" href="generated/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            rosbag2_cpp
+          </a>
+              <div class="version">
+                0.22
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rosbag2_cpp.html">Namespace rosbag2_cpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rosbag2_cpp__bag_events.html">Namespace rosbag2_cpp::bag_events</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__bag_events.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__bag_events.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__bag_events.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rosbag2_cpp__cache.html">Namespace rosbag2_cpp::cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__cache.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rosbag2_cpp__converter_interfaces.html">Namespace rosbag2_cpp::converter_interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__converter_interfaces.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rosbag2_cpp__plugins.html">Namespace rosbag2_cpp::plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__plugins.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rosbag2_cpp__reader_interfaces.html">Namespace rosbag2_cpp::reader_interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__reader_interfaces.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rosbag2_cpp__readers.html">Namespace rosbag2_cpp::readers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__readers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rosbag2_cpp__writer_interfaces.html">Namespace rosbag2_cpp::writer_interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__writer_interfaces.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rosbag2_cpp__writers.html">Namespace rosbag2_cpp::writers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_rosbag2_cpp__writers.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_std.html">Namespace std</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrosbag2__cpp_1_1bag__events_1_1BagSplitInfo.html">Struct BagSplitInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1bag__events_1_1BagSplitInfo.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrosbag2__cpp_1_1bag__events_1_1ReaderEventCallbacks.html">Struct ReaderEventCallbacks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1bag__events_1_1ReaderEventCallbacks.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrosbag2__cpp_1_1bag__events_1_1WriterEventCallbacks.html">Struct WriterEventCallbacks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1bag__events_1_1WriterEventCallbacks.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrosbag2__cpp_1_1ConverterOptions.html">Struct ConverterOptions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1ConverterOptions.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrosbag2__cpp_1_1ConverterTypeSupport.html">Struct ConverterTypeSupport</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1ConverterTypeSupport.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrosbag2__cpp_1_1LocalMessageDefinitionSource_1_1DefinitionIdentifier.html">Struct LocalMessageDefinitionSource::DefinitionIdentifier</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1LocalMessageDefinitionSource_1_1DefinitionIdentifier.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1LocalMessageDefinitionSource_1_1DefinitionIdentifier.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrosbag2__cpp_1_1LocalMessageDefinitionSource_1_1DefinitionIdentifierHash.html">Struct LocalMessageDefinitionSource::DefinitionIdentifierHash</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1LocalMessageDefinitionSource_1_1DefinitionIdentifierHash.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1LocalMessageDefinitionSource_1_1DefinitionIdentifierHash.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrosbag2__cpp_1_1LocalMessageDefinitionSource_1_1MessageSpec.html">Struct LocalMessageDefinitionSource::MessageSpec</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1LocalMessageDefinitionSource_1_1MessageSpec.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1LocalMessageDefinitionSource_1_1MessageSpec.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrosbag2__cpp_1_1rosbag2__introspection__message__t.html">Struct rosbag2_introspection_message_t</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrosbag2__cpp_1_1rosbag2__introspection__message__t.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1BagEventCallback.html">Template Class BagEventCallback</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1BagEventCallback.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1BagEventCallback.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1BagEventCallback.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1BagEventCallbackBase.html">Class BagEventCallbackBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1BagEventCallbackBase.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1BagEventCallbackBase.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1BagEventCallbackBase.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1EventCallbackManager.html">Class EventCallbackManager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1bag__events_1_1EventCallbackManager.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CacheBufferInterface.html">Class CacheBufferInterface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CacheBufferInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CacheBufferInterface.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CacheBufferInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CacheConsumer.html">Class CacheConsumer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CacheConsumer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CircularMessageCache.html">Class CircularMessageCache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CircularMessageCache.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CircularMessageCache.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1CircularMessageCache.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCache.html">Class MessageCache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCache.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCache.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCache.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheBuffer.html">Class MessageCacheBuffer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheBuffer.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheBuffer.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheBuffer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheCircularBuffer.html">Class MessageCacheCircularBuffer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheCircularBuffer.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheCircularBuffer.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheCircularBuffer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheInterface.html">Class MessageCacheInterface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheInterface.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1cache_1_1MessageCacheInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Converter.html">Class Converter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Converter.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatConverter.html">Class SerializationFormatConverter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatConverter.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatConverter.html#base-types">Base Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatConverter.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatDeserializer.html">Class SerializationFormatDeserializer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatDeserializer.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatDeserializer.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatDeserializer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatSerializer.html">Class SerializationFormatSerializer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatSerializer.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatSerializer.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1converter__interfaces_1_1SerializationFormatSerializer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1DefinitionNotFoundError.html">Class DefinitionNotFoundError</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1DefinitionNotFoundError.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1DefinitionNotFoundError.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1DefinitionNotFoundError.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Info.html">Class Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Info.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1LocalMessageDefinitionSource.html">Class LocalMessageDefinitionSource</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1LocalMessageDefinitionSource.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1LocalMessageDefinitionSource.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1LocalMessageDefinitionSource.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1PlayerClock.html">Class PlayerClock</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1PlayerClock.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1PlayerClock.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1PlayerClock.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Reader.html">Class Reader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Reader.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1reader__interfaces_1_1BaseReaderInterface.html">Class BaseReaderInterface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1reader__interfaces_1_1BaseReaderInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1reader__interfaces_1_1BaseReaderInterface.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1reader__interfaces_1_1BaseReaderInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1readers_1_1SequentialReader.html">Class SequentialReader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1readers_1_1SequentialReader.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1readers_1_1SequentialReader.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1readers_1_1SequentialReader.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Reindexer.html">Class Reindexer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Reindexer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1SerializationFormatConverterFactory.html">Class SerializationFormatConverterFactory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1SerializationFormatConverterFactory.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1SerializationFormatConverterFactory.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1SerializationFormatConverterFactory.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1SerializationFormatConverterFactoryInterface.html">Class SerializationFormatConverterFactoryInterface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1SerializationFormatConverterFactoryInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1SerializationFormatConverterFactoryInterface.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1SerializationFormatConverterFactoryInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1TimeControllerClock.html">Class TimeControllerClock</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1TimeControllerClock.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1TimeControllerClock.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1TimeControllerClock.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Writer.html">Class Writer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1Writer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1writer__interfaces_1_1BaseWriterInterface.html">Class BaseWriterInterface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1writer__interfaces_1_1BaseWriterInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1writer__interfaces_1_1BaseWriterInterface.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1writer__interfaces_1_1BaseWriterInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrosbag2__cpp_1_1writers_1_1SequentialWriter.html">Class SequentialWriter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1writers_1_1SequentialWriter.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrosbag2__cpp_1_1writers_1_1SequentialWriter.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrosbag2__cpp_1_1writers_1_1SequentialWriter.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_bag__events_8hpp_1ad7ab8a4bc4ac4143b1f2bd88b3444db6.html">Enum BagEvent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_bag__events_8hpp_1ad7ab8a4bc4ac4143b1f2bd88b3444db6.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a36220c27a682023d72c9af11d8c3f812.html">Function rosbag2_cpp::allocate_internal_types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a36220c27a682023d72c9af11d8c3f812.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1ad235492f47b70b250b4a455f2828696a.html">Function rosbag2_cpp::allocate_introspection_message</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1ad235492f47b70b250b4a455f2828696a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a8badd130c06841cc1c8d79c1241bdca7.html">Function rosbag2_cpp::deallocate_introspection_message</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a8badd130c06841cc1c8d79c1241bdca7.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a5c2f4582e3b81784a5db014504af271c.html">Function rosbag2_cpp::extract_type_identifier</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a5c2f4582e3b81784a5db014504af271c.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a8d02292cfc817d4e9a28c65ffde20d29.html">Function rosbag2_cpp::get_typesupport_handle</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a8d02292cfc817d4e9a28c65ffde20d29.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a3c1cbf33d38416bd8060488a5660aaca.html">Function rosbag2_cpp::get_typesupport_library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1a3c1cbf33d38416bd8060488a5660aaca.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1ae79205ebc87df2d0eefad051098a5ab6.html">Function rosbag2_cpp::get_typesupport_library_path</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1ae79205ebc87df2d0eefad051098a5ab6.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1ac2b030cab64d59aafb2f35a53cac18ba.html">Function rosbag2_cpp::introspection_message_set_topic_name</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1ac2b030cab64d59aafb2f35a53cac18ba.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1aab541feb157c838fa87188851e51482a.html">Function rosbag2_cpp::parse_definition_dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerosbag2__cpp_1aab541feb157c838fa87188851e51482a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_plugin__utils_8hpp_1aad4af34c150f33640165c109e40c9cd8.html">Template Function rosbag2_cpp::plugins::get_class_plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_plugin__utils_8hpp_1aad4af34c150f33640165c109e40c9cd8.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_visibility__control_8hpp_1a459734281aa8a613ad30aeea5049d962.html">Define ROSBAG2_CPP_EXPORT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8hpp_1a459734281aa8a613ad30aeea5049d962.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_visibility__control_8hpp_1aed1ee99ab1e8964ad35153b6331aade8.html">Define ROSBAG2_CPP_IMPORT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8hpp_1aed1ee99ab1e8964ad35153b6331aade8.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_visibility__control_8hpp_1ac5f300b538f40737be28ed90a82f9378.html">Define ROSBAG2_CPP_LOCAL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8hpp_1ac5f300b538f40737be28ed90a82f9378.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_local__message__definition__source_8hpp_1a7e1d5cdb52df68d661efc61d16978a1e.html">Define ROSBAG2_CPP_LOCAL_MESSAGE_DEFINITION_SOURCE_MAX_RECURSION_DEPTH</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_local__message__definition__source_8hpp_1a7e1d5cdb52df68d661efc61d16978a1e.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_logging_8hpp_1a5dc48fb40656816d01ee50330dc38bbc.html">Define ROSBAG2_CPP_LOG_DEBUG</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_logging_8hpp_1a5dc48fb40656816d01ee50330dc38bbc.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_logging_8hpp_1a5b6a02164353ff9bb77be6af4d5fb897.html">Define ROSBAG2_CPP_LOG_DEBUG_STREAM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_logging_8hpp_1a5b6a02164353ff9bb77be6af4d5fb897.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_logging_8hpp_1a1dfe90a18711ad8b646b046653319bac.html">Define ROSBAG2_CPP_LOG_ERROR</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_logging_8hpp_1a1dfe90a18711ad8b646b046653319bac.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_logging_8hpp_1a366f2c38891989693edeeeb58d566b63.html">Define ROSBAG2_CPP_LOG_ERROR_STREAM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_logging_8hpp_1a366f2c38891989693edeeeb58d566b63.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_logging_8hpp_1af3fbb8259c346826041ca48f89f61279.html">Define ROSBAG2_CPP_LOG_INFO</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_logging_8hpp_1af3fbb8259c346826041ca48f89f61279.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_logging_8hpp_1ac1a9aafb6b2c300322a7ce9b928920a4.html">Define ROSBAG2_CPP_LOG_INFO_STREAM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_logging_8hpp_1ac1a9aafb6b2c300322a7ce9b928920a4.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_logging_8hpp_1a4668c7e18e1c65e030126f8ecf3f852f.html">Define ROSBAG2_CPP_LOG_WARN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_logging_8hpp_1a4668c7e18e1c65e030126f8ecf3f852f.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_logging_8hpp_1aae71bb36cb2f1f1f36337a1f20113c70.html">Define ROSBAG2_CPP_LOG_WARN_STREAM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_logging_8hpp_1aae71bb36cb2f1f1f36337a1f20113c70.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_logging_8hpp_1a6b979ecb5ec7417fcf0b86271aee7bb4.html">Define ROSBAG2_CPP_PACKAGE_NAME</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_logging_8hpp_1a6b979ecb5ec7417fcf0b86271aee7bb4.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_visibility__control_8hpp_1a9186e1559d61aac35b745e5ce67f1700.html">Define ROSBAG2_CPP_PUBLIC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8hpp_1a9186e1559d61aac35b745e5ce67f1700.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_visibility__control_8hpp_1afcf536f96aedfcbb4ff8d9f3af02eb02.html">Define ROSBAG2_CPP_PUBLIC_TYPE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8hpp_1afcf536f96aedfcbb4ff8d9f3af02eb02.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#typedefs">Typedefs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedef_bag__events_8hpp_1a784d6d910c462fefa74c3fb7c625cc7a.html">Typedef rosbag2_cpp::bag_events::BagSplitCallbackType</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_bag__events_8hpp_1a784d6d910c462fefa74c3fb7c625cc7a.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedef_namespacerosbag2__cpp_1ad78af85e07de967cb809b2a2b35050ae.html">Typedef rosbag2_cpp::rosbag2_introspection_message_t</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_namespacerosbag2__cpp_1ad78af85e07de967cb809b2a2b35050ae.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src.html">Directory src</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2.html">Directory rosbag2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp.html">Directory rosbag2_cpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include.html">Directory include</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp.html">Directory rosbag2_cpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache.html">Directory cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks.html">Directory clocks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces.html">Directory converter_interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions.html">Directory message_definitions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_plugins.html">Directory plugins</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_plugins.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader_interfaces.html">Directory reader_interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader_interfaces.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_readers.html">Directory readers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_readers.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types.html">Directory types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer_interfaces.html">Directory writer_interfaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer_interfaces.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writers.html">Directory writers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writers.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_bag_events.hpp.html">File bag_events.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_bag_events.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-bag-events-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/bag_events.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_bag_events.hpp.html">Program Listing for File bag_events.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_bag_events.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_bag_events.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_bag_events.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_bag_events.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_bag_events.hpp.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_bag_events.hpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader_interfaces_base_reader_interface.hpp.html">File base_reader_interface.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader_interfaces_base_reader_interface.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-reader-interfaces-base-reader-interface-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/reader_interfaces/base_reader_interface.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader_interfaces_base_reader_interface.hpp.html">Program Listing for File base_reader_interface.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader_interfaces_base_reader_interface.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader_interfaces_base_reader_interface.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader_interfaces_base_reader_interface.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader_interfaces_base_reader_interface.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer_interfaces_base_writer_interface.hpp.html">File base_writer_interface.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer_interfaces_base_writer_interface.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-writer-interfaces-base-writer-interface-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/writer_interfaces/base_writer_interface.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer_interfaces_base_writer_interface.hpp.html">Program Listing for File base_writer_interface.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer_interfaces_base_writer_interface.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer_interfaces_base_writer_interface.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer_interfaces_base_writer_interface.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer_interfaces_base_writer_interface.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_buffer_interface.hpp.html">File cache_buffer_interface.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_buffer_interface.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-cache-cache-buffer-interface-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/cache/cache_buffer_interface.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_buffer_interface.hpp.html">Program Listing for File cache_buffer_interface.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_buffer_interface.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_buffer_interface.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_buffer_interface.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_buffer_interface.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_consumer.hpp.html">File cache_consumer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_consumer.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-cache-cache-consumer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/cache/cache_consumer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_consumer.hpp.html">Program Listing for File cache_consumer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_consumer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_consumer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_consumer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_cache_consumer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_circular_message_cache.hpp.html">File circular_message_cache.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_circular_message_cache.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-cache-circular-message-cache-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/cache/circular_message_cache.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_circular_message_cache.hpp.html">Program Listing for File circular_message_cache.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_circular_message_cache.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_circular_message_cache.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_circular_message_cache.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_circular_message_cache.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter.hpp.html">File converter.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-converter-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/converter.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter.hpp.html">Program Listing for File converter.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_options.hpp.html">File converter_options.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_options.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-converter-options-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/converter_options.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_options.hpp.html">Program Listing for File converter_options.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_options.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_options.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_options.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_options.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_info.hpp.html">File info.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_info.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-info-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/info.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_info.hpp.html">Program Listing for File info.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_info.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_info.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_info.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types_introspection_message.hpp.html">File introspection_message.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types_introspection_message.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-types-introspection-message-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/types/introspection_message.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types_introspection_message.hpp.html">Program Listing for File introspection_message.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types_introspection_message.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types_introspection_message.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types_introspection_message.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types_introspection_message.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types_introspection_message.hpp.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types_introspection_message.hpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions_local_message_definition_source.hpp.html">File local_message_definition_source.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions_local_message_definition_source.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-message-definitions-local-message-definition-source-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/message_definitions/local_message_definition_source.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions_local_message_definition_source.hpp.html">Program Listing for File local_message_definition_source.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions_local_message_definition_source.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions_local_message_definition_source.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions_local_message_definition_source.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions_local_message_definition_source.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions_local_message_definition_source.hpp.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_message_definitions_local_message_definition_source.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_logging.hpp.html">File logging.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_logging.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-logging-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/logging.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_logging.hpp.html">Program Listing for File logging.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_logging.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_logging.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache.hpp.html">File message_cache.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-cache-message-cache-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/cache/message_cache.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache.hpp.html">Program Listing for File message_cache.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_buffer.hpp.html">File message_cache_buffer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_buffer.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-cache-message-cache-buffer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/cache/message_cache_buffer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_buffer.hpp.html">Program Listing for File message_cache_buffer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_buffer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_buffer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_buffer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_buffer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_circular_buffer.hpp.html">File message_cache_circular_buffer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_circular_buffer.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-cache-message-cache-circular-buffer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/cache/message_cache_circular_buffer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_circular_buffer.hpp.html">Program Listing for File message_cache_circular_buffer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_circular_buffer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_circular_buffer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_circular_buffer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_circular_buffer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_interface.hpp.html">File message_cache_interface.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_interface.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-cache-message-cache-interface-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/cache/message_cache_interface.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_interface.hpp.html">Program Listing for File message_cache_interface.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_interface.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_interface.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_interface.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_cache_message_cache_interface.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_player_clock.hpp.html">File player_clock.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_player_clock.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-clocks-player-clock-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/clocks/player_clock.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_player_clock.hpp.html">Program Listing for File player_clock.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_player_clock.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_player_clock.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_player_clock.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_player_clock.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_plugins_plugin_utils.hpp.html">File plugin_utils.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_plugins_plugin_utils.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-plugins-plugin-utils-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/plugins/plugin_utils.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_plugins_plugin_utils.hpp.html">Program Listing for File plugin_utils.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_plugins_plugin_utils.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_plugins_plugin_utils.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_plugins_plugin_utils.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader.hpp.html">File reader.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-reader-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/reader.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader.hpp.html">Program Listing for File reader.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reader.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reindexer.hpp.html">File reindexer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reindexer.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-reindexer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/reindexer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reindexer.hpp.html">Program Listing for File reindexer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reindexer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reindexer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_reindexer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_readers_sequential_reader.hpp.html">File sequential_reader.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_readers_sequential_reader.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-readers-sequential-reader-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/readers/sequential_reader.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_readers_sequential_reader.hpp.html">Program Listing for File sequential_reader.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_readers_sequential_reader.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_readers_sequential_reader.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_readers_sequential_reader.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_readers_sequential_reader.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writers_sequential_writer.hpp.html">File sequential_writer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writers_sequential_writer.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-writers-sequential-writer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/writers/sequential_writer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writers_sequential_writer.hpp.html">Program Listing for File sequential_writer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writers_sequential_writer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writers_sequential_writer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writers_sequential_writer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writers_sequential_writer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_converter.hpp.html">File serialization_format_converter.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_converter.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-converter-interfaces-serialization-format-converter-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/converter_interfaces/serialization_format_converter.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_converter.hpp.html">Program Listing for File serialization_format_converter.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_converter.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_converter.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_converter.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_converter.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory.hpp.html">File serialization_format_converter_factory.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-serialization-format-converter-factory-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/serialization_format_converter_factory.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory.hpp.html">Program Listing for File serialization_format_converter_factory.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory_interface.hpp.html">File serialization_format_converter_factory_interface.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory_interface.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-serialization-format-converter-factory-interface-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/serialization_format_converter_factory_interface.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory_interface.hpp.html">Program Listing for File serialization_format_converter_factory_interface.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory_interface.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory_interface.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory_interface.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_serialization_format_converter_factory_interface.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_deserializer.hpp.html">File serialization_format_deserializer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_deserializer.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-converter-interfaces-serialization-format-deserializer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/converter_interfaces/serialization_format_deserializer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_deserializer.hpp.html">Program Listing for File serialization_format_deserializer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_deserializer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_deserializer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_deserializer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_deserializer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_serializer.hpp.html">File serialization_format_serializer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_serializer.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-converter-interfaces-serialization-format-serializer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/converter_interfaces/serialization_format_serializer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_serializer.hpp.html">Program Listing for File serialization_format_serializer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_serializer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_serializer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_serializer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_converter_interfaces_serialization_format_serializer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_time_controller_clock.hpp.html">File time_controller_clock.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_time_controller_clock.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-clocks-time-controller-clock-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/clocks/time_controller_clock.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_time_controller_clock.hpp.html">Program Listing for File time_controller_clock.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_time_controller_clock.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_time_controller_clock.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_clocks_time_controller_clock.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types.hpp.html">File types.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-types-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/types.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types.hpp.html">Program Listing for File types.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_types.hpp.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_typesupport_helpers.hpp.html">File typesupport_helpers.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_typesupport_helpers.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-typesupport-helpers-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/typesupport_helpers.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_typesupport_helpers.hpp.html">Program Listing for File typesupport_helpers.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_typesupport_helpers.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_typesupport_helpers.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_typesupport_helpers.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_visibility_control.hpp.html">File visibility_control.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_visibility_control.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-visibility-control-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/visibility_control.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_visibility_control.hpp.html">Program Listing for File visibility_control.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_visibility_control.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_visibility_control.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer.hpp.html">File writer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer.hpp.html#definition-tmp-ws-src-rosbag2-rosbag2-cpp-include-rosbag2-cpp-writer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/rosbag2/rosbag2_cpp/include/rosbag2_cpp/writer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer.hpp.html">Program Listing for File writer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_rosbag2_rosbag2_cpp_include_rosbag2_cpp_writer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">rosbag2_cpp</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the documentation for rosbag2_cpp</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-documentation-for-rosbag2-cpp">
+<h1>Welcome to the documentation for rosbag2_cpp<a class="headerlink" href="#welcome-to-the-documentation-for-rosbag2-cpp" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#typedefs">Typedefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-search">
+<h1>Indices and Search<a class="headerlink" href="#indices-and-search" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/index.html" class="btn btn-neutral float-right" title="Class Hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Apache License 2.0.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

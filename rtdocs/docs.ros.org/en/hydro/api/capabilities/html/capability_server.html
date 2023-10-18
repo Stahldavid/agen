@@ -1,0 +1,291 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The capability_server ROS Node &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="The Client Module" href="capabilities.client.html" />
+    <link rel="prev" title="Capabilities" href="index.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/capability_server.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.client.html" title="The Client Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Capabilities"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-capability-server-ros-node">
+<h1>The <tt class="docutils literal"><span class="pre">capability_server</span></tt> ROS Node<a class="headerlink" href="#the-capability-server-ros-node" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="docutils literal"><span class="pre">capability_server</span></tt> ROS Node which is provided with this package uses the Python API&#8217;s provided by this package to serve the discovered capability specifications and manage the run time of capabilities.</p>
+<p>With the <tt class="docutils literal"><span class="pre">capability_server</span></tt> you can list the available capability interfaces and providers, start and stop capabilities explicitly or using reference counting calls &#8220;use&#8221; and &#8220;free&#8221;.</p>
+<p>It is recommended that you use <a class="reference internal" href="capabilities.client.html"><em>The Client Module</em></a> and/or <a class="reference internal" href="capabilities.service_discovery.html"><em>The Service Discovery Module</em></a> in conjunction with the <tt class="docutils literal"><span class="pre">capability_server</span></tt>.</p>
+<div class="section" id="ros-api">
+<h2>ROS API<a class="headerlink" href="#ros-api" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">capability_server</span></tt> provides most of its functionality via ROS services and topics and is configured with ROS parameters.</p>
+<div class="section" id="ros-parameters">
+<h3>ROS Parameters<a class="headerlink" href="#ros-parameters" title="Permalink to this headline">¶</a></h3>
+<p>Using ROS Parameters you can control what is loaded by the capability server:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">~package_whitelist</span></tt> (<strong>list of strings</strong> <em>Default: null</em>)</p>
+<p>If not <em>null</em> then the packages listed will be the only packages from which specs are loaded.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">~package_blacklist</span></tt> (<strong>list of strings</strong> <em>Default: null</em>)</p>
+<p>If not <em>null</em> then the packages listed will be ignored when loading specs.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">~whitelist</span></tt> (<strong>list of strings</strong> <em>Default: null</em>)</p>
+<p>If not <em>null</em> then only the specs listed will be loaded (if found), specs must have fully qualified names, i.e. <tt class="docutils literal"><span class="pre">&lt;package_name&gt;/&lt;spec_name&gt;</span></tt>.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">~blacklist</span></tt> (<strong>list of strings</strong> <em>Default: null</em>)</p>
+<p>If not <em>null</em> then the listed specs will be ignored, specs must have fully qualified names, i.e. <tt class="docutils literal"><span class="pre">&lt;package_name&gt;/&lt;spec_name&gt;</span></tt>.</p>
+</li>
+</ul>
+<p>The easiest way to specify the above parameters is in YAML, either in a separate file, like this:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l-Scalar-Plain">package_whitelist</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">package1</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">package2</span>
+<span class="l-Scalar-Plain">package_blacklist</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">package2</span>
+<span class="l-Scalar-Plain">whitelist</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="s">&#39;package1/SomeCapability&#39;</span>
+  <span class="p-Indicator">-</span> <span class="s">&#39;package2/some_capability_provider&#39;</span>
+  <span class="p-Indicator">-</span> <span class="s">&#39;package2/some_capability_provider_faux&#39;</span>
+<span class="l-Scalar-Plain">blacklist</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="s">&#39;package2/some_capability_provider_faux&#39;</span>
+</pre></div>
+</div>
+<p>Which can be loaded in a launch file like this:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;rosparam</span> <span class="na">command=</span><span class="s">&quot;load&quot;</span> <span class="na">file=</span><span class="s">&quot;$(find some_package)/black_and_white_lists.yaml&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Or inline in the launch file like this:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">&quot;capabilities&quot;</span> <span class="na">type=</span><span class="s">&quot;capability_server&quot;</span> <span class="na">name=</span><span class="s">&quot;capability_server&quot;</span> <span class="na">output=</span><span class="s">&quot;screen&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;rosparam</span> <span class="na">param=</span><span class="s">&quot;package_whitelist&quot;</span><span class="nt">&gt;</span>
+        - package1
+        - package2
+    <span class="nt">&lt;/rosparam&gt;</span>
+    <span class="nt">&lt;rosparam</span> <span class="na">param=</span><span class="s">&quot;package_blacklist&quot;</span><span class="nt">&gt;</span>
+        - package2
+    <span class="nt">&lt;/rosparam&gt;</span>
+    <span class="nt">&lt;rosparam</span> <span class="na">param=</span><span class="s">&quot;whitelist&quot;</span><span class="nt">&gt;</span>
+        - &#39;package1/SomeCapability&#39;
+        - &#39;package2/some_capability_provider&#39;
+        - &#39;package2/some_capability_provider_faux&#39;
+    <span class="nt">&lt;/rosparam&gt;</span>
+    <span class="nt">&lt;rosparam</span> <span class="na">param=</span><span class="s">&quot;blacklist&quot;</span><span class="nt">&gt;</span>
+        - &#39;package2/some_capability_provider_faux&#39;
+    <span class="nt">&lt;/rosparam&gt;</span>
+<span class="nt">&lt;/node&gt;</span>
+</pre></div>
+</div>
+<p>You can also control the behavior of the <tt class="docutils literal"><span class="pre">capability_server</span></tt> using these parameters:</p>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">~debug</span></tt> (<strong>bool</strong> <em>Default: false</em>)</p>
+<p>If <em>true</em> debug level messages will be printed to the screen.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">~missing_default_provider_is_an_error</span></tt> (<strong>bool</strong> <em>Default: false</em>)</p>
+<p>If <em>true</em> then if any interfaces with no configured default provider will result in an error instead of a warning.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">~nodelet_manager_name</span></tt> (<strong>str</strong> <em>Default: capability_server_nodelet_manager</em>)</p>
+<p>Name of the internal nodelet manager which is managed by the <tt class="docutils literal"><span class="pre">capability_server</span></tt>.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">~use_screen</span></tt> (<strong>bool</strong> <em>Default: false</em>)</p>
+<p>If <em>true</em> the <tt class="docutils literal"><span class="pre">--screen</span></tt> option is passed to <tt class="docutils literal"><span class="pre">roslaunch</span></tt> when launching a capability provider&#8217;s launch file.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="ros-topics">
+<h3>ROS Topics<a class="headerlink" href="#ros-topics" title="Permalink to this headline">¶</a></h3>
+<p>There is only one ROS topic provided by the <tt class="docutils literal"><span class="pre">capability_server</span></tt>:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~events</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/msg/CapabilityEvent.html">capabilities/CapabilityEvent</a>)</li>
+</ul>
+<p>On this topic several types of events are published and the type is set in the <tt class="docutils literal"><span class="pre">type</span></tt> field of the message:</p>
+<ul class="simple">
+<li>&#8220;server_ready&#8221;: fired once when the <tt class="docutils literal"><span class="pre">capability_server</span></tt> is done loading and ready</li>
+<li>&#8220;launched&#8221;: fired each time a new capability is launched</li>
+<li>&#8220;stopped&#8221;: fired each time a capability is asked to shutdown</li>
+<li>&#8220;terminated&#8221;: fired each time a capability provider&#8217;s launch file terminates (expected or otherwise)</li>
+</ul>
+<p>The <tt class="docutils literal"><span class="pre">capability</span></tt>, <tt class="docutils literal"><span class="pre">provider</span></tt>, and <tt class="docutils literal"><span class="pre">pid</span></tt> fields of the message are set only for the &#8220;launched&#8221;, &#8220;stopped&#8221;, and &#8220;terminated&#8221; event types.</p>
+</div>
+<div class="section" id="ros-services">
+<h3>ROS Services<a class="headerlink" href="#ros-services" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~start_capability</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/StartCapability.html">capabilities/StartCapability</a>)</li>
+</ul>
+<p>Starts a given capability interface, with an optional preferred provider. If the preferred provider is not given, the default provider is used.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~stop_capability</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/StopCapability.html">capabilities/StopCapability</a>)</li>
+</ul>
+<p>Stops a given capability interface.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~use_capability</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/UseCapability.html">capabilities/UseCapability</a>)</li>
+</ul>
+<p>Notifies the capability server that you use this capability.
+If not already running, the capability interface is started (using the preferred provider if provided), otherwise the reference count is simply incremented.</p>
+<p>It is recommended to use <a class="reference internal" href="capabilities.client.html"><em>The Client Module</em></a> instead of using this service directly.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~free_capability</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/FreeCapability.html">capabilities/FreeCapability</a>)</li>
+</ul>
+<p>Notifies the capability server that you no longer need <strong>one</strong> of the &#8220;use&#8220;&#8216;s you previously made on this capability.
+If the reference count goes to zero, then the capability will be stopped.</p>
+<p>It is recommended to use <a class="reference internal" href="capabilities.client.html"><em>The Client Module</em></a> instead of using this service directly.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~establish_bond</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/EstablishBond.html">capabilities/EstablishBond</a>)</li>
+</ul>
+<p>Generates and returns the <tt class="docutils literal"><span class="pre">bond_id</span></tt> on which a bond should be established.
+This <tt class="docutils literal"><span class="pre">bond_id</span></tt> is used by the <tt class="docutils literal"><span class="pre">~use_capability</span></tt> and <tt class="docutils literal"><span class="pre">~free_capability</span></tt> services.</p>
+<p>It is recommended to use <a class="reference internal" href="capabilities.client.html"><em>The Client Module</em></a> instead of using this service directly.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~reload_capabilities</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/std_srvs/html/srv/Empty.html">std_srvs/Empty</a>)</li>
+</ul>
+<p>Reloads the capabilities from the <tt class="docutils literal"><span class="pre">ROS_PACKAGE_PATH</span></tt>.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~get_interfaces</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/GetInterfaces.html">capabilities/GetInterfaces</a>)</li>
+</ul>
+<p>Returns a list of strings which are the names of the available Capability Interfaces.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~get_semantic_interfaces</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/GetSemanticInterfaces.html">capabilities/GetSemanticInterfaces</a>)</li>
+</ul>
+<p>Returns a list of strings which are the names of the available Capability Semantic Interfaces.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~get_providers</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/GetProviders.html">capabilities/GetProviders</a>)</li>
+</ul>
+<p>Returns a list of strings which are the names of the available Capability Providers.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~get_running_capabilities</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/GetRunningCapabilities.html">capabilities/GetRunningCapabilities</a>)</li>
+</ul>
+<p>Returns a list of <a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/msg/RunningCapability.html">capabilities/RunningCapability</a>, each of which captures the running capabilities&#8217; interface, provider, pid, and dependent capabilities.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~get_capability_specs</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/GetCapabilitySpecs.html">capabilities/GetCapabilitySpecs</a>)</li>
+</ul>
+<p>Returns a list of <a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/msg/CapabilitySpec.html">capabilities/CapabilitySpec</a>, each of which captures all the information necessary to represent that capability specification.</p>
+<p>It is recommended to use <a class="reference internal" href="capabilities.service_discovery.html"><em>The Service Discovery Module</em></a> instead of using this service directly.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~get_capability_spec</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/GetCapabilitySpec.html">capabilities/GetCapabilitySpec</a>)</li>
+</ul>
+<p>Returns a single <a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/msg/CapabilitySpec.html">capabilities/CapabilitySpec</a>, which captures all the information necessary to represent that capabilities specification.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~get_nodelet_manager_name</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/GetNodeletManagerName.html">capabilities/GetNodeletManagerName</a>)</li>
+</ul>
+<p>Returns the name of the nodelet manager node for this <tt class="docutils literal"><span class="pre">capability_server</span></tt>.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">~get_remappings</span></tt> (<a class="reference external" href="http://docs.ros.org/hydro/api/capabilities/html/srv/GetRemappings.html">capabilities/GetRemappings</a>)</li>
+</ul>
+<p>Returns a list of remappings for each ROS primitive (topics, services, actions, parameters) for the given capability interface.</p>
+<p>This is useful for determining what the actual topic name is for a semantic interface or provider which has remappings.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The <tt class="docutils literal"><span class="pre">capability_server</span></tt> ROS Node</a><ul>
+<li><a class="reference internal" href="#ros-api">ROS API</a><ul>
+<li><a class="reference internal" href="#ros-parameters">ROS Parameters</a></li>
+<li><a class="reference internal" href="#ros-topics">ROS Topics</a></li>
+<li><a class="reference internal" href="#ros-services">ROS Services</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Capabilities</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="capabilities.client.html"
+                        title="next chapter">The Client Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/capability_server.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.client.html" title="The Client Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Capabilities"
+             >previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

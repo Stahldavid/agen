@@ -1,0 +1,1 @@
+This a ROS2 launch script for the Webots robotic simulator. It creates and returns a LaunchDescription object that can be used to launch a Webots simulation.

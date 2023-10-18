@@ -1,1 +1,0 @@
-This is a control code for force feedback with ROS2 involved. It involves ROS2 components which need to be well controlled with command and sub-command techniques. The semantic search result also includes some references to similar control techniques that could be implemented here.

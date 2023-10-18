@@ -1,0 +1,1 @@
+This is a Python file for variable impedance control for force feedback. The code initializes a ROS node, creates a publisher to a topic, and in an infinite loop, publishes a message to the topic until ROS is shut down. The semantic search was done with queries related to webots ROS2.

@@ -1,0 +1,8 @@
+class ForceFeedbackControl:
+    def __init__(self):
+        # TODO: Initialize force feedback control
+        pass
+
+    def run(self):
+        # TODO: Run force feedback control
+        pass

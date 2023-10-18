@@ -1,0 +1,1 @@
+This file contains a file related to interfacing with ros2 for variable impedance control for force feedback. However, it appears it is incomplete as there are several TODOs in the code. We are looking to optimize this code and complete the missing parts.

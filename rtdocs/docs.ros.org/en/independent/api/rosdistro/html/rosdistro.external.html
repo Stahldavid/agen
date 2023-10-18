@@ -1,0 +1,415 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rosdistro.external package &#8212; rosdistro  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rosdistro.manifest_provider package" href="rosdistro.manifest_provider.html" />
+    <link rel="prev" title="rosdistro package" href="rosdistro.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rosdistro-external-package">
+<h1>rosdistro.external package<a class="headerlink" href="#rosdistro-external-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-rosdistro.external.appdirs">
+<span id="rosdistro-external-appdirs-module"></span><h2>rosdistro.external.appdirs module<a class="headerlink" href="#module-rosdistro.external.appdirs" title="Permalink to this headline">¶</a></h2>
+<p>Utilities for determining application-specific dirs.</p>
+<p>See &lt;<a class="reference external" href="http://github.com/ActiveState/appdirs">http://github.com/ActiveState/appdirs</a>&gt; for details and usage.</p>
+<dl class="class">
+<dt id="rosdistro.external.appdirs.AppDirs">
+<em class="property">class </em><code class="descclassname">rosdistro.external.appdirs.</code><code class="descname">AppDirs</code><span class="sig-paren">(</span><em>appname</em>, <em>appauthor=None</em>, <em>version=None</em>, <em>roaming=False</em>, <em>multipath=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/external/appdirs.html#AppDirs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.external.appdirs.AppDirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Convenience wrapper for getting application dirs.</p>
+<dl class="attribute">
+<dt id="rosdistro.external.appdirs.AppDirs.site_config_dir">
+<code class="descname">site_config_dir</code><a class="headerlink" href="#rosdistro.external.appdirs.AppDirs.site_config_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rosdistro.external.appdirs.AppDirs.site_data_dir">
+<code class="descname">site_data_dir</code><a class="headerlink" href="#rosdistro.external.appdirs.AppDirs.site_data_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rosdistro.external.appdirs.AppDirs.user_cache_dir">
+<code class="descname">user_cache_dir</code><a class="headerlink" href="#rosdistro.external.appdirs.AppDirs.user_cache_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rosdistro.external.appdirs.AppDirs.user_config_dir">
+<code class="descname">user_config_dir</code><a class="headerlink" href="#rosdistro.external.appdirs.AppDirs.user_config_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rosdistro.external.appdirs.AppDirs.user_data_dir">
+<code class="descname">user_data_dir</code><a class="headerlink" href="#rosdistro.external.appdirs.AppDirs.user_data_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rosdistro.external.appdirs.AppDirs.user_log_dir">
+<code class="descname">user_log_dir</code><a class="headerlink" href="#rosdistro.external.appdirs.AppDirs.user_log_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.external.appdirs.site_config_dir">
+<code class="descclassname">rosdistro.external.appdirs.</code><code class="descname">site_config_dir</code><span class="sig-paren">(</span><em>appname=None</em>, <em>appauthor=None</em>, <em>version=None</em>, <em>multipath=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/external/appdirs.html#site_config_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.external.appdirs.site_config_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return full path to the user-shared data dir for this application.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>“appname” is the name of application.</dt>
+<dd>If None, just the system directory is returned.</dd>
+<dt>“appauthor” (only required and used on Windows) is the name of the</dt>
+<dd>appauthor or distributing body for this application. Typically
+it is the owning company name. This falls back to appname.</dd>
+<dt>“version” is an optional version path element to append to the</dt>
+<dd>path. You might want to use this if you want multiple versions
+of your app to be able to run independently. If used, this
+would typically be “&lt;major&gt;.&lt;minor&gt;”.
+Only applied when appname is present.</dd>
+<dt>“multipath” is an optional parameter only applicable to <a href="#id1"><span class="problematic" id="id2">*</span></a>nix</dt>
+<dd>which indicates that the entire list of config dirs should be
+returned. By default, the first item from XDG_CONFIG_DIRS is
+returned, or ‘/etc/xdg/&lt;AppName&gt;’, if XDG_CONFIG_DIRS is not set</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Typical user data directories are:</dt>
+<dd><p class="first">Mac OS X:   same as site_data_dir
+Unix:       /etc/xdg/&lt;AppName&gt; or $XDG_CONFIG_DIRS[i]/&lt;AppName&gt; for each value in</p>
+<blockquote>
+<div>$XDG_CONFIG_DIRS</div></blockquote>
+<p class="last">Win <em>:      same as site_data_dir
+Vista:      (Fail! “C:ProgramData” is a hidden *system</em> directory on Vista.)</p>
+</dd>
+</dl>
+<p>For Unix, this is using the $XDG_CONFIG_DIRS[0] default, if multipath=False</p>
+<p>WARNING: Do not use this on Windows. See the Vista-Fail note above for why.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.external.appdirs.site_data_dir">
+<code class="descclassname">rosdistro.external.appdirs.</code><code class="descname">site_data_dir</code><span class="sig-paren">(</span><em>appname=None</em>, <em>appauthor=None</em>, <em>version=None</em>, <em>multipath=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/external/appdirs.html#site_data_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.external.appdirs.site_data_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return full path to the user-shared data dir for this application.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>“appname” is the name of application.</dt>
+<dd>If None, just the system directory is returned.</dd>
+<dt>“appauthor” (only required and used on Windows) is the name of the</dt>
+<dd>appauthor or distributing body for this application. Typically
+it is the owning company name. This falls back to appname.</dd>
+<dt>“version” is an optional version path element to append to the</dt>
+<dd>path. You might want to use this if you want multiple versions
+of your app to be able to run independently. If used, this
+would typically be “&lt;major&gt;.&lt;minor&gt;”.
+Only applied when appname is present.</dd>
+<dt>“multipath” is an optional parameter only applicable to <a href="#id3"><span class="problematic" id="id4">*</span></a>nix</dt>
+<dd>which indicates that the entire list of data dirs should be
+returned. By default, the first item from XDG_DATA_DIRS is
+returned, or ‘/usr/local/share/&lt;AppName&gt;’,
+if XDG_DATA_DIRS is not set</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Typical user data directories are:</dt>
+<dd>Mac OS X:   /Library/Application Support/&lt;AppName&gt;
+Unix:       /usr/local/share/&lt;AppName&gt; or /usr/share/&lt;AppName&gt;
+Win XP:     C:Documents and SettingsAll UsersApplication Data&lt;AppAuthor&gt;&lt;AppName&gt;
+Vista:      (Fail! “C:ProgramData” is a hidden <em>system</em> directory on Vista.)
+Win 7:      C:ProgramData&lt;AppAuthor&gt;&lt;AppName&gt;   # Hidden, but writeable on Win 7.</dd>
+</dl>
+<p>For Unix, this is using the $XDG_DATA_DIRS[0] default.</p>
+<p>WARNING: Do not use this on Windows. See the Vista-Fail note above for why.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.external.appdirs.user_cache_dir">
+<code class="descclassname">rosdistro.external.appdirs.</code><code class="descname">user_cache_dir</code><span class="sig-paren">(</span><em>appname=None</em>, <em>appauthor=None</em>, <em>version=None</em>, <em>opinion=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/external/appdirs.html#user_cache_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.external.appdirs.user_cache_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return full path to the user-specific cache dir for this application.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>“appname” is the name of application.</dt>
+<dd>If None, just the system directory is returned.</dd>
+<dt>“appauthor” (only required and used on Windows) is the name of the</dt>
+<dd>appauthor or distributing body for this application. Typically
+it is the owning company name. This falls back to appname.</dd>
+<dt>“version” is an optional version path element to append to the</dt>
+<dd>path. You might want to use this if you want multiple versions
+of your app to be able to run independently. If used, this
+would typically be “&lt;major&gt;.&lt;minor&gt;”.
+Only applied when appname is present.</dd>
+<dt>“opinion” (boolean) can be False to disable the appending of</dt>
+<dd>“Cache” to the base app data dir for Windows. See
+discussion below.</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Typical user cache directories are:</dt>
+<dd>Mac OS X:   ~/Library/Caches/&lt;AppName&gt;
+Unix:       ~/.cache/&lt;AppName&gt; (XDG default)
+Win XP:     C:Documents and Settings&lt;username&gt;Local SettingsApplication Data&lt;AppAuthor&gt;&lt;AppName&gt;Cache
+Vista:      C:Users&lt;username&gt;AppDataLocal&lt;AppAuthor&gt;&lt;AppName&gt;Cache</dd>
+</dl>
+<p>On Windows the only suggestion in the MSDN docs is that local settings go in
+the <cite>CSIDL_LOCAL_APPDATA</cite> directory. This is identical to the non-roaming
+app data dir (the default returned by <cite>user_data_dir</cite> above). Apps typically
+put cache data somewhere <em>under</em> the given dir here. Some examples:</p>
+<blockquote>
+<div>…MozillaFirefoxProfiles&lt;ProfileName&gt;Cache
+…AcmeSuperAppCache1.0</div></blockquote>
+<p>OPINION: This function appends “Cache” to the <cite>CSIDL_LOCAL_APPDATA</cite> value.
+This can be disabled with the <cite>opinion=False</cite> option.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.external.appdirs.user_config_dir">
+<code class="descclassname">rosdistro.external.appdirs.</code><code class="descname">user_config_dir</code><span class="sig-paren">(</span><em>appname=None</em>, <em>appauthor=None</em>, <em>version=None</em>, <em>roaming=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/external/appdirs.html#user_config_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.external.appdirs.user_config_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return full path to the user-specific config dir for this application.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>“appname” is the name of application.</dt>
+<dd>If None, just the system directory is returned.</dd>
+<dt>“appauthor” (only required and used on Windows) is the name of the</dt>
+<dd>appauthor or distributing body for this application. Typically
+it is the owning company name. This falls back to appname.</dd>
+<dt>“version” is an optional version path element to append to the</dt>
+<dd>path. You might want to use this if you want multiple versions
+of your app to be able to run independently. If used, this
+would typically be “&lt;major&gt;.&lt;minor&gt;”.
+Only applied when appname is present.</dd>
+<dt>“roaming” (boolean, default False) can be set True to use the Windows</dt>
+<dd>roaming appdata directory. That means that for users on a Windows
+network setup for roaming profiles, this user data will be
+sync’d on login. See
+&lt;<a class="reference external" href="http://technet.microsoft.com/en-us/library/cc766489(WS.10).aspx">http://technet.microsoft.com/en-us/library/cc766489(WS.10).aspx</a>&gt;
+for a discussion of issues.</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Typical user data directories are:</dt>
+<dd>Mac OS X:               same as user_data_dir
+Unix:                   ~/.config/&lt;AppName&gt;     # or in $XDG_CONFIG_HOME, if defined
+Win <a href="#id5"><span class="problematic" id="id6">*</span></a>:                  same as user_data_dir</dd>
+</dl>
+<p>For Unix, we follow the XDG spec and support $XDG_DATA_HOME.
+That means, by deafult “~/.local/share/&lt;AppName&gt;”.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.external.appdirs.user_data_dir">
+<code class="descclassname">rosdistro.external.appdirs.</code><code class="descname">user_data_dir</code><span class="sig-paren">(</span><em>appname=None</em>, <em>appauthor=None</em>, <em>version=None</em>, <em>roaming=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/external/appdirs.html#user_data_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.external.appdirs.user_data_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return full path to the user-specific data dir for this application.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>“appname” is the name of application.</dt>
+<dd>If None, just the system directory is returned.</dd>
+<dt>“appauthor” (only required and used on Windows) is the name of the</dt>
+<dd>appauthor or distributing body for this application. Typically
+it is the owning company name. This falls back to appname.</dd>
+<dt>“version” is an optional version path element to append to the</dt>
+<dd>path. You might want to use this if you want multiple versions
+of your app to be able to run independently. If used, this
+would typically be “&lt;major&gt;.&lt;minor&gt;”.
+Only applied when appname is present.</dd>
+<dt>“roaming” (boolean, default False) can be set True to use the Windows</dt>
+<dd>roaming appdata directory. That means that for users on a Windows
+network setup for roaming profiles, this user data will be
+sync’d on login. See
+&lt;<a class="reference external" href="http://technet.microsoft.com/en-us/library/cc766489(WS.10).aspx">http://technet.microsoft.com/en-us/library/cc766489(WS.10).aspx</a>&gt;
+for a discussion of issues.</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Typical user data directories are:</dt>
+<dd>Mac OS X:               ~/Library/Application Support/&lt;AppName&gt;
+Unix:                   ~/.local/share/&lt;AppName&gt;    # or in $XDG_DATA_HOME, if defined
+Win XP (not roaming):   C:Documents and Settings&lt;username&gt;Application Data&lt;AppAuthor&gt;&lt;AppName&gt;
+Win XP (roaming):       C:Documents and Settings&lt;username&gt;Local SettingsApplication Data&lt;AppAuthor&gt;&lt;AppName&gt;
+Win 7  (not roaming):   C:Users&lt;username&gt;AppDataLocal&lt;AppAuthor&gt;&lt;AppName&gt;
+Win 7  (roaming):       C:Users&lt;username&gt;AppDataRoaming&lt;AppAuthor&gt;&lt;AppName&gt;</dd>
+</dl>
+<p>For Unix, we follow the XDG spec and support $XDG_DATA_HOME.
+That means, by deafult “~/.local/share/&lt;AppName&gt;”.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.external.appdirs.user_log_dir">
+<code class="descclassname">rosdistro.external.appdirs.</code><code class="descname">user_log_dir</code><span class="sig-paren">(</span><em>appname=None</em>, <em>appauthor=None</em>, <em>version=None</em>, <em>opinion=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/external/appdirs.html#user_log_dir"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.external.appdirs.user_log_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return full path to the user-specific log dir for this application.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>“appname” is the name of application.</dt>
+<dd>If None, just the system directory is returned.</dd>
+<dt>“appauthor” (only required and used on Windows) is the name of the</dt>
+<dd>appauthor or distributing body for this application. Typically
+it is the owning company name. This falls back to appname.</dd>
+<dt>“version” is an optional version path element to append to the</dt>
+<dd>path. You might want to use this if you want multiple versions
+of your app to be able to run independently. If used, this
+would typically be “&lt;major&gt;.&lt;minor&gt;”.
+Only applied when appname is present.</dd>
+<dt>“opinion” (boolean) can be False to disable the appending of</dt>
+<dd>“Logs” to the base app data dir for Windows, and “log” to the
+base cache dir for Unix. See discussion below.</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>Typical user cache directories are:</dt>
+<dd>Mac OS X:   ~/Library/Logs/&lt;AppName&gt;
+Unix:       ~/.cache/&lt;AppName&gt;/log  # or under $XDG_CACHE_HOME if defined
+Win XP:     C:Documents and Settings&lt;username&gt;Local SettingsApplication Data&lt;AppAuthor&gt;&lt;AppName&gt;Logs
+Vista:      C:Users&lt;username&gt;AppDataLocal&lt;AppAuthor&gt;&lt;AppName&gt;Logs</dd>
+</dl>
+<p>On Windows the only suggestion in the MSDN docs is that local settings
+go in the <cite>CSIDL_LOCAL_APPDATA</cite> directory. (Note: I’m interested in
+examples of what some windows apps use for a logs dir.)</p>
+<p>OPINION: This function appends “Logs” to the <cite>CSIDL_LOCAL_APPDATA</cite>
+value for Windows and appends “log” to the user cache dir for Unix.
+This can be disabled with the <cite>opinion=False</cite> option.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.external">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-rosdistro.external" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">rosdistro</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="rosdistro.html">rosdistro package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="rosdistro.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">rosdistro.external package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-rosdistro.external.appdirs">rosdistro.external.appdirs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-rosdistro.external">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rosdistro.manifest_provider.html">rosdistro.manifest_provider package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.aptdistro">rosdistro.aptdistro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.common">rosdistro.common module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.dependency_walker">rosdistro.dependency_walker module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.develdistro">rosdistro.develdistro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.distribution">rosdistro.distribution module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.distribution_cache">rosdistro.distribution_cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.distribution_cache_generator">rosdistro.distribution_cache_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.distribution_file">rosdistro.distribution_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.doc_build_file">rosdistro.doc_build_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.doc_file">rosdistro.doc_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.doc_repository_specification">rosdistro.doc_repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.freeze_source">rosdistro.freeze_source module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.index">rosdistro.index module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.legacy">rosdistro.legacy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.loader">rosdistro.loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.package">rosdistro.package module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release">rosdistro.release module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_build">rosdistro.release_build module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_build_file">rosdistro.release_build_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_cache">rosdistro.release_cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_cache_generator">rosdistro.release_cache_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_file">rosdistro.release_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.release_repository_specification">rosdistro.release_repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.repository">rosdistro.repository module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.repository_specification">rosdistro.repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.rosdistro">rosdistro.rosdistro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.source_build_file">rosdistro.source_build_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.source_file">rosdistro.source_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.source_repository_cache">rosdistro.source_repository_cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.source_repository_specification">rosdistro.source_repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.status">rosdistro.status module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.vcs">rosdistro.vcs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.verify">rosdistro.verify module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro.writer">rosdistro.writer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.html#module-rosdistro">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="rosdistro.html">rosdistro package</a><ul>
+      <li>Previous: <a href="rosdistro.html" title="previous chapter">rosdistro package</a></li>
+      <li>Next: <a href="rosdistro.manifest_provider.html" title="next chapter">rosdistro.manifest_provider package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/rosdistro.external.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

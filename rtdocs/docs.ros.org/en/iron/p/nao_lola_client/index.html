@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the documentation for nao_lola_client &mdash; nao_lola_client 0.3.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Class Hierarchy" href="generated/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            nao_lola_client
+          </a>
+              <div class="version">
+                0.3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_IndexConversion.html">Namespace IndexConversion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_IndexConversion.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_IndexConversion.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_LolaEnums.html">Namespace LolaEnums</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_LolaEnums.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rclcpp.html">Namespace rclcpp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/classConnection.html">Class Connection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classConnection.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classMsgpackPacker.html">Class MsgpackPacker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classMsgpackPacker.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classMsgpackParser.html">Class MsgpackParser</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classMsgpackParser.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classNaoLolaClient.html">Class NaoLolaClient</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classNaoLolaClient.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classNaoLolaClient.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classNaoLolaClient.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a405cbcf1cb5f374f727894dca78953a3.html">Enum Accelerometer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a405cbcf1cb5f374f727894dca78953a3.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ad75b2ce8aa4eae9efa60b053466017ce.html">Enum Angles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ad75b2ce8aa4eae9efa60b053466017ce.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ab9e7eaafa59b2954e3c2d2d6f8777368.html">Enum Battery</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ab9e7eaafa59b2954e3c2d2d6f8777368.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1aa6a8289e9ff1ad294a2d93d4622e1c98.html">Enum FSR</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1aa6a8289e9ff1ad294a2d93d4622e1c98.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a556f75917c60466ce197f7780cc50313.html">Enum Gyroscope</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a556f75917c60466ce197f7780cc50313.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a606399b597484bc348d6b764c6b4d91e.html">Enum Joint</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a606399b597484bc348d6b764c6b4d91e.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ae950d095ef3937233b78390c77bdfd1b.html">Enum LeftEarLeds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ae950d095ef3937233b78390c77bdfd1b.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a95ff4ea20f471a82e9c9f9f128580c44.html">Enum LeftEyeLeds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a95ff4ea20f471a82e9c9f9f128580c44.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ad14b98e6a9c0e7cd6a3dbe5a82d4af58.html">Enum RightEarLeds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ad14b98e6a9c0e7cd6a3dbe5a82d4af58.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ae120795e2562dcae178fa0fddbd13016.html">Enum RightEyeLeds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ae120795e2562dcae178fa0fddbd13016.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a0e59bb4630ab74f0996f2487dc69fde2.html">Enum RobotConfig</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a0e59bb4630ab74f0996f2487dc69fde2.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1adb59e8099cca8f6dadc446ca093ad6c1.html">Enum SkullLeds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1adb59e8099cca8f6dadc446ca093ad6c1.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a5298491f78f8a59414d779fa7fcd687d.html">Enum Sonar</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1a5298491f78f8a59414d779fa7fcd687d.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ae4470f2862525f1e24058a8b0ced7a2c.html">Enum Touch</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_lola__enums_8hpp_1ae4470f2862525f1e24058a8b0ced7a2c.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_command__index__conversion_8hpp_1aad446a3d1065bf9b994ba9b752652426.html">Function IndexConversion::flip</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_command__index__conversion_8hpp_1aad446a3d1065bf9b994ba9b752652426.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#variables">Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a7293e6dc44ed80c4575a08d1647ad8d8.html">Variable IndexConversion::head_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a7293e6dc44ed80c4575a08d1647ad8d8.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a7293e6dc44ed80c4575a08d1647ad8d8.html">Variable IndexConversion::head_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a7293e6dc44ed80c4575a08d1647ad8d8.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a0499528383fc31011117689f587718ca.html">Variable IndexConversion::joint_lola_to_msg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a0499528383fc31011117689f587718ca.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a0499528383fc31011117689f587718ca.html">Variable IndexConversion::joint_lola_to_msg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a0499528383fc31011117689f587718ca.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_sensor__index__conversion_8hpp_1a0499528383fc31011117689f587718ca.html">Variable IndexConversion::joint_lola_to_msg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_sensor__index__conversion_8hpp_1a0499528383fc31011117689f587718ca.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a58a596c959febb6a1f51b2fa0a7e7e7d.html">Variable IndexConversion::joint_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a58a596c959febb6a1f51b2fa0a7e7e7d.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a58a596c959febb6a1f51b2fa0a7e7e7d.html">Variable IndexConversion::joint_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a58a596c959febb6a1f51b2fa0a7e7e7d.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_sensor__index__conversion_8hpp_1a58a596c959febb6a1f51b2fa0a7e7e7d.html">Variable IndexConversion::joint_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_sensor__index__conversion_8hpp_1a58a596c959febb6a1f51b2fa0a7e7e7d.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1ac8e11ab2ff9e1b0d39ff89d017ae2363.html">Variable IndexConversion::left_ear_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1ac8e11ab2ff9e1b0d39ff89d017ae2363.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1ac8e11ab2ff9e1b0d39ff89d017ae2363.html">Variable IndexConversion::left_ear_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1ac8e11ab2ff9e1b0d39ff89d017ae2363.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a90253cee59e3ef08aad2cd5b23f98890.html">Variable IndexConversion::left_eye_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a90253cee59e3ef08aad2cd5b23f98890.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a90253cee59e3ef08aad2cd5b23f98890.html">Variable IndexConversion::left_eye_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a90253cee59e3ef08aad2cd5b23f98890.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a41d020968080ae97358b7ec35d677593.html">Variable IndexConversion::right_ear_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1a41d020968080ae97358b7ec35d677593.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a41d020968080ae97358b7ec35d677593.html">Variable IndexConversion::right_ear_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1a41d020968080ae97358b7ec35d677593.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1af558caf7fcb6dd480291e108be1fdcc1.html">Variable IndexConversion::right_eye_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_command__index__conversion_8hpp_1af558caf7fcb6dd480291e108be1fdcc1.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1af558caf7fcb6dd480291e108be1fdcc1.html">Variable IndexConversion::right_eye_leds_msg_to_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_index__conversion_8hpp_1af558caf7fcb6dd480291e108be1fdcc1.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_connection_8hpp_1aeac71c26a4c73b5872032c6a3b9d411e.html">Define MSGPACK_READ_LENGTH</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_connection_8hpp_1aeac71c26a4c73b5872032c6a3b9d411e.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src.html">Directory src</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_nao_lola.html">Directory nao_lola</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_nao_lola.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_nao_lola_nao_lola_client.html">Directory nao_lola_client</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_nao_lola_nao_lola_client.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_nao_lola_nao_lola_client_include.html">Directory include</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_nao_lola_nao_lola_client_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client.html">Directory nao_lola_client</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_command_index_conversion.hpp.html">File command_index_conversion.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_command_index_conversion.hpp.html#definition-tmp-ws-src-nao-lola-nao-lola-client-include-nao-lola-client-command-index-conversion-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/nao_lola/nao_lola_client/include/nao_lola_client/command_index_conversion.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_command_index_conversion.hpp.html">Program Listing for File command_index_conversion.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_command_index_conversion.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_command_index_conversion.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_command_index_conversion.hpp.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_command_index_conversion.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_connection.hpp.html">File connection.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_connection.hpp.html#definition-tmp-ws-src-nao-lola-nao-lola-client-include-nao-lola-client-connection-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/nao_lola/nao_lola_client/include/nao_lola_client/connection.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_connection.hpp.html">Program Listing for File connection.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_connection.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_connection.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_connection.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_connection.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_index_conversion.hpp.html">File index_conversion.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_index_conversion.hpp.html#definition-tmp-ws-src-nao-lola-nao-lola-client-include-nao-lola-client-index-conversion-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/nao_lola/nao_lola_client/include/nao_lola_client/index_conversion.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_index_conversion.hpp.html">Program Listing for File index_conversion.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_index_conversion.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_index_conversion.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_index_conversion.hpp.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_index_conversion.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_lola_enums.hpp.html">File lola_enums.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_lola_enums.hpp.html#definition-tmp-ws-src-nao-lola-nao-lola-client-include-nao-lola-client-lola-enums-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/nao_lola/nao_lola_client/include/nao_lola_client/lola_enums.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_lola_enums.hpp.html">Program Listing for File lola_enums.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_lola_enums.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_lola_enums.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_lola_enums.hpp.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_packer.hpp.html">File msgpack_packer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_packer.hpp.html#definition-tmp-ws-src-nao-lola-nao-lola-client-include-nao-lola-client-msgpack-packer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/nao_lola/nao_lola_client/include/nao_lola_client/msgpack_packer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_packer.hpp.html">Program Listing for File msgpack_packer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_packer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_packer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_packer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_parser.hpp.html">File msgpack_parser.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_parser.hpp.html#definition-tmp-ws-src-nao-lola-nao-lola-client-include-nao-lola-client-msgpack-parser-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/nao_lola/nao_lola_client/include/nao_lola_client/msgpack_parser.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_parser.hpp.html">Program Listing for File msgpack_parser.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_parser.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_msgpack_parser.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_nao_lola_client.hpp.html">File nao_lola_client.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_nao_lola_client.hpp.html#definition-tmp-ws-src-nao-lola-nao-lola-client-include-nao-lola-client-nao-lola-client-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/nao_lola/nao_lola_client/include/nao_lola_client/nao_lola_client.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_nao_lola_client.hpp.html">Program Listing for File nao_lola_client.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_nao_lola_client.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_nao_lola_client.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_sensor_index_conversion.hpp.html">File sensor_index_conversion.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_sensor_index_conversion.hpp.html#definition-tmp-ws-src-nao-lola-nao-lola-client-include-nao-lola-client-sensor-index-conversion-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/nao_lola/nao_lola_client/include/nao_lola_client/sensor_index_conversion.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_sensor_index_conversion.hpp.html">Program Listing for File sensor_index_conversion.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_sensor_index_conversion.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_sensor_index_conversion.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_nao_lola_nao_lola_client_include_nao_lola_client_sensor_index_conversion.hpp.html#variables">Variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">nao_lola_client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the documentation for nao_lola_client</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-documentation-for-nao-lola-client">
+<h1>Welcome to the documentation for nao_lola_client<a class="headerlink" href="#welcome-to-the-documentation-for-nao-lola-client" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#variables">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-search">
+<h1>Indices and Search<a class="headerlink" href="#indices-and-search" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/index.html" class="btn btn-neutral float-right" title="Class Hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Apache License 2.0.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

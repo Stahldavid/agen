@@ -1,0 +1,1 @@
+Refactor this script taking into account ROS2 practices

@@ -1,0 +1,1124 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>capabilities.server &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/_modules/capabilities/server.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for capabilities.server</h1><div class="highlight"><pre>
+<span class="c"># Software License Agreement (BSD License)</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) 2013, Open Source Robotics Foundation, Inc.</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c"># modification, are permitted provided that the following conditions</span>
+<span class="c"># are met:</span>
+<span class="c">#</span>
+<span class="c">#  * Redistributions of source code must retain the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c">#  * Redistributions in binary form must reproduce the above</span>
+<span class="c">#    copyright notice, this list of conditions and the following</span>
+<span class="c">#    disclaimer in the documentation and/or other materials provided</span>
+<span class="c">#    with the distribution.</span>
+<span class="c">#  * Neither the name of Open Source Robotics Foundation, Inc. nor</span>
+<span class="c">#    the names of its contributors may be used to endorse or promote</span>
+<span class="c">#    products derived from this software without specific prior</span>
+<span class="c">#    written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c"># &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="c"># FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="c"># COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="c"># INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="c"># BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="c"># LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="c"># LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="c"># ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="c"># Author: Tully Foote &lt;tfoote@osrfoundation.org&gt;</span>
+<span class="c"># Author: William Woodall &lt;william@osrfoundation.org&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module implements the Capability server.</span>
+
+<span class="sd">The Capability server provides access to queries and services related</span>
+<span class="sd">to capabilities.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+
+<span class="kn">import</span> <span class="nn">rospy</span>
+
+<span class="kn">from</span> <span class="nn">bondpy.bondpy</span> <span class="kn">import</span> <span class="n">Bond</span>
+
+<span class="kn">from</span> <span class="nn">std_srvs.srv</span> <span class="kn">import</span> <span class="n">Empty</span>
+<span class="kn">from</span> <span class="nn">std_srvs.srv</span> <span class="kn">import</span> <span class="n">EmptyResponse</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">EstablishBond</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">EstablishBondResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetCapabilitySpec</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetCapabilitySpecResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">FreeCapability</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">FreeCapabilityResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetCapabilitySpecs</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetCapabilitySpecsResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetInterfaces</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetInterfacesResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetNodeletManagerName</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetNodeletManagerNameResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetProviders</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetProvidersResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetSemanticInterfaces</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetSemanticInterfacesResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetRemappings</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetRemappingsResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetRunningCapabilities</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">GetRunningCapabilitiesResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">StartCapability</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">StartCapabilityResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">StopCapability</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">StopCapabilityResponse</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">UseCapability</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">UseCapabilityResponse</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.discovery</span> <span class="kn">import</span> <span class="n">package_index_from_package_path</span>
+<span class="kn">from</span> <span class="nn">capabilities.discovery</span> <span class="kn">import</span> <span class="n">spec_file_index_from_package_index</span>
+<span class="kn">from</span> <span class="nn">capabilities.discovery</span> <span class="kn">import</span> <span class="n">spec_index_from_spec_file_index</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.launch_manager</span> <span class="kn">import</span> <span class="n">_special_nodelet_manager_capability</span>
+<span class="kn">from</span> <span class="nn">capabilities.launch_manager</span> <span class="kn">import</span> <span class="n">LaunchManager</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.msg</span> <span class="kn">import</span> <span class="n">Capability</span>
+<span class="kn">from</span> <span class="nn">capabilities.msg</span> <span class="kn">import</span> <span class="n">CapabilityEvent</span>
+<span class="kn">from</span> <span class="nn">capabilities.msg</span> <span class="kn">import</span> <span class="n">CapabilitySpec</span>
+<span class="kn">from</span> <span class="nn">capabilities.msg</span> <span class="kn">import</span> <span class="n">Remapping</span>
+<span class="kn">from</span> <span class="nn">capabilities.msg</span> <span class="kn">import</span> <span class="n">RunningCapability</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.specs.interface</span> <span class="kn">import</span> <span class="n">capability_interface_from_string</span>
+<span class="kn">from</span> <span class="nn">capabilities.specs.semantic_interface</span> <span class="kn">import</span> <span class="n">semantic_capability_interface_from_string</span>
+
+<span class="n">USER_SERVICE_REASON</span> <span class="o">=</span> <span class="s">&#39;user service call&#39;</span>
+
+<span class="c">## Hack to squelch output from Service call failure ##</span>
+
+<span class="kn">from</span> <span class="nn">rospy.impl</span> <span class="kn">import</span> <span class="n">tcpros_service</span>
+
+
+<span class="k">def</span> <span class="nf">custom__handle_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transport</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>  <span class="c"># pragma: no cover</span>
+    <span class="kn">import</span> <span class="nn">struct</span>
+    <span class="kn">from</span> <span class="nn">rospy.impl.tcpros_service</span> <span class="kn">import</span> <span class="n">convert_return_to_response</span>
+    <span class="kn">from</span> <span class="nn">rospy.service</span> <span class="kn">import</span> <span class="n">ServiceException</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c"># convert return type to response Message instance</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">convert_return_to_response</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handler</span><span class="p">(</span><span class="n">request</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">response_class</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seq</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c"># ok byte</span>
+        <span class="n">transport</span><span class="o">.</span><span class="n">write_buff</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s">&#39;&lt;B&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">transport</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">seq</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ServiceException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">rospydebug</span><span class="p">(</span><span class="s">&quot;handler raised ServiceException: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_service_error</span><span class="p">(</span><span class="n">transport</span><span class="p">,</span> <span class="s">&quot;service cannot process request: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c"># rospy.logerr(&quot;Error processing request: %s\n%s&quot; % (e, traceback.print_exc()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_service_error</span><span class="p">(</span><span class="n">transport</span><span class="p">,</span> <span class="s">&quot;error processing request: </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="n">tcpros_service</span><span class="o">.</span><span class="n">ServiceImpl</span><span class="o">.</span><span class="n">_handle_request</span> <span class="o">=</span> <span class="n">custom__handle_request</span>
+
+<span class="c">## End hacks ##</span>
+
+
+<div class="viewcode-block" id="CapabilityInstance"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityInstance">[docs]</a><span class="k">class</span> <span class="nc">CapabilityInstance</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Encapsulates the state of an instance of a Capability Provider</span>
+
+<span class="sd">    This class encapsulates the state of the capability instance and</span>
+<span class="sd">    provides methods for changing the states of the instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">provider_path</span><span class="p">,</span> <span class="n">started_by</span><span class="o">=</span><span class="s">&#39;unknown&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">=</span> <span class="s">&#39;waiting&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">=</span> <span class="n">provider</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">provider_path</span> <span class="o">=</span> <span class="n">provider_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">implements</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depends_on</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">provider</span><span class="o">.</span><span class="n">dependencies</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canceled</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">started_by</span> <span class="o">=</span> <span class="n">started_by</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bonds</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c"># {bond_id: reference_count}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">reference_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bonds</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="CapabilityInstance.state"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityInstance.state">[docs]</a>    <span class="k">def</span> <span class="nf">state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the current state of the CapabilityInstance&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span>
+</div>
+<div class="viewcode-block" id="CapabilityInstance.launch"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityInstance.launch">[docs]</a>    <span class="k">def</span> <span class="nf">launch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change to the &#39;launching&#39; state</span>
+
+<span class="sd">        Fails to transition if the current state is not &#39;waiting&#39;.</span>
+
+<span class="sd">        :returns: True if transition is successful, False otherwise</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="s">&#39;waiting&#39;</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span>
+                <span class="s">&quot;Capability Provider &#39;{0}&#39; &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span>
+                <span class="s">&quot;cannot transition to &#39;launching&#39; from anything but &quot;</span> <span class="o">+</span>
+                <span class="s">&quot;&#39;waiting&#39;, current state is &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">=</span> <span class="s">&#39;launching&#39;</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="CapabilityInstance.cancel"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityInstance.cancel">[docs]</a>    <span class="k">def</span> <span class="nf">cancel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cancels the instance, which can only be done while it is still &#39;waiting&#39;</span>
+
+<span class="sd">        Fails to cancel if the current state is not &#39;waiting&#39;.</span>
+<span class="sd">        &quot;Canceling&quot; is achieved by setting the canceled member variable to True.</span>
+
+<span class="sd">        :returns: True if canceling is successful, False otherwise</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="s">&#39;waiting&#39;</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span>
+                <span class="s">&quot;Capability Instance &#39;{0}&#39; &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span>
+                <span class="s">&quot;cannot be canceled from anything but &quot;</span> <span class="o">+</span>
+                <span class="s">&quot;&#39;waiting&#39;, current state is &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">canceled</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="CapabilityInstance.launched"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityInstance.launched">[docs]</a>    <span class="k">def</span> <span class="nf">launched</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called once the instance is &quot;launched&quot;, changes state to &#39;running&#39;</span>
+
+<span class="sd">        Fails to transition if the current state is not &#39;launching&#39;.</span>
+<span class="sd">        If successful, the state changes to &#39;running&#39;.</span>
+
+<span class="sd">        :param pid: process ID of the instance being tracked</span>
+<span class="sd">        :type pid: int</span>
+<span class="sd">        :returns: True if transition is successful, False otherwise</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">pid</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="s">&#39;launching&#39;</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span>
+                <span class="s">&quot;Capability Instance &#39;{0}&#39; &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span>
+                <span class="s">&quot;cannot transition to &#39;running&#39; from anything but &quot;</span> <span class="o">+</span>
+                <span class="s">&quot;&#39;launching&#39;, current state is &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">=</span> <span class="s">&#39;running&#39;</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="CapabilityInstance.stopped"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityInstance.stopped">[docs]</a>    <span class="k">def</span> <span class="nf">stopped</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change to the &#39;stopping&#39; state</span>
+
+<span class="sd">        Fails to transition if the current state is not either &#39;running&#39; or &#39;launching&#39;.</span>
+
+<span class="sd">        :returns: True if transition is successful, False otherwise</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;running&#39;</span><span class="p">,</span> <span class="s">&#39;launching&#39;</span><span class="p">]:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span>
+                <span class="s">&quot;Capability Instance &#39;{0}&#39; &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span>
+                <span class="s">&quot;cannot transition to &#39;stopping&#39; from anything but &quot;</span> <span class="o">+</span>
+                <span class="s">&quot;&#39;launching&#39; or &#39;running&#39;, &quot;</span> <span class="o">+</span>
+                <span class="s">&quot;current state is &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">=</span> <span class="s">&#39;stopping&#39;</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="CapabilityInstance.terminated"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityInstance.terminated">[docs]</a>    <span class="k">def</span> <span class="nf">terminated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called when the instance has terminated, transitions to the &#39;terminated&#39; state</span>
+
+<span class="sd">        Fails to transition if the current state is not &#39;stopping&#39;.</span>
+
+<span class="sd">        :returns: True if transition is successful, False otherwise</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="s">&#39;stopping&#39;</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span>
+                <span class="s">&quot;Capability Instance &#39;{0}&#39; &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span>
+                <span class="s">&quot;terminated unexpectedly, it was previously in the &quot;</span> <span class="o">+</span>
+                <span class="s">&quot;&#39;{0}&#39; state.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">))</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">=</span> <span class="s">&#39;terminated&#39;</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+</div></div>
+<div class="viewcode-block" id="get_reverse_depends"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.get_reverse_depends">[docs]</a><span class="k">def</span> <span class="nf">get_reverse_depends</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">capability_instances</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gets the reverse dependencies of a given Capability</span>
+
+<span class="sd">    :param name: Name of the Capability which the instances might depend on</span>
+<span class="sd">    :type name: str</span>
+<span class="sd">    :param capability_instances: list of instances to search for having a</span>
+<span class="sd">        dependency on the given Capability</span>
+<span class="sd">    :type capability_instances: :py:obj:`list` of :py:class:`CapabilityInstance`</span>
+<span class="sd">    :returns: A list of :py:class:`CapabilityInstance`&#39;s which depend on the</span>
+<span class="sd">        given Capability name</span>
+<span class="sd">    :rtype: :py:obj:`list` of :py:class:`CapabilityInstance`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rdepends</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">capability_instances</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">depends_on</span><span class="p">:</span>
+            <span class="n">rdepends</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rdepends</span>
+
+</div>
+<div class="viewcode-block" id="CapabilityServer"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityServer">[docs]</a><span class="k">class</span> <span class="nc">CapabilityServer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A class to expose the :py:class:`discovery.SpecIndex` over a ROS API</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_paths</span><span class="p">,</span> <span class="n">screen</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__package_paths</span> <span class="o">=</span> <span class="n">package_paths</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__graph_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__launch_manager</span> <span class="o">=</span> <span class="n">LaunchManager</span><span class="p">(</span>
+            <span class="n">screen</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;~use_screen&#39;</span><span class="p">,</span> <span class="n">screen</span><span class="p">)),</span>
+            <span class="n">nodelet_manager_name</span><span class="o">=</span><span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;~nodelet_manager_name&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__package_whitelist</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__package_blacklist</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__whitelist</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__blacklist</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__missing_default_provider_is_an_error</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;~missing_default_provider_is_an_error&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__bonds</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="CapabilityServer.spin"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityServer.spin">[docs]</a>    <span class="k">def</span> <span class="nf">spin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Starts the capability server by setting up ROS comms, then spins&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__package_whitelist</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;~package_whitelist&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__package_whitelist</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">None</span><span class="p">))):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;~package_whitelist must be a list or null, got a &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__whitelist</span><span class="p">))</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__package_whitelist</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__package_blacklist</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;~package_blacklist&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__package_blacklist</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">None</span><span class="p">))):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;~package_blacklist must be a list or null, got a &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__whitelist</span><span class="p">))</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__package_blacklist</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__whitelist</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;~whitelist&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__whitelist</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">None</span><span class="p">))):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;~whitelist must be a list or null, got a &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__whitelist</span><span class="p">))</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__whitelist</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__blacklist</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;~blacklist&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__blacklist</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">None</span><span class="p">))):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;~blacklist must be a list or null, got a &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__blacklist</span><span class="p">))</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__blacklist</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;~debug&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__debug</span><span class="p">:</span>
+            <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;rosout&#39;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logdebug</span><span class="p">(</span><span class="s">&#39;Debug messages enabled.&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__load_capabilities</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__bond_topic</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;/bonds&quot;</span>
+
+        <span class="c"># Collect default arguments</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__populate_default_providers</span><span class="p">()</span>
+
+        <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span>
+            <span class="s">&#39;~events&#39;</span><span class="p">,</span> <span class="n">CapabilityEvent</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_capability_events</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__start_capability_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~start_capability&#39;</span><span class="p">,</span> <span class="n">StartCapability</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_start_capability</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__stop_capability_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~stop_capability&#39;</span><span class="p">,</span> <span class="n">StopCapability</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_stop_capability</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__establish_bond_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~establish_bond&#39;</span><span class="p">,</span> <span class="n">EstablishBond</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_establish_bond</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__free_capability_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~free_capability&#39;</span><span class="p">,</span> <span class="n">FreeCapability</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_free_capability</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__use_capability_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~use_capability&#39;</span><span class="p">,</span> <span class="n">UseCapability</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_use_capability</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__reload_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~reload_capabilities&#39;</span><span class="p">,</span> <span class="n">Empty</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_reload_request</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__interfaces_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~get_interfaces&#39;</span><span class="p">,</span> <span class="n">GetInterfaces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_get_interfaces</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__providers_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~get_providers&#39;</span><span class="p">,</span> <span class="n">GetProviders</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_get_providers</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__semantic_interfaces_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~get_semantic_interfaces&#39;</span><span class="p">,</span> <span class="n">GetSemanticInterfaces</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_get_semantic_interfaces</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__running_capabilities</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~get_running_capabilities&#39;</span><span class="p">,</span> <span class="n">GetRunningCapabilities</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_get_running_capabilities</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__capability_specs</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~get_capability_specs&#39;</span><span class="p">,</span> <span class="n">GetCapabilitySpecs</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_get_capability_specs</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__capability_spec</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~get_capability_spec&#39;</span><span class="p">,</span> <span class="n">GetCapabilitySpec</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_get_capability_spec</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__get_nodelet_manager_name_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~get_nodelet_manager_name&#39;</span><span class="p">,</span> <span class="n">GetNodeletManagerName</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_get_nodelet_manager_name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__get_remappings_service</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Service</span><span class="p">(</span>
+            <span class="s">&#39;~get_remappings&#39;</span><span class="p">,</span> <span class="n">GetRemappings</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handle_get_remappings</span><span class="p">)</span>
+
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Capability Server Ready&quot;</span><span class="p">)</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">Publisher</span><span class="p">(</span><span class="s">&quot;~events&quot;</span><span class="p">,</span> <span class="n">CapabilityEvent</span><span class="p">,</span> <span class="n">queue_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span>
+            <span class="n">CapabilityEvent</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">CapabilityEvent</span><span class="o">.</span><span class="n">SERVER_READY</span><span class="p">))</span>
+
+        <span class="n">rospy</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="CapabilityServer.shutdown"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityServer.shutdown">[docs]</a>    <span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Stops the capability server and cleans up any running processes&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>  <span class="c"># pragma: no cover</span>
+            <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;running&#39;</span><span class="p">,</span> <span class="s">&#39;launching&#39;</span><span class="p">]:</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">stopped</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s">&#39;waiting&#39;</span><span class="p">:</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__launch_manager</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</div>
+    <span class="k">def</span> <span class="nf">__load_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">package_index</span> <span class="o">=</span> <span class="n">package_index_from_package_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__package_paths</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spec_file_index</span> <span class="o">=</span> <span class="n">spec_file_index_from_package_index</span><span class="p">(</span><span class="n">package_index</span><span class="p">)</span>
+        <span class="c"># Prune packages by black and white list</span>
+        <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec_file_index</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__package_whitelist</span> <span class="ow">and</span> <span class="n">package</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__package_whitelist</span><span class="p">:</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Package &#39;{0}&#39; not in whitelist, skipping.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package</span><span class="p">))</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec_file_index</span><span class="p">[</span><span class="n">package</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__package_blacklist</span> <span class="ow">and</span> <span class="n">package</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__package_blacklist</span><span class="p">:</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Package &#39;{0}&#39; in blacklist, skipping.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package</span><span class="p">))</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec_file_index</span><span class="p">[</span><span class="n">package</span><span class="p">]</span>
+        <span class="c"># Generate spec_index from spec file index</span>
+        <span class="n">spec_index</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="n">spec_index_from_spec_file_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec_file_index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">&quot;Errors were encountered loading capabilities:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">&quot;  &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+        <span class="c"># Prune specific capabilities based on black and white lists</span>
+        <span class="n">removed_interfaces</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">specs</span><span class="p">,</span> <span class="n">remove_func</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">spec_index</span><span class="o">.</span><span class="n">interfaces</span><span class="p">,</span> <span class="n">spec_index</span><span class="o">.</span><span class="n">remove_interface</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">spec_index</span><span class="o">.</span><span class="n">semantic_interfaces</span><span class="p">,</span> <span class="n">spec_index</span><span class="o">.</span><span class="n">remove_semantic_interface</span><span class="p">),</span>
+            <span class="p">(</span><span class="n">spec_index</span><span class="o">.</span><span class="n">providers</span><span class="p">,</span> <span class="n">spec_index</span><span class="o">.</span><span class="n">remove_provider</span><span class="p">)</span>
+        <span class="p">]:</span>
+            <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">specs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__whitelist</span> <span class="ow">and</span> <span class="n">spec</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__whitelist</span><span class="p">:</span>
+                    <span class="n">removed_interfaces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+                    <span class="n">remove_func</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+                    <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Spec &#39;{0}&#39; is not in the whitelist, skipping.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spec</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__blacklist</span> <span class="ow">and</span> <span class="n">spec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__blacklist</span><span class="p">:</span>
+                    <span class="n">removed_interfaces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+                    <span class="n">remove_func</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+                    <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Spec &#39;{0}&#39; is in the blacklist, skipping.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spec</span><span class="p">))</span>
+        <span class="c"># Remove providers which no longer have an interface</span>
+        <span class="k">for</span> <span class="n">interface</span> <span class="ow">in</span> <span class="n">removed_interfaces</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">provider</span> <span class="ow">in</span> <span class="n">spec_index</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">provider</span><span class="o">.</span><span class="n">implements</span> <span class="o">==</span> <span class="n">interface</span><span class="p">:</span>
+                    <span class="n">spec_index</span><span class="o">.</span><span class="n">remove_provider</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span> <span class="o">=</span> <span class="n">spec_index</span>
+        <span class="c"># Prune spec_file_index</span>
+        <span class="n">spec_paths</span> <span class="o">=</span> <span class="n">spec_index</span><span class="o">.</span><span class="n">interface_paths</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="o">+</span> \
+            <span class="n">spec_index</span><span class="o">.</span><span class="n">semantic_interface_paths</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="o">+</span> \
+            <span class="n">spec_index</span><span class="o">.</span><span class="n">provider_paths</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">package_dict</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec_file_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">spec_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;capability_interface&#39;</span><span class="p">,</span> <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">,</span> <span class="s">&#39;capability_provider&#39;</span><span class="p">]:</span>
+                <span class="n">package_dict</span><span class="p">[</span><span class="n">spec_type</span><span class="p">][:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">path</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">package_dict</span><span class="p">[</span><span class="n">spec_type</span><span class="p">]</span> <span class="k">if</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">spec_paths</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__populate_default_providers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># Collect available interfaces</span>
+        <span class="n">interfaces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">interface_names</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">semantic_interface_names</span>
+        <span class="k">for</span> <span class="n">interface</span> <span class="ow">in</span> <span class="n">interfaces</span><span class="p">:</span>
+            <span class="c"># Collect the providers for each interface</span>
+            <span class="n">providers</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span>
+                         <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                         <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">implements</span> <span class="o">==</span> <span class="n">interface</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">providers</span><span class="p">:</span>
+                <span class="c"># If an interface has not providers, ignore it</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span><span class="p">(</span><span class="s">&quot;No providers for capability interface &#39;{0}&#39;, not checking for default provider.&quot;</span>
+                              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">interface</span><span class="p">))</span>
+                <span class="k">continue</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c"># Try to get the default provider from the corresponding ros parameter</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">interface</span><span class="p">]</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">&#39;~defaults/&#39;</span> <span class="o">+</span> <span class="n">interface</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="c"># No ros parameter set for this capability interface</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span><span class="p">(</span><span class="s">&quot;No default provider given for capability interface &#39;{0}&#39;. &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">interface</span><span class="p">))</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">providers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="c"># If there is only one provider, allow it to be the default</span>
+                    <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span><span class="p">(</span><span class="s">&quot;&#39;{0}&#39; has only one provider, &#39;{1}&#39;, using that as the default.&quot;</span>
+                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">providers</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">interface</span><span class="p">]</span> <span class="o">=</span> <span class="n">providers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c"># Otherwise we can&#39;t decide</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__missing_default_provider_is_an_error</span><span class="p">:</span>
+                        <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">&quot;Could not determine a default provider for capability interface &#39;{0}&#39;, aborting.&quot;</span>
+                                     <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">interface</span><span class="p">))</span>
+                        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span><span class="p">(</span><span class="s">&quot;Could not determine a default provider for capability interface &#39;{0}&#39;.&quot;</span>
+                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">interface</span><span class="p">))</span>
+                        <span class="k">continue</span>
+            <span class="c"># Make sure the given default provider exists</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">interface</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">provider_names</span><span class="p">:</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">&quot;Given default provider &#39;{0}&#39; for interface &#39;{1}&#39; does not exist.&quot;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">interface</span><span class="p">],</span> <span class="n">interface</span><span class="p">))</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c"># Make sure the given provider implements this interface</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">interface</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">providers</span><span class="p">:</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">&quot;Given default provider &#39;{0}&#39; does not implment interface &#39;{1}&#39;.&quot;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">interface</span><span class="p">],</span> <span class="n">interface</span><span class="p">))</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c"># Update the interface object with the default provider</span>
+            <span class="n">iface</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="n">interface</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">semantic_interfaces</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+            <span class="n">iface</span><span class="o">.</span><span class="n">default_provider</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">interface</span><span class="p">]</span>
+        <span class="c"># Summarize defaults</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;For each available interface, the default provider:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">interface</span><span class="p">,</span> <span class="n">provider</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;&#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">interface</span><span class="p">))</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;  =&gt; &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">provider</span><span class="p">))</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c"># pragma: no cover</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span><span class="p">(</span><span class="s">&quot;No runnable Capabilities loaded.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">warning_level_exceptions</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;because it is not running&#39;</span><span class="p">]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+            <span class="n">log_func</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span>
+            <span class="k">if</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">warning_level_exceptions</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">]:</span>
+                <span class="n">log_func</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logdebug</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">())</span>
+            <span class="n">log_func</span><span class="p">(</span><span class="s">&#39;{0}: {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
+            <span class="k">raise</span>
+
+<div class="viewcode-block" id="CapabilityServer.handle_capability_events"><a class="viewcode-back" href="../../capabilities.server.html#capabilities.server.CapabilityServer.handle_capability_events">[docs]</a>    <span class="k">def</span> <span class="nf">handle_capability_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Callback for handling messages (events) from the /events topic</span>
+
+<span class="sd">        This callback only process events generated by this node.</span>
+
+<span class="sd">        :param event: ROS message encapsulating an event</span>
+<span class="sd">        :type event: :py:class:`capabilities.msgs.CapabilityEvent`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_capability_events</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">_handle_capability_events</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="c"># Ignore any publications which we did not send (external publishers)</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">_connection_header</span><span class="p">[</span><span class="s">&#39;callerid&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_name</span><span class="p">():</span>
+            <span class="k">return</span>  <span class="c"># pragma: no cover</span>
+        <span class="c"># Ignore the `server_ready` event</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">event</span><span class="o">.</span><span class="n">SERVER_READY</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="c"># Specially handle the nodelet manager</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">capability</span> <span class="o">==</span> <span class="n">_special_nodelet_manager_capability</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">event</span><span class="o">.</span><span class="n">TERMINATED</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
+                    <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">&quot;Capability server&#39;s nodelet manager terminated unexpectedly.&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+            <span class="k">return</span>
+        <span class="c"># Update the capability</span>
+        <span class="n">capability</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">capability</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">__graph_lock</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">capability</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">&quot;Unknown capability instance: &#39;{0}&#39;&quot;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability</span><span class="p">))</span>
+                <span class="k">return</span>
+            <span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">[</span><span class="n">capability</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">event</span><span class="o">.</span><span class="n">LAUNCHED</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">canceled</span><span class="p">:</span>  <span class="c"># pragma: no cover</span>
+                    <span class="c"># This is defensive programming, it should not happen</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__stop_capability</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">instance</span><span class="o">.</span><span class="n">launched</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">event</span><span class="o">.</span><span class="n">TERMINATED</span><span class="p">:</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">terminated</span><span class="p">()</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span>
+                    <span class="s">&quot;Capability Provider &#39;{0}&#39; for Capability &#39;{1}&#39; &quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">provider</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">capability</span><span class="p">)</span> <span class="o">+</span>
+                    <span class="s">&quot;has terminated.&quot;</span><span class="p">)</span>
+            <span class="c"># Update the graph</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__update_graph</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__remove_terminated_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># collect all of the terminated capabilities</span>
+        <span class="n">terminated</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span>
+                      <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                      <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s">&#39;terminated&#39;</span><span class="p">]</span>
+        <span class="c"># Remove terminated instances</span>
+        <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">terminated</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">[</span><span class="n">instance</span><span class="o">.</span><span class="n">interface</span><span class="p">]</span>
+            <span class="c"># Shutdown unused capabilities</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__cleanup_graph</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__cleanup_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Iterate over the running capabilities and shutdown ones which are no longer needed</span>
+
+<span class="sd">        For each running capability, if it was not started by the user then look at who depends on it.</span>
+<span class="sd">        If no other capabilities depend on it, then shut it down.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Collect all running capabilities</span>
+        <span class="n">running_capabilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span>
+                                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                                <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s">&#39;running&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">cap</span> <span class="ow">in</span> <span class="n">running_capabilities</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cap</span><span class="o">.</span><span class="n">started_by</span> <span class="o">==</span> <span class="n">USER_SERVICE_REASON</span><span class="p">:</span>
+                <span class="c"># Started by user, do not garbage collect this</span>
+                <span class="k">continue</span>
+            <span class="n">rdepends</span> <span class="o">=</span> <span class="n">get_reverse_depends</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">interface</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">rdepends</span><span class="p">:</span>
+                <span class="c"># Someone depends on me, do not garbage collect this</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">logdebug</span><span class="p">(</span><span class="s">&quot;Keeping the &#39;{0}&#39; provider of the &#39;{1}&#39; interface, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">cap</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span> <span class="o">+</span>
+                               <span class="s">&quot;because other running capabilities depend on it.&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">cap</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s">&#39;running&#39;</span><span class="p">:</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Stopping the &#39;{0}&#39; provider of the &#39;{1}&#39; interface, because it has no dependents left.&quot;</span>
+                              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">cap</span><span class="o">.</span><span class="n">interface</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__stop_capability</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">cap</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s">&#39;waiting&#39;</span><span class="p">:</span>  <span class="c"># pragma: no cover</span>
+                <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Canceling the &#39;{0}&#39; provider of the &#39;{1}&#39; interface, because it has no dependents left.&quot;</span>
+                              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">cap</span><span class="o">.</span><span class="n">interface</span><span class="p">))</span>
+                <span class="n">cap</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+            <span class="c"># Else the state is launching, stopping, or terminated</span>
+            <span class="c"># In which case launching will be caught on the next cleanup</span>
+            <span class="c"># and the latter two will get cleared out also.</span>
+
+    <span class="k">def</span> <span class="nf">__update_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c"># collect all of the waiting capabilities</span>
+        <span class="n">waiting</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span>
+                   <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                   <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s">&#39;waiting&#39;</span><span class="p">]</span>
+        <span class="c"># If any of the waiting have no blocking dependencies start them</span>
+        <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">waiting</span><span class="p">:</span>
+            <span class="n">blocking_dependencies</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">dependency_name</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">depends_on</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dependency_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">:</span>  <span class="c"># pragma: no cover</span>
+                    <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span>
+                        <span class="s">&quot;Inconsistent capability run graph, &#39;{0}&#39; depends on &quot;</span>
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;&#39;{0}&#39;, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dependency_name</span><span class="p">)</span> <span class="o">+</span>
+                        <span class="s">&quot;which is not in the list of capability instances.&quot;</span><span class="p">)</span>
+                    <span class="k">return</span>
+                <span class="n">dependency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">[</span><span class="n">dependency_name</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">dependency</span><span class="o">.</span><span class="n">state</span> <span class="o">!=</span> <span class="s">&#39;running&#39;</span><span class="p">:</span>
+                    <span class="n">blocking_dependencies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dependency</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">blocking_dependencies</span><span class="p">:</span>
+                <span class="n">instance</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__launch_manager</span><span class="o">.</span><span class="n">run_capability_provider</span><span class="p">(</span>
+                    <span class="n">instance</span><span class="o">.</span><span class="n">provider</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">provider_path</span>
+                <span class="p">)</span>
+        <span class="c"># Remove any terminated capabilities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__remove_terminated_capabilities</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__stop_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">&quot;Inconsistent capability run graph, asked to stop &quot;</span> <span class="o">+</span>
+                         <span class="s">&quot;capability &#39;{0}&#39;, &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span>
+                         <span class="s">&quot;which is not in the list of capability instances.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">capability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">rdepends</span> <span class="o">=</span> <span class="n">get_reverse_depends</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">cap</span> <span class="ow">in</span> <span class="n">rdepends</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cap</span><span class="o">.</span><span class="n">state</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;stopping&#39;</span><span class="p">,</span> <span class="s">&#39;terminated&#39;</span><span class="p">]:</span>  <span class="c"># pragma: no cover</span>
+                <span class="c"># It is possible that this cap was stopped by another cap in this list</span>
+                <span class="c"># This is purely defensive</span>
+                <span class="k">continue</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span>
+                <span class="s">&quot;Capability &#39;{0}&#39; being stopped because its dependency &#39;{1}&#39; is being stopped.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__stop_capability</span><span class="p">(</span><span class="n">cap</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
+        <span class="n">capability</span><span class="o">.</span><span class="n">stopped</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__launch_manager</span><span class="o">.</span><span class="n">stop_capability_provider</span><span class="p">(</span><span class="n">capability</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__get_provider_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">interface</span><span class="p">,</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">provider</span><span class="o">.</span><span class="n">dependencies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">provider_name</span> <span class="o">=</span> <span class="n">dep</span><span class="o">.</span><span class="n">provider</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">interface</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">provider_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">providers</span><span class="p">:</span>
+                <span class="c"># This is the case where a provider depends on another interface,</span>
+                <span class="c"># but the preferred provider does not exist</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Capability Provider &#39;{0}&#39; not found&quot;</span>
+                                   <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">provider_name</span><span class="p">))</span>
+            <span class="n">dep_provider</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">providers</span><span class="p">[</span><span class="n">provider_name</span><span class="p">]</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">dep_provider</span><span class="p">,</span> <span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">__get_capability_instances_from_provider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider</span><span class="p">):</span>
+        <span class="n">instances</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">providers</span> <span class="o">=</span> <span class="p">[(</span><span class="n">provider</span><span class="p">,</span> <span class="n">USER_SERVICE_REASON</span><span class="p">)]</span>
+        <span class="k">while</span> <span class="n">providers</span><span class="p">:</span>
+            <span class="n">curr</span><span class="p">,</span> <span class="n">reason</span> <span class="o">=</span> <span class="n">providers</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">providers</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__get_provider_dependencies</span><span class="p">(</span><span class="n">curr</span><span class="p">))</span>
+            <span class="n">curr_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">provider_paths</span><span class="p">[</span><span class="n">curr</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">instances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CapabilityInstance</span><span class="p">(</span><span class="n">curr</span><span class="p">,</span> <span class="n">curr_path</span><span class="p">,</span> <span class="n">started_by</span><span class="o">=</span><span class="n">reason</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">instances</span>
+
+    <span class="k">def</span> <span class="nf">__get_providers_for_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">,</span> <span class="n">allow_semantic</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">valid_interfaces</span> <span class="o">=</span> <span class="p">[</span><span class="n">interface</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">allow_semantic</span><span class="p">:</span>
+            <span class="c"># Add semantic interfaces which redefine this one</span>
+            <span class="n">valid_interfaces</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">semantic_interfaces</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                 <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">redefines</span> <span class="o">==</span> <span class="n">interface</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="n">providers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+                          <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                          <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">implements</span> <span class="ow">in</span> <span class="n">valid_interfaces</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">providers</span>  <span class="c"># Could be empty</span>
+
+    <span class="k">def</span> <span class="nf">__start_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capability</span><span class="p">,</span> <span class="n">preferred_provider</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">capability</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">semantic_interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Capability &#39;{0}&#39; not found.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability</span><span class="p">))</span>
+        <span class="c"># If no preferred provider is given, use the default</span>
+        <span class="n">preferred_provider</span> <span class="o">=</span> <span class="n">preferred_provider</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">capability</span><span class="p">]</span>
+        <span class="n">providers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_providers_for_interface</span><span class="p">(</span><span class="n">capability</span><span class="p">,</span> <span class="n">allow_semantic</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">preferred_provider</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">providers</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="s">&quot;Capability Provider &#39;{0}&#39; not found for Capability &#39;{1}&#39;&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">preferred_provider</span><span class="p">,</span> <span class="n">capability</span><span class="p">))</span>
+        <span class="n">provider</span> <span class="o">=</span> <span class="n">providers</span><span class="p">[</span><span class="n">preferred_provider</span><span class="p">]</span>
+        <span class="n">instances</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_capability_instances_from_provider</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">__graph_lock</span><span class="p">:</span>
+            <span class="c"># If the requested capability has an existing instance, we don&#39;t start it</span>
+            <span class="c"># again. Return a result that lets the callee know this happened.</span>
+            <span class="n">requested_instance</span> <span class="o">=</span> <span class="n">instances</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">requested_instance</span><span class="o">.</span><span class="n">interface</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">:</span>
+                <span class="n">requested_instance_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">[</span>
+                    <span class="n">requested_instance</span><span class="o">.</span><span class="n">interface</span><span class="p">]</span><span class="o">.</span><span class="n">state</span>
+                <span class="k">if</span> <span class="n">requested_instance_state</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;running&#39;</span><span class="p">]:</span>
+                    <span class="c"># Current instance is running (or will be soon)</span>
+                    <span class="k">return</span> <span class="n">StartCapabilityResponse</span><span class="o">.</span><span class="n">RESULT_CURRENTLY_RUNNING</span>
+                <span class="k">elif</span> <span class="n">requested_instance_state</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;waiting&#39;</span><span class="p">,</span> <span class="s">&#39;launching&#39;</span><span class="p">]:</span>
+                    <span class="k">return</span> <span class="n">StartCapabilityResponse</span><span class="o">.</span><span class="n">RESULT_CURRENTLY_STARTING</span>
+                <span class="k">elif</span> <span class="n">requested_instance_state</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;stopping&#39;</span><span class="p">,</span> <span class="s">&#39;terminated&#39;</span><span class="p">]:</span>
+                    <span class="c"># Current instance is in the process of stopping</span>
+                    <span class="k">return</span> <span class="n">StartCapabilityResponse</span><span class="o">.</span><span class="n">RESULT_CURRENTLY_STOPPING</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                        <span class="s">&quot;Instance for capability &#39;{0}&#39; has improper state &#39;{1}&#39;&quot;</span>
+                        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability</span><span class="p">,</span> <span class="n">requested_instance_state</span><span class="p">))</span>
+
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">instances</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">interface</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">interface</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__update_graph</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">StartCapabilityResponse</span><span class="o">.</span><span class="n">RESULT_SUCCESS</span>
+
+    <span class="k">def</span> <span class="nf">handle_get_capability_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_get_capability_specs</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_get_capability_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Servicing request for capability specs...&quot;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">GetCapabilitySpecsResponse</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">package_dict</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec_file_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">spec_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;capability_interface&#39;</span><span class="p">,</span> <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">,</span> <span class="s">&#39;capability_provider&#39;</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">package_dict</span><span class="p">[</span><span class="n">spec_type</span><span class="p">]:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">raw</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                        <span class="n">default_provider</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                        <span class="c"># If a capability interface, try to lookup the default provider</span>
+                        <span class="n">iface</span> <span class="o">=</span> <span class="bp">None</span>
+                        <span class="k">if</span> <span class="n">spec_type</span> <span class="o">==</span> <span class="s">&#39;capability_interface&#39;</span><span class="p">:</span>
+                            <span class="n">iface</span> <span class="o">=</span> <span class="n">capability_interface_from_string</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">spec_type</span> <span class="o">==</span> <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">:</span>
+                            <span class="n">iface</span> <span class="o">=</span> <span class="n">semantic_capability_interface_from_string</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">spec_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;capability_interface&#39;</span><span class="p">,</span> <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">]:</span>
+                            <span class="n">iface</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;{package}/{name}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">iface</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">iface</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">:</span>
+                                <span class="n">default_provider</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">default_provider</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">iface</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                        <span class="n">cs</span> <span class="o">=</span> <span class="n">CapabilitySpec</span><span class="p">(</span><span class="n">package_name</span><span class="p">,</span> <span class="n">spec_type</span><span class="p">,</span> <span class="n">raw</span><span class="p">,</span> <span class="n">default_provider</span><span class="p">)</span>
+                        <span class="n">response</span><span class="o">.</span><span class="n">capability_specs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">def</span> <span class="nf">handle_get_capability_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_get_capability_spec</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_get_capability_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Servicing request for get capability spec &#39;{0}&#39;...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">capability_spec</span><span class="p">))</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">GetCapabilitySpecResponse</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">package_dict</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spec_file_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">spec_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;capability_interface&#39;</span><span class="p">,</span> <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">,</span> <span class="s">&#39;capability_provider&#39;</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">package_dict</span><span class="p">[</span><span class="n">spec_type</span><span class="p">]:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">raw</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                        <span class="n">default_provider</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                        <span class="c"># If a capability interface, try to lookup the default provider</span>
+                        <span class="n">iface</span> <span class="o">=</span> <span class="bp">None</span>
+                        <span class="k">if</span> <span class="n">spec_type</span> <span class="o">==</span> <span class="s">&#39;capability_interface&#39;</span><span class="p">:</span>
+                            <span class="n">iface</span> <span class="o">=</span> <span class="n">capability_interface_from_string</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">spec_type</span> <span class="o">==</span> <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">:</span>
+                            <span class="n">iface</span> <span class="o">=</span> <span class="n">semantic_capability_interface_from_string</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">spec_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;capability_interface&#39;</span><span class="p">,</span> <span class="s">&#39;semantic_capability_interface&#39;</span><span class="p">]:</span>
+                            <span class="n">iface</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;{package}/{name}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">iface</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">iface</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">:</span>
+                                <span class="n">default_provider</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">default_provider</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">iface</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">iface</span> <span class="ow">and</span> <span class="n">iface</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">req</span><span class="o">.</span><span class="n">capability_spec</span><span class="p">:</span>
+                            <span class="n">response</span><span class="o">.</span><span class="n">capability_spec</span> <span class="o">=</span> <span class="n">CapabilitySpec</span><span class="p">(</span><span class="n">package_name</span><span class="p">,</span> <span class="n">spec_type</span><span class="p">,</span> <span class="n">raw</span><span class="p">,</span> <span class="n">default_provider</span><span class="p">)</span>
+                            <span class="k">return</span> <span class="n">response</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Could not find requested spec &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">capability_spec</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">handle_start_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_start_capability</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_start_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Request to start capability &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">capability</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">preferred_provider</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot; with provider &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">preferred_provider</span><span class="p">)</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__start_capability</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">capability</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">preferred_provider</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">StartCapabilityResponse</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">handle_stop_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_stop_capability</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_stop_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Request to stop capability &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">capability</span><span class="p">))</span>
+        <span class="n">capability</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">capability</span>
+        <span class="k">if</span> <span class="n">capability</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;No Capability &#39;{0}&#39; running&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__stop_capability</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">StopCapabilityResponse</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">handle_establish_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_establish_bond</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_establish_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Request to establish a bond&quot;</span><span class="p">)</span>
+        <span class="n">bond_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid1</span><span class="p">())</span>
+
+        <span class="k">def</span> <span class="nf">on_formed</span><span class="p">():</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Bond formed with bond_id of &#39;{0}&#39;&quot;</span>
+                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bond_id</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">on_broken</span><span class="p">():</span>
+            <span class="c"># if bond_id in self.__bonds:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Bond with bond id &#39;{0}&#39; was broken, freeing associated capabilities&quot;</span>
+                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bond_id</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__free_capabilities_by_bond_id</span><span class="p">(</span><span class="n">bond_id</span><span class="p">)</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bonds</span><span class="p">[</span><span class="n">bond_id</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__bonds</span><span class="p">[</span><span class="n">bond_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">Bond</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__bond_topic</span><span class="p">,</span> <span class="n">bond_id</span><span class="p">,</span> <span class="n">on_broken</span><span class="o">=</span><span class="n">on_broken</span><span class="p">,</span> <span class="n">on_formed</span><span class="o">=</span><span class="n">on_formed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__bonds</span><span class="p">[</span><span class="n">bond_id</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">EstablishBondResponse</span><span class="p">(</span><span class="n">bond_id</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__free_capabilities_by_bond_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bond_id</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">bond_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bonds</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">capability</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">bond_id</span> <span class="ow">in</span> <span class="n">capability</span><span class="o">.</span><span class="n">bonds</span><span class="p">:</span>
+                    <span class="k">del</span> <span class="n">capability</span><span class="o">.</span><span class="n">bonds</span><span class="p">[</span><span class="n">bond_id</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">capability</span><span class="o">.</span><span class="n">reference_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Capability &#39;{0}&#39; being stopped because it has zero references&quot;</span>
+                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability</span><span class="o">.</span><span class="n">interface</span><span class="p">))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__stop_capability</span><span class="p">(</span><span class="n">capability</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__free_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capability_name</span><span class="p">,</span> <span class="n">bond_id</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">capability_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">:</span>
+            <span class="c"># If you update this exception&#39;s message, then update the corresponding code</span>
+            <span class="c"># in capabilities.client.CapabilitiesClient.free_capability()</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot free Capability &#39;{0}&#39;, because it is not running&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability_name</span><span class="p">))</span>
+        <span class="n">capability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">[</span><span class="n">capability_name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">bond_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">capability</span><span class="o">.</span><span class="n">bonds</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Given bond_id &#39;{0}&#39; not associated with given capability &#39;{1}&#39;&quot;</span>
+                               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bond_id</span><span class="p">,</span> <span class="n">capability_name</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">capability</span><span class="o">.</span><span class="n">bonds</span><span class="p">[</span><span class="n">bond_id</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c"># pragma: no cover</span>
+            <span class="c"># this is defensive, it should never happen</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Cannot free capability &#39;{0}&#39; for bond_id &#39;{1}&#39;, it already has a reference count of 0&quot;</span>
+                               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability_name</span><span class="p">,</span> <span class="n">bond_id</span><span class="p">))</span>
+        <span class="n">capability</span><span class="o">.</span><span class="n">bonds</span><span class="p">[</span><span class="n">bond_id</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">capability</span><span class="o">.</span><span class="n">reference_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Capability &#39;{0}&#39; being stopped because it has zero references&quot;</span>
+                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability</span><span class="o">.</span><span class="n">interface</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__stop_capability</span><span class="p">(</span><span class="n">capability</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">handle_free_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_free_capability</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_free_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Request to free usage of capability &#39;{0}&#39; (bond id &#39;{1}&#39;)&quot;</span>
+                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">capability</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">bond_id</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__free_capability</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">capability</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">bond_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FreeCapabilityResponse</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">handle_use_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_use_capability</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_use_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;Request to use capability &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">capability</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">preferred_provider</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot; with provider &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">preferred_provider</span><span class="p">)</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="c"># Make sure the bond_id is valid</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">bond_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bonds</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Invalid bond_id given to ~use_capability: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">bond_id</span><span class="p">))</span>
+        <span class="c"># Start the capability if it is not already running</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">capability</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">:</span>
+            <span class="c"># This will raise if it failes to start the capability</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__start_capability</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">capability</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">preferred_provider</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">req</span><span class="o">.</span><span class="n">capability</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span>  <span class="c"># Should be true</span>
+        <span class="c"># Get a handle ont he capability</span>
+        <span class="n">capability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">[</span><span class="n">req</span><span class="o">.</span><span class="n">capability</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">preferred_provider</span> <span class="ow">and</span> <span class="n">capability</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="n">req</span><span class="o">.</span><span class="n">preferred_provider</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Requested to use capability &#39;{0}&#39; with preferred provider &#39;{1}&#39;, &quot;</span>
+                               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability</span><span class="o">.</span><span class="n">interface</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">preferred_provider</span><span class="p">)</span> <span class="o">+</span>
+                               <span class="s">&quot;but the capability is already running with provider &#39;{0}&#39;&quot;</span>
+                               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">bond_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">capability</span><span class="o">.</span><span class="n">bonds</span><span class="p">:</span>
+            <span class="n">capability</span><span class="o">.</span><span class="n">bonds</span><span class="p">[</span><span class="n">req</span><span class="o">.</span><span class="n">bond_id</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">capability</span><span class="o">.</span><span class="n">bonds</span><span class="p">[</span><span class="n">req</span><span class="o">.</span><span class="n">bond_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">UseCapabilityResponse</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">handle_reload_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_reload_request</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_reload_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s">&quot;Reloading capabilities...&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__load_capabilities</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">EmptyResponse</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">handle_get_interfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_get_interfaces</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_get_interfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">GetInterfacesResponse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">interface_names</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">handle_get_providers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_get_providers</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_get_providers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">interface</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">interface</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">semantic_interfaces</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Capability Interface &#39;{0}&#39; not found.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">interface</span><span class="p">))</span>
+            <span class="n">providers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_providers_for_interface</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">interface</span><span class="p">,</span> <span class="n">allow_semantic</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">include_semantic</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="n">default_provider</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__default_providers</span><span class="p">[</span><span class="n">req</span><span class="o">.</span><span class="n">interface</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">providers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">provider_names</span>
+            <span class="n">default_provider</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">GetProvidersResponse</span><span class="p">(</span><span class="n">providers</span><span class="p">,</span> <span class="n">default_provider</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">handle_get_semantic_interfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_get_semantic_interfaces</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_get_semantic_interfaces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">interface</span><span class="p">:</span>
+            <span class="n">sifaces</span> <span class="o">=</span> <span class="p">[</span><span class="n">si</span><span class="o">.</span><span class="n">name</span>
+                       <span class="k">for</span> <span class="n">si</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">semantic_interfaces</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                       <span class="k">if</span> <span class="n">si</span><span class="o">.</span><span class="n">redefines</span> <span class="o">==</span> <span class="n">req</span><span class="o">.</span><span class="n">interface</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sifaces</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__spec_index</span><span class="o">.</span><span class="n">semantic_interface_names</span>
+        <span class="k">return</span> <span class="n">GetSemanticInterfacesResponse</span><span class="p">(</span><span class="n">sifaces</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">handle_get_running_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_get_running_capabilities</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_get_running_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">GetRunningCapabilitiesResponse</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;running&#39;</span><span class="p">]:</span>  <span class="c"># pragma: no cover</span>
+                <span class="k">continue</span>
+            <span class="n">running_capability</span> <span class="o">=</span> <span class="n">RunningCapability</span><span class="p">()</span>
+            <span class="n">running_capability</span><span class="o">.</span><span class="n">capability</span> <span class="o">=</span> <span class="n">Capability</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">interface</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">running_capability</span><span class="o">.</span><span class="n">started_by</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">started_by</span>
+            <span class="n">running_capability</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">pid</span>
+            <span class="n">rdepends</span> <span class="o">=</span> <span class="n">get_reverse_depends</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">interface</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">dep</span> <span class="ow">in</span> <span class="n">rdepends</span><span class="p">:</span>
+                <span class="n">running_capability</span><span class="o">.</span><span class="n">dependent_capabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Capability</span><span class="p">(</span><span class="n">dep</span><span class="o">.</span><span class="n">interface</span><span class="p">,</span> <span class="n">dep</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="n">resp</span><span class="o">.</span><span class="n">running_capabilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">running_capability</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resp</span>
+
+    <span class="k">def</span> <span class="nf">handle_get_nodelet_manager_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_get_nodelet_manager_name</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_get_nodelet_manager_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">GetNodeletManagerNameResponse</span><span class="p">()</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">nodelet_manager_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__launch_manager</span><span class="o">.</span><span class="n">nodelet_manager_name</span>
+        <span class="k">return</span> <span class="n">resp</span>
+
+    <span class="k">def</span> <span class="nf">handle_get_remappings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__catch_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_handle_get_remappings</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_get_remappings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+        <span class="n">interface</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">spec</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">interface</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="p">[</span><span class="n">req</span><span class="o">.</span><span class="n">spec</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">providers</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">i</span><span class="o">.</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capability_instances</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+            <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">spec</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">providers</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&quot;Spec &#39;{0}&#39; is neither a running Interface nor a running Provider.&quot;</span>
+                                   <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">spec</span><span class="p">))</span>
+            <span class="n">interface</span> <span class="o">=</span> <span class="n">providers</span><span class="p">[</span><span class="n">req</span><span class="o">.</span><span class="n">spec</span><span class="p">]</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">GetRemappingsResponse</span><span class="p">()</span>
+        <span class="n">remappings</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">&#39;topics&#39;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s">&#39;services&#39;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s">&#39;actions&#39;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="p">}</span>
+        <span class="c"># Iterate this instance and its recursive dependencies</span>
+        <span class="k">for</span> <span class="n">iface</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__get_capability_instances_from_provider</span><span class="p">(</span><span class="n">interface</span><span class="o">.</span><span class="n">provider</span><span class="p">)):</span>
+            <span class="c"># For each iterate over their remappings and add them to the combined remappings,</span>
+            <span class="c"># flattening the remappings as you go</span>
+            <span class="k">for</span> <span class="n">map_type</span><span class="p">,</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="n">iface</span><span class="o">.</span><span class="n">provider</span><span class="o">.</span><span class="n">remappings_by_type</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">assert</span> <span class="n">map_type</span> <span class="ow">in</span> <span class="n">remappings</span>
+                <span class="n">remappings</span><span class="p">[</span><span class="n">map_type</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span>
+            <span class="c"># Collapse remapping chains</span>
+            <span class="k">for</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="n">remappings</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
+                        <span class="n">mapping</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+                        <span class="k">del</span> <span class="n">mapping</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">map_type</span><span class="p">,</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="n">remappings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">resp_mapping</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">resp</span><span class="p">,</span> <span class="n">map_type</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">remapping</span> <span class="o">=</span> <span class="n">Remapping</span><span class="p">()</span>
+                <span class="n">remapping</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="n">remapping</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="n">resp_mapping</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">remapping</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">resp</span>
+
+</div>
+<span class="k">def</span> <span class="nf">create_parser</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">&quot;Runs the capability server&quot;</span><span class="p">)</span>
+    <span class="n">add</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span>
+    <span class="n">add</span><span class="p">(</span><span class="s">&#39;package_path&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Overrides ROS_PACKAGE_PATH when discovering capabilities&quot;</span><span class="p">)</span>
+    <span class="n">add</span><span class="p">(</span><span class="s">&#39;--screen&#39;</span><span class="p">,</span> <span class="s">&#39;-s&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s">&quot;Passes `--screen` down to roslaunch, `use_screen` rosparam takes priority.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">sysargv</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">myargv</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">create_parser</span><span class="p">()</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">sysargv</span><span class="p">)</span>
+
+    <span class="n">ros_package_path</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">package_path</span> <span class="ow">or</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">&#39;ROS_PACKAGE_PATH&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">ros_package_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ros_package_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ros_package_path</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s">&#39;No package paths specified, set ROS_PACKAGE_PATH or &#39;</span>
+                 <span class="s">&#39;pass them as an argument&#39;</span><span class="p">)</span>
+    <span class="c"># Extend the ROS_PACKAGE_PATH</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;ROS_PACKAGE_PATH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">&#39;ROS_PACKAGE_PATH&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;:&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">ros_package_path</span><span class="p">)</span>
+
+    <span class="n">rospy</span><span class="o">.</span><span class="n">init_node</span><span class="p">(</span><span class="s">&#39;capability_server&#39;</span><span class="p">)</span>
+
+    <span class="n">capability_server</span> <span class="o">=</span> <span class="n">CapabilityServer</span><span class="p">(</span><span class="n">ros_package_path</span><span class="p">,</span> <span class="n">screen</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">screen</span><span class="p">)</span>
+    <span class="n">capability_server</span><span class="o">.</span><span class="n">spin</span><span class="p">()</span>
+    <span class="n">capability_server</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rclcpp_lifecycle: Package containing a prototype for lifecycle implementation. &mdash; rclcpp_lifecycle 19.2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Namespace rclcpp_lifecycle" href="namespace_rclcpp_lifecycle.html" />
+    <link rel="prev" title="Welcome to the documentation for rclcpp_lifecycle" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            rclcpp_lifecycle
+          </a>
+              <div class="version">
+                19.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">rclcpp_lifecycle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#page-hierarchy">Page Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#namespaces">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespace_rclcpp_lifecycle.html">Namespace rclcpp_lifecycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_lifecycle.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_lifecycle.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_lifecycle.html#functions">Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_lifecycle.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="namespace_rclcpp_lifecycle__node_interfaces.html">Namespace rclcpp_lifecycle::node_interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_lifecycle__node_interfaces.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="structhas__on__activate.html">Template Struct has_on_activate</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structhas__on__activate.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="structhas__on__activate_3_01T_00_01typename_01std_1_1enable__if_3_01std_1_1is__same_3_01void_00_c30024c2784360a3da73ddd170cc599f.html">Template Struct has_on_activate&lt; T, typename std::enable_if&lt; std::is_same&lt; void, decltype(std::declval&lt; T &gt;, ().on_activate()) &gt;::value &gt;::type &gt;</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structhas__on__activate_3_01T_00_01typename_01std_1_1enable__if_3_01std_1_1is__same_3_01void_00_c30024c2784360a3da73ddd170cc599f.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="structhas__on__deactivate.html">Template Struct has_on_deactivate</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structhas__on__deactivate.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="structhas__on__deactivate_3_01T_00_01typename_01std_1_1enable__if_3_01std_1_1is__same_3_01void_029742064b7ae594e6294a8d0c5702007.html">Template Struct has_on_deactivate&lt; T, typename std::enable_if&lt; std::is_same&lt; void, decltype(std::declval&lt; T &gt;, ().on_deactivate()) &gt;::value &gt;::type &gt;</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structhas__on__deactivate_3_01T_00_01typename_01std_1_1enable__if_3_01std_1_1is__same_3_01void_029742064b7ae594e6294a8d0c5702007.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="structis__manageable__node.html">Template Struct is_manageable_node</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structis__manageable__node.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="structis__manageable__node.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="structis__manageable__node.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="structis__manageable__node_3_01T_00_01typename_01std_1_1enable__if_3_01has__on__activate_3_01T_0b3a08f8c1b4e8a6400a1496f9bf679db.html">Template Struct is_manageable_node&lt; T, typename std::enable_if&lt; has_on_activate&lt; T &gt;::value &amp;&amp;has_on_deactivate&lt; T &gt;::value &gt;::type &gt;</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structis__manageable__node_3_01T_00_01typename_01std_1_1enable__if_3_01has__on__activate_3_01T_0b3a08f8c1b4e8a6400a1496f9bf679db.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="structis__manageable__node_3_01T_00_01typename_01std_1_1enable__if_3_01has__on__activate_3_01T_0b3a08f8c1b4e8a6400a1496f9bf679db.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="structis__manageable__node_3_01T_00_01typename_01std_1_1enable__if_3_01has__on__activate_3_01T_0b3a08f8c1b4e8a6400a1496f9bf679db.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecycleNode.html">Class LifecycleNode</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecycleNode.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecycleNode.html#base-types">Base Types</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecycleNode.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecyclePublisher.html">Template Class LifecyclePublisher</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecyclePublisher.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecyclePublisher.html#base-types">Base Types</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecyclePublisher.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__lifecycle_1_1ManagedEntityInterface.html">Class ManagedEntityInterface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1ManagedEntityInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__lifecycle_1_1ManagedEntityInterface.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1ManagedEntityInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__lifecycle_1_1node__interfaces_1_1LifecycleNodeInterface.html">Class LifecycleNodeInterface</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1node__interfaces_1_1LifecycleNodeInterface.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__lifecycle_1_1node__interfaces_1_1LifecycleNodeInterface.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1node__interfaces_1_1LifecycleNodeInterface.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__lifecycle_1_1SimpleManagedEntity.html">Class SimpleManagedEntity</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1SimpleManagedEntity.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__lifecycle_1_1SimpleManagedEntity.html#base-type">Base Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__lifecycle_1_1SimpleManagedEntity.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1SimpleManagedEntity.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__lifecycle_1_1State.html">Class State</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1State.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__lifecycle_1_1Transition.html">Class Transition</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__lifecycle_1_1Transition.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacerclcpp__lifecycle_1a45265f885801bd844c6db631e2b0f3ff.html">Template Function rclcpp_lifecycle::create_default_publisher_options</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacerclcpp__lifecycle_1a45265f885801bd844c6db631e2b0f3ff.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacerclcpp__lifecycle_1a89d110e27007f14b5d5bf2b461dcfe71.html">Template Function rclcpp_lifecycle::create_default_subscription_options</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacerclcpp__lifecycle_1a89d110e27007f14b5d5bf2b461dcfe71.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">Defines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1ad45800b3123be20d4c5a70fa3228e254.html">Define RCLCPP_LIFECYCLE_EXPORT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8h_1ad45800b3123be20d4c5a70fa3228e254.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1a4d0b6e807b222bd7da158a219bd536a3.html">Define RCLCPP_LIFECYCLE_IMPORT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8h_1a4d0b6e807b222bd7da158a219bd536a3.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1aa470755b83c4077cb0531ff56a254f87.html">Define RCLCPP_LIFECYCLE_LOCAL</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8h_1aa470755b83c4077cb0531ff56a254f87.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1a3f9c9a64a17c059f5b74c036570dee1d.html">Define RCLCPP_LIFECYCLE_PUBLIC</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8h_1a3f9c9a64a17c059f5b74c036570dee1d.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8h_1a573697410ae21682076abeb5d120f804.html">Define RCLCPP_LIFECYCLE_PUBLIC_TYPE</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8h_1a573697410ae21682076abeb5d120f804.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#typedefs">Typedefs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="typedef_namespacerclcpp__lifecycle_1a4c24364ee7e73c343ceafeb14503da46.html">Typedef rclcpp_lifecycle::PublisherOptionsWithAllocator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="typedef_namespacerclcpp__lifecycle_1a4c24364ee7e73c343ceafeb14503da46.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_namespacerclcpp__lifecycle_1a285284f4eb860124a7a938267d791df3.html">Typedef rclcpp_lifecycle::SubscriptionOptionsWithAllocator</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="typedef_namespacerclcpp__lifecycle_1a285284f4eb860124a7a938267d791df3.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#directories">Directories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dir_include.html">Directory include</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dir_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="dir_include_rclcpp_lifecycle.html">Directory rclcpp_lifecycle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dir_include_rclcpp_lifecycle.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l5"><a class="reference internal" href="dir_include_rclcpp_lifecycle.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="dir_include_rclcpp_lifecycle_node_interfaces.html">Directory node_interfaces</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dir_include_rclcpp_lifecycle_node_interfaces.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="dir_include_rclcpp_lifecycle_type_traits.html">Directory type_traits</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dir_include_rclcpp_lifecycle_type_traits.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#files">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_lifecycle_type_traits_is_manageable_node.hpp.html">File is_manageable_node.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_type_traits_is_manageable_node.hpp.html#definition-include-rclcpp-lifecycle-type-traits-is-manageable-node-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_lifecycle/type_traits/is_manageable_node.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_lifecycle_type_traits_is_manageable_node.hpp.html">Program Listing for File is_manageable_node.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_type_traits_is_manageable_node.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_type_traits_is_manageable_node.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html">File lifecycle_node.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html#definition-include-rclcpp-lifecycle-lifecycle-node-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_lifecycle/lifecycle_node.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_lifecycle_lifecycle_node.hpp.html">Program Listing for File lifecycle_node.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html#functions">Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node_impl.hpp.html">File lifecycle_node_impl.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node_impl.hpp.html#definition-include-rclcpp-lifecycle-lifecycle-node-impl-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_lifecycle/lifecycle_node_impl.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_lifecycle_lifecycle_node_impl.hpp.html">Program Listing for File lifecycle_node_impl.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node_impl.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node_impl.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node_impl.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_lifecycle_node_interfaces_lifecycle_node_interface.hpp.html">File lifecycle_node_interface.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_node_interfaces_lifecycle_node_interface.hpp.html#definition-include-rclcpp-lifecycle-node-interfaces-lifecycle-node-interface-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_lifecycle_node_interfaces_lifecycle_node_interface.hpp.html">Program Listing for File lifecycle_node_interface.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_node_interfaces_lifecycle_node_interface.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_node_interfaces_lifecycle_node_interface.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_node_interfaces_lifecycle_node_interface.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_node_interfaces_lifecycle_node_interface.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_publisher.hpp.html">File lifecycle_publisher.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_publisher.hpp.html#definition-include-rclcpp-lifecycle-lifecycle-publisher-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_lifecycle/lifecycle_publisher.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_lifecycle_lifecycle_publisher.hpp.html">Program Listing for File lifecycle_publisher.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_publisher.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_publisher.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_publisher.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_publisher.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_lifecycle_managed_entity.hpp.html">File managed_entity.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_managed_entity.hpp.html#definition-include-rclcpp-lifecycle-managed-entity-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_lifecycle/managed_entity.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_lifecycle_managed_entity.hpp.html">Program Listing for File managed_entity.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_managed_entity.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_managed_entity.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_managed_entity.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_managed_entity.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_lifecycle_state.hpp.html">File state.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_state.hpp.html#definition-include-rclcpp-lifecycle-state-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_lifecycle/state.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_lifecycle_state.hpp.html">Program Listing for File state.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_state.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_state.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_state.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_state.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_lifecycle_transition.hpp.html">File transition.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_transition.hpp.html#definition-include-rclcpp-lifecycle-transition-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_lifecycle/transition.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_lifecycle_transition.hpp.html">Program Listing for File transition.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_transition.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_transition.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_transition.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_transition.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_lifecycle_visibility_control.h.html">File visibility_control.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_visibility_control.h.html#definition-include-rclcpp-lifecycle-visibility-control-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_lifecycle/visibility_control.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_lifecycle_visibility_control.h.html">Program Listing for File visibility_control.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_visibility_control.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_lifecycle_visibility_control.h.html#defines">Defines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pages">Pages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="page_deprecated.html">Deprecated List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rclcpp_lifecycle</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">rclcpp_lifecycle: Package containing a prototype for lifecycle implementation.</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rclcpp-lifecycle-package-containing-a-prototype-for-lifecycle-implementation">
+<span id="page-index"></span><h1>rclcpp_lifecycle: Package containing a prototype for lifecycle implementation.<a class="headerlink" href="#rclcpp-lifecycle-package-containing-a-prototype-for-lifecycle-implementation" title="Permalink to this headline"></a></h1>
+<div class="docutils container">
+<dd><p><ul class="simple">
+<li><p>Lifecycle states: Define the State class. There are 4 primary states: Unconfigured, Inactive, Active and Finalized. There are also 6 transition states which are intermediate states during a requested transition. Configuring, CleaningUp, ShuttingDown, Activating, Deactivating and ErrorProcessing.<ul>
+<li><p>rclcpp_lifecycle/state.hpp</p></li>
+</ul>
+</p></li>
+<li><p>Lifecycle transitions Define the Transition class. There are 7 transitions exposed to a supervisory process, they are: create, configure, cleanup, activate, deactivate, shutdown and destroy.<ul>
+<li><p>rclcpp_lifecycle/transition.hpp</p></li>
+</ul>
+</p></li>
+<li><p>Lifecycle publisher creates a publisher that allows enabling and disabling message publication.<ul>
+<li><p>rclcpp_lifecycle/publisher.hpp</p></li>
+</ul>
+</p></li>
+<li><p>Lifecycle node: An optional interface class for life cycle node implementations.<ul>
+<li><p>rclcpp_lifecycle/lifecycle_node.hpp</p></li>
+</ul>
+</p></li>
+</ul>
+</p>
+<p>Some useful internal abstractions and utilities:<ul class="simple">
+<li><p>Macros for controlling symbol visibility on the library<ul>
+<li><p>rclcpp_lifecycle/visibility_control.h </p></li>
+</ul>
+</p></li>
+</ul>
+</p>
+</dd></div>
+<section id="page-hierarchy">
+<h2>Page Hierarchy<a class="headerlink" href="#page-hierarchy" title="Permalink to this headline"></a></h2>
+<ul class="treeView" id="page-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li> <a href="page_deprecated.html#page-deprecated">Deprecated List</a></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView page-treeView --></section>
+<section id="class-hierarchy">
+<h2>Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline"></a></h2>
+<ul class="treeView" id="class-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li>Namespace <a href="namespace_rclcpp_lifecycle.html#namespace-rclcpp-lifecycle">rclcpp_lifecycle</a><ul><li>Namespace <a href="namespace_rclcpp_lifecycle__node_interfaces.html#namespace-rclcpp-lifecycle-node-interfaces">rclcpp_lifecycle::node_interfaces</a><ul><li class="lastChild">Class <a href="classrclcpp__lifecycle_1_1node__interfaces_1_1LifecycleNodeInterface.html#exhale-class-classrclcpp-lifecycle-1-1node-interfaces-1-1LifecycleNodeInterface">LifecycleNodeInterface</a></li></ul></li><li>Class <a href="classrclcpp__lifecycle_1_1LifecycleNode.html#exhale-class-classrclcpp-lifecycle-1-1LifecycleNode">LifecycleNode</a></li><li>Template Class <a href="classrclcpp__lifecycle_1_1LifecyclePublisher.html#exhale-class-classrclcpp-lifecycle-1-1LifecyclePublisher">LifecyclePublisher</a></li><li>Class <a href="classrclcpp__lifecycle_1_1ManagedEntityInterface.html#exhale-class-classrclcpp-lifecycle-1-1ManagedEntityInterface">ManagedEntityInterface</a></li><li>Class <a href="classrclcpp__lifecycle_1_1SimpleManagedEntity.html#exhale-class-classrclcpp-lifecycle-1-1SimpleManagedEntity">SimpleManagedEntity</a></li><li>Class <a href="classrclcpp__lifecycle_1_1State.html#exhale-class-classrclcpp-lifecycle-1-1State">State</a></li><li class="lastChild">Class <a href="classrclcpp__lifecycle_1_1Transition.html#exhale-class-classrclcpp-lifecycle-1-1Transition">Transition</a></li></ul></li><li>Template Struct <a href="structhas__on__activate.html#exhale-struct-structhas-on-activate">has_on_activate</a></li><li>Template Struct <a href="structhas__on__activate_3_01T_00_01typename_01std_1_1enable__if_3_01std_1_1is__same_3_01void_00_c30024c2784360a3da73ddd170cc599f.html#exhale-struct-structhas-on-activate-3-01T-00-01typename-01std-1-1enable-if-3-01std-1-1is-same-3-01void-00-c30024c2784360a3da73ddd170cc599f">has_on_activate&lt; T, typename std::enable_if&lt; std::is_same&lt; void, decltype(std::declval&lt; T &gt;, ().on_activate()) &gt;::value &gt;::type &gt;</a></li><li>Template Struct <a href="structhas__on__deactivate.html#exhale-struct-structhas-on-deactivate">has_on_deactivate</a></li><li>Template Struct <a href="structhas__on__deactivate_3_01T_00_01typename_01std_1_1enable__if_3_01std_1_1is__same_3_01void_029742064b7ae594e6294a8d0c5702007.html#exhale-struct-structhas-on-deactivate-3-01T-00-01typename-01std-1-1enable-if-3-01std-1-1is-same-3-01void-029742064b7ae594e6294a8d0c5702007">has_on_deactivate&lt; T, typename std::enable_if&lt; std::is_same&lt; void, decltype(std::declval&lt; T &gt;, ().on_deactivate()) &gt;::value &gt;::type &gt;</a></li><li>Template Struct <a href="structis__manageable__node.html#exhale-struct-structis-manageable-node">is_manageable_node</a></li><li class="lastChild">Template Struct <a href="structis__manageable__node_3_01T_00_01typename_01std_1_1enable__if_3_01has__on__activate_3_01T_0b3a08f8c1b4e8a6400a1496f9bf679db.html#exhale-struct-structis-manageable-node-3-01T-00-01typename-01std-1-1enable-if-3-01has-on-activate-3-01T-0b3a08f8c1b4e8a6400a1496f9bf679db">is_manageable_node&lt; T, typename std::enable_if&lt; has_on_activate&lt; T &gt;::value &amp;&amp;has_on_deactivate&lt; T &gt;::value &gt;::type &gt;</a></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView class-treeView --></section>
+<section id="file-hierarchy">
+<h2>File Hierarchy<a class="headerlink" href="#file-hierarchy" title="Permalink to this headline"></a></h2>
+<ul class="treeView" id="file-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li class="lastChild">Directory <a href="dir_include.html#dir-include">include</a><ul><li class="lastChild">Directory <a href="dir_include_rclcpp_lifecycle.html#dir-include-rclcpp-lifecycle">rclcpp_lifecycle</a><ul><li>Directory <a href="dir_include_rclcpp_lifecycle_node_interfaces.html#dir-include-rclcpp-lifecycle-node-interfaces">node_interfaces</a><ul><li class="lastChild">File <a href="file_include_rclcpp_lifecycle_node_interfaces_lifecycle_node_interface.hpp.html#file-include-rclcpp-lifecycle-node-interfaces-lifecycle-node-interface.hpp">lifecycle_node_interface.hpp</a></li></ul></li><li>Directory <a href="dir_include_rclcpp_lifecycle_type_traits.html#dir-include-rclcpp-lifecycle-type-traits">type_traits</a><ul><li class="lastChild">File <a href="file_include_rclcpp_lifecycle_type_traits_is_manageable_node.hpp.html#file-include-rclcpp-lifecycle-type-traits-is-manageable-node.hpp">is_manageable_node.hpp</a></li></ul></li><li>File <a href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html#file-include-rclcpp-lifecycle-lifecycle-node.hpp">lifecycle_node.hpp</a></li><li>File <a href="file_include_rclcpp_lifecycle_lifecycle_node_impl.hpp.html#file-include-rclcpp-lifecycle-lifecycle-node-impl.hpp">lifecycle_node_impl.hpp</a></li><li>File <a href="file_include_rclcpp_lifecycle_lifecycle_publisher.hpp.html#file-include-rclcpp-lifecycle-lifecycle-publisher.hpp">lifecycle_publisher.hpp</a></li><li>File <a href="file_include_rclcpp_lifecycle_managed_entity.hpp.html#file-include-rclcpp-lifecycle-managed-entity.hpp">managed_entity.hpp</a></li><li>File <a href="file_include_rclcpp_lifecycle_state.hpp.html#file-include-rclcpp-lifecycle-state.hpp">state.hpp</a></li><li>File <a href="file_include_rclcpp_lifecycle_transition.hpp.html#file-include-rclcpp-lifecycle-transition.hpp">transition.hpp</a></li><li class="lastChild">File <a href="file_include_rclcpp_lifecycle_visibility_control.h.html#file-include-rclcpp-lifecycle-visibility-control.h">visibility_control.h</a></li></ul></li></ul></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView file-treeView --></section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline"></a></h2>
+<section id="namespaces">
+<h3>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_rclcpp_lifecycle.html">Namespace rclcpp_lifecycle</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_rclcpp_lifecycle__node_interfaces.html">Namespace rclcpp_lifecycle::node_interfaces</a></li>
+</ul>
+</div>
+</section>
+<section id="classes-and-structs">
+<h3>Classes and Structs<a class="headerlink" href="#classes-and-structs" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structhas__on__activate.html">Template Struct has_on_activate</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structhas__on__activate_3_01T_00_01typename_01std_1_1enable__if_3_01std_1_1is__same_3_01void_00_c30024c2784360a3da73ddd170cc599f.html">Template Struct has_on_activate&lt; T, typename std::enable_if&lt; std::is_same&lt; void, decltype(std::declval&lt; T &gt;, ().on_activate()) &gt;::value &gt;::type &gt;</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structhas__on__deactivate.html">Template Struct has_on_deactivate</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structhas__on__deactivate_3_01T_00_01typename_01std_1_1enable__if_3_01std_1_1is__same_3_01void_029742064b7ae594e6294a8d0c5702007.html">Template Struct has_on_deactivate&lt; T, typename std::enable_if&lt; std::is_same&lt; void, decltype(std::declval&lt; T &gt;, ().on_deactivate()) &gt;::value &gt;::type &gt;</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structis__manageable__node.html">Template Struct is_manageable_node</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structis__manageable__node_3_01T_00_01typename_01std_1_1enable__if_3_01has__on__activate_3_01T_0b3a08f8c1b4e8a6400a1496f9bf679db.html">Template Struct is_manageable_node&lt; T, typename std::enable_if&lt; has_on_activate&lt; T &gt;::value &amp;&amp;has_on_deactivate&lt; T &gt;::value &gt;::type &gt;</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecycleNode.html">Class LifecycleNode</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__lifecycle_1_1LifecyclePublisher.html">Template Class LifecyclePublisher</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__lifecycle_1_1ManagedEntityInterface.html">Class ManagedEntityInterface</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__lifecycle_1_1node__interfaces_1_1LifecycleNodeInterface.html">Class LifecycleNodeInterface</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__lifecycle_1_1SimpleManagedEntity.html">Class SimpleManagedEntity</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__lifecycle_1_1State.html">Class State</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__lifecycle_1_1Transition.html">Class Transition</a></li>
+</ul>
+</div>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacerclcpp__lifecycle_1a45265f885801bd844c6db631e2b0f3ff.html">Template Function rclcpp_lifecycle::create_default_publisher_options</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacerclcpp__lifecycle_1a89d110e27007f14b5d5bf2b461dcfe71.html">Template Function rclcpp_lifecycle::create_default_subscription_options</a></li>
+</ul>
+</div>
+</section>
+<section id="defines">
+<h3>Defines<a class="headerlink" href="#defines" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8h_1ad45800b3123be20d4c5a70fa3228e254.html">Define RCLCPP_LIFECYCLE_EXPORT</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8h_1a4d0b6e807b222bd7da158a219bd536a3.html">Define RCLCPP_LIFECYCLE_IMPORT</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8h_1aa470755b83c4077cb0531ff56a254f87.html">Define RCLCPP_LIFECYCLE_LOCAL</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8h_1a3f9c9a64a17c059f5b74c036570dee1d.html">Define RCLCPP_LIFECYCLE_PUBLIC</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8h_1a573697410ae21682076abeb5d120f804.html">Define RCLCPP_LIFECYCLE_PUBLIC_TYPE</a></li>
+</ul>
+</div>
+</section>
+<section id="typedefs">
+<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_namespacerclcpp__lifecycle_1a4c24364ee7e73c343ceafeb14503da46.html">Typedef rclcpp_lifecycle::PublisherOptionsWithAllocator</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_namespacerclcpp__lifecycle_1a285284f4eb860124a7a938267d791df3.html">Typedef rclcpp_lifecycle::SubscriptionOptionsWithAllocator</a></li>
+</ul>
+</div>
+</section>
+<section id="directories">
+<h3>Directories<a class="headerlink" href="#directories" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include.html">Directory include</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_rclcpp_lifecycle.html">Directory rclcpp_lifecycle</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_rclcpp_lifecycle_node_interfaces.html">Directory node_interfaces</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_rclcpp_lifecycle_type_traits.html">Directory type_traits</a></li>
+</ul>
+</div>
+</section>
+<section id="files">
+<h3>Files<a class="headerlink" href="#files" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_lifecycle_type_traits_is_manageable_node.hpp.html">File is_manageable_node.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node.hpp.html">File lifecycle_node.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_node_impl.hpp.html">File lifecycle_node_impl.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_lifecycle_node_interfaces_lifecycle_node_interface.hpp.html">File lifecycle_node_interface.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_lifecycle_lifecycle_publisher.hpp.html">File lifecycle_publisher.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_lifecycle_managed_entity.hpp.html">File managed_entity.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_lifecycle_state.hpp.html">File state.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_lifecycle_transition.hpp.html">File transition.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_lifecycle_visibility_control.h.html">File visibility_control.h</a></li>
+</ul>
+</div>
+</section>
+<section id="pages">
+<h3>Pages<a class="headerlink" href="#pages" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="page_deprecated.html">Deprecated List</a></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to the documentation for rclcpp_lifecycle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="namespace_rclcpp_lifecycle.html" class="btn btn-neutral float-right" title="Namespace rclcpp_lifecycle" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Apache License 2.0.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

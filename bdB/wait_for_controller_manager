@@ -1,0 +1,2 @@
+def wait_for_controller_manager(node, controller_manager, timeout_duration):
+    # Wait for the controller manager to be available

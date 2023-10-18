@@ -1,0 +1,203 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Capabilities &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="#" />
+    <link rel="next" title="The capability_server ROS Node" href="capability_server.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/index.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capability_server.html" title="The capability_server ROS Node"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="capabilities">
+<h1>Capabilities<a class="headerlink" href="#capabilities" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Implements the concept of capabilities as part of the robots-in-concert system.</p>
+<div class="section" id="api-documentation">
+<h2>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>For end users it is recommended to use the <tt class="docutils literal"><span class="pre">capability_server</span></tt> script in combination with the <a class="reference internal" href="capabilities.client.html#capabilities.client.CapabilitiesClient" title="capabilities.client.CapabilitiesClient"><tt class="xref py py-class docutils literal"><span class="pre">capabilities.client.CapabilitiesClient</span></tt></a> Class of the <a class="reference internal" href="capabilities.client.html"><em>capabilities.client</em></a> module and the <a class="reference internal" href="capabilities.service_discovery.html"><em>capabilities.service_discovery</em></a> module.</p>
+<p>The <tt class="docutils literal"><span class="pre">capability_server</span></tt>, along with its ROS API, is documented here: <a class="reference internal" href="capability_server.html"><em>The capability_server ROS Node</em></a></p>
+<p>The <a class="reference internal" href="capabilities.client.html#capabilities.client.CapabilitiesClient" title="capabilities.client.CapabilitiesClient"><tt class="xref py py-class docutils literal"><span class="pre">capabilities.client.CapabilitiesClient</span></tt></a> class provides a simple Python class for interacting with a remote <tt class="docutils literal"><span class="pre">capability_server</span></tt>, allowing you to &#8220;use&#8221; and &#8220;free&#8221; capabilities using the reference counting services provided by the server.
+The client API ensures the &#8220;uses&#8221; of capabilities do not leak by maintaining a bond with each client, and it manages underlying bond creation and maintenance under the hood so that the client never sees that.
+Since there is a bond with each client, if that bond breaks for any reason, then the corresponding &#8220;used&#8221; capabilities will be freed and may shutdown.
+Therefore, if you want to make sure the capabilities keep running, you need to keep the <a class="reference internal" href="capabilities.client.html#capabilities.client.CapabilitiesClient" title="capabilities.client.CapabilitiesClient"><tt class="xref py py-class docutils literal"><span class="pre">capabilities.client.CapabilitiesClient</span></tt></a> Class around for the lifetime of your application.</p>
+<p>The <a class="reference internal" href="capabilities.service_discovery.html"><em>capabilities.service_discovery</em></a> module provides a mechanism to remotely get an instance of the powerful <a class="reference internal" href="capabilities.discovery.html#capabilities.discovery.SpecIndex" title="capabilities.discovery.SpecIndex"><tt class="xref py py-class docutils literal"><span class="pre">capabilities.discovery.SpecIndex</span></tt></a> Class which allows you to introspect the available capability specs (interfaces, semantic interfaces, and providers) to which the server has access.</p>
+<p>These are considered to be the public API for the <tt class="docutils literal"><span class="pre">capabilities</span></tt> Python package:</p>
+<ul class="simple">
+<li><a class="reference internal" href="capabilities.client.html"><em>The Client Module</em></a>: interact remotely with a capability_server</li>
+<li><a class="reference internal" href="capabilities.discovery.html"><em>The Discovery Module</em></a>: discover and load capability spec files from the ROS_PACKAGE_PATH</li>
+<li><a class="reference internal" href="capabilities.service_discovery.html"><em>The Service Discovery Module</em></a>: get a SpecIndex from a remote capability_server</li>
+<li><a class="reference internal" href="capabilities.specs.html"><em>The Specs Package</em></a>: package for interacting with different types of capability specs</li>
+</ul>
+<p>The rest of the documented API is used internally and not considered public, so use it at your on risk:</p>
+<ul class="simple">
+<li><a class="reference internal" href="capabilities.server.html"><em>The Server Module</em></a>: implementation of the capability_server ROS Node</li>
+<li><a class="reference internal" href="capabilities.launch_manager.html"><em>The Launch Manager Module</em></a>: implements a manager for the running roslaunch instances</li>
+</ul>
+</div>
+<div class="section" id="building">
+<h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
+<p>Build it in a catkin workspace or build it stand alone (replace hydro with your ros version if necessary):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">source</span> /opt/ros/hydro/setup.bash
+<span class="nv">$ </span>mkdir build
+<span class="nv">$ </span><span class="nb">cd </span>build
+<span class="nv">$ </span>cmake ..
+<span class="nv">$ </span>make
+<span class="nv">$ </span><span class="nb">source</span> ./devel/setup.bash
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-documentation">
+<h2>Building the Documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h2>
+<p>First you need <tt class="docutils literal"><span class="pre">sphinx</span></tt> installed, on Ubuntu:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-sphinx
+</pre></div>
+</div>
+<p>On other platforms use pip:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo pip install Sphinx
+</pre></div>
+</div>
+<p>You have to have built the package first, then you mush source the resulting devel or install space:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">source</span> /path/to/space/setup.bash
+</pre></div>
+</div>
+<p>Then from the capabilities source folder you can build the docs:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>docs
+<span class="nv">$ </span>make html
+</pre></div>
+</div>
+<p>The resulting docs will be generated to <tt class="docutils literal"><span class="pre">doc/.build/html/index.html</span></tt>.</p>
+</div>
+<div class="section" id="running-the-tests">
+<h2>Running the Tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h2>
+<p>To run the tests you will need the <tt class="docutils literal"><span class="pre">nosetests</span></tt> and <tt class="docutils literal"><span class="pre">coverage</span></tt> python packages. On Ubuntu you can get these like this:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo apt-get install python-nose python-coverage
+</pre></div>
+</div>
+<p>On other platforms you can use <tt class="docutils literal"><span class="pre">pip</span></tt>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>sudo pip install nose coverage
+</pre></div>
+</div>
+<p>You will also need the build and run dependencies for capabilities because it must be built during the testing.
+You can get the dependencies you need using <tt class="docutils literal"><span class="pre">rosdep</span></tt>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>rosdep install --from-paths ./ --ignore-src --rosdistro hydro -y
+</pre></div>
+</div>
+<p>Remember to update the value given to <tt class="docutils literal"><span class="pre">--rosdistro</span></tt> to the ROS distro you are using and to change the <tt class="docutils literal"><span class="pre">./</span></tt> given to <tt class="docutils literal"><span class="pre">--from-paths</span></tt> if you are not in the local checkout of the <tt class="docutils literal"><span class="pre">capabilities</span></tt> source code.</p>
+<p>Finally you can run the tests with a coverage report by invoking the <tt class="docutils literal"><span class="pre">coverage</span></tt> target of the provided <tt class="docutils literal"><span class="pre">Makefile</span></tt> in the root of the capabilities source repository:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>make coverage
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-a-demo">
+<h2>Running a demo<a class="headerlink" href="#running-a-demo" title="Permalink to this headline">¶</a></h2>
+<p>See: <a class="reference external" href="http://wiki.ros.org/capabilities/Tutorials">http://wiki.ros.org/capabilities/Tutorials</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Capabilities</a><ul>
+<li><a class="reference internal" href="#api-documentation">API Documentation</a></li>
+<li><a class="reference internal" href="#building">Building</a></li>
+<li><a class="reference internal" href="#building-the-documentation">Building the Documentation</a></li>
+<li><a class="reference internal" href="#running-the-tests">Running the Tests</a></li>
+<li><a class="reference internal" href="#running-a-demo">Running a demo</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="capability_server.html"
+                        title="next chapter">The <tt class="docutils literal docutils literal docutils literal"><span class="pre">capability_server</span></tt> ROS Node</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capability_server.html" title="The capability_server ROS Node"
+             >next</a> |</li>
+        <li><a href="#">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

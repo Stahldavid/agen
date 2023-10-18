@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the documentation for kobuki_core &mdash; kobuki_core 1.4.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Page Hierarchy" href="generated/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            kobuki_core
+          </a>
+              <div class="version">
+                1.4
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Page Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_kobuki.html">Namespace kobuki</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_kobuki.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_kobuki.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_kobuki.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_kobuki.html#unions">Unions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_packet_handler.html">Namespace packet_handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_packet_handler.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1BumperEvent.html">Struct BumperEvent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1BumperEvent.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1ButtonEvent.html">Struct ButtonEvent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1ButtonEvent.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1Cliff_1_1Data.html">Struct Cliff::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Cliff_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Cliff_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1CliffEvent.html">Struct CliffEvent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1CliffEvent.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1Command_1_1Data.html">Struct Command::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Command_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Command_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1ControllerInfo_1_1Data.html">Struct ControllerInfo::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1ControllerInfo_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1ControllerInfo_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1CoreSensors_1_1Data.html">Struct CoreSensors::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1CoreSensors_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1CoreSensors_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1CoreSensors_1_1Flags.html">Struct CoreSensors::Flags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1CoreSensors_1_1Flags.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1CoreSensors_1_1Flags.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1Current_1_1Data.html">Struct Current::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Current_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Current_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1DigitalOutput.html">Struct DigitalOutput</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1DigitalOutput.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1DockIR_1_1Data.html">Struct DockIR::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1DockIR_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1DockIR_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1DockStationIRState.html">Struct DockStationIRState</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1DockStationIRState.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1Eeprom_1_1Data.html">Struct Eeprom::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Eeprom_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Eeprom_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1Firmware_1_1Data.html">Struct Firmware::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Firmware_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Firmware_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1GpInput_1_1Data.html">Struct GpInput::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1GpInput_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1GpInput_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1Hardware_1_1Data.html">Struct Hardware::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Hardware_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Hardware_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1Inertia_1_1Data.html">Struct Inertia::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Inertia_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1Inertia_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1InputEvent.html">Struct InputEvent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1InputEvent.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1PowerEvent.html">Struct PowerEvent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1PowerEvent.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1RobotDockingState.html">Struct RobotDockingState</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1RobotDockingState.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1RobotEvent.html">Struct RobotEvent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1RobotEvent.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1ThreeAxisGyro_1_1Data.html">Struct ThreeAxisGyro::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1ThreeAxisGyro_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1ThreeAxisGyro_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1UniqueDeviceID_1_1Data.html">Struct UniqueDeviceID::Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1UniqueDeviceID_1_1Data.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1UniqueDeviceID_1_1Data.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structkobuki_1_1WheelEvent.html">Struct WheelEvent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structkobuki_1_1WheelEvent.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1AccelerationLimiter.html">Class AccelerationLimiter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1AccelerationLimiter.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Battery.html">Class Battery</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Battery.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Cliff.html">Class Cliff</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Cliff.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Cliff.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Cliff.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Cliff.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Cliff.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Command.html">Class Command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Command.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Command.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Command.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Command.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Command.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1ControllerInfo.html">Class ControllerInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1ControllerInfo.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1ControllerInfo.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1ControllerInfo.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1ControllerInfo.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1ControllerInfo.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1CoreSensors.html">Class CoreSensors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1CoreSensors.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1CoreSensors.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1CoreSensors.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1CoreSensors.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1CoreSensors.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Current.html">Class Current</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Current.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Current.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Current.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Current.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Current.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1DiffDrive.html">Class DiffDrive</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1DiffDrive.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1DockDrive.html">Class DockDrive</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1DockDrive.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1DockIR.html">Class DockIR</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1DockIR.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1DockIR.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1DockIR.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1DockIR.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1DockIR.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Eeprom.html">Class Eeprom</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Eeprom.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Eeprom.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Eeprom.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Eeprom.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Eeprom.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1EventManager.html">Class EventManager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1EventManager.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Firmware.html">Class Firmware</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Firmware.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Firmware.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Firmware.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Firmware.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Firmware.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1GpInput.html">Class GpInput</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1GpInput.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1GpInput.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1GpInput.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1GpInput.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1GpInput.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Hardware.html">Class Hardware</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Hardware.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Hardware.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Hardware.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Hardware.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Hardware.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Header.html">Class Header</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Header.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Inertia.html">Class Inertia</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Inertia.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Inertia.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Inertia.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1Inertia.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Inertia.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Kobuki.html">Class Kobuki</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Kobuki.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1PacketFinder.html">Class PacketFinder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1PacketFinder.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1PacketFinder.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1PacketFinder.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1PacketFinderBase.html">Class PacketFinderBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1PacketFinderBase.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1PacketFinderBase.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1PacketFinderBase.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1Parameters.html">Class Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1Parameters.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1ThreeAxisGyro.html">Class ThreeAxisGyro</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1ThreeAxisGyro.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1ThreeAxisGyro.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1ThreeAxisGyro.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1ThreeAxisGyro.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1ThreeAxisGyro.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1UniqueDeviceID.html">Class UniqueDeviceID</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1UniqueDeviceID.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1UniqueDeviceID.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1UniqueDeviceID.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classkobuki_1_1UniqueDeviceID.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1UniqueDeviceID.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classkobuki_1_1VersionInfo.html">Class VersionInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classkobuki_1_1VersionInfo.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classpacket__handler_1_1payloadBase.html">Class payloadBase</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classpacket__handler_1_1payloadBase.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classpacket__handler_1_1payloadBase.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classpacket__handler_1_1payloadBase.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_led__array_8hpp_1a278fbe81cdc3dd93c2fde224fb013c26.html">Enum LedColour</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_led__array_8hpp_1a278fbe81cdc3dd93c2fde224fb013c26.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_led__array_8hpp_1a33186680e911242fe0c7a511a12d1465.html">Enum LedNumber</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_led__array_8hpp_1a33186680e911242fe0c7a511a12d1465.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_logging_8hpp_1aea0196abcf44f291eacfdf14bfab2de7.html">Enum LogLevel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_logging_8hpp_1aea0196abcf44f291eacfdf14bfab2de7.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_sound_8hpp_1a336129805a07def7a2c2b0be281e7ddd.html">Enum SoundSequences</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_sound_8hpp_1a336129805a07def7a2c2b0be281e7ddd.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#unions">Unions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/unionkobuki_1_1union__sint16.html">Union union_sint16</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/unionkobuki_1_1union__sint16.html#union-documentation">Union Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_logging_8hpp_1a28d2d7f6f0e6f7bc03acd0b965f3d717.html">Function kobuki::logDebug</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_logging_8hpp_1a28d2d7f6f0e6f7bc03acd0b965f3d717.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_logging_8hpp_1aab6640a6427c36ed6550f55859916b41.html">Function kobuki::logError</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_logging_8hpp_1aab6640a6427c36ed6550f55859916b41.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_logging_8hpp_1a0ae50c82346daea118e95bb2bb360ca1.html">Function kobuki::logInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_logging_8hpp_1a0ae50c82346daea118e95bb2bb360ca1.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_logging_8hpp_1aa0be7970cd1fe50f4cf0f9073a2e1557.html">Function kobuki::logWarning</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_logging_8hpp_1aa0be7970cd1fe50f4cf0f9073a2e1557.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_macros_8hpp_1aaaaea9bc9168746bc8d93e5e580ea365.html">Define EXP_TEMPLATE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_macros_8hpp_1aaaaea9bc9168746bc8d93e5e580ea365.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_macros_8hpp_1a006a4ca34f6e83bce1e10abd9e29c84e.html">Define kobuki_LOCAL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_macros_8hpp_1a006a4ca34f6e83bce1e10abd9e29c84e.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_macros_8hpp_1a4b92966a9fada0eb71fe09d15a768343.html">Define kobuki_PUBLIC</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_macros_8hpp_1a4b92966a9fada0eb71fe09d15a768343.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/define_three__axis__gyro_8hpp_1a87f68e96fb938eddc39ad1f19d923a96.html">Define MAX_DATA_SIZE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_three__axis__gyro_8hpp_1a87f68e96fb938eddc39ad1f19d923a96.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src.html">Directory src</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core.html">Directory kobuki_core</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include.html">Directory include</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include_kobuki_core.html">Directory kobuki_core</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include_kobuki_core.html#subdirectories">Subdirectories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include_kobuki_core.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include_kobuki_core_modules.html">Directory modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include_kobuki_core_modules.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler.html">Directory packet_handler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include_kobuki_core_packets.html">Directory packets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_kobuki_core_include_kobuki_core_packets.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_acceleration_limiter.hpp.html">File acceleration_limiter.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_acceleration_limiter.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-modules-acceleration-limiter-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/modules/acceleration_limiter.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_acceleration_limiter.hpp.html">Program Listing for File acceleration_limiter.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_acceleration_limiter.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_acceleration_limiter.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_acceleration_limiter.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_acceleration_limiter.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_battery.hpp.html">File battery.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_battery.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-modules-battery-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/modules/battery.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_battery.hpp.html">Program Listing for File battery.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_battery.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_battery.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_battery.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_battery.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_battery.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_cliff.hpp.html">File cliff.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_cliff.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-cliff-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/cliff.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_cliff.hpp.html">Program Listing for File cliff.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_cliff.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_cliff.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_cliff.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_cliff.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_cliff.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_command.hpp.html">File command.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_command.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-command-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/command.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_command.hpp.html">Program Listing for File command.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_command.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_command.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_command.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_command.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_command.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_controller_info.hpp.html">File controller_info.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_controller_info.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-controller-info-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/controller_info.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_controller_info.hpp.html">Program Listing for File controller_info.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_controller_info.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_controller_info.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_controller_info.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_controller_info.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_controller_info.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_core_sensors.hpp.html">File core_sensors.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_core_sensors.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-core-sensors-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/core_sensors.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_core_sensors.hpp.html">Program Listing for File core_sensors.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_core_sensors.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_core_sensors.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_core_sensors.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_core_sensors.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_core_sensors.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_current.hpp.html">File current.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_current.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-current-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/current.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_current.hpp.html">Program Listing for File current.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_current.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_current.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_current.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_current.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_current.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_diff_drive.hpp.html">File diff_drive.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_diff_drive.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-modules-diff-drive-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/modules/diff_drive.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_diff_drive.hpp.html">Program Listing for File diff_drive.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_diff_drive.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_diff_drive.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_diff_drive.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_diff_drive.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_diff_drive.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_digital_output.hpp.html">File digital_output.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_digital_output.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-modules-digital-output-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/modules/digital_output.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_digital_output.hpp.html">Program Listing for File digital_output.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_digital_output.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_digital_output.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_digital_output.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_digital_output.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_dock_drive.hpp.html">File dock_drive.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_dock_drive.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-dock-drive-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/dock_drive.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_dock_drive.hpp.html">Program Listing for File dock_drive.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_dock_drive.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_dock_drive.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_dock_drive.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_dock_ir.hpp.html">File dock_ir.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_dock_ir.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-dock-ir-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/dock_ir.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_dock_ir.hpp.html">Program Listing for File dock_ir.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_dock_ir.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_dock_ir.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_dock_ir.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_dock_ir.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_dock_ir.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_eeprom.hpp.html">File eeprom.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_eeprom.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-eeprom-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/eeprom.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_eeprom.hpp.html">Program Listing for File eeprom.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_eeprom.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_eeprom.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_eeprom.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_eeprom.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_event_manager.hpp.html">File event_manager.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_event_manager.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-event-manager-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/event_manager.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_event_manager.hpp.html">Program Listing for File event_manager.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_event_manager.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_event_manager.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_event_manager.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_event_manager.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_event_manager.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_firmware.hpp.html">File firmware.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_firmware.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-firmware-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/firmware.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_firmware.hpp.html">Program Listing for File firmware.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_firmware.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_firmware.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_firmware.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_firmware.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_firmware.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_gp_input.hpp.html">File gp_input.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_gp_input.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-gp-input-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/gp_input.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_gp_input.hpp.html">Program Listing for File gp_input.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_gp_input.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_gp_input.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_gp_input.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_gp_input.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_gp_input.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_hardware.hpp.html">File hardware.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_hardware.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-hardware-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/hardware.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_hardware.hpp.html">Program Listing for File hardware.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_hardware.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_hardware.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_hardware.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_hardware.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_hardware.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_inertia.hpp.html">File inertia.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_inertia.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-inertia-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/inertia.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_inertia.hpp.html">Program Listing for File inertia.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_inertia.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_inertia.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_inertia.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_inertia.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_inertia.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_kobuki.hpp.html">File kobuki.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_kobuki.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-kobuki-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/kobuki.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_kobuki.hpp.html">Program Listing for File kobuki.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_kobuki.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_kobuki.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_kobuki.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_kobuki.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_kobuki.hpp.html#unions">Unions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_led_array.hpp.html">File led_array.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_led_array.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-modules-led-array-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/modules/led_array.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_led_array.hpp.html">Program Listing for File led_array.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_led_array.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_led_array.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_led_array.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_led_array.hpp.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_logging.hpp.html">File logging.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_logging.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-logging-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/logging.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_logging.hpp.html">Program Listing for File logging.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_logging.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_logging.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_logging.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_logging.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_logging.hpp.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_logging.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_macros.hpp.html">File macros.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_macros.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-macros-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/macros.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_macros.hpp.html">Program Listing for File macros.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_macros.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_macros.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_macros.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_macros.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules.hpp.html">File modules.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-modules-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/modules.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_modules.hpp.html">Program Listing for File modules.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules.hpp.html#included-by">Included By</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_packet_finder.hpp.html">File packet_finder.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_packet_finder.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packet-handler-packet-finder-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packet_handler/packet_finder.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_packet_finder.hpp.html">Program Listing for File packet_finder.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_packet_finder.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_packet_finder.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_packet_finder.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_packet_finder.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_packet_finder.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets.hpp.html">File packets.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets.hpp.html">Program Listing for File packets.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets.hpp.html#included-by">Included By</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_parameters.hpp.html">File parameters.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_parameters.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-parameters-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/parameters.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_parameters.hpp.html">Program Listing for File parameters.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_parameters.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_parameters.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_parameters.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_parameters.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_parameters.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_base.hpp.html">File payload_base.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_base.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packet-handler-payload-base-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packet_handler/payload_base.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_base.hpp.html">Program Listing for File payload_base.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_base.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_base.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_base.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_base.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_base.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_headers.hpp.html">File payload_headers.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_headers.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packet-handler-payload-headers-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packet_handler/payload_headers.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_headers.hpp.html">Program Listing for File payload_headers.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_headers.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_headers.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_headers.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packet_handler_payload_headers.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_sound.hpp.html">File sound.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_sound.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-modules-sound-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/modules/sound.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_sound.hpp.html">Program Listing for File sound.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_sound.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_sound.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_sound.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_modules_sound.hpp.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_three_axis_gyro.hpp.html">File three_axis_gyro.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_three_axis_gyro.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-three-axis-gyro-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/three_axis_gyro.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_three_axis_gyro.hpp.html">Program Listing for File three_axis_gyro.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_three_axis_gyro.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_three_axis_gyro.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_three_axis_gyro.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_three_axis_gyro.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_three_axis_gyro.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_three_axis_gyro.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_unique_device_id.hpp.html">File unique_device_id.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_unique_device_id.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-packets-unique-device-id-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/packets/unique_device_id.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_unique_device_id.hpp.html">Program Listing for File unique_device_id.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_unique_device_id.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_unique_device_id.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_unique_device_id.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_unique_device_id.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_packets_unique_device_id.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_version_info.hpp.html">File version_info.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_version_info.hpp.html#definition-tmp-ws-src-kobuki-core-include-kobuki-core-version-info-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/kobuki_core/include/kobuki_core/version_info.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_kobuki_core_include_kobuki_core_version_info.hpp.html">Program Listing for File version_info.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_version_info.hpp.html#detailed-description">Detailed Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_version_info.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_version_info.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_version_info.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_kobuki_core_include_kobuki_core_version_info.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#pages">Pages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/page_todo.html">Todo List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">kobuki_core</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the documentation for kobuki_core</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-documentation-for-kobuki-core">
+<h1>Welcome to the documentation for kobuki_core<a class="headerlink" href="#welcome-to-the-documentation-for-kobuki-core" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Page Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#unions">Unions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#defines">Defines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#pages">Pages</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-search">
+<h1>Indices and Search<a class="headerlink" href="#indices-and-search" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/index.html" class="btn btn-neutral float-right" title="Page Hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, BSD.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rosdistro.legacy &#8212; rosdistro  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for rosdistro.legacy</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Software License Agreement (BSD License)</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright (c) 2013, Open Source Robotics Foundation, Inc.</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c1"># modification, are permitted provided that the following conditions</span>
+<span class="c1"># are met:</span>
+<span class="c1">#</span>
+<span class="c1">#  * Redistributions of source code must retain the above copyright</span>
+<span class="c1">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c1">#  * Redistributions in binary form must reproduce the above</span>
+<span class="c1">#    copyright notice, this list of conditions and the following</span>
+<span class="c1">#    disclaimer in the documentation and/or other materials provided</span>
+<span class="c1">#    with the distribution.</span>
+<span class="c1">#  * Neither the name of Open Source Robotics Foundation, Inc. nor</span>
+<span class="c1">#    the names of its contributors may be used to endorse or promote</span>
+<span class="c1">#    products derived from this software without specific prior</span>
+<span class="c1">#    written permission.</span>
+<span class="c1">#</span>
+<span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c1"># &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c1"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="c1"># FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="c1"># COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="c1"># INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="c1"># BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="c1"># LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c1"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="c1"># LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="c1"># ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c1"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">gzip</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">cStringIO</span> <span class="k">import</span> <span class="n">StringIO</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span> <span class="k">as</span> <span class="n">StringIO</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">_get_dist_file_data</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">logger</span>
+
+<span class="c1"># legacy imports</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">common</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.aptdistro</span> <span class="k">import</span> <span class="n">AptDistro</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.develdistro</span> <span class="k">import</span> <span class="n">DevelDistro</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.rosdistro</span> <span class="k">import</span> <span class="n">RosDistro</span>  <span class="c1"># noqa</span>
+<span class="kn">from</span> <span class="nn">.rosdistro</span> <span class="k">import</span> <span class="n">walks</span>  <span class="c1"># noqa</span>
+
+<span class="kn">from</span> <span class="nn">.doc_build_file</span> <span class="k">import</span> <span class="n">DocBuildFile</span>
+<span class="kn">from</span> <span class="nn">.doc_file</span> <span class="k">import</span> <span class="n">DocFile</span>
+
+<span class="kn">from</span> <span class="nn">.loader</span> <span class="k">import</span> <span class="n">load_url</span>
+<span class="kn">from</span> <span class="nn">.manifest_provider.cache</span> <span class="k">import</span> <span class="n">CachedManifestProvider</span>
+
+<span class="kn">from</span> <span class="nn">.release</span> <span class="k">import</span> <span class="n">Release</span>
+<span class="kn">from</span> <span class="nn">.release_build</span> <span class="k">import</span> <span class="n">ReleaseBuild</span>
+<span class="kn">from</span> <span class="nn">.release_build_file</span> <span class="k">import</span> <span class="n">ReleaseBuildFile</span>
+<span class="kn">from</span> <span class="nn">.release_cache</span> <span class="k">import</span> <span class="n">ReleaseCache</span>
+<span class="kn">from</span> <span class="nn">.release_file</span> <span class="k">import</span> <span class="n">ReleaseFile</span>
+<span class="kn">from</span> <span class="nn">.source_build_file</span> <span class="k">import</span> <span class="n">SourceBuildFile</span>
+<span class="kn">from</span> <span class="nn">.source_file</span> <span class="k">import</span> <span class="n">SourceFile</span>
+
+
+<span class="c1"># release information</span>
+
+
+<div class="viewcode-block" id="get_cached_release"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_cached_release">[docs]</a><span class="k">def</span> <span class="nf">get_cached_release</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_lazy_load</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# rosdistro.get_cached_release() has been deprecated in favor of the new function rosdistro.get_cached_distribution() - please check that you have the latest versions of the Python tools (e.g. on Ubuntu/Debian use: sudo apt-get update &amp;&amp; sudo apt-get install --only-upgrade python-bloom python-rosdep python-rosinstall python-rosinstall-generator)&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cache</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cache</span> <span class="o">=</span> <span class="n">get_release_cache</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">allow_lazy_load</span><span class="p">:</span>
+                <span class="k">raise</span>
+            <span class="c1"># create empty cache instance</span>
+            <span class="n">rel_file_data</span> <span class="o">=</span> <span class="n">_get_dist_file_data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">,</span> <span class="s1">&#39;release&#39;</span><span class="p">)</span>
+            <span class="n">cache</span> <span class="o">=</span> <span class="n">ReleaseCache</span><span class="p">(</span><span class="n">dist_name</span><span class="p">,</span> <span class="n">rel_file_data</span><span class="o">=</span><span class="n">rel_file_data</span><span class="p">)</span>
+    <span class="n">rel</span> <span class="o">=</span> <span class="n">Release</span><span class="p">(</span>
+        <span class="n">cache</span><span class="o">.</span><span class="n">release_file</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">CachedManifestProvider</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">Release</span><span class="o">.</span><span class="n">default_manifest_providers</span> <span class="k">if</span> <span class="n">allow_lazy_load</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)])</span>
+    <span class="k">assert</span> <span class="n">cache</span><span class="o">.</span><span class="n">release_file</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">dist_name</span>
+    <span class="k">return</span> <span class="n">rel</span></div>
+
+
+<div class="viewcode-block" id="get_release"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_release">[docs]</a><span class="k">def</span> <span class="nf">get_release</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# rosdistro.get_release() has been deprecated in favor of the new function rosdistro.get_cached_distribution() - please check that you have the latest versions of the Python tools (e.g. on Ubuntu/Debian use: sudo apt-get update &amp;&amp; sudo apt-get install --only-upgrade python-bloom python-rosdep python-rosinstall python-rosinstall-generator)&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">rel_file</span> <span class="o">=</span> <span class="n">get_release_file</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Release</span><span class="p">(</span><span class="n">rel_file</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_release_file"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_release_file">[docs]</a><span class="k">def</span> <span class="nf">get_release_file</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# rosdistro.get_release_file() has been deprecated in favor of the new function rosdistro.get_distribution_file() - please check that you have the latest versions of the Python tools (e.g. on Ubuntu/Debian use: sudo apt-get update &amp;&amp; sudo apt-get install --only-upgrade python-bloom python-rosdep python-rosinstall python-rosinstall-generator)&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_get_dist_file_data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">,</span> <span class="s1">&#39;distribution&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ReleaseFile</span><span class="p">(</span><span class="n">dist_name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_release_cache"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_release_cache">[docs]</a><span class="k">def</span> <span class="nf">get_release_cache</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# rosdistro.get_release_cache() has been deprecated in favor of the new function rosdistro.get_distribution_cache() - please check that you have the latest versions of the Python tools (e.g. on Ubuntu/Debian use: sudo apt-get update &amp;&amp; sudo apt-get install --only-upgrade python-bloom python-rosdep python-rosinstall python-rosinstall-generator)&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">dist_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">index</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Unknown release: &#39;</span><span class="si">{0}</span><span class="s2">&#39;. Valid release names are: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dist_name</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">keys</span><span class="p">()))))</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">distributions</span><span class="p">[</span><span class="n">dist_name</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">&#39;distribution_cache&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dist</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Release has no cache: &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dist_name</span><span class="p">))</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="s1">&#39;distribution_cache&#39;</span><span class="p">]</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Load cache from &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.yaml&#39;</span><span class="p">):</span>
+        <span class="n">yaml_str</span> <span class="o">=</span> <span class="n">load_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.yaml.gz&#39;</span><span class="p">):</span>
+        <span class="n">yaml_gz_str</span> <span class="o">=</span> <span class="n">load_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">skip_decode</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">yaml_gz_stream</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">yaml_gz_str</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">GzipFile</span><span class="p">(</span><span class="n">fileobj</span><span class="o">=</span><span class="n">yaml_gz_stream</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="n">yaml_str</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">yaml_str</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">yaml_str</span> <span class="o">=</span> <span class="n">yaml_str</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;The url of the cache must end with either &quot;.yaml&quot; or &quot;.yaml.gz&quot;&#39;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">yaml_str</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ReleaseCache</span><span class="p">(</span><span class="n">dist_name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_release_builds"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_release_builds">[docs]</a><span class="k">def</span> <span class="nf">get_release_builds</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">release_file</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# rosdistro.get_release_builds() has been deprecated and its functionality is now handled by the &#39;ros_buildfarm.config&#39; module&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">build_files</span> <span class="o">=</span> <span class="n">get_release_build_files</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">release_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">builds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">build_file</span> <span class="ow">in</span> <span class="n">build_files</span><span class="p">:</span>
+        <span class="n">builds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ReleaseBuild</span><span class="p">(</span><span class="n">release_file</span><span class="p">,</span> <span class="n">build_file</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">builds</span></div>
+
+
+<div class="viewcode-block" id="get_release_build_files"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_release_build_files">[docs]</a><span class="k">def</span> <span class="nf">get_release_build_files</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# rosdistro.get_release_build_files() has been deprecated and its functionality is now handled by the &#39;ros_buildfarm.config&#39; module&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_get_dist_file_data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">,</span> <span class="s1">&#39;release_builds&#39;</span><span class="p">)</span>
+    <span class="n">build_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">build_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ReleaseBuildFile</span><span class="p">(</span><span class="n">dist_name</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">build_files</span></div>
+
+
+<span class="c1"># source information</span>
+
+
+<div class="viewcode-block" id="get_source_file"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_source_file">[docs]</a><span class="k">def</span> <span class="nf">get_source_file</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# rosdistro.get_source_file() has been deprecated in favor of the new function rosdistro.get_distribution_file() - please check that you have the latest versions of the Python tools (e.g. on Ubuntu/Debian use: sudo apt-get update &amp;&amp; sudo apt-get install --only-upgrade python-bloom python-rosdep python-rosinstall python-rosinstall-generator)&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_get_dist_file_data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">,</span> <span class="s1">&#39;distribution&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">SourceFile</span><span class="p">(</span><span class="n">dist_name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_source_build_files"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_source_build_files">[docs]</a><span class="k">def</span> <span class="nf">get_source_build_files</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# rosdistro.get_source_build_files() has been deprecated and its functionality is now handled by the &#39;ros_buildfarm.config&#39; module&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_get_dist_file_data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">,</span> <span class="s1">&#39;source_builds&#39;</span><span class="p">)</span>
+    <span class="n">build_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">build_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SourceBuildFile</span><span class="p">(</span><span class="n">dist_name</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">build_files</span></div>
+
+
+<span class="c1"># doc information</span>
+
+
+<div class="viewcode-block" id="get_doc_file"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_doc_file">[docs]</a><span class="k">def</span> <span class="nf">get_doc_file</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# rosdistro.get_doc_file() has been deprecated in favor of the new function rosdistro.get_distribution_file() - please check that you have the latest versions of the Python tools (e.g. on Ubuntu/Debian use: sudo apt-get update &amp;&amp; sudo apt-get install --only-upgrade python-bloom python-rosdep python-rosinstall python-rosinstall-generator)&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_get_dist_file_data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">,</span> <span class="s1">&#39;distribution&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">DocFile</span><span class="p">(</span><span class="n">dist_name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_doc_build_files"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.legacy.get_doc_build_files">[docs]</a><span class="k">def</span> <span class="nf">get_doc_build_files</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# rosdistro.get_doc_build_files() has been deprecated and its functionality is now handled by the &#39;ros_buildfarm.config&#39; module&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">_get_dist_file_data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dist_name</span><span class="p">,</span> <span class="s1">&#39;doc_builds&#39;</span><span class="p">)</span>
+    <span class="n">build_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">build_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DocBuildFile</span><span class="p">(</span><span class="n">dist_name</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">build_files</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">rosdistro</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rosdistro.html">rosdistro package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  <li><a href="../rosdistro.html">rosdistro</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

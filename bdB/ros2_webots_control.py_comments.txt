@@ -1,0 +1,1 @@
+This is a ROS2 node that interacts with Webots to control the impedance of a robot arm. The node subscribes to a topic, force_feedback, and publishes to a topic, impedance_values.

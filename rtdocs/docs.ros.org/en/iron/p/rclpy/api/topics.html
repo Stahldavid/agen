@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topics &mdash; rclpy 3.2.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=eb155f5e"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Services" href="services.html" />
+    <link rel="prev" title="Node" href="node.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            rclpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="clock.html">Clock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="init_shutdown.html">Initialization, Shutdown, and Spinning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="node.html">Node</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Topics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-rclpy.publisher">Publisher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.publisher.Publisher"><code class="docutils literal notranslate"><span class="pre">Publisher</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-rclpy.subscription">Subscription</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rclpy.subscription.Subscription"><code class="docutils literal notranslate"><span class="pre">Subscription</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="time.html">Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="timers.html">Timer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="context.html">Context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="execution_and_callbacks.html">Execution and Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qos.html">Quality of Service</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">rclpy</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rclpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API</a></li>
+      <li class="breadcrumb-item active">Topics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/topics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="topics">
+<h1>Topics<a class="headerlink" href="#topics" title="Link to this heading"></a></h1>
+<section id="module-rclpy.publisher">
+<span id="publisher"></span><h2>Publisher<a class="headerlink" href="#module-rclpy.publisher" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.publisher.Publisher">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.publisher.</span></span><span class="sig-name descname"><span class="pre">Publisher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">publisher_impl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rpyutils.import_c_library.Publisher</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MsgType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qos_profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rclpy.qos.QoSProfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_callbacks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.event_handler.html#rclpy.event_handler.PublisherEventCallbacks" title="rclpy.event_handler.PublisherEventCallbacks"><span class="pre">PublisherEventCallbacks</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup" title="rclpy.callback_groups.CallbackGroup"><span class="pre">CallbackGroup</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.publisher.Publisher" title="Link to this definition"></a></dt>
+<dd><p>Create a container for a ROS publisher.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Users should not create a publisher with this constuctor, instead they should
+call <code class="xref py py-meth docutils literal notranslate"><span class="pre">Node.create_publisher()</span></code>.</p>
+</div>
+<p>A publisher is used as a primary means of communication in a ROS system by publishing
+messages on a ROS topic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>publisher_impl</strong> – Publisher wrapping the underlying <code class="docutils literal notranslate"><span class="pre">rcl_publisher_t</span></code> object.</p></li>
+<li><p><strong>msg_type</strong> – The type of ROS messages the publisher will publish.</p></li>
+<li><p><strong>topic</strong> – The name of the topic the publisher will publish to.</p></li>
+<li><p><strong>qos_profile</strong> – The quality of service profile to apply to the publisher.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.publisher.Publisher.assert_liveliness">
+<span class="sig-name descname"><span class="pre">assert_liveliness</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.publisher.Publisher.assert_liveliness" title="Link to this definition"></a></dt>
+<dd><p>Manually assert that this Publisher is alive.</p>
+<p>If the QoS Liveliness policy is set to MANUAL_BY_TOPIC, the
+application must call this at least as often as <code class="docutils literal notranslate"><span class="pre">QoSProfile.liveliness_lease_duration</span></code>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.publisher.Publisher.destroy">
+<span class="sig-name descname"><span class="pre">destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.publisher.Publisher.destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.publisher.Publisher.get_subscription_count">
+<span class="sig-name descname"><span class="pre">get_subscription_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rclpy.publisher.Publisher.get_subscription_count" title="Link to this definition"></a></dt>
+<dd><p>Get the amount of subscribers that this publisher has.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.publisher.Publisher.handle">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle</span></span><a class="headerlink" href="#rclpy.publisher.Publisher.handle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.publisher.Publisher.publish">
+<span class="sig-name descname"><span class="pre">publish</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MsgType</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#rclpy.publisher.Publisher.publish" title="Link to this definition"></a></dt>
+<dd><p>Send a message to the topic for the publisher.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>msg</strong> – The ROS message to publish.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p>TypeError if the type of the passed message isn’t an instance
+of the provided type when the publisher was constructed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.publisher.Publisher.topic_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">topic_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#rclpy.publisher.Publisher.topic_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.publisher.Publisher.wait_for_all_acked">
+<span class="sig-name descname"><span class="pre">wait_for_all_acked</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rclpy.duration.Duration</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">rclpy.duration.Duration</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rclpy.publisher.Publisher.wait_for_all_acked" title="Link to this definition"></a></dt>
+<dd><p>Wait until all published message data is acknowledged or until the timeout elapses.</p>
+<p>If the timeout is negative then this function will block indefinitely until all published
+message data is acknowledged.
+If the timeout is 0 then it will check if all published message has been acknowledged
+without waiting.
+If the timeout is greater than 0 then it will return after that period of time has elapsed
+or all published message data is acknowledged.
+This function only waits for acknowledgments if the publisher’s QOS profile is RELIABLE.
+Otherwise this function will immediately return true.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>timeout</strong> – the duration to wait for all published message data to be acknowledged.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if all published message data is acknowledged before the timeout, otherwise
+false.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-rclpy.subscription">
+<span id="subscription"></span><h2>Subscription<a class="headerlink" href="#module-rclpy.subscription" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.subscription.Subscription">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.subscription.</span></span><span class="sig-name descname"><span class="pre">Subscription</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subscription_impl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rpyutils.import_c_library.Subscription</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MsgType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup" title="rclpy.callback_groups.CallbackGroup"><span class="pre">CallbackGroup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">qos_profile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rclpy.qos.QoSProfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_callbacks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../rclpy.event_handler.html#rclpy.event_handler.SubscriptionEventCallbacks" title="rclpy.event_handler.SubscriptionEventCallbacks"><span class="pre">SubscriptionEventCallbacks</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.subscription.Subscription" title="Link to this definition"></a></dt>
+<dd><p>Create a container for a ROS subscription.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Users should not create a subscription with this constructor, instead they
+should call <code class="xref py py-meth docutils literal notranslate"><span class="pre">Node.create_subscription()</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subscription_impl</strong> – <a class="reference internal" href="../rclpy.subscription.html#rclpy.subscription.Subscription" title="rclpy.subscription.Subscription"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subscription</span></code></a> wrapping the underlying
+<code class="docutils literal notranslate"><span class="pre">rcl_subscription_t</span></code> object.</p></li>
+<li><p><strong>msg_type</strong> – The type of ROS messages the subscription will subscribe to.</p></li>
+<li><p><strong>topic</strong> – The name of the topic the subscription will subscribe to.</p></li>
+<li><p><strong>callback</strong> – A user-defined callback function that is called when a message is
+received by the subscription.</p></li>
+<li><p><strong>callback_group</strong> – The callback group for the subscription. If <code class="docutils literal notranslate"><span class="pre">None</span></code>, then the
+nodes default callback group is used.</p></li>
+<li><p><strong>qos_profile</strong> – The quality of service profile to apply to the subscription.</p></li>
+<li><p><strong>raw</strong> – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, then received messages will be stored in raw binary
+representation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.subscription.Subscription.CallbackType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CallbackType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.subscription.Subscription.CallbackType" title="Link to this definition"></a></dt>
+<dd><p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rclpy.subscription.Subscription.CallbackType.MessageOnly">
+<span class="sig-name descname"><span class="pre">MessageOnly</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rclpy.subscription.Subscription.CallbackType.MessageOnly" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rclpy.subscription.Subscription.CallbackType.WithMessageInfo">
+<span class="sig-name descname"><span class="pre">WithMessageInfo</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#rclpy.subscription.Subscription.CallbackType.WithMessageInfo" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.subscription.Subscription.callback">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><a class="headerlink" href="#rclpy.subscription.Subscription.callback" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.subscription.Subscription.destroy">
+<span class="sig-name descname"><span class="pre">destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.subscription.Subscription.destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.subscription.Subscription.get_publisher_count">
+<span class="sig-name descname"><span class="pre">get_publisher_count</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#rclpy.subscription.Subscription.get_publisher_count" title="Link to this definition"></a></dt>
+<dd><p>Get the number of publishers that this subscription has.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.subscription.Subscription.handle">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle</span></span><a class="headerlink" href="#rclpy.subscription.Subscription.handle" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rclpy.subscription.Subscription.topic_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">topic_name</span></span><a class="headerlink" href="#rclpy.subscription.Subscription.topic_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="node.html" class="btn btn-neutral float-left" title="Node" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="services.html" class="btn btn-neutral float-right" title="Services" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Open Source Robotics Foundation, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

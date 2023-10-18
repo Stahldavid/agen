@@ -1,0 +1,820 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Specs Package &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="The Server Module" href="capabilities.server.html" />
+    <link rel="prev" title="The Service Discovery Module" href="capabilities.service_discovery.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/capabilities.specs.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.server.html" title="The Server Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="capabilities.service_discovery.html" title="The Service Discovery Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-specs-package">
+<h1>The Specs Package<a class="headerlink" href="#the-specs-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-capabilities.specs.interface">
+<span id="the-interface-spec-module"></span><h2>The Interface Spec Module<a class="headerlink" href="#module-capabilities.specs.interface" title="Permalink to this headline">¶</a></h2>
+<p>This module implements the Capability Interface concept</p>
+<p>This module contains free functions which serve as factories for the <a class="reference internal" href="#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInterface</span></tt></a> class.
+These factories can take the spec file for a Capability Interface and create a
+<a class="reference internal" href="#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInterface</span></tt></a> instance out of it.
+The <a class="reference internal" href="#capabilities.specs.interface.Interface" title="capabilities.specs.interface.Interface"><tt class="xref py py-class docutils literal"><span class="pre">Interface</span></tt></a> class encapsulates the interface itself, representing the topics, services, params, etc...
+The <a class="reference internal" href="#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInterface</span></tt></a> class encapsulates meta information about the Interface like the name,
+description, and extends the <a class="reference internal" href="#capabilities.specs.interface.Interface" title="capabilities.specs.interface.Interface"><tt class="xref py py-class docutils literal"><span class="pre">Interface</span></tt></a> class.
+The <a class="reference internal" href="#capabilities.specs.interface.Interface" title="capabilities.specs.interface.Interface"><tt class="xref py py-class docutils literal"><span class="pre">Interface</span></tt></a> class is made up of <a class="reference internal" href="#capabilities.specs.interface.InterfaceElement" title="capabilities.specs.interface.InterfaceElement"><tt class="xref py py-class docutils literal"><span class="pre">InterfaceElement</span></tt></a>&#8216;s which represent
+the elements of a Capability Interface, each consisting of a name, type, and description.</p>
+<p>With an Interface RGBCamera.yaml, like this:</p>
+<div class="highlight-python"><pre>%YAML 1.1
+# Capability Interface file for RGBCamera
+---
+# Name of the Interface
+name: RGBCamera
+spec_version: 1
+spec_type: interface
+description: 'This Capability describes the interface exposed by a generic RGBCamera.'
+interface:
+  # Topics
+  topics:
+    # Topics provided by the interface
+    provides:
+      'camera/image_raw':
+        type: 'sensor_msgs/Image'
+        description: 'raw image from the camera'
+      'camera/camera_info':
+        type: 'sensor_msgs/CameraInfo'
+    # Topics expect by the interface
+    requires: {}
+  # Services provided by the interface
+  services:
+    'camera/set_info':
+      type: 'sensor_msgs/SetCameraInfo'</pre>
+</div>
+<p>You can use this interface like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">capabilities.specs.interface</span> <span class="kn">import</span> <span class="n">capability_interface_from_file_path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ci</span> <span class="o">=</span> <span class="n">capability_interface_from_file_path</span><span class="p">(</span><span class="s">&#39;test/unit/specs/interfaces/RGBCamera.yaml&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">topics</span><span class="p">)</span>
+<span class="go">{&#39;camera/camera_info&#39;: &lt;capabilities.specs.interface.InterfaceElement object at 0x10736ced0&gt;,</span>
+<span class="go"> &#39;camera/image_raw&#39;: &lt;capabilities.specs.interface.InterfaceElement object at 0x10736cf10&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">camera/image_raw</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+<span class="go">sensor_msgs/Image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+<span class="go">raw image from the camera</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">required_services</span><span class="p">)</span>
+<span class="go">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">provided_topics</span><span class="p">)</span>
+<span class="go">{&#39;camera/camera_info&#39;: &lt;capabilities.specs.interface.InterfaceElement object at 0x10774ce10&gt;,</span>
+<span class="go"> &#39;camera/image_raw&#39;: &lt;capabilities.specs.interface.InterfaceElement object at 0x10774ce50&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">ci</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+<span class="go">{}</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="capabilities.specs.interface.CapabilityInterface">
+<em class="property">class </em><tt class="descclassname">capabilities.specs.interface.</tt><tt class="descname">CapabilityInterface</tt><big>(</big><em>name</em>, <em>spec_version</em>, <em>description=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#CapabilityInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.CapabilityInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a Capability Interface</p>
+<p>A Capability Interface is defined by:</p>
+<ul class="simple">
+<li>name (str): name of the interface</li>
+<li>spec_type (str): type of the interface specification (has to be &#8216;interface&#8217;)</li>
+<li>spec_version (int): version of the interface specification</li>
+<li>description (str): free form description of the interface</li>
+<li>default_provider (str): name of the default provider for this interface, defaults to &#8216;unknown&#8217;</li>
+<li>interface (<a class="reference internal" href="#capabilities.specs.interface.Interface" title="capabilities.specs.interface.Interface"><tt class="xref py py-class docutils literal"><span class="pre">Interface</span></tt></a>): representation of components which make up the interface</li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="capabilities.specs.interface.Interface">
+<em class="property">class </em><tt class="descclassname">capabilities.specs.interface.</tt><tt class="descname">Interface</tt><a class="reference internal" href="_modules/capabilities/specs/interface.html#Interface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.Interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents the Interface part of a Capability Interface</p>
+<p>An Interface can consist of zero to all of these elements:</p>
+<ul class="simple">
+<li>topics: (name/type)<ul>
+<li>requires: Expected topics</li>
+<li>provides: Provided topics</li>
+</ul>
+</li>
+<li>services: (name/type)<ul>
+<li>requires: Expected services</li>
+<li>provides: Provided services</li>
+</ul>
+</li>
+<li>actions: (name/type)<ul>
+<li>requires: Expected actions</li>
+<li>provides: Provided actions</li>
+</ul>
+</li>
+<li>parameters: (name/type/description)<ul>
+<li>requires: Parameters which should be set for the interface, e.g. map_resolution</li>
+<li>provides: Parameters which the interface provides, e.g. robot_model</li>
+</ul>
+</li>
+<li>dynamic_parameters: List of dynamic_parameters which are available (name)</li>
+</ul>
+<p>The groupings &#8216;requires&#8217; and &#8216;provides&#8217; are purely semantic,
+and are not used by the capability system programatically,
+but instead are there to give more meaning to the developers.</p>
+<dl class="method">
+<dt id="capabilities.specs.interface.Interface.add_action">
+<tt class="descname">add_action</tt><big>(</big><em>action_name</em>, <em>interface_element</em>, <em>grouping=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#Interface.add_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.Interface.add_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a action to the Interface</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>action_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the action</li>
+<li><strong>interface_element</strong> (<a class="reference internal" href="#capabilities.specs.interface.InterfaceElement" title="capabilities.specs.interface.InterfaceElement"><tt class="xref py py-class docutils literal"><span class="pre">InterfaceElement</span></tt></a>) &#8211; <a class="reference internal" href="#capabilities.specs.interface.InterfaceElement" title="capabilities.specs.interface.InterfaceElement"><tt class="xref py py-class docutils literal"><span class="pre">InterfaceElement</span></tt></a> instance for the action</li>
+<li><strong>grouping</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a> or <a class="reference external" href="http://docs.python.org/library/constants.html#None" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">None</span></tt></a>) &#8211; semantic grouping of the action, &#8216;requires&#8217;, &#8216;provides&#8217;, or None</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><tt class="xref py py-exc docutils literal"><span class="pre">ValueError</span></tt> if the grouping is invalid</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><tt class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></tt> if the action is already in the interface</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.specs.interface.Interface.add_dynamic_parameter">
+<tt class="descname">add_dynamic_parameter</tt><big>(</big><em>dynamic_parameter_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#Interface.add_dynamic_parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.Interface.add_dynamic_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a dynamic_parameter to the Interface</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>dynamic_parameter_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the dynamic_parameter</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></tt> if the dynamic_parameter is already in the interface</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.specs.interface.Interface.add_parameter">
+<tt class="descname">add_parameter</tt><big>(</big><em>parameter_name</em>, <em>interface_element</em>, <em>grouping=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#Interface.add_parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.Interface.add_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a parameter to the Interface</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parameter_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the parameter</li>
+<li><strong>interface_element</strong> (<a class="reference internal" href="#capabilities.specs.interface.InterfaceElement" title="capabilities.specs.interface.InterfaceElement"><tt class="xref py py-class docutils literal"><span class="pre">InterfaceElement</span></tt></a>) &#8211; <a class="reference internal" href="#capabilities.specs.interface.InterfaceElement" title="capabilities.specs.interface.InterfaceElement"><tt class="xref py py-class docutils literal"><span class="pre">InterfaceElement</span></tt></a> instance for the parameter</li>
+<li><strong>grouping</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a> or <a class="reference external" href="http://docs.python.org/library/constants.html#None" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">None</span></tt></a>) &#8211; semantic grouping of the parameter, &#8216;requires&#8217;, &#8216;provides&#8217;, or None</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><tt class="xref py py-exc docutils literal"><span class="pre">ValueError</span></tt> if the grouping is invalid</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><tt class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></tt> if the parameter is already in the interface</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.specs.interface.Interface.add_service">
+<tt class="descname">add_service</tt><big>(</big><em>service_name</em>, <em>interface_element</em>, <em>grouping=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#Interface.add_service"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.Interface.add_service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a service to the Interface</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>service_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the service</li>
+<li><strong>interface_element</strong> (<a class="reference internal" href="#capabilities.specs.interface.InterfaceElement" title="capabilities.specs.interface.InterfaceElement"><tt class="xref py py-class docutils literal"><span class="pre">InterfaceElement</span></tt></a>) &#8211; <a class="reference internal" href="#capabilities.specs.interface.InterfaceElement" title="capabilities.specs.interface.InterfaceElement"><tt class="xref py py-class docutils literal"><span class="pre">InterfaceElement</span></tt></a> instance for the service</li>
+<li><strong>grouping</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a> or <a class="reference external" href="http://docs.python.org/library/constants.html#None" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">None</span></tt></a>) &#8211; semantic grouping of the service, &#8216;requires&#8217;, &#8216;provides&#8217;, or None</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><tt class="xref py py-exc docutils literal"><span class="pre">ValueError</span></tt> if the grouping is invalid</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><tt class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></tt> if the service is already in the interface</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="capabilities.specs.interface.Interface.add_topic">
+<tt class="descname">add_topic</tt><big>(</big><em>topic_name</em>, <em>interface_element</em>, <em>grouping=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#Interface.add_topic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.Interface.add_topic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a topic to the Interface</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>topic_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; name of the topic</li>
+<li><strong>interface_element</strong> (<a class="reference internal" href="#capabilities.specs.interface.InterfaceElement" title="capabilities.specs.interface.InterfaceElement"><tt class="xref py py-class docutils literal"><span class="pre">InterfaceElement</span></tt></a>) &#8211; <a class="reference internal" href="#capabilities.specs.interface.InterfaceElement" title="capabilities.specs.interface.InterfaceElement"><tt class="xref py py-class docutils literal"><span class="pre">InterfaceElement</span></tt></a> instance for the topic</li>
+<li><strong>grouping</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">str</span></tt></a> or <a class="reference external" href="http://docs.python.org/library/constants.html#None" title="(in Python v2.7)"><tt class="xref py py-obj docutils literal"><span class="pre">None</span></tt></a>) &#8211; semantic grouping of the topic, &#8216;requires&#8217;, &#8216;provides&#8217;, or None</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first"><tt class="xref py py-exc docutils literal"><span class="pre">ValueError</span></tt> if the grouping is invalid</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><tt class="xref py py-exc docutils literal"><span class="pre">RuntimeError</span></tt> if the topic is already in the interface</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="capabilities.specs.interface.InterfaceElement">
+<em class="property">class </em><tt class="descclassname">capabilities.specs.interface.</tt><tt class="descname">InterfaceElement</tt><big>(</big><em>name</em>, <em>element_kind</em>, <em>element_type=None</em>, <em>description=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#InterfaceElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.InterfaceElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a part of an interface</p>
+<p>An interface element is defined by:</p>
+<ul class="simple">
+<li>name: topic, service, action, or parameter name</li>
+<li>element kind: topic, service, action, parameter, or dynamic_parameter</li>
+<li>type: topic, service or action type (pkg/msg) or parameter type</li>
+<li>description: free form description of the element</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">ValueError</span></tt> if the element kind is invalid</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="exception">
+<dt id="capabilities.specs.interface.InvalidInterface">
+<em class="property">exception </em><tt class="descclassname">capabilities.specs.interface.</tt><tt class="descname">InvalidInterface</tt><big>(</big><em>msg</em>, <em>file_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#InvalidInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.InvalidInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>InvalidInterface exception</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.interface.capability_interface_from_dict">
+<tt class="descclassname">capabilities.specs.interface.</tt><tt class="descname">capability_interface_from_dict</tt><big>(</big><em>spec</em>, <em>file_name='&lt;dict&gt;'</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#capability_interface_from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.capability_interface_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a CapabilityInterface instance from a dict version of the spec</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>string</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Capability Interface spec</li>
+<li><strong>file_name</strong> &#8211; Name of the file where this spec originated (defaults to &#8216;&lt;dict&gt;&#8217;)</li>
+<li><strong>file_name</strong> &#8211; str</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CapabilityInterface instance, populated with the provided spec</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInterface</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><a class="reference internal" href="#capabilities.specs.interface.InvalidInterface" title="capabilities.specs.interface.InvalidInterface"><tt class="xref py py-exc docutils literal"><span class="pre">InvalidInterface</span></tt></a> if the spec is not complete or has invalid entries</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.interface.capability_interface_from_file">
+<tt class="descclassname">capabilities.specs.interface.</tt><tt class="descname">capability_interface_from_file</tt><big>(</big><em>file_handle</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#capability_interface_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.capability_interface_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a CapabilityInterface instance from a given spec file handle</p>
+<p>See <a class="reference internal" href="#capabilities.specs.interface.capability_interface_from_dict" title="capabilities.specs.interface.capability_interface_from_dict"><tt class="xref py py-func docutils literal"><span class="pre">capability_interface_from_dict()</span></tt></a> for list of possible exceptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_handle</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#file" title="(in Python v2.7)"><em>file</em></a>) &#8211; file handle for the Capability Interface spec file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">CapabilityInterface instance, populated with data from the spec file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInterface</span></tt></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">OSError</span></tt> if the given file does not exist</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.interface.capability_interface_from_file_path">
+<tt class="descclassname">capabilities.specs.interface.</tt><tt class="descname">capability_interface_from_file_path</tt><big>(</big><em>file_path</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#capability_interface_from_file_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.capability_interface_from_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a CapabilityInterface instance from a spec file at a given path</p>
+<p>See <a class="reference internal" href="#capabilities.specs.interface.capability_interface_from_dict" title="capabilities.specs.interface.capability_interface_from_dict"><tt class="xref py py-func docutils literal"><span class="pre">capability_interface_from_dict()</span></tt></a> for list of possible exceptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_path</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; location of the Capability Interface spec file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">CapabilityInterface instance, populated with data from the spec file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInterface</span></tt></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">OSError</span></tt> if the given file does not exist</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.interface.capability_interface_from_string">
+<tt class="descclassname">capabilities.specs.interface.</tt><tt class="descname">capability_interface_from_string</tt><big>(</big><em>string</em>, <em>file_name='&lt;string&gt;'</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/interface.html#capability_interface_from_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.interface.capability_interface_from_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a CapabilityInterface instance from a string containing the spec</p>
+<p>See <a class="reference internal" href="#capabilities.specs.interface.capability_interface_from_dict" title="capabilities.specs.interface.capability_interface_from_dict"><tt class="xref py py-func docutils literal"><span class="pre">capability_interface_from_dict()</span></tt></a> for list of possible exceptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>string</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Capability Interface spec</li>
+<li><strong>file_name</strong> &#8211; Name of the file where this spec originated (defaults to &#8216;&lt;string&gt;&#8217;)</li>
+<li><strong>file_name</strong> &#8211; str</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CapabilityInterface instance, populated with the provided spec</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#capabilities.specs.interface.CapabilityInterface" title="capabilities.specs.interface.CapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityInterface</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><tt class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></tt> if the given value for string is not a str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-capabilities.specs.provider">
+<span id="the-provider-spec-module"></span><h2>The Provider Spec Module<a class="headerlink" href="#module-capabilities.specs.provider" title="Permalink to this headline">¶</a></h2>
+<p>This module implements the Capability Provider concept</p>
+<p>This module contains free functions which serve as factories for the <a class="reference internal" href="#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityProvider</span></tt></a> class.
+These factories can take the spec file for a Capability Provider and create a
+<a class="reference internal" href="#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityProvider</span></tt></a> instance out of it.
+The <a class="reference internal" href="#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityProvider</span></tt></a> class is designed to encapsualte the meta data
+which describes the Capability Provider.</p>
+<p>With a provider spec like this:</p>
+<div class="highlight-python"><pre>%YAML 1.1
+---
+name: navigation_nav_stack
+spec_version: 1
+spec_type: provider
+description: 'Implements the ability to navigate.'
+implements: navigation/Navigation
+launch_file: 'launch/navigation_nav_stack.launch'
+depends_on:
+    'laser_capability/LaserObservation':
+        provider: 'hokuyo_capability/hokuyo_base'
+remappings:
+    topics:
+        'scan': 'nav_stack/scan'
+nodelet_manager: 'nav_manager'</pre>
+</div>
+<p>You can use this API like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">capabilities.specs.provider</span> <span class="kn">import</span> <span class="n">capability_provider_from_file_path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cp</span> <span class="o">=</span> <span class="n">capability_provider_from_file_path</span><span class="p">(</span><span class="s">&#39;test/unit/specs/providers/navigation_nav_stack.yaml&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">dependencies</span><span class="p">)</span>
+<span class="go">{&lt;capabilities.specs.common.SpecName object at 0x1099ebfd0&gt;:</span>
+<span class="go">    &lt;capabilities.specs.provider.DependsOnRelationship object at 0x109a3fa50&gt;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="s">&#39;laser_capability/LaserObservation&#39;</span><span class="p">])</span>
+<span class="go">laser_capability/LaserObservation:</span>
+<span class="go">    preferred provider: hokuyo_capability/hokuyo_base</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">launch_file</span><span class="p">)</span>
+<span class="go">launch/navigation_nav_stack.launch</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">implements</span><span class="p">)</span>
+<span class="go">navigation/Navigation</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">nodelet_manager</span><span class="p">)</span>
+<span class="go">nav_manager</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="capabilities.specs.provider.CapabilityProvider">
+<em class="property">class </em><tt class="descclassname">capabilities.specs.provider.</tt><tt class="descname">CapabilityProvider</tt><big>(</big><em>name</em>, <em>spec_version</em>, <em>implements</em>, <em>launch_file=None</em>, <em>description=None</em>, <em>remappings=None</em>, <em>nodelet_manager=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/provider.html#CapabilityProvider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.provider.CapabilityProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a Capability Provider</p>
+<p>A Capability Provider is defined by:</p>
+<ul class="simple">
+<li>name (str): name of the provider</li>
+<li>spec_type (str): type of the specification (has to be &#8216;provider&#8217;)</li>
+<li>spec_version (int): version of the provider specification</li>
+<li>description (str): free form description of the provider</li>
+<li>implements (str): Name of a Capability Interface which this provider implements</li>
+<li>launch_file (str or None): Path to a launch file which runs the provider, None indicates no launch file to run</li>
+<li>depends_on (dict): list of depends on relationships to Capabilities with remappings and provider preference</li>
+<li>remappings (dict): map of ROS Names defined in the Capability to their new names for this provider</li>
+<li>nodelet_manager (str or None): name of the nodelet manager used by the provider, this is an implementation hint</li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="capabilities.specs.provider.DependsOnRelationship">
+<em class="property">class </em><tt class="descclassname">capabilities.specs.provider.</tt><tt class="descname">DependsOnRelationship</tt><big>(</big><em>capability_name</em>, <em>preferred_provider</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/provider.html#DependsOnRelationship"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.provider.DependsOnRelationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Models the depends_on relationship between a Capability Provider and a Capability</p>
+<p>This relationship consists of:</p>
+<ul class="simple">
+<li>capability_name (str): name of the Capability which is depended on</li>
+<li>provider_preference (str): (optional) name of preferred provider for the Capability which is depended on</li>
+</ul>
+</dd></dl>
+
+<dl class="exception">
+<dt id="capabilities.specs.provider.InvalidProvider">
+<em class="property">exception </em><tt class="descclassname">capabilities.specs.provider.</tt><tt class="descname">InvalidProvider</tt><big>(</big><em>msg</em>, <em>file_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/provider.html#InvalidProvider"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.provider.InvalidProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>InvalidProvider exception</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.provider.capability_provider_from_dict">
+<tt class="descclassname">capabilities.specs.provider.</tt><tt class="descname">capability_provider_from_dict</tt><big>(</big><em>spec</em>, <em>file_name='&lt;dict&gt;'</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/provider.html#capability_provider_from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.provider.capability_provider_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a CapabilityProvider instance from a dict version of the spec</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>string</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Capability Provider spec</li>
+<li><strong>file_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the file where this spec originated (defaults to &#8216;&lt;dict&gt;&#8217;)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CapabilityProvider instance, populated with the provided spec</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityProvider</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><a class="reference internal" href="#capabilities.specs.provider.InvalidProvider" title="capabilities.specs.provider.InvalidProvider"><tt class="xref py py-exc docutils literal"><span class="pre">InvalidProvider</span></tt></a> if the spec is not complete or has invalid entries</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.provider.capability_provider_from_file">
+<tt class="descclassname">capabilities.specs.provider.</tt><tt class="descname">capability_provider_from_file</tt><big>(</big><em>file_handle</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/provider.html#capability_provider_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.provider.capability_provider_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a CapabilityProvider instance from a given spec file handle</p>
+<p>See <a class="reference internal" href="#capabilities.specs.provider.capability_provider_from_dict" title="capabilities.specs.provider.capability_provider_from_dict"><tt class="xref py py-func docutils literal"><span class="pre">capability_provider_from_dict()</span></tt></a> for list of possible exceptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_handle</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#file" title="(in Python v2.7)"><em>file</em></a>) &#8211; file handle for the Capability Provider spec file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">CapabilityProvider instance, populated with data from the spec file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityProvider</span></tt></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">OSError</span></tt> if the given file does not exist</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.provider.capability_provider_from_file_path">
+<tt class="descclassname">capabilities.specs.provider.</tt><tt class="descname">capability_provider_from_file_path</tt><big>(</big><em>file_path</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/provider.html#capability_provider_from_file_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.provider.capability_provider_from_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a CapabilityProvider instance from a spec file at a given path</p>
+<p>See <a class="reference internal" href="#capabilities.specs.provider.capability_provider_from_dict" title="capabilities.specs.provider.capability_provider_from_dict"><tt class="xref py py-func docutils literal"><span class="pre">capability_provider_from_dict()</span></tt></a> for list of possible exceptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_path</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; location of the Capability Provider spec file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">CapabilityProvider instance, populated with data from the spec file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityProvider</span></tt></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">OSError</span></tt> if the given file does not exist</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.provider.capability_provider_from_string">
+<tt class="descclassname">capabilities.specs.provider.</tt><tt class="descname">capability_provider_from_string</tt><big>(</big><em>string</em>, <em>file_name='&lt;string&gt;'</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/provider.html#capability_provider_from_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.provider.capability_provider_from_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a CapabilityProvider instance from a string containing the spec</p>
+<p>See <a class="reference internal" href="#capabilities.specs.provider.capability_provider_from_dict" title="capabilities.specs.provider.capability_provider_from_dict"><tt class="xref py py-func docutils literal"><span class="pre">capability_provider_from_dict()</span></tt></a> for list of possible exceptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>string</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Capability Provider spec</li>
+<li><strong>file_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the file where this spec originated (defaults to &#8216;&lt;string&gt;&#8217;)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CapabilityProvider instance, populated with the provided spec</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#capabilities.specs.provider.CapabilityProvider" title="capabilities.specs.provider.CapabilityProvider"><tt class="xref py py-class docutils literal"><span class="pre">CapabilityProvider</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><tt class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></tt> if the given value for string is not a str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-capabilities.specs.semantic_interface">
+<span id="the-semantic-interface-spec-module"></span><h2>The Semantic Interface Spec Module<a class="headerlink" href="#module-capabilities.specs.semantic_interface" title="Permalink to this headline">¶</a></h2>
+<p>This module implements the Semantic Capability Interface concept</p>
+<p>This module contains free functions which serve as factories for the <a class="reference internal" href="#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">SemanticCapabilityInterface</span></tt></a> class.
+These factories can take the spec file for a Semantic Capability Interface and create a
+<a class="reference internal" href="#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">SemanticCapabilityInterface</span></tt></a> instance out of it.
+The <a class="reference internal" href="#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">SemanticCapabilityInterface</span></tt></a> class encapsulates meta information about the semantic interface.
+The <a class="reference internal" href="#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">SemanticCapabilityInterface</span></tt></a> class defines of:</p>
+<ul class="simple">
+<li>A capability which is being redefined, by name and remappings</li>
+<li>A name</li>
+<li>A global namespace (optional)</li>
+<li>Any ROS Name remappings (optional)</li>
+</ul>
+<p>With an Semantic Capability Interface FrontRGBCamera.yaml, like this:</p>
+<div class="highlight-python"><pre>%YAML 1.1
+---
+name: FrontRGBCamera
+spec_version: 1
+spec_type: semantic_interface
+description: 'This is semantically the Front RGB camera.'
+redefines: 'a_package/RGBCamera'
+# First the global_namespace is applied to all ROS Names
+global_namespace: 'front_camera'
+# Then individual remappings are done, and override the global_namespace
+remappings:
+  topics:
+    'camera/image_raw': 'front_camera/image_raw'
+    'camera/camera_info': 'front_camera/camera_info'
+  services:
+    'camera/set_info': 'front_camera/set_info'</pre>
+</div>
+<p>You can use this interface like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">capabilities.specs.semantic_interface</span> <span class="kn">import</span> <span class="n">semantic_capability_interface_from_file_path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sci</span> <span class="o">=</span> <span class="n">semantic_capability_interface_from_file_path</span><span class="p">(</span><span class="s">&#39;test/specs/semantic_interfaces/FrontRGBCamera.yaml&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">sci</span><span class="o">.</span><span class="n">redefines</span><span class="p">)</span>
+<span class="go">a_package/RGBCamera</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">sci</span><span class="o">.</span><span class="n">global_namespace</span><span class="p">)</span>
+<span class="go">front_camera</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">sci</span><span class="o">.</span><span class="n">remappings</span><span class="p">)</span>
+<span class="go">{&#39;camera/camera_info&#39;: &#39;front_camera/camera_info&#39;,</span>
+<span class="go"> &#39;camera/image_raw&#39;: &#39;front_camera/image_raw&#39;,</span>
+<span class="go"> &#39;camera/set_info&#39;: &#39;front_camera/set_info&#39;}</span>
+</pre></div>
+</div>
+<dl class="exception">
+<dt id="capabilities.specs.semantic_interface.InvalidSemanticInterface">
+<em class="property">exception </em><tt class="descclassname">capabilities.specs.semantic_interface.</tt><tt class="descname">InvalidSemanticInterface</tt><big>(</big><em>msg</em>, <em>file_name</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/semantic_interface.html#InvalidSemanticInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.semantic_interface.InvalidSemanticInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>InvalidSemanticInterface exception</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="capabilities.specs.semantic_interface.SemanticCapabilityInterface">
+<em class="property">class </em><tt class="descclassname">capabilities.specs.semantic_interface.</tt><tt class="descname">SemanticCapabilityInterface</tt><big>(</big><em>name</em>, <em>redefines</em>, <em>spec_version</em>, <em>description=None</em>, <em>global_namespace=None</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/semantic_interface.html#SemanticCapabilityInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a Semantic Capability Interface</p>
+<p>A Semantic Capability Interface is defined by:</p>
+<ul class="simple">
+<li>name (str): name of the redefined interface</li>
+<li>redefines (str): name of a capability being redefined</li>
+<li>spec_type (str): type of the interface specification (has to be &#8216;semantic_interface&#8217;)</li>
+<li>spec_version (int): version of the interface specification</li>
+<li>description (str): free form description of the interface</li>
+<li>global_namespace (str or None): (optional) global namespace for all ROS Names, None means no global_namespace</li>
+<li>remappings (dict): (optional) map from ROS Names in redefined interface to Names in this interface</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.semantic_interface.semantic_capability_interface_from_dict">
+<tt class="descclassname">capabilities.specs.semantic_interface.</tt><tt class="descname">semantic_capability_interface_from_dict</tt><big>(</big><em>spec</em>, <em>file_name='&lt;dict&gt;'</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/semantic_interface.html#semantic_capability_interface_from_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.semantic_interface.semantic_capability_interface_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a SemanticCapabilityInterface instance from a dict version of the spec</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>string</strong> (<a class="reference external" href="http://docs.python.org/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) &#8211; Semantic Capability Interface spec</li>
+<li><strong>file_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the file where this spec originated (defaults to &#8216;&lt;dict&gt;&#8217;)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">SemanticCapabilityInterface instance, populated with the provided spec</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">SemanticCapabilityInterface</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><a class="reference internal" href="#capabilities.specs.semantic_interface.InvalidSemanticInterface" title="capabilities.specs.semantic_interface.InvalidSemanticInterface"><tt class="xref py py-exc docutils literal"><span class="pre">InvalidSemanticInterface</span></tt></a> if the spec is not complete or has invalid entries</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.semantic_interface.semantic_capability_interface_from_file">
+<tt class="descclassname">capabilities.specs.semantic_interface.</tt><tt class="descname">semantic_capability_interface_from_file</tt><big>(</big><em>file_handle</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/semantic_interface.html#semantic_capability_interface_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.semantic_interface.semantic_capability_interface_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a SemanticCapabilityInterface instance from a given spec file handle</p>
+<p>See <a class="reference internal" href="#capabilities.specs.semantic_interface.semantic_capability_interface_from_dict" title="capabilities.specs.semantic_interface.semantic_capability_interface_from_dict"><tt class="xref py py-func docutils literal"><span class="pre">semantic_capability_interface_from_dict()</span></tt></a> for list of possible exceptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_handle</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#file" title="(in Python v2.7)"><em>file</em></a>) &#8211; file handle for the Semantic Capability Interface spec file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">SemanticCapabilityInterface instance, populated with data from the spec file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">SemanticCapabilityInterface</span></tt></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">OSError</span></tt> if the given file does not exist</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.semantic_interface.semantic_capability_interface_from_file_path">
+<tt class="descclassname">capabilities.specs.semantic_interface.</tt><tt class="descname">semantic_capability_interface_from_file_path</tt><big>(</big><em>file_path</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/semantic_interface.html#semantic_capability_interface_from_file_path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.semantic_interface.semantic_capability_interface_from_file_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a SemanticCapabilityInterface instance from a spec file at a given path</p>
+<p>See <a class="reference internal" href="#capabilities.specs.semantic_interface.semantic_capability_interface_from_dict" title="capabilities.specs.semantic_interface.semantic_capability_interface_from_dict"><tt class="xref py py-func docutils literal"><span class="pre">semantic_capability_interface_from_dict()</span></tt></a> for list of possible exceptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>file_path</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; location of the Semantic Capability Interface spec file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">SemanticCapabilityInterface instance, populated with data from the spec file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">SemanticCapabilityInterface</span></tt></a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><tt class="xref py py-exc docutils literal"><span class="pre">OSError</span></tt> if the given file does not exist</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="capabilities.specs.semantic_interface.semantic_capability_interface_from_string">
+<tt class="descclassname">capabilities.specs.semantic_interface.</tt><tt class="descname">semantic_capability_interface_from_string</tt><big>(</big><em>string</em>, <em>file_name='&lt;string&gt;'</em><big>)</big><a class="reference internal" href="_modules/capabilities/specs/semantic_interface.html#semantic_capability_interface_from_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#capabilities.specs.semantic_interface.semantic_capability_interface_from_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a SemanticCapabilityInterface instance from a string containing the spec</p>
+<p>See <a class="reference internal" href="#capabilities.specs.semantic_interface.semantic_capability_interface_from_dict" title="capabilities.specs.semantic_interface.semantic_capability_interface_from_dict"><tt class="xref py py-func docutils literal"><span class="pre">semantic_capability_interface_from_dict()</span></tt></a> for list of possible exceptions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>string</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Semantic Capability Interface spec</li>
+<li><strong>file_name</strong> (<a class="reference external" href="http://docs.python.org/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; Name of the file where this spec originated (defaults to &#8216;&lt;string&gt;&#8217;)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">SemanticCapabilityInterface instance, populated with the provided spec</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#capabilities.specs.semantic_interface.SemanticCapabilityInterface" title="capabilities.specs.semantic_interface.SemanticCapabilityInterface"><tt class="xref py py-class docutils literal"><span class="pre">SemanticCapabilityInterface</span></tt></a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises :</th><td class="field-body"><p class="first last"><tt class="xref py py-exc docutils literal"><span class="pre">AttributeError</span></tt> if the given value for string is not a str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Specs Package</a><ul>
+<li><a class="reference internal" href="#module-capabilities.specs.interface">The Interface Spec Module</a></li>
+<li><a class="reference internal" href="#module-capabilities.specs.provider">The Provider Spec Module</a></li>
+<li><a class="reference internal" href="#module-capabilities.specs.semantic_interface">The Semantic Interface Spec Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="capabilities.service_discovery.html"
+                        title="previous chapter">The Service Discovery Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="capabilities.server.html"
+                        title="next chapter">The Server Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/capabilities.specs.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="capabilities.server.html" title="The Server Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="capabilities.service_discovery.html" title="The Service Discovery Module"
+             >previous</a> |</li>
+        <li><a href="index.html">capabilities 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

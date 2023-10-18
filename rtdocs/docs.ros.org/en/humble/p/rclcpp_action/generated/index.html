@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rclcpp_action: ROS Action Client Library for C++ &mdash; rclcpp_action 16.0.3 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="../_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Namespace rclcpp_action" href="namespace_rclcpp_action.html" />
+    <link rel="prev" title="Welcome to the documentation for rclcpp_action" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> rclcpp_action
+          </a>
+              <div class="version">
+                16.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">rclcpp_action</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference">Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#namespaces">Namespaces</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="namespace_rclcpp_action.html">Namespace rclcpp_action</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_action.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_action.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_action.html#enums">Enums</a></li>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_action.html#functions">Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_action.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="namespace_rclcpp_action__exceptions.html">Namespace rclcpp_action::exceptions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="namespace_rclcpp_action__exceptions.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="namespace_std.html">Namespace std</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="namespace_std.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="namespace_std.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="structrclcpp__action_1_1Client_1_1SendGoalOptions.html">Struct Client::SendGoalOptions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structrclcpp__action_1_1Client_1_1SendGoalOptions.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l5"><a class="reference internal" href="structrclcpp__action_1_1Client_1_1SendGoalOptions.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="structrclcpp__action_1_1ClientGoalHandle_1_1WrappedResult.html">Struct ClientGoalHandle::WrappedResult</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structrclcpp__action_1_1ClientGoalHandle_1_1WrappedResult.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l5"><a class="reference internal" href="structrclcpp__action_1_1ClientGoalHandle_1_1WrappedResult.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="structstd_1_1hash_3_01rclcpp__action_1_1GoalUUID_01_4.html">Template Struct hash&lt; rclcpp_action::GoalUUID &gt;</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structstd_1_1hash_3_01rclcpp__action_1_1GoalUUID_01_4.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="structstd_1_1less_3_01rclcpp__action_1_1GoalUUID_01_4.html">Template Struct less&lt; rclcpp_action::GoalUUID &gt;</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="structstd_1_1less_3_01rclcpp__action_1_1GoalUUID_01_4.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1Client.html">Template Class Client</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1Client.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1Client.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1Client.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1Client.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1Client.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1ClientBase.html">Class ClientBase</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ClientBase.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1ClientBase.html#base-type">Base Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1ClientBase.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ClientBase.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1ClientGoalHandle.html">Template Class ClientGoalHandle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ClientGoalHandle.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1ClientGoalHandle.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ClientGoalHandle.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1DefaultActionStatusQoS.html">Class DefaultActionStatusQoS</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1DefaultActionStatusQoS.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1DefaultActionStatusQoS.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1DefaultActionStatusQoS.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnawareGoalHandleError.html">Class UnawareGoalHandleError</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnawareGoalHandleError.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnawareGoalHandleError.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnawareGoalHandleError.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnknownGoalHandleError.html">Class UnknownGoalHandleError</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnknownGoalHandleError.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnknownGoalHandleError.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnknownGoalHandleError.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1Server.html">Template Class Server</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1Server.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1Server.html#base-types">Base Types</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1Server.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1ServerBase.html">Class ServerBase</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ServerBase.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1ServerBase.html#base-type">Base Type</a></li>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1ServerBase.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ServerBase.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandle.html">Template Class ServerGoalHandle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandle.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandle.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandle.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandleBase.html">Class ServerGoalHandleBase</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandleBase.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandleBase.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandleBase.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#enums">Enums</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="enum_namespacerclcpp__action_1a27ea2386548de7ad3bef27bb3c0eed05.html">Enum CancelResponse</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="enum_namespacerclcpp__action_1a27ea2386548de7ad3bef27bb3c0eed05.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="enum_namespacerclcpp__action_1ababbbebf29fec7c541687c724fc82ba7.html">Enum GoalResponse</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="enum_namespacerclcpp__action_1ababbbebf29fec7c541687c724fc82ba7.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="enum_namespacerclcpp__action_1ae469597b77e40287e19539b806a54619.html">Enum ResultCode</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="enum_namespacerclcpp__action_1ae469597b77e40287e19539b806a54619.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacerclcpp__action_1ac10b44f70269da89caea19f16ee8f859.html">Function rclcpp_action::convert(const GoalUUID&amp;, rcl_action_goal_info_t *)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacerclcpp__action_1ac10b44f70269da89caea19f16ee8f859.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacerclcpp__action_1ac3880c9316ff444e5d27630560a25fda.html">Function rclcpp_action::convert(const rcl_action_goal_info_t&amp;, GoalUUID *)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacerclcpp__action_1ac3880c9316ff444e5d27630560a25fda.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacerclcpp__action_1add376503638408eec8582bf19f87edff.html">Template Function rclcpp_action::create_client(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr, rclcpp::node_interfaces::NodeGraphInterface::SharedPtr, rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr, rclcpp::node_interfaces::NodeWaitablesInterface::SharedPtr, const std::string&amp;, rclcpp::CallbackGroup::SharedPtr, const rcl_action_client_options_t&amp;)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacerclcpp__action_1add376503638408eec8582bf19f87edff.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacerclcpp__action_1ade4b70da37e1a47662951aef2a6923de.html">Template Function rclcpp_action::create_client(NodeT, const std::string&amp;, rclcpp::CallbackGroup::SharedPtr, const rcl_action_client_options_t&amp;)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacerclcpp__action_1ade4b70da37e1a47662951aef2a6923de.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacerclcpp__action_1aac27305f020b4586d4ae781024ac80e4.html">Template Function rclcpp_action::create_server(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr, rclcpp::node_interfaces::NodeClockInterface::SharedPtr, rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr, rclcpp::node_interfaces::NodeWaitablesInterface::SharedPtr, const std::string&amp;, typename Server&lt;ActionT&gt;::GoalCallback, typename Server&lt;ActionT&gt;::CancelCallback, typename Server&lt;ActionT&gt;::AcceptedCallback, const rcl_action_server_options_t&amp;, rclcpp::CallbackGroup::SharedPtr)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacerclcpp__action_1aac27305f020b4586d4ae781024ac80e4.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacerclcpp__action_1ac979659607812bb8b489bc7ddaff3039.html">Template Function rclcpp_action::create_server(NodeT, const std::string&amp;, typename Server&lt;ActionT&gt;::GoalCallback, typename Server&lt;ActionT&gt;::CancelCallback, typename Server&lt;ActionT&gt;::AcceptedCallback, const rcl_action_server_options_t&amp;, rclcpp::CallbackGroup::SharedPtr)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacerclcpp__action_1ac979659607812bb8b489bc7ddaff3039.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacerclcpp__action_1a6f55878989f514002fa754cea71b979e.html">Function rclcpp_action::to_string</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacerclcpp__action_1a6f55878989f514002fa754cea71b979e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacestd_1a1d2324ac3fe483483ba53560318b8639.html">Function std::to_string(const rclcpp::Parameter&amp;)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacestd_1a1d2324ac3fe483483ba53560318b8639.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="function_namespacestd_1ad5ab824f9738a59b56721b0a1517bda9.html">Function std::to_string(const std::vector&lt;rclcpp::Parameter&gt;&amp;)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="function_namespacestd_1ad5ab824f9738a59b56721b0a1517bda9.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">Defines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1ace407b6a2412dd49ac2d56cec9de5361.html">Define RCLCPP_ACTION_EXPORT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1ace407b6a2412dd49ac2d56cec9de5361.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1a57d3369dff8a2b5e51e1625c54ce1168.html">Define RCLCPP_ACTION_IMPORT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1a57d3369dff8a2b5e51e1625c54ce1168.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1a82a86319de04e685dcff67d134685e8d.html">Define RCLCPP_ACTION_LOCAL</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1a82a86319de04e685dcff67d134685e8d.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1a736fe60d4de4417a213ed34ba1926048.html">Define RCLCPP_ACTION_PUBLIC</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1a736fe60d4de4417a213ed34ba1926048.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="define_visibility__control_8hpp_1a7f55d4d243ad14ad7ede3c18cf2a706c.html">Define RCLCPP_ACTION_PUBLIC_TYPE</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="define_visibility__control_8hpp_1a7f55d4d243ad14ad7ede3c18cf2a706c.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#typedefs">Typedefs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="typedef_namespacerclcpp__action_1a4563f51a4161985dfa2f986daad17dc7.html">Typedef rclcpp_action::GoalInfo</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="typedef_namespacerclcpp__action_1a4563f51a4161985dfa2f986daad17dc7.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_namespacerclcpp__action_1a5ad8c2a7c9c386cbeb8913bc618eec4c.html">Typedef rclcpp_action::GoalStatus</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="typedef_namespacerclcpp__action_1a5ad8c2a7c9c386cbeb8913bc618eec4c.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="typedef_namespacerclcpp__action_1a67daf44a45003173e42ccc612fcb052b.html">Typedef rclcpp_action::GoalUUID</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="typedef_namespacerclcpp__action_1a67daf44a45003173e42ccc612fcb052b.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#directories">Directories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dir_include.html">Directory include</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dir_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="dir_include_rclcpp_action.html">Directory rclcpp_action</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="dir_include_rclcpp_action.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#files">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_client.hpp.html">File client.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client.hpp.html#definition-include-rclcpp-action-client-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/client.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_client.hpp.html">Program Listing for File client.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle.hpp.html">File client_goal_handle.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle.hpp.html#definition-include-rclcpp-action-client-goal-handle-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/client_goal_handle.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_client_goal_handle.hpp.html">Program Listing for File client_goal_handle.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle.hpp.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle.hpp.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle_impl.hpp.html">File client_goal_handle_impl.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle_impl.hpp.html#definition-include-rclcpp-action-client-goal-handle-impl-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/client_goal_handle_impl.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_client_goal_handle_impl.hpp.html">Program Listing for File client_goal_handle_impl.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle_impl.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle_impl.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle_impl.hpp.html#namespaces">Namespaces</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_create_client.hpp.html">File create_client.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_client.hpp.html#definition-include-rclcpp-action-create-client-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/create_client.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_create_client.hpp.html">Program Listing for File create_client.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_client.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_client.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_client.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_client.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_create_server.hpp.html">File create_server.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_server.hpp.html#definition-include-rclcpp-action-create-server-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/create_server.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_create_server.hpp.html">Program Listing for File create_server.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_server.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_server.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_server.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_create_server.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_exceptions.hpp.html">File exceptions.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_exceptions.hpp.html#definition-include-rclcpp-action-exceptions-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/exceptions.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_exceptions.hpp.html">Program Listing for File exceptions.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_exceptions.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_exceptions.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_exceptions.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_exceptions.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_qos.hpp.html">File qos.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_qos.hpp.html#definition-include-rclcpp-action-qos-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/qos.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_qos.hpp.html">Program Listing for File qos.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_qos.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_qos.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_qos.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_rclcpp_action.hpp.html">File rclcpp_action.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_rclcpp_action.hpp.html#definition-include-rclcpp-action-rclcpp-action-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/rclcpp_action.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_rclcpp_action.hpp.html">Program Listing for File rclcpp_action.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_rclcpp_action.hpp.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_server.hpp.html">File server.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server.hpp.html#definition-include-rclcpp-action-server-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/server.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_server.hpp.html">Program Listing for File server.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server.hpp.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server.hpp.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_server_goal_handle.hpp.html">File server_goal_handle.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server_goal_handle.hpp.html#definition-include-rclcpp-action-server-goal-handle-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/server_goal_handle.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_server_goal_handle.hpp.html">Program Listing for File server_goal_handle.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server_goal_handle.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server_goal_handle.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server_goal_handle.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_server_goal_handle.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_types.hpp.html">File types.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_types.hpp.html#definition-include-rclcpp-action-types-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/types.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_types.hpp.html">Program Listing for File types.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_types.hpp.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_types.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_types.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_types.hpp.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_types.hpp.html#functions">Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_types.hpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="file_include_rclcpp_action_visibility_control.hpp.html">File visibility_control.hpp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_visibility_control.hpp.html#definition-include-rclcpp-action-visibility-control-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">include/rclcpp_action/visibility_control.hpp</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="program_listing_file_include_rclcpp_action_visibility_control.hpp.html">Program Listing for File visibility_control.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_visibility_control.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="file_include_rclcpp_action_visibility_control.hpp.html#defines">Defines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rclcpp_action</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">rclcpp_action: ROS Action Client Library for C++</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rclcpp-action-ros-action-client-library-for-c">
+<span id="page-index"></span><h1>rclcpp_action: ROS Action Client Library for C++<a class="headerlink" href="#rclcpp-action-ros-action-client-library-for-c" title="Permalink to this headline"></a></h1>
+<div class="docutils container">
+<dd><p><code class="docutils literal notranslate"><span class="pre">rclcpp_action</span></code> provides the canonical C++ API for interacting with ROS Actions. It consists of these main components:</p>
+<p><ul class="simple">
+<li><p>Action Client<ul>
+<li><p>rclcpp_action/client.hpp</p></li>
+<li><p>rclcpp_action/create_client.hpp</p></li>
+<li><p>rclcpp_action/client_goal_handle.hpp</p></li>
+</ul>
+</p></li>
+<li><p>Action Server<ul>
+<li><p>rclcpp_action/server.hpp</p></li>
+<li><p>rclcpp_action/create_server.hpp</p></li>
+<li><p>rclcpp_action/server_goal_handle.hpp </p></li>
+</ul>
+</p></li>
+</ul>
+</p>
+</dd></div>
+<section id="class-hierarchy">
+<h2>Class Hierarchy<a class="headerlink" href="#class-hierarchy" title="Permalink to this headline"></a></h2>
+<ul class="treeView" id="class-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li>Namespace <a href="namespace_rclcpp_action.html#namespace-rclcpp-action">rclcpp_action</a><ul><li>Namespace <a href="namespace_rclcpp_action__exceptions.html#namespace-rclcpp-action-exceptions">rclcpp_action::exceptions</a><ul><li>Class <a href="classrclcpp__action_1_1exceptions_1_1UnawareGoalHandleError.html#exhale-class-classrclcpp-action-1-1exceptions-1-1UnawareGoalHandleError">UnawareGoalHandleError</a></li><li class="lastChild">Class <a href="classrclcpp__action_1_1exceptions_1_1UnknownGoalHandleError.html#exhale-class-classrclcpp-action-1-1exceptions-1-1UnknownGoalHandleError">UnknownGoalHandleError</a></li></ul></li><li>Template Class <a href="classrclcpp__action_1_1Client.html#exhale-class-classrclcpp-action-1-1Client">Client</a><ul><li class="lastChild">Struct <a href="structrclcpp__action_1_1Client_1_1SendGoalOptions.html#exhale-struct-structrclcpp-action-1-1Client-1-1SendGoalOptions">Client::SendGoalOptions</a></li></ul></li><li>Class <a href="classrclcpp__action_1_1ClientBase.html#exhale-class-classrclcpp-action-1-1ClientBase">ClientBase</a></li><li>Template Class <a href="classrclcpp__action_1_1ClientGoalHandle.html#exhale-class-classrclcpp-action-1-1ClientGoalHandle">ClientGoalHandle</a><ul><li class="lastChild">Struct <a href="structrclcpp__action_1_1ClientGoalHandle_1_1WrappedResult.html#exhale-struct-structrclcpp-action-1-1ClientGoalHandle-1-1WrappedResult">ClientGoalHandle::WrappedResult</a></li></ul></li><li>Class <a href="classrclcpp__action_1_1DefaultActionStatusQoS.html#exhale-class-classrclcpp-action-1-1DefaultActionStatusQoS">DefaultActionStatusQoS</a></li><li>Template Class <a href="classrclcpp__action_1_1Server.html#exhale-class-classrclcpp-action-1-1Server">Server</a></li><li>Class <a href="classrclcpp__action_1_1ServerBase.html#exhale-class-classrclcpp-action-1-1ServerBase">ServerBase</a></li><li>Template Class <a href="classrclcpp__action_1_1ServerGoalHandle.html#exhale-class-classrclcpp-action-1-1ServerGoalHandle">ServerGoalHandle</a></li><li>Class <a href="classrclcpp__action_1_1ServerGoalHandleBase.html#exhale-class-classrclcpp-action-1-1ServerGoalHandleBase">ServerGoalHandleBase</a></li><li>Enum <a href="enum_namespacerclcpp__action_1a27ea2386548de7ad3bef27bb3c0eed05.html#exhale-enum-namespacerclcpp-action-1a27ea2386548de7ad3bef27bb3c0eed05">CancelResponse</a></li><li>Enum <a href="enum_namespacerclcpp__action_1ababbbebf29fec7c541687c724fc82ba7.html#exhale-enum-namespacerclcpp-action-1ababbbebf29fec7c541687c724fc82ba7">GoalResponse</a></li><li class="lastChild">Enum <a href="enum_namespacerclcpp__action_1ae469597b77e40287e19539b806a54619.html#exhale-enum-namespacerclcpp-action-1ae469597b77e40287e19539b806a54619">ResultCode</a></li></ul></li><li class="lastChild">Namespace <a href="namespace_std.html#namespace-std">std</a><ul><li>Template <a href="structstd_1_1hash_3_01rclcpp__action_1_1GoalUUID_01_4.html#exhale-struct-structstd-1-1hash-3-01rclcpp-action-1-1GoalUUID-01-4">Struct hash&lt; rclcpp_action::GoalUUID &gt;</a></li><li class="lastChild">Template <a href="structstd_1_1less_3_01rclcpp__action_1_1GoalUUID_01_4.html#exhale-struct-structstd-1-1less-3-01rclcpp-action-1-1GoalUUID-01-4">Struct less&lt; rclcpp_action::GoalUUID &gt;</a></li></ul></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView class-treeView --></section>
+<section id="file-hierarchy">
+<h2>File Hierarchy<a class="headerlink" href="#file-hierarchy" title="Permalink to this headline"></a></h2>
+<ul class="treeView" id="file-treeView">
+  <li>
+    <ul class="collapsibleList">
+      <li class="lastChild">Directory <a href="dir_include.html#dir-include">include</a><ul><li class="lastChild">Directory <a href="dir_include_rclcpp_action.html#dir-include-rclcpp-action">rclcpp_action</a><ul><li>File <a href="file_include_rclcpp_action_client.hpp.html#file-include-rclcpp-action-client.hpp">client.hpp</a></li><li>File <a href="file_include_rclcpp_action_client_goal_handle.hpp.html#file-include-rclcpp-action-client-goal-handle.hpp">client_goal_handle.hpp</a></li><li>File <a href="file_include_rclcpp_action_client_goal_handle_impl.hpp.html#file-include-rclcpp-action-client-goal-handle-impl.hpp">client_goal_handle_impl.hpp</a></li><li>File <a href="file_include_rclcpp_action_create_client.hpp.html#file-include-rclcpp-action-create-client.hpp">create_client.hpp</a></li><li>File <a href="file_include_rclcpp_action_create_server.hpp.html#file-include-rclcpp-action-create-server.hpp">create_server.hpp</a></li><li>File <a href="file_include_rclcpp_action_exceptions.hpp.html#file-include-rclcpp-action-exceptions.hpp">exceptions.hpp</a></li><li>File <a href="file_include_rclcpp_action_qos.hpp.html#file-include-rclcpp-action-qos.hpp">qos.hpp</a></li><li>File <a href="file_include_rclcpp_action_rclcpp_action.hpp.html#file-include-rclcpp-action-rclcpp-action.hpp">rclcpp_action.hpp</a></li><li>File <a href="file_include_rclcpp_action_server.hpp.html#file-include-rclcpp-action-server.hpp">server.hpp</a></li><li>File <a href="file_include_rclcpp_action_server_goal_handle.hpp.html#file-include-rclcpp-action-server-goal-handle.hpp">server_goal_handle.hpp</a></li><li>File <a href="file_include_rclcpp_action_types.hpp.html#file-include-rclcpp-action-types.hpp">types.hpp</a></li><li class="lastChild">File <a href="file_include_rclcpp_action_visibility_control.hpp.html#file-include-rclcpp-action-visibility-control.hpp">visibility_control.hpp</a></li></ul></li></ul></li>
+    </ul>
+  </li><!-- only tree view element -->
+</ul><!-- /treeView file-treeView --></section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline"></a></h2>
+<section id="namespaces">
+<h3>Namespaces<a class="headerlink" href="#namespaces" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_rclcpp_action.html">Namespace rclcpp_action</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_rclcpp_action__exceptions.html">Namespace rclcpp_action::exceptions</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="namespace_std.html">Namespace std</a></li>
+</ul>
+</div>
+</section>
+<section id="classes-and-structs">
+<h3>Classes and Structs<a class="headerlink" href="#classes-and-structs" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structrclcpp__action_1_1Client_1_1SendGoalOptions.html">Struct Client::SendGoalOptions</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structrclcpp__action_1_1ClientGoalHandle_1_1WrappedResult.html">Struct ClientGoalHandle::WrappedResult</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structstd_1_1hash_3_01rclcpp__action_1_1GoalUUID_01_4.html">Template Struct hash&lt; rclcpp_action::GoalUUID &gt;</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="structstd_1_1less_3_01rclcpp__action_1_1GoalUUID_01_4.html">Template Struct less&lt; rclcpp_action::GoalUUID &gt;</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1Client.html">Template Class Client</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1ClientBase.html">Class ClientBase</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1ClientGoalHandle.html">Template Class ClientGoalHandle</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1DefaultActionStatusQoS.html">Class DefaultActionStatusQoS</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnawareGoalHandleError.html">Class UnawareGoalHandleError</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1exceptions_1_1UnknownGoalHandleError.html">Class UnknownGoalHandleError</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1Server.html">Template Class Server</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1ServerBase.html">Class ServerBase</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandle.html">Template Class ServerGoalHandle</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classrclcpp__action_1_1ServerGoalHandleBase.html">Class ServerGoalHandleBase</a></li>
+</ul>
+</div>
+</section>
+<section id="enums">
+<h3>Enums<a class="headerlink" href="#enums" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_namespacerclcpp__action_1a27ea2386548de7ad3bef27bb3c0eed05.html">Enum CancelResponse</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_namespacerclcpp__action_1ababbbebf29fec7c541687c724fc82ba7.html">Enum GoalResponse</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="enum_namespacerclcpp__action_1ae469597b77e40287e19539b806a54619.html">Enum ResultCode</a></li>
+</ul>
+</div>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacerclcpp__action_1ac10b44f70269da89caea19f16ee8f859.html">Function rclcpp_action::convert(const GoalUUID&amp;, rcl_action_goal_info_t *)</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacerclcpp__action_1ac3880c9316ff444e5d27630560a25fda.html">Function rclcpp_action::convert(const rcl_action_goal_info_t&amp;, GoalUUID *)</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacerclcpp__action_1add376503638408eec8582bf19f87edff.html">Template Function rclcpp_action::create_client(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr, rclcpp::node_interfaces::NodeGraphInterface::SharedPtr, rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr, rclcpp::node_interfaces::NodeWaitablesInterface::SharedPtr, const std::string&amp;, rclcpp::CallbackGroup::SharedPtr, const rcl_action_client_options_t&amp;)</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacerclcpp__action_1ade4b70da37e1a47662951aef2a6923de.html">Template Function rclcpp_action::create_client(NodeT, const std::string&amp;, rclcpp::CallbackGroup::SharedPtr, const rcl_action_client_options_t&amp;)</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacerclcpp__action_1aac27305f020b4586d4ae781024ac80e4.html">Template Function rclcpp_action::create_server(rclcpp::node_interfaces::NodeBaseInterface::SharedPtr, rclcpp::node_interfaces::NodeClockInterface::SharedPtr, rclcpp::node_interfaces::NodeLoggingInterface::SharedPtr, rclcpp::node_interfaces::NodeWaitablesInterface::SharedPtr, const std::string&amp;, typename Server&lt;ActionT&gt;::GoalCallback, typename Server&lt;ActionT&gt;::CancelCallback, typename Server&lt;ActionT&gt;::AcceptedCallback, const rcl_action_server_options_t&amp;, rclcpp::CallbackGroup::SharedPtr)</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacerclcpp__action_1ac979659607812bb8b489bc7ddaff3039.html">Template Function rclcpp_action::create_server(NodeT, const std::string&amp;, typename Server&lt;ActionT&gt;::GoalCallback, typename Server&lt;ActionT&gt;::CancelCallback, typename Server&lt;ActionT&gt;::AcceptedCallback, const rcl_action_server_options_t&amp;, rclcpp::CallbackGroup::SharedPtr)</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacerclcpp__action_1a6f55878989f514002fa754cea71b979e.html">Function rclcpp_action::to_string</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacestd_1a1d2324ac3fe483483ba53560318b8639.html">Function std::to_string(const rclcpp::Parameter&amp;)</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="function_namespacestd_1ad5ab824f9738a59b56721b0a1517bda9.html">Function std::to_string(const std::vector&lt;rclcpp::Parameter&gt;&amp;)</a></li>
+</ul>
+</div>
+</section>
+<section id="defines">
+<h3>Defines<a class="headerlink" href="#defines" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8hpp_1ace407b6a2412dd49ac2d56cec9de5361.html">Define RCLCPP_ACTION_EXPORT</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8hpp_1a57d3369dff8a2b5e51e1625c54ce1168.html">Define RCLCPP_ACTION_IMPORT</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8hpp_1a82a86319de04e685dcff67d134685e8d.html">Define RCLCPP_ACTION_LOCAL</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8hpp_1a736fe60d4de4417a213ed34ba1926048.html">Define RCLCPP_ACTION_PUBLIC</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="define_visibility__control_8hpp_1a7f55d4d243ad14ad7ede3c18cf2a706c.html">Define RCLCPP_ACTION_PUBLIC_TYPE</a></li>
+</ul>
+</div>
+</section>
+<section id="typedefs">
+<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_namespacerclcpp__action_1a4563f51a4161985dfa2f986daad17dc7.html">Typedef rclcpp_action::GoalInfo</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_namespacerclcpp__action_1a5ad8c2a7c9c386cbeb8913bc618eec4c.html">Typedef rclcpp_action::GoalStatus</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="typedef_namespacerclcpp__action_1a67daf44a45003173e42ccc612fcb052b.html">Typedef rclcpp_action::GoalUUID</a></li>
+</ul>
+</div>
+</section>
+<section id="directories">
+<h3>Directories<a class="headerlink" href="#directories" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include.html">Directory include</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dir_include_rclcpp_action.html">Directory rclcpp_action</a></li>
+</ul>
+</div>
+</section>
+<section id="files">
+<h3>Files<a class="headerlink" href="#files" title="Permalink to this headline"></a></h3>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_client.hpp.html">File client.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle.hpp.html">File client_goal_handle.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_client_goal_handle_impl.hpp.html">File client_goal_handle_impl.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_create_client.hpp.html">File create_client.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_create_server.hpp.html">File create_server.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_exceptions.hpp.html">File exceptions.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_qos.hpp.html">File qos.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_rclcpp_action.hpp.html">File rclcpp_action.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_server.hpp.html">File server.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_server_goal_handle.hpp.html">File server_goal_handle.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_types.hpp.html">File types.hpp</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="file_include_rclcpp_action_visibility_control.hpp.html">File visibility_control.hpp</a></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to the documentation for rclcpp_action" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="namespace_rclcpp_action.html" class="btn btn-neutral float-right" title="Namespace rclcpp_action" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Apache License 2.0.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

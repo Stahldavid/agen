@@ -1,0 +1,1 @@
+This function is used to check if a specific node possesses a certain list of service names. The function takes four parameters: the node to be checked, the name of the node, the namespace of the node, and a list of service names.

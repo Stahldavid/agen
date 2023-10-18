@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rclpy.event_handler module &mdash; rclpy 3.2.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=eb155f5e"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rclpy.exceptions module" href="rclpy.exceptions.html" />
+    <link rel="prev" title="rclpy.duration module" href="rclpy.duration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            rclpy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">rclpy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="rclpy.html">rclpy package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="rclpy.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="rclpy.callback_groups.html">rclpy.callback_groups module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.client.html">rclpy.client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.clock.html">rclpy.clock module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.constants.html">rclpy.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.context.html">rclpy.context module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.duration.html">rclpy.duration module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">rclpy.event_handler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.exceptions.html">rclpy.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.executors.html">rclpy.executors module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.expand_topic_name.html">rclpy.expand_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.guard_condition.html">rclpy.guard_condition module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.logging.html">rclpy.logging module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.logging_service.html">rclpy.logging_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.node.html">rclpy.node module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter.html">rclpy.parameter module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_client.html">rclpy.parameter_client module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_event_handler.html">rclpy.parameter_event_handler module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.parameter_service.html">rclpy.parameter_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.publisher.html">rclpy.publisher module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos.html">rclpy.qos module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos_event.html">rclpy.qos_event module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.qos_overriding_options.html">rclpy.qos_overriding_options module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.serialization.html">rclpy.serialization module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.service.html">rclpy.service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.service_introspection.html">rclpy.service_introspection module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.signals.html">rclpy.signals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.subscription.html">rclpy.subscription module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.task.html">rclpy.task module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.time.html">rclpy.time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.time_source.html">rclpy.time_source module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.timer.html">rclpy.timer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.topic_endpoint_info.html">rclpy.topic_endpoint_info module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.topic_or_service_is_hidden.html">rclpy.topic_or_service_is_hidden module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_description_service.html">rclpy.type_description_service module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_hash.html">rclpy.type_hash module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.type_support.html">rclpy.type_support module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.utilities.html">rclpy.utilities module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_full_topic_name.html">rclpy.validate_full_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_namespace.html">rclpy.validate_namespace module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_node_name.html">rclpy.validate_node_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_parameter_name.html">rclpy.validate_parameter_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.validate_topic_name.html">rclpy.validate_topic_name module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.wait_for_message.html">rclpy.wait_for_message module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rclpy.waitable.html">rclpy.waitable module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rclpy.html#module-rclpy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">rclpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">rclpy</a></li>
+          <li class="breadcrumb-item"><a href="rclpy.html">rclpy package</a></li>
+      <li class="breadcrumb-item active">rclpy.event_handler module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rclpy.event_handler.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rclpy.event_handler">
+<span id="rclpy-event-handler-module"></span><h1>rclpy.event_handler module<a class="headerlink" href="#module-rclpy.event_handler" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.event_handler.EventHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.event_handler.</span></span><span class="sig-name descname"><span class="pre">EventHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup" title="rclpy.callback_groups.CallbackGroup"><span class="pre">CallbackGroup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">IntEnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent_impl</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.EventHandler" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="rclpy.waitable.html#rclpy.waitable.Waitable" title="rclpy.waitable.Waitable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Waitable</span></code></a></p>
+<p>Waitable type to handle QoS events.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.event_handler.EventHandler.add_to_wait_set">
+<span class="sig-name descname"><span class="pre">add_to_wait_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait_set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.EventHandler.add_to_wait_set" title="Link to this definition"></a></dt>
+<dd><p>Add entites to wait set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.event_handler.EventHandler.destroy">
+<span class="sig-name descname"><span class="pre">destroy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.EventHandler.destroy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.event_handler.EventHandler.execute">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taken_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.EventHandler.execute" title="Link to this definition"></a></dt>
+<dd><p>Execute work after data has been taken from a ready wait set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.event_handler.EventHandler.get_num_entities">
+<span class="sig-name descname"><span class="pre">get_num_entities</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.EventHandler.get_num_entities" title="Link to this definition"></a></dt>
+<dd><p>Return number of each type of entity used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.event_handler.EventHandler.is_ready">
+<span class="sig-name descname"><span class="pre">is_ready</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait_set</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.EventHandler.is_ready" title="Link to this definition"></a></dt>
+<dd><p>Return True if entities are ready in the wait set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.event_handler.EventHandler.take_data">
+<span class="sig-name descname"><span class="pre">take_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.EventHandler.take_data" title="Link to this definition"></a></dt>
+<dd><p>Take stuff from lower level so the wait set doesn’t immediately wake again.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="rclpy.event_handler.IncompatibleTypeInfo">
+<span class="sig-prename descclassname"><span class="pre">rclpy.event_handler.</span></span><span class="sig-name descname"><span class="pre">IncompatibleTypeInfo</span></span><a class="headerlink" href="#rclpy.event_handler.IncompatibleTypeInfo" title="Link to this definition"></a></dt>
+<dd><p>Raised when registering a callback for an event type that is not supported.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.event_handler.PublisherEventCallbacks">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.event_handler.</span></span><span class="sig-name descname"><span class="pre">PublisherEventCallbacks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deadline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_offered_deadline_missed_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liveliness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_liveliness_lost_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incompatible_qos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_requested_qos_incompatible_event_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incompatible_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_incompatible_type_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matched</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_matched_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_default_callbacks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.PublisherEventCallbacks" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container to provide middleware event callbacks for a Publisher.</p>
+<p>Create and return a PublisherEventCallbacks container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deadline</strong> – A user-defined callback that is called when the Publisher misses
+its offered Deadline.</p></li>
+<li><p><strong>liveliness</strong> – A user-defined callback that is called when this Publisher
+fails to signal its Liveliness and is reported as not-alive.</p></li>
+<li><p><strong>incompatible_qos</strong> – A user-defined callback that is called when a Subscription
+with incompatible QoS policies is discovered on subscribed topic.</p></li>
+<li><p><strong>incompatible_type</strong> – A user-defined callback that is called when a topic type
+doesn’t match.</p></li>
+<li><p><strong>matched</strong> – A user-defined callback that is called when a Subscription is connected or
+disconnected.</p></li>
+<li><p><strong>use_default_callbacks</strong> – Whether or not to use default callbacks when the user
+doesn’t supply one</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.event_handler.PublisherEventCallbacks.create_event_handlers">
+<span class="sig-name descname"><span class="pre">create_event_handlers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup" title="rclpy.callback_groups.CallbackGroup"><span class="pre">CallbackGroup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">publisher</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rpyutils.import_c_library.Publisher</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#rclpy.event_handler.EventHandler" title="rclpy.event_handler.EventHandler"><span class="pre">EventHandler</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rclpy.event_handler.PublisherEventCallbacks.create_event_handlers" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.event_handler.QoSEventHandler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.event_handler.</span></span><span class="sig-name descname"><span class="pre">QoSEventHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.QoSEventHandler" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rclpy.event_handler.EventHandler" title="rclpy.event_handler.EventHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">EventHandler</span></code></a></p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="rclpy.event_handler.QoSPublisherMatchedInfo">
+<span class="sig-prename descclassname"><span class="pre">rclpy.event_handler.</span></span><span class="sig-name descname"><span class="pre">QoSPublisherMatchedInfo</span></span><a class="headerlink" href="#rclpy.event_handler.QoSPublisherMatchedInfo" title="Link to this definition"></a></dt>
+<dd><p>Payload type for Publisher Incompatible QoS callback.</p>
+<p>Mirrors rmw_offered_incompatible_qos_status_t from rmw/types.h</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rclpy.event_handler.SubscriptionEventCallbacks">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rclpy.event_handler.</span></span><span class="sig-name descname"><span class="pre">SubscriptionEventCallbacks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deadline</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_requested_deadline_missed_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incompatible_qos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_requested_qos_incompatible_event_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liveliness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_liveliness_changed_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_lost</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_message_lost_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">incompatible_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_incompatible_type_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matched</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">rpyutils.import_c_library.rmw_matched_status_t</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_default_callbacks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rclpy.event_handler.SubscriptionEventCallbacks" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container to provide middleware event callbacks for a Subscription.</p>
+<p>Create a SubscriptionEventCallbacks container.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deadline</strong> – A user-defined callback that is called when a topic misses our
+requested Deadline.</p></li>
+<li><p><strong>incompatible_qos</strong> – A user-defined callback that is called when a Publisher
+with incompatible QoS policies is discovered on subscribed topic.</p></li>
+<li><p><strong>liveliness</strong> – A user-defined callback that is called when the Liveliness of
+a Publisher on subscribed topic changes.</p></li>
+<li><p><strong>message_lost</strong> – A user-defined callback that is called when a messages is lost.</p></li>
+<li><p><strong>incompatible_type</strong> – A user-defined callback that is called when a topic type
+doesn’t match.</p></li>
+<li><p><strong>matched</strong> – A user-defined callback that is called when a Publisher is connected or
+disconnected.</p></li>
+<li><p><strong>use_default_callbacks</strong> – Whether or not to use default callbacks when the user
+doesn’t supply one</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="rclpy.event_handler.SubscriptionEventCallbacks.create_event_handlers">
+<span class="sig-name descname"><span class="pre">create_event_handlers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">callback_group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="rclpy.callback_groups.html#rclpy.callback_groups.CallbackGroup" title="rclpy.callback_groups.CallbackGroup"><span class="pre">CallbackGroup</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">subscription</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rpyutils.import_c_library.Subscription</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#rclpy.event_handler.EventHandler" title="rclpy.event_handler.EventHandler"><span class="pre">EventHandler</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rclpy.event_handler.SubscriptionEventCallbacks.create_event_handlers" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rclpy.duration.html" class="btn btn-neutral float-left" title="rclpy.duration module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rclpy.exceptions.html" class="btn btn-neutral float-right" title="rclpy.exceptions module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016-2022, Open Source Robotics Foundation, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

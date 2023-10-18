@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the documentation for robot_calibration &mdash; robot_calibration 0.8.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Class Hierarchy" href="generated/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            robot_calibration
+          </a>
+              <div class="version">
+                0.8
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_rclcpp.html">Namespace rclcpp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/namespace_robot_calibration.html">Namespace robot_calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_robot_calibration.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_robot_calibration.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_robot_calibration.html#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/namespace_robot_calibration.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1Chain3dToCamera2d.html">Struct Chain3dToCamera2d</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1Chain3dToCamera2d.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1Chain3dToChain3d.html">Struct Chain3dToChain3d</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1Chain3dToChain3d.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1Chain3dToMesh.html">Struct Chain3dToMesh</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1Chain3dToMesh.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1Chain3dToPlane.html">Struct Chain3dToPlane</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1Chain3dToPlane.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1ChainManager_1_1ChainController.html">Struct ChainManager::ChainController</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1ChainManager_1_1ChainController.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1ChainManager_1_1ChainController.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1LedFinder_1_1CloudDifferenceTracker.html">Struct LedFinder::CloudDifferenceTracker</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1LedFinder_1_1CloudDifferenceTracker.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1LedFinder_1_1CloudDifferenceTracker.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams.html">Struct OptimizationParams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToCamera2dParams.html">Struct OptimizationParams::Chain3dToCamera2dParams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToCamera2dParams.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToCamera2dParams.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToCamera2dParams.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToCamera2dParams.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToChain3dParams.html">Struct OptimizationParams::Chain3dToChain3dParams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToChain3dParams.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToChain3dParams.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToChain3dParams.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToChain3dParams.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToMeshParams.html">Struct OptimizationParams::Chain3dToMeshParams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToMeshParams.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToMeshParams.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToMeshParams.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToMeshParams.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToPlaneParams.html">Struct OptimizationParams::Chain3dToPlaneParams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToPlaneParams.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToPlaneParams.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToPlaneParams.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Chain3dToPlaneParams.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameInitialValue.html">Struct OptimizationParams::FreeFrameInitialValue</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameInitialValue.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameInitialValue.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameInitialValue.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameInitialValue.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameParams.html">Struct OptimizationParams::FreeFrameParams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameParams.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameParams.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameParams.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1FreeFrameParams.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1ModelParams.html">Struct OptimizationParams::ModelParams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1ModelParams.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1ModelParams.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1ModelParams.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1ModelParams.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1OutrageousParams.html">Struct OptimizationParams::OutrageousParams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1OutrageousParams.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1OutrageousParams.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1OutrageousParams.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1OutrageousParams.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Params.html">Struct OptimizationParams::Params</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Params.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Params.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Params.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1Params.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1PlaneToPlaneParams.html">Struct OptimizationParams::PlaneToPlaneParams</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1PlaneToPlaneParams.html#nested-relationships">Nested Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1PlaneToPlaneParams.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1PlaneToPlaneParams.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OptimizationParams_1_1PlaneToPlaneParams.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1OutrageousError.html">Struct OutrageousError</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1OutrageousError.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/structrobot__calibration_1_1PlaneToPlaneError.html">Struct PlaneToPlaneError</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrobot__calibration_1_1PlaneToPlaneError.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classHardIronOffsetError.html">Class HardIronOffsetError</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classHardIronOffsetError.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1ActionClient.html">Template Class ActionClient</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1ActionClient.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1BaseCalibration.html">Class BaseCalibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1BaseCalibration.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1BaseCalibration.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1BaseCalibration.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1Camera2dModel.html">Class Camera2dModel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1Camera2dModel.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1Camera2dModel.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1Camera2dModel.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1Camera3dModel.html">Class Camera3dModel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1Camera3dModel.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1Camera3dModel.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1Camera3dModel.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1CaptureManager.html">Class CaptureManager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1CaptureManager.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1Chain3dModel.html">Class Chain3dModel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1Chain3dModel.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1Chain3dModel.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1Chain3dModel.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1ChainManager.html">Class ChainManager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1ChainManager.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1ChainManager.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1ChainManager.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1CheckerboardFinder.html">Template Class CheckerboardFinder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1CheckerboardFinder.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1CheckerboardFinder.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1CheckerboardFinder.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1DepthCameraInfoManager.html">Class DepthCameraInfoManager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1DepthCameraInfoManager.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1FeatureFinder.html">Class FeatureFinder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1FeatureFinder.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1FeatureFinder.html#derived-types">Derived Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1FeatureFinder.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1FeatureFinderLoader.html">Class FeatureFinderLoader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1FeatureFinderLoader.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1LedFinder.html">Class LedFinder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1LedFinder.html#nested-relationships">Nested Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1LedFinder.html#nested-types">Nested Types</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1LedFinder.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1LedFinder.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1LedFinder.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1MeshLoader.html">Class MeshLoader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1MeshLoader.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1OptimizationOffsets.html">Class OptimizationOffsets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1OptimizationOffsets.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1Optimizer.html">Class Optimizer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1Optimizer.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1PlaneFinder.html">Class PlaneFinder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1PlaneFinder.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1PlaneFinder.html#base-type">Base Type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1PlaneFinder.html#derived-type">Derived Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1PlaneFinder.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1RobotFinder.html">Class RobotFinder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1RobotFinder.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1RobotFinder.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1RobotFinder.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/classrobot__calibration_1_1ScanFinder.html">Class ScanFinder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1ScanFinder.html#inheritance-relationships">Inheritance Relationships</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/classrobot__calibration_1_1ScanFinder.html#base-type">Base Type</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/classrobot__calibration_1_1ScanFinder.html#class-documentation">Class Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1a902717976e8730c262feda4642a534dd.html">Enum &#64;0</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1a902717976e8730c262feda4642a534dd.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1af642e0597f9992ca45d5f6968765ad3b.html">Enum &#64;1</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1af642e0597f9992ca45d5f6968765ad3b.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1acf3fd4a966226208bd83eea39de691a5.html">Enum &#64;2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1acf3fd4a966226208bd83eea39de691a5.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1ae58fe07bf0b20140c1fa14145d95392e.html">Enum &#64;3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1ae58fe07bf0b20140c1fa14145d95392e.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1aaf1ca62f57a277b2bc254f10ce22e8a0.html">Enum ActionClientState</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_namespacerobot__calibration_1aaf1ca62f57a277b2bc254f10ce22e8a0.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1abaeae05406a596c31d82da3d2df5afd0.html">Function robot_calibration::axis_magnitude_from_rotation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1abaeae05406a596c31d82da3d2df5afd0.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a3e27c4c4073bd7757025feed16dbfa43.html">Function robot_calibration::distToLine</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a3e27c4c4073bd7757025feed16dbfa43.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1abe15128a192fefd4f4119764150afccf.html">Function robot_calibration::exportResults</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1abe15128a192fefd4f4119764150afccf.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a4942fd00bad3cef1c482abbc490b3531.html">Function robot_calibration::getCentroid</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a4942fd00bad3cef1c482abbc490b3531.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a5129903e47b71d8865676faa270393aa.html">Function robot_calibration::getMatrix</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a5129903e47b71d8865676faa270393aa.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a6aba456cf98684425a56a0afa65f43e5.html">Function robot_calibration::getPlane</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a6aba456cf98684425a56a0afa65f43e5.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a3b8063fbf59beac437b8f3a227c89de3.html">Function robot_calibration::getPosesFromBag</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a3b8063fbf59beac437b8f3a227c89de3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1ae1a4d7d7b1f8ecbdb1dc7694ea8fdd4f.html">Function robot_calibration::getPosesFromYaml</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1ae1a4d7d7b1f8ecbdb1dc7694ea8fdd4f.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1ac7cf8e218007bc30c57ea452f94c7f65.html">Function robot_calibration::getSensorIndex</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1ac7cf8e218007bc30c57ea452f94c7f65.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a0c0adc248cc7e97b7536278700d17bab.html">Function robot_calibration::hasSensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a0c0adc248cc7e97b7536278700d17bab.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a9834a84410822f5e0fe92698bd7f770d.html">Function robot_calibration::load_bag</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a9834a84410822f5e0fe92698bd7f770d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1aae4bc2c7bf5cd250869d305405b3dcf3.html">Function robot_calibration::rotation_from_axis_magnitude</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1aae4bc2c7bf5cd250869d305405b3dcf3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a628365b123f821972c01be61ebbd65d5.html">Function robot_calibration::updateCameraInfo</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_namespacerobot__calibration_1a628365b123f821972c01be61ebbd65d5.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#typedefs">Typedefs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedef_namespacerobot__calibration_1a422e2736023f96ecdc6187f96ac0cca5.html">Typedef robot_calibration::FeatureFinderMap</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_namespacerobot__calibration_1a422e2736023f96ecdc6187f96ac0cca5.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedef_namespacerobot__calibration_1ad1939af7eedb64e1e1cecddae9e67ef6.html">Typedef robot_calibration::FeatureFinderPtr</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_namespacerobot__calibration_1ad1939af7eedb64e1e1cecddae9e67ef6.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/typedef_namespacerobot__calibration_1ab193a94ed242156e1ad39255bdafd27a.html">Typedef robot_calibration::MeshPtr</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_namespacerobot__calibration_1ab193a94ed242156e1ad39255bdafd27a.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src.html">Directory src</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration.html">Directory robot_calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration.html">Directory robot_calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include.html">Directory include</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration.html">Directory robot_calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions.html">Directory cost_functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders.html">Directory finders</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models.html">Directory models</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization.html">Directory optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization.html#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util.html">Directory util</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_action_client.hpp.html">File action_client.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_action_client.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-action-client-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/action_client.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_action_client.hpp.html">Program Listing for File action_client.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_action_client.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_action_client.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_action_client.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_action_client.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_action_client.hpp.html#enums">Enums</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_base_calibration.hpp.html">File base_calibration.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_base_calibration.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-optimization-base-calibration-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/optimization/base_calibration.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_base_calibration.hpp.html">Program Listing for File base_calibration.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_base_calibration.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_base_calibration.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_base_calibration.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_calibration_data.hpp.html">File calibration_data.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_calibration_data.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-calibration-data-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/calibration_data.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_calibration_data.hpp.html">Program Listing for File calibration_data.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_calibration_data.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_calibration_data.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_calibration_data.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_calibration_data.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera2d.hpp.html">File camera2d.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera2d.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-models-camera2d-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/models/camera2d.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera2d.hpp.html">Program Listing for File camera2d.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera2d.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera2d.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera2d.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera2d.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera3d.hpp.html">File camera3d.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera3d.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-models-camera3d-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/models/camera3d.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera3d.hpp.html">Program Listing for File camera3d.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera3d.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera3d.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera3d.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_camera3d.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_camera_info.hpp.html">File camera_info.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_camera_info.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-camera-info-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/camera_info.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_camera_info.hpp.html">Program Listing for File camera_info.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_camera_info.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_camera_info.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_camera_info.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_camera_info.hpp.html#enums">Enums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_camera_info.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_capture_manager.hpp.html">File capture_manager.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_capture_manager.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-capture-manager-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/capture_manager.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_capture_manager.hpp.html">Program Listing for File capture_manager.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_capture_manager.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_capture_manager.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_capture_manager.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_ceres_optimizer.hpp.html">File ceres_optimizer.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_ceres_optimizer.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-optimization-ceres-optimizer-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/optimization/ceres_optimizer.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_ceres_optimizer.hpp.html">Program Listing for File ceres_optimizer.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_ceres_optimizer.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_ceres_optimizer.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_ceres_optimizer.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_ceres_optimizer.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_chain3d.hpp.html">File chain3d.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_chain3d.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-models-chain3d-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/models/chain3d.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_chain3d.hpp.html">Program Listing for File chain3d.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_chain3d.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_chain3d.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_chain3d.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_chain3d.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_models_chain3d.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_camera2d_error.hpp.html">File chain3d_to_camera2d_error.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_camera2d_error.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-cost-functions-chain3d-to-camera2d-error-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/cost_functions/chain3d_to_camera2d_error.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_camera2d_error.hpp.html">Program Listing for File chain3d_to_camera2d_error.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_camera2d_error.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_camera2d_error.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_camera2d_error.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_chain3d_error.hpp.html">File chain3d_to_chain3d_error.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_chain3d_error.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-cost-functions-chain3d-to-chain3d-error-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/cost_functions/chain3d_to_chain3d_error.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_chain3d_error.hpp.html">Program Listing for File chain3d_to_chain3d_error.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_chain3d_error.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_chain3d_error.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_chain3d_error.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_mesh_error.hpp.html">File chain3d_to_mesh_error.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_mesh_error.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-cost-functions-chain3d-to-mesh-error-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/cost_functions/chain3d_to_mesh_error.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_mesh_error.hpp.html">Program Listing for File chain3d_to_mesh_error.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_mesh_error.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_mesh_error.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_mesh_error.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_mesh_error.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_plane_error.hpp.html">File chain3d_to_plane_error.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_plane_error.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-cost-functions-chain3d-to-plane-error-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/cost_functions/chain3d_to_plane_error.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_plane_error.hpp.html">Program Listing for File chain3d_to_plane_error.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_plane_error.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_plane_error.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_chain3d_to_plane_error.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_chain_manager.hpp.html">File chain_manager.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_chain_manager.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-chain-manager-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/chain_manager.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_chain_manager.hpp.html">Program Listing for File chain_manager.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_chain_manager.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_chain_manager.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_chain_manager.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_chain_manager.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_checkerboard_finder.hpp.html">File checkerboard_finder.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_checkerboard_finder.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-finders-checkerboard-finder-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/finders/checkerboard_finder.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_checkerboard_finder.hpp.html">Program Listing for File checkerboard_finder.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_checkerboard_finder.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_checkerboard_finder.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_checkerboard_finder.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_depth_camera_info.hpp.html">File depth_camera_info.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_depth_camera_info.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-depth-camera-info-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/depth_camera_info.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_depth_camera_info.hpp.html">Program Listing for File depth_camera_info.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_depth_camera_info.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_depth_camera_info.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_depth_camera_info.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_depth_camera_info.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_eigen_geometry.hpp.html">File eigen_geometry.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_eigen_geometry.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-eigen-geometry-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/eigen_geometry.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_eigen_geometry.hpp.html">Program Listing for File eigen_geometry.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_eigen_geometry.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_eigen_geometry.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_eigen_geometry.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_eigen_geometry.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_export.hpp.html">File export.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_export.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-optimization-export-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/optimization/export.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_export.hpp.html">Program Listing for File export.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_export.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_export.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_export.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_feature_finder.hpp.html">File feature_finder.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_feature_finder.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-finders-feature-finder-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/finders/feature_finder.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_feature_finder.hpp.html">Program Listing for File feature_finder.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_feature_finder.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_feature_finder.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_feature_finder.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_feature_finder.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_led_finder.hpp.html">File led_finder.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_led_finder.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-finders-led-finder-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/finders/led_finder.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_led_finder.hpp.html">Program Listing for File led_finder.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_led_finder.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_led_finder.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_led_finder.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_loader.hpp.html">File loader.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_loader.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-finders-loader-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/finders/loader.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_loader.hpp.html">Program Listing for File loader.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_loader.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_loader.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_loader.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_loader.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_loader.hpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_magnetometer_error.hpp.html">File magnetometer_error.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_magnetometer_error.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-cost-functions-magnetometer-error-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/cost_functions/magnetometer_error.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_magnetometer_error.hpp.html">Program Listing for File magnetometer_error.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_magnetometer_error.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_magnetometer_error.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_mesh_loader.hpp.html">File mesh_loader.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_mesh_loader.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-mesh-loader-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/mesh_loader.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_mesh_loader.hpp.html">Program Listing for File mesh_loader.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_mesh_loader.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_mesh_loader.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_mesh_loader.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_mesh_loader.hpp.html#classes">Classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_mesh_loader.hpp.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_offsets.hpp.html">File offsets.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_offsets.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-optimization-offsets-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/optimization/offsets.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_offsets.hpp.html">Program Listing for File offsets.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_offsets.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_offsets.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_offsets.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_offsets.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_outrageous_error.hpp.html">File outrageous_error.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_outrageous_error.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-cost-functions-outrageous-error-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/cost_functions/outrageous_error.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_outrageous_error.hpp.html">Program Listing for File outrageous_error.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_outrageous_error.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_outrageous_error.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_outrageous_error.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_params.hpp.html">File params.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_params.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-optimization-params-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/optimization/params.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_params.hpp.html">Program Listing for File params.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_params.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_params.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_params.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_optimization_params.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_plane_finder.hpp.html">File plane_finder.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_plane_finder.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-finders-plane-finder-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/finders/plane_finder.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_plane_finder.hpp.html">Program Listing for File plane_finder.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_plane_finder.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_plane_finder.hpp.html#included-by">Included By</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_plane_finder.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_plane_finder.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_plane_to_plane_error.hpp.html">File plane_to_plane_error.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_plane_to_plane_error.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-cost-functions-plane-to-plane-error-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/cost_functions/plane_to_plane_error.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_plane_to_plane_error.hpp.html">Program Listing for File plane_to_plane_error.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_plane_to_plane_error.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_plane_to_plane_error.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_cost_functions_plane_to_plane_error.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_bag.hpp.html">File poses_from_bag.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_bag.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-poses-from-bag-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/poses_from_bag.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_bag.hpp.html">Program Listing for File poses_from_bag.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_bag.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_bag.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_bag.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_yaml.hpp.html">File poses_from_yaml.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_yaml.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-util-poses-from-yaml-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/util/poses_from_yaml.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_yaml.hpp.html">Program Listing for File poses_from_yaml.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_yaml.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_yaml.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_util_poses_from_yaml.hpp.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_robot_finder.hpp.html">File robot_finder.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_robot_finder.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-finders-robot-finder-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/finders/robot_finder.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_robot_finder.hpp.html">Program Listing for File robot_finder.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_robot_finder.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_robot_finder.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_robot_finder.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_scan_finder.hpp.html">File scan_finder.hpp</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_scan_finder.hpp.html#definition-tmp-ws-src-robot-calibration-robot-calibration-include-robot-calibration-finders-scan-finder-hpp">Definition (<code class="docutils literal notranslate"><span class="pre">/tmp/ws/src/robot_calibration/robot_calibration/include/robot_calibration/finders/scan_finder.hpp</span></code>)</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/program_listing_file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_scan_finder.hpp.html">Program Listing for File scan_finder.hpp</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_scan_finder.hpp.html#includes">Includes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_scan_finder.hpp.html#namespaces">Namespaces</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file__tmp_ws_src_robot_calibration_robot_calibration_include_robot_calibration_finders_scan_finder.hpp.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">robot_calibration</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the documentation for robot_calibration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-documentation-for-robot-calibration">
+<h1>Welcome to the documentation for robot_calibration<a class="headerlink" href="#welcome-to-the-documentation-for-robot-calibration" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">Class Hierarchy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#namespaces">Namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#enums">Enums</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#typedefs">Typedefs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#directories">Directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-search">
+<h1>Indices and Search<a class="headerlink" href="#indices-and-search" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/index.html" class="btn btn-neutral float-right" title="Class Hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Apache2.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

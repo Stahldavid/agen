@@ -1,0 +1,8 @@
+class WebotsController:
+    def __init__(self):
+        # TODO: Initialize Webots controller
+        pass
+
+    def run(self):
+        # TODO: Run Webots controller
+        pass

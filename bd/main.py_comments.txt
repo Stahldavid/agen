@@ -1,0 +1,1 @@
+The main file of the project that is responsible for starting the variable impedance controller. The optimization is for the Variable Impedance Control code for force feedback.

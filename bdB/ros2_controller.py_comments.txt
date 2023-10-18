@@ -1,0 +1,1 @@
+This is a file for a ros2 controller. It needs to initialise the controller and also run it. There is also a need for the main function which includes the rclpy.init() function to initialise rclpy library.

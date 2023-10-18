@@ -1,0 +1,1 @@
+This is the initial code that handles robot driving and obstacle avoidance in Webots. The semantic search queries are performed on the classes MyRobotDriver and ObstacleAvoider. The aim is to refine and complete this code for better performance and readability.

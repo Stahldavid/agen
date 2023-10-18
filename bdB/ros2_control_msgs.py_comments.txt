@@ -1,0 +1,1 @@
+You are currently not utilizing the ROS2 parameter service to its full potential in your code. The parameter service can be extremely useful for adjusting parameters that might need to be tweaked over time. I have updated your code to include usage of the parameter service.

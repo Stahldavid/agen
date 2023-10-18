@@ -1,0 +1,400 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>capabilities.specs.provider &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/_modules/capabilities/specs/provider.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for capabilities.specs.provider</h1><div class="highlight"><pre>
+<span class="c"># Software License Agreement (BSD License)</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) 2013, Open Source Robotics Foundation, Inc.</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c"># modification, are permitted provided that the following conditions</span>
+<span class="c"># are met:</span>
+<span class="c">#</span>
+<span class="c">#  * Redistributions of source code must retain the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c">#  * Redistributions in binary form must reproduce the above</span>
+<span class="c">#    copyright notice, this list of conditions and the following</span>
+<span class="c">#    disclaimer in the documentation and/or other materials provided</span>
+<span class="c">#    with the distribution.</span>
+<span class="c">#  * Neither the name of Open Source Robotics Foundation, Inc. nor</span>
+<span class="c">#    the names of its contributors may be used to endorse or promote</span>
+<span class="c">#    products derived from this software without specific prior</span>
+<span class="c">#    written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c"># &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="c"># FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="c"># COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="c"># INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="c"># BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="c"># LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="c"># LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="c"># ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="c"># Author: William Woodall &lt;william@osrfoundation.org&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module implements the Capability Provider concept</span>
+
+<span class="sd">This module contains free functions which serve as factories for the :py:class:`CapabilityProvider` class.</span>
+<span class="sd">These factories can take the spec file for a Capability Provider and create a</span>
+<span class="sd">:py:class:`CapabilityProvider` instance out of it.</span>
+<span class="sd">The :py:class:`CapabilityProvider` class is designed to encapsualte the meta data</span>
+<span class="sd">which describes the Capability Provider.</span>
+
+<span class="sd">With a provider spec like this::</span>
+
+<span class="sd">    %YAML 1.1</span>
+<span class="sd">    ---</span>
+<span class="sd">    name: navigation_nav_stack</span>
+<span class="sd">    spec_version: 1</span>
+<span class="sd">    spec_type: provider</span>
+<span class="sd">    description: &#39;Implements the ability to navigate.&#39;</span>
+<span class="sd">    implements: navigation/Navigation</span>
+<span class="sd">    launch_file: &#39;launch/navigation_nav_stack.launch&#39;</span>
+<span class="sd">    depends_on:</span>
+<span class="sd">        &#39;laser_capability/LaserObservation&#39;:</span>
+<span class="sd">            provider: &#39;hokuyo_capability/hokuyo_base&#39;</span>
+<span class="sd">    remappings:</span>
+<span class="sd">        topics:</span>
+<span class="sd">            &#39;scan&#39;: &#39;nav_stack/scan&#39;</span>
+<span class="sd">    nodelet_manager: &#39;nav_manager&#39;</span>
+
+<span class="sd">You can use this API like this::</span>
+
+<span class="sd">    &gt;&gt;&gt; from pprint import pprint</span>
+<span class="sd">    &gt;&gt;&gt; from capabilities.specs.provider import capability_provider_from_file_path</span>
+<span class="sd">    &gt;&gt;&gt; cp = capability_provider_from_file_path(&#39;test/unit/specs/providers/navigation_nav_stack.yaml&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; pprint(cp.dependencies)</span>
+<span class="sd">    {&lt;capabilities.specs.common.SpecName object at 0x1099ebfd0&gt;:</span>
+<span class="sd">        &lt;capabilities.specs.provider.DependsOnRelationship object at 0x109a3fa50&gt;}</span>
+<span class="sd">    &gt;&gt;&gt; print(cp.dependencies[&#39;laser_capability/LaserObservation&#39;])</span>
+<span class="sd">    laser_capability/LaserObservation:</span>
+<span class="sd">        preferred provider: hokuyo_capability/hokuyo_base</span>
+<span class="sd">    &gt;&gt;&gt; print(cp.launch_file)</span>
+<span class="sd">    launch/navigation_nav_stack.launch</span>
+<span class="sd">    &gt;&gt;&gt; print(cp.implements)</span>
+<span class="sd">    navigation/Navigation</span>
+<span class="sd">    &gt;&gt;&gt; print(cp.nodelet_manager)</span>
+<span class="sd">    nav_manager</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.specs.common</span> <span class="kn">import</span> <span class="n">validate_spec_name</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.specs.remappings</span> <span class="kn">import</span> <span class="n">RemapCollection</span>
+
+
+<div class="viewcode-block" id="InvalidProvider"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.provider.InvalidProvider">[docs]</a><span class="k">class</span> <span class="nc">InvalidProvider</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;InvalidProvider exception&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;In provider spec file &#39;{0}&#39;: {1}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">msg</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="capability_provider_from_file_path"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.provider.capability_provider_from_file_path">[docs]</a><span class="k">def</span> <span class="nf">capability_provider_from_file_path</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a CapabilityProvider instance from a spec file at a given path</span>
+
+<span class="sd">    See :py:func:`capability_provider_from_dict` for list of possible exceptions</span>
+
+<span class="sd">    :param file_path: location of the Capability Provider spec file</span>
+<span class="sd">    :type file_path: str</span>
+<span class="sd">    :returns: CapabilityProvider instance, populated with data from the spec file</span>
+<span class="sd">    :rtype: :py:class:`CapabilityProvider`</span>
+<span class="sd">    :raises: :py:exc:`OSError` if the given file does not exist</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_path</span><span class="p">),</span> <span class="s">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">capability_provider_from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()),</span> <span class="n">file_path</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="capability_provider_from_file"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.provider.capability_provider_from_file">[docs]</a><span class="k">def</span> <span class="nf">capability_provider_from_file</span><span class="p">(</span><span class="n">file_handle</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a CapabilityProvider instance from a given spec file handle</span>
+
+<span class="sd">    See :py:func:`capability_provider_from_dict` for list of possible exceptions</span>
+
+<span class="sd">    :param file_handle: file handle for the Capability Provider spec file</span>
+<span class="sd">    :type file_handle: file</span>
+<span class="sd">    :returns: CapabilityProvider instance, populated with data from the spec file</span>
+<span class="sd">    :rtype: :py:class:`CapabilityProvider`</span>
+<span class="sd">    :raises: :py:exc:`OSError` if the given file does not exist</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">capability_provider_from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handle</span><span class="o">.</span><span class="n">read</span><span class="p">()),</span> <span class="n">file_handle</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="capability_provider_from_string"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.provider.capability_provider_from_string">[docs]</a><span class="k">def</span> <span class="nf">capability_provider_from_string</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="s">&#39;&lt;string&gt;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a CapabilityProvider instance from a string containing the spec</span>
+
+<span class="sd">    See :py:func:`capability_provider_from_dict` for list of possible exceptions</span>
+
+<span class="sd">    :param string: Capability Provider spec</span>
+<span class="sd">    :type string: str</span>
+<span class="sd">    :param file_name: Name of the file where this spec originated (defaults to &#39;&lt;string&gt;&#39;)</span>
+<span class="sd">    :type file_name: str</span>
+<span class="sd">    :returns: CapabilityProvider instance, populated with the provided spec</span>
+<span class="sd">    :rtype: :py:class:`CapabilityProvider`</span>
+<span class="sd">    :raises: :py:exc:`AttributeError` if the given value for string is not a str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">capability_provider_from_dict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">string</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="capability_provider_from_dict"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.provider.capability_provider_from_dict">[docs]</a><span class="k">def</span> <span class="nf">capability_provider_from_dict</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="s">&#39;&lt;dict&gt;&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates a CapabilityProvider instance from a dict version of the spec</span>
+
+<span class="sd">    :param string: Capability Provider spec</span>
+<span class="sd">    :type string: dict</span>
+<span class="sd">    :param file_name: Name of the file where this spec originated (defaults to &#39;&lt;dict&gt;&#39;)</span>
+<span class="sd">    :type file_name: str</span>
+<span class="sd">    :returns: CapabilityProvider instance, populated with the provided spec</span>
+<span class="sd">    :rtype: :py:class:`CapabilityProvider`</span>
+<span class="sd">    :raises: :py:exc:`InvalidProvider` if the spec is not complete or has invalid entries</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s">&#39;name&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&#39;No name specified&#39;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s">&#39;spec_type&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&#39;No spec type specified&#39;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">spec</span><span class="p">[</span><span class="s">&#39;spec_type&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&#39;provider&#39;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&quot;Invalid spec type, expected &#39;provider&#39; got: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s">&#39;spec_type&#39;</span><span class="p">]),</span>
+                              <span class="n">file_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;spec_version&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&#39;No spec version specified&#39;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">spec_version</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">spec</span><span class="p">[</span><span class="s">&#39;spec_version&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">spec_version</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&quot;Invalid spec version: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">spec_version</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s">&#39;implements&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&quot;No implements specified&quot;</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">implements</span> <span class="o">=</span> <span class="n">spec</span><span class="p">[</span><span class="s">&#39;implements&#39;</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">validate_spec_name</span><span class="p">(</span><span class="n">implements</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AssertionError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&quot;Invalid spec name for implements: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">launch_file</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;launch_file&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;description&#39;</span><span class="p">,</span> <span class="s">&#39;No description given.&#39;</span><span class="p">)</span>
+    <span class="n">remappings</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;remappings&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">remappings</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&quot;Invalid remappings section, expected dict got: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">remappings</span><span class="p">)),</span>
+                              <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">nodelet_manager</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;nodelet_manager&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nodelet_manager</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">None</span><span class="p">))):</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&quot;Invalid nodelet_manager, expected string got: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">nodelet_manager</span><span class="p">)),</span>
+                              <span class="n">file_name</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">capability_provider</span> <span class="o">=</span> <span class="n">CapabilityProvider</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">spec_version</span><span class="p">,</span> <span class="n">implements</span><span class="p">,</span> <span class="n">launch_file</span><span class="p">,</span>
+                                                 <span class="n">description</span><span class="p">,</span> <span class="n">remappings</span><span class="p">,</span> <span class="n">nodelet_manager</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">AssertionError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c"># Catch remapping errors</span>
+            <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">depends_on</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;depends_on&#39;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">depends_on</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">depends_on</span> <span class="o">=</span> <span class="p">[</span><span class="n">depends_on</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">depends_on</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="n">depends_on</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">x</span><span class="p">,</span> <span class="p">{})</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">depends_on</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">depends_on</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&quot;Invalid depends_on section, expected dict got: &#39;{0}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">depends_on</span><span class="p">)),</span>
+                              <span class="n">file_name</span><span class="p">)</span>
+    <span class="n">valid_conditionals</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;provider&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">interface</span><span class="p">,</span> <span class="n">conditions</span> <span class="ow">in</span> <span class="n">depends_on</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conditions</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&quot;Invalid depends_on conditional section, expected dict got: &#39;{0}&#39;&quot;</span>
+                                  <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">conditions</span><span class="p">)),</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">conditions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_conditionals</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidProvider</span><span class="p">(</span><span class="s">&quot;Invalid depends_on interface condition &#39;{0}&#39;, should be one of: &#39;{1}&#39;&quot;</span>
+                                      <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s">&quot;&#39;, &#39;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valid_conditionals</span><span class="p">)),</span> <span class="n">file_name</span><span class="p">)</span>
+        <span class="n">preferred_provider</span> <span class="o">=</span> <span class="n">conditions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;provider&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">capability_provider</span><span class="o">.</span><span class="n">add_depends_on</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">preferred_provider</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">capability_provider</span>
+
+</div>
+<div class="viewcode-block" id="CapabilityProvider"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.provider.CapabilityProvider">[docs]</a><span class="k">class</span> <span class="nc">CapabilityProvider</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents a Capability Provider</span>
+
+<span class="sd">    A Capability Provider is defined by:</span>
+
+<span class="sd">    - name (str): name of the provider</span>
+<span class="sd">    - spec_type (str): type of the specification (has to be &#39;provider&#39;)</span>
+<span class="sd">    - spec_version (int): version of the provider specification</span>
+<span class="sd">    - description (str): free form description of the provider</span>
+<span class="sd">    - implements (str): Name of a Capability Interface which this provider implements</span>
+<span class="sd">    - launch_file (str or None): Path to a launch file which runs the provider, None indicates no launch file to run</span>
+<span class="sd">    - depends_on (dict): list of depends on relationships to Capabilities with remappings and provider preference</span>
+<span class="sd">    - remappings (dict): map of ROS Names defined in the Capability to their new names for this provider</span>
+<span class="sd">    - nodelet_manager (str or None): name of the nodelet manager used by the provider, this is an implementation hint</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">spec_type</span> <span class="o">=</span> <span class="s">&#39;provider&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">spec_version</span><span class="p">,</span> <span class="n">implements</span><span class="p">,</span> <span class="n">launch_file</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">description</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">remappings</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">nodelet_manager</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spec_version</span> <span class="o">=</span> <span class="n">spec_version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">implements</span> <span class="o">=</span> <span class="n">implements</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">launch_file</span> <span class="o">=</span> <span class="n">launch_file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodelet_manager</span> <span class="o">=</span> <span class="n">nodelet_manager</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__remap_collection</span> <span class="o">=</span> <span class="n">RemapCollection</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_remappings_by_dict</span><span class="p">(</span><span class="n">remappings</span> <span class="ow">or</span> <span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__depends_on</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">remappings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__remap_collection</span><span class="o">.</span><span class="n">remappings</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">remappings_by_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__remap_collection</span><span class="o">.</span><span class="n">remappings_by_type</span>
+
+    <span class="k">def</span> <span class="nf">add_remappings_by_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">remappings_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__remap_collection</span><span class="o">.</span><span class="n">add_remappings_by_dict</span><span class="p">(</span><span class="n">remappings_dict</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__depends_on</span>
+
+    <span class="k">def</span> <span class="nf">depends_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface_name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">interface_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__depends_on</span>
+
+    <span class="k">def</span> <span class="nf">add_depends_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface_name</span><span class="p">,</span> <span class="n">preferred_provider</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="n">relationship</span> <span class="o">=</span> <span class="n">DependsOnRelationship</span><span class="p">(</span><span class="n">interface_name</span><span class="p">,</span> <span class="n">preferred_provider</span><span class="p">)</span>
+        <span class="c"># The dict strucutre of YAML should prevent duplicate interface_name keys</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__depends_on</span><span class="p">[</span><span class="n">interface_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;&quot;Capability Provider:</span>
+<span class="s">{{</span>
+<span class="s">  name: {name}</span>
+<span class="s">  spec version: {spec_version}</span>
+<span class="s">  implements: {implements}{nodelet_manager_str}</span>
+<span class="s">  description:</span>
+<span class="s">    {description}</span>
+<span class="s">{remappings_str}</span>
+<span class="s">  depend on relationships:</span>
+<span class="s">{depends_on_str}</span>
+<span class="s">}}</span>
+<span class="s">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">depends_on_str</span><span class="o">=</span><span class="s">&quot;[</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__depends_on</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">]&quot;</span><span class="p">,</span>
+           <span class="n">remappings_str</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__remap_collection</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+           <span class="n">nodelet_manager_str</span><span class="o">=</span><span class="s">&#39;&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodelet_manager</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodelet_manager</span> <span class="o">+</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span>
+           <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="DependsOnRelationship"><a class="viewcode-back" href="../../../capabilities.specs.html#capabilities.specs.provider.DependsOnRelationship">[docs]</a><span class="k">class</span> <span class="nc">DependsOnRelationship</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Models the depends_on relationship between a Capability Provider and a Capability</span>
+
+<span class="sd">    This relationship consists of:</span>
+
+<span class="sd">    - capability_name (str): name of the Capability which is depended on</span>
+<span class="sd">    - provider_preference (str): (optional) name of preferred provider for the Capability which is depended on</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">valid_remapping_types</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;topics&#39;</span><span class="p">,</span> <span class="s">&#39;services&#39;</span><span class="p">,</span> <span class="s">&#39;parameters&#39;</span><span class="p">,</span> <span class="s">&#39;actions&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capability_name</span><span class="p">,</span> <span class="n">preferred_provider</span><span class="p">):</span>
+        <span class="n">validate_spec_name</span><span class="p">(</span><span class="n">capability_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">preferred_provider</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">validate_spec_name</span><span class="p">(</span><span class="n">preferred_provider</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">capability_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capability_name</span> <span class="o">=</span> <span class="n">capability_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">provider</span> <span class="o">=</span> <span class="n">preferred_provider</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preferred_provider</span> <span class="o">=</span> <span class="n">preferred_provider</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">provider</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">+=</span> <span class="s">&quot;:</span><span class="se">\n</span><span class="s">  preferred provider: {0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">provider</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">msg</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

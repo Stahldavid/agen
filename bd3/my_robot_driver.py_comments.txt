@@ -1,0 +1,1 @@
+Semantic search results suggest utilizing the 'AckermannDrive' message type for variable steering control. Similar to the 'Twist' message used here, 'AckermannDrive' will be used to provide directed velocity commands to the robot. Additionally, based on the examples from 'webots_ros2', it's good to initialize the 'rclpy' within the 'init' method of the class.

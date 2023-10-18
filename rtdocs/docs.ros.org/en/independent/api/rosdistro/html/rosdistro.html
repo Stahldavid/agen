@@ -1,0 +1,1079 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rosdistro package &#8212; rosdistro  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rosdistro.external package" href="rosdistro.external.html" />
+    <link rel="prev" title="Welcome to rosdistro’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rosdistro-package">
+<h1>rosdistro package<a class="headerlink" href="#rosdistro-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rosdistro.external.html">rosdistro.external package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.external.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.external.html#module-rosdistro.external.appdirs">rosdistro.external.appdirs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.external.html#module-rosdistro.external">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rosdistro.manifest_provider.html">rosdistro.manifest_provider package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.manifest_provider.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.manifest_provider.html#module-rosdistro.manifest_provider.bitbucket">rosdistro.manifest_provider.bitbucket module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.manifest_provider.html#module-rosdistro.manifest_provider.cache">rosdistro.manifest_provider.cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.manifest_provider.html#module-rosdistro.manifest_provider.git">rosdistro.manifest_provider.git module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.manifest_provider.html#module-rosdistro.manifest_provider.github">rosdistro.manifest_provider.github module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.manifest_provider.html#module-rosdistro.manifest_provider.tar">rosdistro.manifest_provider.tar module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rosdistro.manifest_provider.html#module-rosdistro.manifest_provider">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-rosdistro.aptdistro">
+<span id="rosdistro-aptdistro-module"></span><h2>rosdistro.aptdistro module<a class="headerlink" href="#module-rosdistro.aptdistro" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.aptdistro.AptDistro">
+<em class="property">class </em><code class="descclassname">rosdistro.aptdistro.</code><code class="descname">AptDistro</code><span class="sig-paren">(</span><em>ubuntudistro</em>, <em>arch</em>, <em>shadow=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/aptdistro.html#AptDistro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.aptdistro.AptDistro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.aptdistro.AptDistro.depends">
+<code class="descname">depends</code><span class="sig-paren">(</span><em>package</em>, <em>res=None</em>, <em>one=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/aptdistro.html#AptDistro.depends"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.aptdistro.AptDistro.depends" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.aptdistro.AptDistro.depends1">
+<code class="descname">depends1</code><span class="sig-paren">(</span><em>package</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/aptdistro.html#AptDistro.depends1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.aptdistro.AptDistro.depends1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.aptdistro.AptDistro.depends_on">
+<code class="descname">depends_on</code><span class="sig-paren">(</span><em>package</em>, <em>res=None</em>, <em>one=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/aptdistro.html#AptDistro.depends_on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.aptdistro.AptDistro.depends_on" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.aptdistro.AptDistro.depends_on1">
+<code class="descname">depends_on1</code><span class="sig-paren">(</span><em>package</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/aptdistro.html#AptDistro.depends_on1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.aptdistro.AptDistro.depends_on1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.aptdistro.AptDistro.has_package">
+<code class="descname">has_package</code><span class="sig-paren">(</span><em>package</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/aptdistro.html#AptDistro.has_package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.aptdistro.AptDistro.has_package" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.common">
+<span id="rosdistro-common-module"></span><h2>rosdistro.common module<a class="headerlink" href="#module-rosdistro.common" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.common.error">
+<code class="descclassname">rosdistro.common.</code><code class="descname">error</code><span class="sig-paren">(</span><em>msg</em>, <em>end=None</em>, <em>file=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/common.html#error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.common.error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.common.info">
+<code class="descclassname">rosdistro.common.</code><code class="descname">info</code><span class="sig-paren">(</span><em>msg</em>, <em>end=None</em>, <em>file=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/common.html#info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.common.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.common.override_print">
+<code class="descclassname">rosdistro.common.</code><code class="descname">override_print</code><span class="sig-paren">(</span><em>print_func=&lt;function _print_func&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/common.html#override_print"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.common.override_print" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.common.quiet">
+<code class="descclassname">rosdistro.common.</code><code class="descname">quiet</code><span class="sig-paren">(</span><em>state=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/common.html#quiet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.common.quiet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.common.rmtree">
+<code class="descclassname">rosdistro.common.</code><code class="descname">rmtree</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/common.html#rmtree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.common.rmtree" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.common.warning">
+<code class="descclassname">rosdistro.common.</code><code class="descname">warning</code><span class="sig-paren">(</span><em>msg</em>, <em>end=None</em>, <em>file=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/common.html#warning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.common.warning" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.dependency_walker">
+<span id="rosdistro-dependency-walker-module"></span><h2>rosdistro.dependency_walker module<a class="headerlink" href="#module-rosdistro.dependency_walker" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.dependency_walker.DependencyWalker">
+<em class="property">class </em><code class="descclassname">rosdistro.dependency_walker.</code><code class="descname">DependencyWalker</code><span class="sig-paren">(</span><em>distribution_instance</em>, <em>evaluate_condition_context=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/dependency_walker.html#DependencyWalker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.dependency_walker.DependencyWalker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.dependency_walker.DependencyWalker.get_depends">
+<code class="descname">get_depends</code><span class="sig-paren">(</span><em>pkg_name</em>, <em>depend_type</em>, <em>ros_packages_only=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/dependency_walker.html#DependencyWalker.get_depends"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.dependency_walker.DependencyWalker.get_depends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of package names which the package depends on.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.dependency_walker.DependencyWalker.get_depends_on">
+<code class="descname">get_depends_on</code><span class="sig-paren">(</span><em>pkg_name</em>, <em>depend_type</em>, <em>ignore_pkgs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/dependency_walker.html#DependencyWalker.get_depends_on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.dependency_walker.DependencyWalker.get_depends_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of package names which depend on the package.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.dependency_walker.DependencyWalker.get_recursive_depends">
+<code class="descname">get_recursive_depends</code><span class="sig-paren">(</span><em>pkg_name</em>, <em>depend_types</em>, <em>ros_packages_only=False</em>, <em>ignore_pkgs=None</em>, <em>limit_depth=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/dependency_walker.html#DependencyWalker.get_recursive_depends"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.dependency_walker.DependencyWalker.get_recursive_depends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of package names which the package (transitively) depends on.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.dependency_walker.DependencyWalker.get_recursive_depends_on">
+<code class="descname">get_recursive_depends_on</code><span class="sig-paren">(</span><em>pkg_name</em>, <em>depend_types</em>, <em>ignore_pkgs=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/dependency_walker.html#DependencyWalker.get_recursive_depends_on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.dependency_walker.DependencyWalker.get_recursive_depends_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of package names which (transitively) depend on the package.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rosdistro.dependency_walker.SourceDependencyWalker">
+<em class="property">class </em><code class="descclassname">rosdistro.dependency_walker.</code><code class="descname">SourceDependencyWalker</code><span class="sig-paren">(</span><em>distribution_instance</em>, <em>evaluate_condition_context=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/dependency_walker.html#SourceDependencyWalker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.dependency_walker.SourceDependencyWalker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rosdistro.dependency_walker.DependencyWalker" title="rosdistro.dependency_walker.DependencyWalker"><code class="xref py py-class docutils literal notranslate"><span class="pre">rosdistro.dependency_walker.DependencyWalker</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.develdistro">
+<span id="rosdistro-develdistro-module"></span><h2>rosdistro.develdistro module<a class="headerlink" href="#module-rosdistro.develdistro" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.develdistro.DevelDistro">
+<em class="property">class </em><code class="descclassname">rosdistro.develdistro.</code><code class="descname">DevelDistro</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/develdistro.html#DevelDistro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.develdistro.DevelDistro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rosdistro.develdistro.DevelDistroRepo">
+<em class="property">class </em><code class="descclassname">rosdistro.develdistro.</code><code class="descname">DevelDistroRepo</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/develdistro.html#DevelDistroRepo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.develdistro.DevelDistroRepo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.develdistro.DevelDistroRepo.get_rosinstall">
+<code class="descname">get_rosinstall</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/develdistro.html#DevelDistroRepo.get_rosinstall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.develdistro.DevelDistroRepo.get_rosinstall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.distribution">
+<span id="rosdistro-distribution-module"></span><h2>rosdistro.distribution module<a class="headerlink" href="#module-rosdistro.distribution" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.distribution.Distribution">
+<em class="property">class </em><code class="descclassname">rosdistro.distribution.</code><code class="descname">Distribution</code><span class="sig-paren">(</span><em>distribution_file</em>, <em>manifest_providers=None</em>, <em>source_manifest_providers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution.html#Distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution.Distribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="rosdistro.distribution.Distribution.default_manifest_providers">
+<code class="descname">default_manifest_providers</code><em class="property"> = [&lt;function github_manifest_provider&gt;, &lt;function bitbucket_manifest_provider&gt;, &lt;function git_manifest_provider&gt;, &lt;function tar_manifest_provider&gt;]</em><a class="headerlink" href="#rosdistro.distribution.Distribution.default_manifest_providers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rosdistro.distribution.Distribution.default_source_manifest_providers">
+<code class="descname">default_source_manifest_providers</code><em class="property"> = [&lt;function github_source_manifest_provider&gt;, &lt;function git_source_manifest_provider&gt;, &lt;function tar_source_manifest_provider&gt;]</em><a class="headerlink" href="#rosdistro.distribution.Distribution.default_source_manifest_providers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.distribution.Distribution.get_release_package_xml">
+<code class="descname">get_release_package_xml</code><span class="sig-paren">(</span><em>pkg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution.html#Distribution.get_release_package_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution.Distribution.get_release_package_xml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.distribution.Distribution.get_source_package_xml">
+<code class="descname">get_source_package_xml</code><span class="sig-paren">(</span><em>pkg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution.html#Distribution.get_source_package_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution.Distribution.get_source_package_xml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.distribution.Distribution.get_source_repo_package_xmls">
+<code class="descname">get_source_repo_package_xmls</code><span class="sig-paren">(</span><em>repo_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution.html#Distribution.get_source_repo_package_xmls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution.Distribution.get_source_repo_package_xmls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.distribution_cache">
+<span id="rosdistro-distribution-cache-module"></span><h2>rosdistro.distribution_cache module<a class="headerlink" href="#module-rosdistro.distribution_cache" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.distribution_cache.DistributionCache">
+<em class="property">class </em><code class="descclassname">rosdistro.distribution_cache.</code><code class="descname">DistributionCache</code><span class="sig-paren">(</span><em>name</em>, <em>data=None</em>, <em>distribution_file_data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_cache.html#DistributionCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_cache.DistributionCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.distribution_cache.DistributionCache.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_cache.html#DistributionCache.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_cache.DistributionCache.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.distribution_cache.DistributionCache.get_source_packages">
+<code class="descname">get_source_packages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_cache.html#DistributionCache.get_source_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_cache.DistributionCache.get_source_packages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns dictionary mapping source package names to Package() objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.distribution_cache.DistributionCache.update_distribution">
+<code class="descname">update_distribution</code><span class="sig-paren">(</span><em>distribution_file_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_cache.html#DistributionCache.update_distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_cache.DistributionCache.update_distribution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.distribution_cache_generator">
+<span id="rosdistro-distribution-cache-generator-module"></span><h2>rosdistro.distribution_cache_generator module<a class="headerlink" href="#module-rosdistro.distribution_cache_generator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.distribution_cache_generator.CacheYamlDumper">
+<em class="property">class </em><code class="descclassname">rosdistro.distribution_cache_generator.</code><code class="descname">CacheYamlDumper</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_cache_generator.html#CacheYamlDumper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_cache_generator.CacheYamlDumper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">yaml.dumper.SafeDumper</span></code></p>
+<p>A yaml dumper specific to dumping the serialized rosdistro cache file.</p>
+<p>Allows long lines and direct unicode representation. This avoids writing escape
+sequences, line continuations, and other noise into the cache file. Also permits
+long strings to alias each other (by default only objects do).</p>
+<dl class="method">
+<dt id="rosdistro.distribution_cache_generator.CacheYamlDumper.ignore_aliases">
+<code class="descname">ignore_aliases</code><span class="sig-paren">(</span><em>content</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_cache_generator.html#CacheYamlDumper.ignore_aliases"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_cache_generator.CacheYamlDumper.ignore_aliases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow strings that look like package XML to alias to each other in the YAML output.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.distribution_cache_generator.CacheYamlDumper.represent_mapping">
+<code class="descname">represent_mapping</code><span class="sig-paren">(</span><em>tag</em>, <em>mapping</em>, <em>flow_style=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_cache_generator.html#CacheYamlDumper.represent_mapping"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_cache_generator.CacheYamlDumper.represent_mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives compact representation for the distribution_file section, while allowing the package
+XML cache sections room to breathe.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.distribution_cache_generator.generate_distribution_cache">
+<code class="descclassname">rosdistro.distribution_cache_generator.</code><code class="descname">generate_distribution_cache</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em>, <em>preclean=False</em>, <em>ignore_local=False</em>, <em>include_source=False</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_cache_generator.html#generate_distribution_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_cache_generator.generate_distribution_cache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.distribution_cache_generator.generate_distribution_caches">
+<code class="descclassname">rosdistro.distribution_cache_generator.</code><code class="descname">generate_distribution_caches</code><span class="sig-paren">(</span><em>index</em>, <em>dist_names=None</em>, <em>preclean=False</em>, <em>ignore_local=False</em>, <em>include_source=False</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_cache_generator.html#generate_distribution_caches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_cache_generator.generate_distribution_caches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.distribution_file">
+<span id="rosdistro-distribution-file-module"></span><h2>rosdistro.distribution_file module<a class="headerlink" href="#module-rosdistro.distribution_file" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.distribution_file.DistributionFile">
+<em class="property">class </em><code class="descclassname">rosdistro.distribution_file.</code><code class="descname">DistributionFile</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_file.html#DistributionFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_file.DistributionFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.distribution_file.DistributionFile.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_file.html#DistributionFile.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_file.DistributionFile.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.distribution_file.DistributionFile.merge">
+<code class="descname">merge</code><span class="sig-paren">(</span><em>other_dist_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_file.html#DistributionFile.merge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_file.DistributionFile.merge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.distribution_file.create_distribution_file">
+<code class="descclassname">rosdistro.distribution_file.</code><code class="descname">create_distribution_file</code><span class="sig-paren">(</span><em>dist_name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/distribution_file.html#create_distribution_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.distribution_file.create_distribution_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.doc_build_file">
+<span id="rosdistro-doc-build-file-module"></span><h2>rosdistro.doc_build_file module<a class="headerlink" href="#module-rosdistro.doc_build_file" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.doc_build_file.DocBuildFile">
+<em class="property">class </em><code class="descclassname">rosdistro.doc_build_file.</code><code class="descname">DocBuildFile</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_build_file.html#DocBuildFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_build_file.DocBuildFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.doc_build_file.DocBuildFile.filter_repositories">
+<code class="descname">filter_repositories</code><span class="sig-paren">(</span><em>repos</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_build_file.html#DocBuildFile.filter_repositories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_build_file.DocBuildFile.filter_repositories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.doc_build_file.DocBuildFile.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_build_file.html#DocBuildFile.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_build_file.DocBuildFile.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.doc_build_file.DocBuildFile.get_target_arches">
+<code class="descname">get_target_arches</code><span class="sig-paren">(</span><em>os_name</em>, <em>os_code_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_build_file.html#DocBuildFile.get_target_arches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_build_file.DocBuildFile.get_target_arches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.doc_build_file.DocBuildFile.get_target_configuration">
+<code class="descname">get_target_configuration</code><span class="sig-paren">(</span><em>os_name=None</em>, <em>os_code_name=None</em>, <em>arch=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_build_file.html#DocBuildFile.get_target_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_build_file.DocBuildFile.get_target_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.doc_build_file.DocBuildFile.get_target_os_code_names">
+<code class="descname">get_target_os_code_names</code><span class="sig-paren">(</span><em>os_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_build_file.html#DocBuildFile.get_target_os_code_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_build_file.DocBuildFile.get_target_os_code_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.doc_build_file.DocBuildFile.get_target_os_names">
+<code class="descname">get_target_os_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_build_file.html#DocBuildFile.get_target_os_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_build_file.DocBuildFile.get_target_os_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.doc_file">
+<span id="rosdistro-doc-file-module"></span><h2>rosdistro.doc_file module<a class="headerlink" href="#module-rosdistro.doc_file" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.doc_file.DocFile">
+<em class="property">class </em><code class="descclassname">rosdistro.doc_file.</code><code class="descname">DocFile</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_file.html#DocFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_file.DocFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.doc_repository_specification">
+<span id="rosdistro-doc-repository-specification-module"></span><h2>rosdistro.doc_repository_specification module<a class="headerlink" href="#module-rosdistro.doc_repository_specification" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.doc_repository_specification.DocRepositorySpecification">
+<em class="property">class </em><code class="descclassname">rosdistro.doc_repository_specification.</code><code class="descname">DocRepositorySpecification</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_repository_specification.html#DocRepositorySpecification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_repository_specification.DocRepositorySpecification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rosdistro.repository_specification.RepositorySpecification" title="rosdistro.repository_specification.RepositorySpecification"><code class="xref py py-class docutils literal notranslate"><span class="pre">rosdistro.repository_specification.RepositorySpecification</span></code></a></p>
+<dl class="method">
+<dt id="rosdistro.doc_repository_specification.DocRepositorySpecification.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/doc_repository_specification.html#DocRepositorySpecification.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.doc_repository_specification.DocRepositorySpecification.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.freeze_source">
+<span id="rosdistro-freeze-source-module"></span><h2>rosdistro.freeze_source module<a class="headerlink" href="#module-rosdistro.freeze_source" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.freeze_source.freeze_distribution_sources">
+<code class="descclassname">rosdistro.freeze_source.</code><code class="descname">freeze_distribution_sources</code><span class="sig-paren">(</span><em>dist</em>, <em>release_version=False</em>, <em>release_tag=False</em>, <em>concurrent_ops=16</em>, <em>quiet=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/freeze_source.html#freeze_distribution_sources"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.freeze_source.freeze_distribution_sources" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.index">
+<span id="rosdistro-index-module"></span><h2>rosdistro.index module<a class="headerlink" href="#module-rosdistro.index" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.index.Index">
+<em class="property">class </em><code class="descclassname">rosdistro.index.</code><code class="descname">Index</code><span class="sig-paren">(</span><em>data</em>, <em>base_url</em>, <em>url_query=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/index.html#Index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.index.Index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.legacy">
+<span id="rosdistro-legacy-module"></span><h2>rosdistro.legacy module<a class="headerlink" href="#module-rosdistro.legacy" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.legacy.get_cached_release">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_cached_release</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em>, <em>cache=None</em>, <em>allow_lazy_load=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_cached_release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_cached_release" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.legacy.get_doc_build_files">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_doc_build_files</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_doc_build_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_doc_build_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.legacy.get_doc_file">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_doc_file</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_doc_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_doc_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.legacy.get_release">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_release</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_release" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.legacy.get_release_build_files">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_release_build_files</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_release_build_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_release_build_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.legacy.get_release_builds">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_release_builds</code><span class="sig-paren">(</span><em>index</em>, <em>release_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_release_builds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_release_builds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.legacy.get_release_cache">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_release_cache</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_release_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_release_cache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.legacy.get_release_file">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_release_file</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_release_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_release_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.legacy.get_source_build_files">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_source_build_files</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_source_build_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_source_build_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.legacy.get_source_file">
+<code class="descclassname">rosdistro.legacy.</code><code class="descname">get_source_file</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/legacy.html#get_source_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.legacy.get_source_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.loader">
+<span id="rosdistro-loader-module"></span><h2>rosdistro.loader module<a class="headerlink" href="#module-rosdistro.loader" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.loader.load_url">
+<code class="descclassname">rosdistro.loader.</code><code class="descname">load_url</code><span class="sig-paren">(</span><em>url</em>, <em>retry=2</em>, <em>retry_period=1</em>, <em>timeout=10</em>, <em>skip_decode=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/loader.html#load_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.loader.load_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.package">
+<span id="rosdistro-package-module"></span><h2>rosdistro.package module<a class="headerlink" href="#module-rosdistro.package" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.package.Package">
+<em class="property">class </em><code class="descclassname">rosdistro.package.</code><code class="descname">Package</code><span class="sig-paren">(</span><em>name</em>, <em>repository_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/package.html#Package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.package.Package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.release">
+<span id="rosdistro-release-module"></span><h2>rosdistro.release module<a class="headerlink" href="#module-rosdistro.release" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.release.Release">
+<em class="property">class </em><code class="descclassname">rosdistro.release.</code><code class="descname">Release</code><span class="sig-paren">(</span><em>rel_file</em>, <em>manifest_providers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release.html#Release"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release.Release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="rosdistro.release.Release.default_manifest_providers">
+<code class="descname">default_manifest_providers</code><em class="property"> = [&lt;function github_manifest_provider&gt;, &lt;function bitbucket_manifest_provider&gt;, &lt;function git_manifest_provider&gt;]</em><a class="headerlink" href="#rosdistro.release.Release.default_manifest_providers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.release.Release.get_package_xml">
+<code class="descname">get_package_xml</code><span class="sig-paren">(</span><em>pkg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release.html#Release.get_package_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release.Release.get_package_xml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.release_build">
+<span id="rosdistro-release-build-module"></span><h2>rosdistro.release_build module<a class="headerlink" href="#module-rosdistro.release_build" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.release_build.ReleaseBuild">
+<em class="property">class </em><code class="descclassname">rosdistro.release_build.</code><code class="descname">ReleaseBuild</code><span class="sig-paren">(</span><em>dist</em>, <em>release_build_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_build.html#ReleaseBuild"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_build.ReleaseBuild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.release_build.ReleaseBuild.get_package_names">
+<code class="descname">get_package_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_build.html#ReleaseBuild.get_package_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_build.ReleaseBuild.get_package_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.release_build_file">
+<span id="rosdistro-release-build-file-module"></span><h2>rosdistro.release_build_file module<a class="headerlink" href="#module-rosdistro.release_build_file" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.release_build_file.ReleaseBuildFile">
+<em class="property">class </em><code class="descclassname">rosdistro.release_build_file.</code><code class="descname">ReleaseBuildFile</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_build_file.html#ReleaseBuildFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_build_file.ReleaseBuildFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.release_build_file.ReleaseBuildFile.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_build_file.html#ReleaseBuildFile.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_build_file.ReleaseBuildFile.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.release_build_file.ReleaseBuildFile.get_target_arches">
+<code class="descname">get_target_arches</code><span class="sig-paren">(</span><em>os_name</em>, <em>os_code_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_build_file.html#ReleaseBuildFile.get_target_arches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_build_file.ReleaseBuildFile.get_target_arches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.release_build_file.ReleaseBuildFile.get_target_configuration">
+<code class="descname">get_target_configuration</code><span class="sig-paren">(</span><em>os_name=None</em>, <em>os_code_name=None</em>, <em>arch=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_build_file.html#ReleaseBuildFile.get_target_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_build_file.ReleaseBuildFile.get_target_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.release_build_file.ReleaseBuildFile.get_target_os_code_names">
+<code class="descname">get_target_os_code_names</code><span class="sig-paren">(</span><em>os_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_build_file.html#ReleaseBuildFile.get_target_os_code_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_build_file.ReleaseBuildFile.get_target_os_code_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.release_build_file.ReleaseBuildFile.get_target_os_names">
+<code class="descname">get_target_os_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_build_file.html#ReleaseBuildFile.get_target_os_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_build_file.ReleaseBuildFile.get_target_os_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.release_cache">
+<span id="rosdistro-release-cache-module"></span><h2>rosdistro.release_cache module<a class="headerlink" href="#module-rosdistro.release_cache" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.release_cache.ReleaseCache">
+<em class="property">class </em><code class="descclassname">rosdistro.release_cache.</code><code class="descname">ReleaseCache</code><span class="sig-paren">(</span><em>name</em>, <em>data=None</em>, <em>distribution_file_data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_cache.html#ReleaseCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_cache.ReleaseCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.release_cache.ReleaseCache.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_cache.html#ReleaseCache.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_cache.ReleaseCache.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.release_cache.ReleaseCache.update_distribution">
+<code class="descname">update_distribution</code><span class="sig-paren">(</span><em>distribution_file_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_cache.html#ReleaseCache.update_distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_cache.ReleaseCache.update_distribution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.release_cache_generator">
+<span id="rosdistro-release-cache-generator-module"></span><h2>rosdistro.release_cache_generator module<a class="headerlink" href="#module-rosdistro.release_cache_generator" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.release_cache_generator.generate_release_cache">
+<code class="descclassname">rosdistro.release_cache_generator.</code><code class="descname">generate_release_cache</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em>, <em>preclean=False</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_cache_generator.html#generate_release_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_cache_generator.generate_release_cache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.release_cache_generator.generate_release_caches">
+<code class="descclassname">rosdistro.release_cache_generator.</code><code class="descname">generate_release_caches</code><span class="sig-paren">(</span><em>index</em>, <em>dist_names=None</em>, <em>preclean=False</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_cache_generator.html#generate_release_caches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_cache_generator.generate_release_caches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.release_file">
+<span id="rosdistro-release-file-module"></span><h2>rosdistro.release_file module<a class="headerlink" href="#module-rosdistro.release_file" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.release_file.ReleaseFile">
+<em class="property">class </em><code class="descclassname">rosdistro.release_file.</code><code class="descname">ReleaseFile</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_file.html#ReleaseFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_file.ReleaseFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.release_repository_specification">
+<span id="rosdistro-release-repository-specification-module"></span><h2>rosdistro.release_repository_specification module<a class="headerlink" href="#module-rosdistro.release_repository_specification" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.release_repository_specification.ReleaseRepositorySpecification">
+<em class="property">class </em><code class="descclassname">rosdistro.release_repository_specification.</code><code class="descname">ReleaseRepositorySpecification</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_repository_specification.html#ReleaseRepositorySpecification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_repository_specification.ReleaseRepositorySpecification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rosdistro.repository_specification.RepositorySpecification" title="rosdistro.repository_specification.RepositorySpecification"><code class="xref py py-class docutils literal notranslate"><span class="pre">rosdistro.repository_specification.RepositorySpecification</span></code></a></p>
+<dl class="method">
+<dt id="rosdistro.release_repository_specification.ReleaseRepositorySpecification.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_repository_specification.html#ReleaseRepositorySpecification.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_repository_specification.ReleaseRepositorySpecification.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.release_repository_specification.ReleaseRepositorySpecification.get_release_tag">
+<code class="descname">get_release_tag</code><span class="sig-paren">(</span><em>pkg_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/release_repository_specification.html#ReleaseRepositorySpecification.get_release_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.release_repository_specification.ReleaseRepositorySpecification.get_release_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.repository">
+<span id="rosdistro-repository-module"></span><h2>rosdistro.repository module<a class="headerlink" href="#module-rosdistro.repository" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.repository.Repository">
+<em class="property">class </em><code class="descclassname">rosdistro.repository.</code><code class="descname">Repository</code><span class="sig-paren">(</span><em>name</em>, <em>doc_data</em>, <em>release_data</em>, <em>source_data</em>, <em>status_data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/repository.html#Repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.repository.Repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.repository.Repository.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/repository.html#Repository.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.repository.Repository.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.repository_specification">
+<span id="rosdistro-repository-specification-module"></span><h2>rosdistro.repository_specification module<a class="headerlink" href="#module-rosdistro.repository_specification" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.repository_specification.RepositorySpecification">
+<em class="property">class </em><code class="descclassname">rosdistro.repository_specification.</code><code class="descname">RepositorySpecification</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/repository_specification.html#RepositorySpecification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.repository_specification.RepositorySpecification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="rosdistro.repository_specification.RepositorySpecification.VCS_REGEX">
+<code class="descname">VCS_REGEX</code><em class="property"> = re.compile('(?:https?:\\/\\/|ssh:\\/\\/|git:\\/\\/|git&#64;)((?:[a-fA-F0-9]{40}&#64;)?[\\w.-]+)[:/]([\\w/-]*)(?:\\.git)?$')</em><a class="headerlink" href="#rosdistro.repository_specification.RepositorySpecification.VCS_REGEX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.repository_specification.RepositorySpecification.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/repository_specification.html#RepositorySpecification.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.repository_specification.RepositorySpecification.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.repository_specification.RepositorySpecification.get_url_parts">
+<code class="descname">get_url_parts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/repository_specification.html#RepositorySpecification.get_url_parts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.repository_specification.RepositorySpecification.get_url_parts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple for the server and path, eg (‘github.com’, ‘ros/catkin’)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.repository_specification.RepositorySpecification.has_remote_tag">
+<code class="descname">has_remote_tag</code><span class="sig-paren">(</span><em>tag</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/repository_specification.html#RepositorySpecification.has_remote_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.repository_specification.RepositorySpecification.has_remote_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rosdistro.repository_specification.RepositorySpecification.remote_refs">
+<code class="descname">remote_refs</code><a class="headerlink" href="#rosdistro.repository_specification.RepositorySpecification.remote_refs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rosdistro.repository_specification.RepositorySpecification.remote_tags">
+<code class="descname">remote_tags</code><a class="headerlink" href="#rosdistro.repository_specification.RepositorySpecification.remote_tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.rosdistro">
+<span id="rosdistro-rosdistro-module"></span><h2>rosdistro.rosdistro module<a class="headerlink" href="#module-rosdistro.rosdistro" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.rosdistro.RosDependencies">
+<em class="property">class </em><code class="descclassname">rosdistro.rosdistro.</code><code class="descname">RosDependencies</code><span class="sig-paren">(</span><em>name</em>, <em>cache_location</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDependencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDependencies.get_dependencies">
+<code class="descname">get_dependencies</code><span class="sig-paren">(</span><em>package</em>, <em>rosdistro</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDependencies.get_dependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDependencies.get_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rosdistro.rosdistro.RosDistro">
+<em class="property">class </em><code class="descclassname">rosdistro.rosdistro.</code><code class="descname">RosDistro</code><span class="sig-paren">(</span><em>name</em>, <em>cache_location=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDistro.get_depends">
+<code class="descname">get_depends</code><span class="sig-paren">(</span><em>items, depth=0, dep_dict={'build': ['build', 'run', 'buildtool', 'test'], 'buildtool': ['build', 'run', 'buildtool', 'test'], 'run': ['build', 'run', 'buildtool', 'test'], 'test': ['build', 'run', 'buildtool', 'test']}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro.get_depends"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro.get_depends" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDistro.get_depends1">
+<code class="descname">get_depends1</code><span class="sig-paren">(</span><em>items</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro.get_depends1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro.get_depends1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDistro.get_depends_on">
+<code class="descname">get_depends_on</code><span class="sig-paren">(</span><em>items, depth=0, dep_dict={'build': ['build', 'run', 'buildtool', 'test'], 'buildtool': ['build', 'run', 'buildtool', 'test'], 'run': ['build', 'run', 'buildtool', 'test'], 'test': ['build', 'run', 'buildtool', 'test']}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro.get_depends_on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro.get_depends_on" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDistro.get_depends_on1">
+<code class="descname">get_depends_on1</code><span class="sig-paren">(</span><em>items</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro.get_depends_on1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro.get_depends_on1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDistro.get_package">
+<code class="descname">get_package</code><span class="sig-paren">(</span><em>pkg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro.get_package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro.get_package" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDistro.get_packages">
+<code class="descname">get_packages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro.get_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro.get_packages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDistro.get_repositories">
+<code class="descname">get_repositories</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro.get_repositories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro.get_repositories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDistro.get_repository">
+<code class="descname">get_repository</code><span class="sig-paren">(</span><em>repo</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro.get_repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro.get_repository" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosDistro.get_rosinstall">
+<code class="descname">get_rosinstall</code><span class="sig-paren">(</span><em>items</em>, <em>version='last_release'</em>, <em>source='vcs'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistro.get_rosinstall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistro.get_rosinstall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rosdistro.rosdistro.RosDistroFile">
+<em class="property">class </em><code class="descclassname">rosdistro.rosdistro.</code><code class="descname">RosDistroFile</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosDistroFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosDistroFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rosdistro.rosdistro.RosPackage">
+<em class="property">class </em><code class="descclassname">rosdistro.rosdistro.</code><code class="descname">RosPackage</code><span class="sig-paren">(</span><em>name</em>, <em>repository</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosPackage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosPackage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosPackage.get_package_xml">
+<code class="descname">get_package_xml</code><span class="sig-paren">(</span><em>rosdistro</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosPackage.get_package_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosPackage.get_package_xml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosPackage.get_release_tag">
+<code class="descname">get_release_tag</code><span class="sig-paren">(</span><em>rosdistro</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosPackage.get_release_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosPackage.get_release_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosPackage.get_rosinstall">
+<code class="descname">get_rosinstall</code><span class="sig-paren">(</span><em>version</em>, <em>source</em>, <em>rosdistro</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosPackage.get_rosinstall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosPackage.get_rosinstall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rosdistro.rosdistro.RosRepository">
+<em class="property">class </em><code class="descclassname">rosdistro.rosdistro.</code><code class="descname">RosRepository</code><span class="sig-paren">(</span><em>name</em>, <em>version</em>, <em>url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosRepository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosRepository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.rosdistro.RosRepository.get_rosinstall">
+<code class="descname">get_rosinstall</code><span class="sig-paren">(</span><em>version</em>, <em>source</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#RosRepository.get_rosinstall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.RosRepository.get_rosinstall" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.rosdistro.get_package_dependencies">
+<code class="descclassname">rosdistro.rosdistro.</code><code class="descname">get_package_dependencies</code><span class="sig-paren">(</span><em>package_xml</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#get_package_dependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.get_package_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.rosdistro.invert_dict">
+<code class="descclassname">rosdistro.rosdistro.</code><code class="descname">invert_dict</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#invert_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.invert_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.rosdistro.retrieve_dependencies">
+<code class="descclassname">rosdistro.rosdistro.</code><code class="descname">retrieve_dependencies</code><span class="sig-paren">(</span><em>package_xml</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/rosdistro.html#retrieve_dependencies"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.rosdistro.retrieve_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.source_build_file">
+<span id="rosdistro-source-build-file-module"></span><h2>rosdistro.source_build_file module<a class="headerlink" href="#module-rosdistro.source_build_file" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.source_build_file.SourceBuildFile">
+<em class="property">class </em><code class="descclassname">rosdistro.source_build_file.</code><code class="descname">SourceBuildFile</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_build_file.html#SourceBuildFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_build_file.SourceBuildFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.source_build_file.SourceBuildFile.filter_repositories">
+<code class="descname">filter_repositories</code><span class="sig-paren">(</span><em>repos</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_build_file.html#SourceBuildFile.filter_repositories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_build_file.SourceBuildFile.filter_repositories" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.source_build_file.SourceBuildFile.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_build_file.html#SourceBuildFile.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_build_file.SourceBuildFile.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.source_build_file.SourceBuildFile.get_target_arches">
+<code class="descname">get_target_arches</code><span class="sig-paren">(</span><em>os_name</em>, <em>os_code_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_build_file.html#SourceBuildFile.get_target_arches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_build_file.SourceBuildFile.get_target_arches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.source_build_file.SourceBuildFile.get_target_configuration">
+<code class="descname">get_target_configuration</code><span class="sig-paren">(</span><em>os_name=None</em>, <em>os_code_name=None</em>, <em>arch=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_build_file.html#SourceBuildFile.get_target_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_build_file.SourceBuildFile.get_target_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.source_build_file.SourceBuildFile.get_target_os_code_names">
+<code class="descname">get_target_os_code_names</code><span class="sig-paren">(</span><em>os_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_build_file.html#SourceBuildFile.get_target_os_code_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_build_file.SourceBuildFile.get_target_os_code_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.source_build_file.SourceBuildFile.get_target_os_names">
+<code class="descname">get_target_os_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_build_file.html#SourceBuildFile.get_target_os_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_build_file.SourceBuildFile.get_target_os_names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.source_file">
+<span id="rosdistro-source-file-module"></span><h2>rosdistro.source_file module<a class="headerlink" href="#module-rosdistro.source_file" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.source_file.SourceFile">
+<em class="property">class </em><code class="descclassname">rosdistro.source_file.</code><code class="descname">SourceFile</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_file.html#SourceFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_file.SourceFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.source_repository_cache">
+<span id="rosdistro-source-repository-cache-module"></span><h2>rosdistro.source_repository_cache module<a class="headerlink" href="#module-rosdistro.source_repository_cache" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.source_repository_cache.SourceRepositoryCache">
+<em class="property">class </em><code class="descclassname">rosdistro.source_repository_cache.</code><code class="descname">SourceRepositoryCache</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_repository_cache.html#SourceRepositoryCache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_repository_cache.SourceRepositoryCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class represents a cache of the package XML strings for all packages in a single
+repo at a particular moment in time. A dictionary of many of these (one for each repo)
+keyed to the repo name represents the totality of the source package xml cache.</p>
+<dl class="method">
+<dt id="rosdistro.source_repository_cache.SourceRepositoryCache.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>package_name</em>, <em>package_path</em>, <em>package_xml_string</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_repository_cache.html#SourceRepositoryCache.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_repository_cache.SourceRepositoryCache.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a package to the cache.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rosdistro.source_repository_cache.SourceRepositoryCache.from_ref">
+<em class="property">classmethod </em><code class="descname">from_ref</code><span class="sig-paren">(</span><em>ref</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_repository_cache.html#SourceRepositoryCache.from_ref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_repository_cache.SourceRepositoryCache.from_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new empty cache instance from just the version control reference hash.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.source_repository_cache.SourceRepositoryCache.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_repository_cache.html#SourceRepositoryCache.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_repository_cache.SourceRepositoryCache.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the bare data dict, suitable for serializing into yaml.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.source_repository_cache.SourceRepositoryCache.items">
+<code class="descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_repository_cache.html#SourceRepositoryCache.items"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_repository_cache.SourceRepositoryCache.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator of (str, str, str) containing the package name, path relative
+to repo root, and package xml string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.source_repository_cache.SourceRepositoryCache.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_repository_cache.html#SourceRepositoryCache.keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_repository_cache.SourceRepositoryCache.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of packages in the repo cache.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rosdistro.source_repository_cache.SourceRepositoryCache.ref">
+<code class="descname">ref</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_repository_cache.html#SourceRepositoryCache.ref"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_repository_cache.SourceRepositoryCache.ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version control hash.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.source_repository_specification">
+<span id="rosdistro-source-repository-specification-module"></span><h2>rosdistro.source_repository_specification module<a class="headerlink" href="#module-rosdistro.source_repository_specification" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.source_repository_specification.SourceRepositorySpecification">
+<em class="property">class </em><code class="descclassname">rosdistro.source_repository_specification.</code><code class="descname">SourceRepositorySpecification</code><span class="sig-paren">(</span><em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_repository_specification.html#SourceRepositorySpecification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_repository_specification.SourceRepositorySpecification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rosdistro.repository_specification.RepositorySpecification" title="rosdistro.repository_specification.RepositorySpecification"><code class="xref py py-class docutils literal notranslate"><span class="pre">rosdistro.repository_specification.RepositorySpecification</span></code></a></p>
+<dl class="method">
+<dt id="rosdistro.source_repository_specification.SourceRepositorySpecification.get_data">
+<code class="descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/source_repository_specification.html#SourceRepositorySpecification.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.source_repository_specification.SourceRepositorySpecification.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.status">
+<span id="rosdistro-status-module"></span><h2>rosdistro.status module<a class="headerlink" href="#module-rosdistro.status" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-rosdistro.vcs">
+<span id="rosdistro-vcs-module"></span><h2>rosdistro.vcs module<a class="headerlink" href="#module-rosdistro.vcs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rosdistro.vcs.Git">
+<em class="property">class </em><code class="descclassname">rosdistro.vcs.</code><code class="descname">Git</code><span class="sig-paren">(</span><em>cwd=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/vcs.html#Git"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.vcs.Git" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="rosdistro.vcs.Git.command">
+<code class="descname">command</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/vcs.html#Git.command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.vcs.Git.command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rosdistro.vcs.Git.version_gte">
+<em class="property">classmethod </em><code class="descname">version_gte</code><span class="sig-paren">(</span><em>version</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/vcs.html#Git.version_gte"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.vcs.Git.version_gte" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.vcs.ref_is_hash">
+<code class="descclassname">rosdistro.vcs.</code><code class="descname">ref_is_hash</code><span class="sig-paren">(</span><em>ref</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/vcs.html#ref_is_hash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.vcs.ref_is_hash" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.verify">
+<span id="rosdistro-verify-module"></span><h2>rosdistro.verify module<a class="headerlink" href="#module-rosdistro.verify" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.verify.reformat_files">
+<code class="descclassname">rosdistro.verify.</code><code class="descname">reformat_files</code><span class="sig-paren">(</span><em>index_url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/verify.html#reformat_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.verify.reformat_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.verify.verify_files">
+<code class="descclassname">rosdistro.verify.</code><code class="descname">verify_files</code><span class="sig-paren">(</span><em>index_url</em>, <em>callback</em>, <em>include_deprecated=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/verify.html#verify_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.verify.verify_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.verify.verify_files_identical">
+<code class="descclassname">rosdistro.verify.</code><code class="descname">verify_files_identical</code><span class="sig-paren">(</span><em>index_url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/verify.html#verify_files_identical"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.verify.verify_files_identical" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.verify.verify_files_parsable">
+<code class="descclassname">rosdistro.verify.</code><code class="descname">verify_files_parsable</code><span class="sig-paren">(</span><em>index_url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/verify.html#verify_files_parsable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.verify.verify_files_parsable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro.writer">
+<span id="rosdistro-writer-module"></span><h2>rosdistro.writer module<a class="headerlink" href="#module-rosdistro.writer" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.writer.yaml_from_distribution_file">
+<code class="descclassname">rosdistro.writer.</code><code class="descname">yaml_from_distribution_file</code><span class="sig-paren">(</span><em>distribution_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/writer.html#yaml_from_distribution_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.writer.yaml_from_distribution_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.writer.yaml_from_release_file">
+<code class="descclassname">rosdistro.writer.</code><code class="descname">yaml_from_release_file</code><span class="sig-paren">(</span><em>release_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro/writer.html#yaml_from_release_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.writer.yaml_from_release_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-rosdistro">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-rosdistro" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rosdistro.get_cached_distribution">
+<code class="descclassname">rosdistro.</code><code class="descname">get_cached_distribution</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em>, <em>cache=None</em>, <em>allow_lazy_load=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro.html#get_cached_distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.get_cached_distribution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.get_distribution">
+<code class="descclassname">rosdistro.</code><code class="descname">get_distribution</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro.html#get_distribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.get_distribution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.get_distribution_cache">
+<code class="descclassname">rosdistro.</code><code class="descname">get_distribution_cache</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro.html#get_distribution_cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.get_distribution_cache" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.get_distribution_cache_string">
+<code class="descclassname">rosdistro.</code><code class="descname">get_distribution_cache_string</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro.html#get_distribution_cache_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.get_distribution_cache_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.get_distribution_file">
+<code class="descclassname">rosdistro.</code><code class="descname">get_distribution_file</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro.html#get_distribution_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.get_distribution_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.get_distribution_files">
+<code class="descclassname">rosdistro.</code><code class="descname">get_distribution_files</code><span class="sig-paren">(</span><em>index</em>, <em>dist_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro.html#get_distribution_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.get_distribution_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.get_index">
+<code class="descclassname">rosdistro.</code><code class="descname">get_index</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro.html#get_index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.get_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rosdistro.get_index_url">
+<code class="descclassname">rosdistro.</code><code class="descname">get_index_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/rosdistro.html#get_index_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rosdistro.get_index_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">rosdistro</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">rosdistro package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="rosdistro.external.html">rosdistro.external package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rosdistro.manifest_provider.html">rosdistro.manifest_provider package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.aptdistro">rosdistro.aptdistro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.common">rosdistro.common module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.dependency_walker">rosdistro.dependency_walker module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.develdistro">rosdistro.develdistro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.distribution">rosdistro.distribution module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.distribution_cache">rosdistro.distribution_cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.distribution_cache_generator">rosdistro.distribution_cache_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.distribution_file">rosdistro.distribution_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.doc_build_file">rosdistro.doc_build_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.doc_file">rosdistro.doc_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.doc_repository_specification">rosdistro.doc_repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.freeze_source">rosdistro.freeze_source module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.index">rosdistro.index module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.legacy">rosdistro.legacy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.loader">rosdistro.loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.package">rosdistro.package module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.release">rosdistro.release module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.release_build">rosdistro.release_build module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.release_build_file">rosdistro.release_build_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.release_cache">rosdistro.release_cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.release_cache_generator">rosdistro.release_cache_generator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.release_file">rosdistro.release_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.release_repository_specification">rosdistro.release_repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.repository">rosdistro.repository module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.repository_specification">rosdistro.repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.rosdistro">rosdistro.rosdistro module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.source_build_file">rosdistro.source_build_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.source_file">rosdistro.source_file module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.source_repository_cache">rosdistro.source_repository_cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.source_repository_specification">rosdistro.source_repository_specification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.status">rosdistro.status module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.vcs">rosdistro.vcs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.verify">rosdistro.verify module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro.writer">rosdistro.writer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-rosdistro">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to rosdistro’s documentation!</a></li>
+      <li>Next: <a href="rosdistro.external.html" title="next chapter">rosdistro.external package</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/rosdistro.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

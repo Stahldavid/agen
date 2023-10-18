@@ -1,0 +1,489 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>rosdistro.rosdistro &#8212; rosdistro  documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for rosdistro.rosdistro</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="k">import</span> <span class="n">urlopen</span>
+    <span class="kn">from</span> <span class="nn">urllib.error</span> <span class="k">import</span> <span class="n">HTTPError</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">urllib2</span> <span class="k">import</span> <span class="n">urlopen</span>
+    <span class="kn">from</span> <span class="nn">urllib2</span> <span class="k">import</span> <span class="n">HTTPError</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">error</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">info</span>
+<span class="kn">from</span> <span class="nn">.common</span> <span class="k">import</span> <span class="n">warning</span>
+
+<span class="n">RES_DICT</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;build&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;buildtool&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="n">RES_TREE</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;build&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;buildtool&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="p">{}}</span>
+<span class="n">CACHE_VERSION</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">walks</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;FULL_WALK&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;build&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;build&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">,</span> <span class="s1">&#39;buildtool&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">],</span>
+                  <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;build&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">,</span> <span class="s1">&#39;buildtool&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">],</span>
+                  <span class="s1">&#39;buildtool&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;build&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">,</span> <span class="s1">&#39;buildtool&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">],</span>
+                  <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;build&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">,</span> <span class="s1">&#39;buildtool&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">]},</span>
+    <span class="s1">&#39;SPIRAL_OF_DOOM&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;build&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">],</span>
+                       <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;buildtool&#39;</span><span class="p">],</span>
+                       <span class="s1">&#39;buildtool&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">],</span>
+                       <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;build&#39;</span><span class="p">]}</span>
+
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="invert_dict"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.invert_dict">[docs]</a><span class="k">def</span> <span class="nf">invert_dict</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="n">inverted</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">v_keys</span> <span class="o">=</span> <span class="n">inverted</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">v_keys</span><span class="p">:</span>
+                <span class="n">v_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inverted</span></div>
+
+
+<div class="viewcode-block" id="RosDistro"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro">[docs]</a><span class="k">class</span> <span class="nc">RosDistro</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">cache_location</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depends_on1_cache</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">RES_TREE</span><span class="p">)</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_construct_rosdistro_file</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">name</span><span class="p">,))</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_construct_rosdistro_dependencies</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cache_location</span><span class="p">,))</span>
+        <span class="n">t1</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">t2</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="n">t2</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_construct_rosdistro_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span> <span class="o">=</span> <span class="n">RosDistroFile</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_construct_rosdistro_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">cache_location</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depends_file</span> <span class="o">=</span> <span class="n">RosDependencies</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">cache_location</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RosDistro.get_repositories"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro.get_repositories">[docs]</a>    <span class="k">def</span> <span class="nf">get_repositories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">repositories</span></div>
+
+<div class="viewcode-block" id="RosDistro.get_repository"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro.get_repository">[docs]</a>    <span class="k">def</span> <span class="nf">get_repository</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repo</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_repositories</span><span class="p">()[</span><span class="n">repo</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="RosDistro.get_packages"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro.get_packages">[docs]</a>    <span class="k">def</span> <span class="nf">get_packages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">packages</span></div>
+
+<div class="viewcode-block" id="RosDistro.get_package"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro.get_package">[docs]</a>    <span class="k">def</span> <span class="nf">get_package</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pkg</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_packages</span><span class="p">()[</span><span class="n">pkg</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="RosDistro.get_rosinstall"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro.get_rosinstall">[docs]</a>    <span class="k">def</span> <span class="nf">get_rosinstall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;last_release&#39;</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">&#39;vcs&#39;</span><span class="p">):</span>
+        <span class="n">rosinstall</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_to_pkg_list</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+            <span class="n">rosinstall</span> <span class="o">+=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_rosinstall</span><span class="p">(</span><span class="n">version</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rosinstall</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_depends_on1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">package_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">depends_on1_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">depends_on1_cache</span><span class="p">[</span><span class="n">package_name</span><span class="p">]</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">RES_DICT</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_packages</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">depends</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_depends1</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">package_name</span> <span class="ow">in</span> <span class="n">depends</span><span class="p">:</span>
+                    <span class="n">res</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depends_on1_cache</span><span class="p">[</span><span class="n">package_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+<div class="viewcode-block" id="RosDistro.get_depends_on1"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro.get_depends_on1">[docs]</a>    <span class="k">def</span> <span class="nf">get_depends_on1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_depends_on</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RosDistro.get_depends_on"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro.get_depends_on">[docs]</a>    <span class="k">def</span> <span class="nf">get_depends_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dep_dict</span><span class="o">=</span><span class="n">walks</span><span class="p">[</span><span class="s1">&#39;FULL_WALK&#39;</span><span class="p">]):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">RES_DICT</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_to_pkg_list</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">dep_type</span><span class="p">,</span> <span class="n">dep_list</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_get_depends_on_recursive</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dep_type</span><span class="p">,</span> <span class="n">invert_dict</span><span class="p">(</span><span class="n">dep_dict</span><span class="p">),</span> <span class="n">dep_list</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_depends_on_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">dep_type</span><span class="p">,</span> <span class="n">dep_dict</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">curr_depth</span><span class="p">):</span>
+        <span class="n">deps_on</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_depends_on1</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+
+        <span class="c1"># merge and recurse</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">deps_on</span><span class="p">[</span><span class="n">dep_type</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">depth</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">curr_depth</span> <span class="o">&lt;</span> <span class="n">depth</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">next_dep_type</span> <span class="ow">in</span> <span class="n">dep_dict</span><span class="p">[</span><span class="n">dep_type</span><span class="p">]:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_get_depends_on_recursive</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">next_dep_type</span><span class="p">,</span> <span class="n">dep_dict</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">curr_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_depends1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">packages</span><span class="p">[</span><span class="n">package_name</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">depends_file</span><span class="o">.</span><span class="n">get_dependencies</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RosDistro.get_depends1"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro.get_depends1">[docs]</a>    <span class="k">def</span> <span class="nf">get_depends1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_depends</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RosDistro.get_depends"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistro.get_depends">[docs]</a>    <span class="k">def</span> <span class="nf">get_depends</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dep_dict</span><span class="o">=</span><span class="n">walks</span><span class="p">[</span><span class="s1">&#39;FULL_WALK&#39;</span><span class="p">]):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">RES_DICT</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_to_pkg_list</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">dep_type</span><span class="p">,</span> <span class="n">dep_list</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_get_depends_recursive</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">dep_type</span><span class="p">,</span> <span class="n">dep_dict</span><span class="p">,</span> <span class="n">dep_list</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_depends_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">dep_type</span><span class="p">,</span> <span class="n">dep_dict</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">curr_depth</span><span class="p">):</span>
+        <span class="n">deps1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_depends1</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+
+        <span class="c1"># merge and recurse</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">deps1</span><span class="p">[</span><span class="n">dep_type</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">depth</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">curr_depth</span> <span class="o">&lt;</span> <span class="n">depth</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_packages</span><span class="p">():</span>  <span class="c1"># recurse on packages only</span>
+                        <span class="k">for</span> <span class="n">next_dep_type</span> <span class="ow">in</span> <span class="n">dep_dict</span><span class="p">[</span><span class="n">dep_type</span><span class="p">]:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">_get_depends_recursive</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">next_dep_type</span><span class="p">,</span> <span class="n">dep_dict</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">curr_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_convert_to_pkg_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="n">items</span><span class="p">]</span>
+        <span class="n">pkgs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">repositories</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">repositories</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">packages</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pkgs</span><span class="p">:</span>
+                        <span class="n">pkgs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">packages</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">packages</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="n">pkgs</span><span class="p">:</span>
+                    <span class="n">pkgs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distro_file</span><span class="o">.</span><span class="n">packages</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;!!! </span><span class="si">{0}</span><span class="s2"> is not a package name nor a repository name&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">pkgs</span></div>
+
+
+<div class="viewcode-block" id="RosDistroFile"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDistroFile">[docs]</a><span class="k">class</span> <span class="nc">RosDistroFile</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">packages</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repositories</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="c1"># parse ros distro file</span>
+        <span class="n">distro_url</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="s1">&#39;https://raw.github.com/ros/rosdistro/master/releases/</span><span class="si">%s</span><span class="s1">.yaml&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">distro</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">distro_url</span><span class="o">.</span><span class="n">read</span><span class="p">())[</span><span class="s1">&#39;repositories&#39;</span><span class="p">]</span>
+
+        <span class="c1"># loop over all repo&#39;s</span>
+        <span class="k">for</span> <span class="n">repo_name</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">distro</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">repo</span> <span class="o">=</span> <span class="n">RosRepository</span><span class="p">(</span><span class="n">repo_name</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repositories</span><span class="p">[</span><span class="n">repo_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">repo</span>
+            <span class="k">if</span> <span class="s1">&#39;packages&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>  <span class="c1"># support unary disto&#39;s</span>
+                <span class="n">data</span><span class="p">[</span><span class="s1">&#39;packages&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">repo_name</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}</span>
+
+            <span class="c1"># loop over all packages</span>
+            <span class="k">for</span> <span class="n">pkg_name</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;packages&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">pkg</span> <span class="o">=</span> <span class="n">RosPackage</span><span class="p">(</span><span class="n">pkg_name</span><span class="p">,</span> <span class="n">repo</span><span class="p">)</span>
+                <span class="n">repo</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">packages</span><span class="p">[</span><span class="n">pkg_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pkg</span></div>
+
+
+<div class="viewcode-block" id="RosRepository"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosRepository">[docs]</a><span class="k">class</span> <span class="nc">RosRepository</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">version</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">packages</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="RosRepository.get_rosinstall"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosRepository.get_rosinstall">[docs]</a>    <span class="k">def</span> <span class="nf">get_rosinstall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">get_rosinstall</span><span class="p">(</span><span class="n">version</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">packages</span><span class="p">])</span></div></div>
+
+
+<div class="viewcode-block" id="RosPackage"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosPackage">[docs]</a><span class="k">class</span> <span class="nc">RosPackage</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">repository</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repository</span> <span class="o">=</span> <span class="n">repository</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_package_xmls</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_release_tags</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">_fetch_package_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdistro</span><span class="p">):</span>
+        <span class="n">repo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository</span>
+        <span class="k">if</span> <span class="s1">&#39;github.com&#39;</span> <span class="ow">in</span> <span class="n">repo</span><span class="o">.</span><span class="n">url</span><span class="p">:</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">url</span>
+            <span class="n">release_tag</span> <span class="o">=</span> <span class="s1">&#39;release/</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">/</span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rosdistro</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">repo</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.git&#39;</span><span class="p">,</span> <span class="s1">&#39;/</span><span class="si">{0}</span><span class="s1">/package.xml&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">release_tag</span><span class="p">))</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;git://&#39;</span><span class="p">,</span> <span class="s1">&#39;https://&#39;</span><span class="p">)</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.&#39;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">package_xml</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Failed to read package.xml file from url &#39;</span><span class="si">{0}</span><span class="s2">&#39;: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+                    <span class="n">warning</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+                    <span class="n">upstream_version</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">legacy_release_tag</span> <span class="o">=</span> <span class="s1">&#39;release/</span><span class="si">{0}</span><span class="s1">/</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">upstream_version</span><span class="p">)</span>
+                    <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">release_tag</span><span class="p">,</span> <span class="n">legacy_release_tag</span><span class="p">)</span>
+                    <span class="n">info</span><span class="p">(</span><span class="s2">&quot;Trying to read from legacy-style url &#39;</span><span class="si">{0}</span><span class="s2">&#39; instead&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+                    <span class="n">package_xml</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">AND</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot;Failed to read package.xml file from url &#39;</span><span class="si">{0}</span><span class="s2">&#39;: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_package_xmls</span><span class="p">[</span><span class="n">rosdistro</span><span class="p">]</span> <span class="o">=</span> <span class="n">package_xml</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_release_tags</span><span class="p">[</span><span class="n">rosdistro</span><span class="p">]</span> <span class="o">=</span> <span class="n">release_tag</span>
+            <span class="k">return</span> <span class="n">package_xml</span><span class="p">,</span> <span class="n">release_tag</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Non-github repositories are net yet supported by the rosdistro tool&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RosPackage.get_package_xml"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosPackage.get_package_xml">[docs]</a>    <span class="k">def</span> <span class="nf">get_package_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdistro</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">rosdistro</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_package_xmls</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_package_xml</span><span class="p">(</span><span class="n">rosdistro</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_package_xmls</span><span class="p">[</span><span class="n">rosdistro</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="RosPackage.get_release_tag"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosPackage.get_release_tag">[docs]</a>    <span class="k">def</span> <span class="nf">get_release_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rosdistro</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">rosdistro</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_release_tags</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_package_xml</span><span class="p">(</span><span class="n">rosdistro</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_release_tags</span><span class="p">[</span><span class="n">rosdistro</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="RosPackage.get_rosinstall"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosPackage.get_rosinstall">[docs]</a>    <span class="k">def</span> <span class="nf">get_rosinstall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">rosdistro</span><span class="p">):</span>
+        <span class="c1"># can&#39;t get last release of unreleased repository</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;last_release&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Can&#39;t get the last release of unreleased repository </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="c1"># set specific version of last release of needed</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;last_release&#39;</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># generate the rosinstall file</span>
+        <span class="n">release_tag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_release_tag</span><span class="p">(</span><span class="n">rosdistro</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="s1">&#39;master&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">([{</span>
+                <span class="s1">&#39;git&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;local-name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="s1">&#39;uri&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+                    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">release_tag</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="p">}}],</span>
+                <span class="n">default_style</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">source</span> <span class="o">==</span> <span class="s1">&#39;vcs&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">([{</span>
+                    <span class="s1">&#39;git&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;local-name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                        <span class="s1">&#39;uri&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+                        <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">release_tag</span>
+                    <span class="p">}}],</span>
+                    <span class="n">default_style</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">source</span> <span class="o">==</span> <span class="s1">&#39;tar&#39;</span><span class="p">:</span>
+                <span class="n">uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">url</span>
+                <span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;git://&#39;</span><span class="p">,</span> <span class="s1">&#39;https://&#39;</span><span class="p">)</span>
+                <span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.git&#39;</span><span class="p">,</span> <span class="s1">&#39;/archive/</span><span class="si">{0}</span><span class="s1">.tar.gz&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">release_tag</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_dump</span><span class="p">([{</span>
+                    <span class="s1">&#39;tar&#39;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;local-name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                        <span class="s1">&#39;uri&#39;</span><span class="p">:</span> <span class="n">uri</span><span class="p">,</span>
+                        <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">-release-</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repository</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">release_tag</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">))</span>
+                    <span class="p">}}],</span>
+                    <span class="n">default_style</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Invalid source type </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">source</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="RosDependencies"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDependencies">[docs]</a><span class="k">class</span> <span class="nc">RosDependencies</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">cache_location</span><span class="p">):</span>
+        <span class="c1"># url&#39;s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-dependencies.yaml&#39;</span> <span class="o">%</span> <span class="n">name</span>
+        <span class="k">if</span> <span class="n">cache_location</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">local_url</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_location</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">rospkg</span> <span class="k">import</span> <span class="n">environment</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">local_url</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">environment</span><span class="o">.</span><span class="n">get_ros_home</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server_url</span> <span class="o">=</span> <span class="s1">&#39;http://www.ros.org/rosdistro/</span><span class="si">%s</span><span class="s1">-dependencies.tar.gz&#39;</span> <span class="o">%</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># initialize with the local or server cache</span>
+        <span class="n">deps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_local_cache</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">deps</span> <span class="o">==</span> <span class="p">{}:</span>
+            <span class="n">deps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_server_cache</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">deps</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">==</span> <span class="s1">&#39;server&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_local_cache</span><span class="p">()</span>
+
+<div class="viewcode-block" id="RosDependencies.get_dependencies"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.RosDependencies.get_dependencies">[docs]</a>    <span class="k">def</span> <span class="nf">get_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package</span><span class="p">,</span> <span class="n">rosdistro</span><span class="p">):</span>
+        <span class="n">repo</span> <span class="o">=</span> <span class="n">package</span><span class="o">.</span><span class="n">repository</span>
+        <span class="c1"># support unreleased stacks</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">repo</span><span class="o">.</span><span class="n">version</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">RES_DICT</span><span class="p">)</span>
+
+        <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">?</span><span class="si">%s</span><span class="s1">?</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">repo</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="n">package</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># check in memory first</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="c1"># read server cache if needed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">!=</span> <span class="s1">&#39;server&#39;</span><span class="p">:</span>
+            <span class="n">deps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_server_cache</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">deps</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_write_local_cache</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="c1"># retrieve dependencies</span>
+        <span class="n">deps</span> <span class="o">=</span> <span class="n">retrieve_dependencies</span><span class="p">(</span><span class="n">package</span><span class="o">.</span><span class="n">get_package_xml</span><span class="p">(</span><span class="n">rosdistro</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">deps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_local_cache</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">deps</span></div>
+
+    <span class="k">def</span> <span class="nf">_read_server_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="s1">&#39;server&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">server_url</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">HTTPError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Failed to read server cache: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">ex</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{}</span>
+        <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+            <span class="n">fh</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+            <span class="n">tar</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">tar</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="n">deps</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">deps</span> \
+           <span class="ow">or</span> <span class="s1">&#39;cache_version&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">deps</span> \
+           <span class="ow">or</span> <span class="n">deps</span><span class="p">[</span><span class="s1">&#39;cache_version&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">CACHE_VERSION</span> \
+           <span class="ow">or</span> <span class="s1">&#39;repositories&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">deps</span><span class="p">:</span>
+            <span class="k">raise</span>
+        <span class="k">return</span> <span class="n">deps</span><span class="p">[</span><span class="s1">&#39;repositories&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_read_local_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="s1">&#39;local&#39;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_url</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">deps</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">deps</span> \
+                   <span class="ow">or</span> <span class="s1">&#39;cache_version&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">deps</span> \
+                   <span class="ow">or</span> <span class="n">deps</span><span class="p">[</span><span class="s1">&#39;cache_version&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">CACHE_VERSION</span> \
+                   <span class="ow">or</span> <span class="s1">&#39;repositories&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">deps</span><span class="p">:</span>
+                    <span class="k">raise</span>
+                <span class="k">return</span> <span class="n">deps</span><span class="p">[</span><span class="s1">&#39;repositories&#39;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">_write_local_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_url</span><span class="p">))</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_url</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">({</span><span class="s1">&#39;cache_version&#39;</span><span class="p">:</span> <span class="n">CACHE_VERSION</span><span class="p">,</span>
+                           <span class="s1">&#39;repositories&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dependencies</span><span class="p">},</span>
+                          <span class="n">f</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to write local dependency cache to </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_url</span><span class="p">,</span> <span class="n">ex</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="retrieve_dependencies"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.retrieve_dependencies">[docs]</a><span class="k">def</span> <span class="nf">retrieve_dependencies</span><span class="p">(</span><span class="n">package_xml</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">get_package_dependencies</span><span class="p">(</span><span class="n">package_xml</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Failed to get dependencies from package_xml:</span><span class="se">\n</span><span class="s2">```</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="s2">```&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package_xml</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="get_package_dependencies"><a class="viewcode-back" href="../../rosdistro.html#rosdistro.rosdistro.get_package_dependencies">[docs]</a><span class="k">def</span> <span class="nf">get_package_dependencies</span><span class="p">(</span><span class="n">package_xml</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;/usr/lib/pymodules/python2.7&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/usr/lib/pymodules/python2.7&quot;</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">catkin_pkg</span> <span class="k">import</span> <span class="n">package</span> <span class="k">as</span> <span class="n">catkin_pkg</span>
+
+    <span class="n">pkg</span> <span class="o">=</span> <span class="n">catkin_pkg</span><span class="o">.</span><span class="n">parse_package_string</span><span class="p">(</span><span class="n">package_xml</span><span class="p">)</span>
+    <span class="n">depends1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;build&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">pkg</span><span class="o">.</span><span class="n">build_depends</span><span class="p">],</span>
+                <span class="s1">&#39;buildtool&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">pkg</span><span class="o">.</span><span class="n">buildtool_depends</span><span class="p">],</span>
+                <span class="s1">&#39;test&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">pkg</span><span class="o">.</span><span class="n">test_depends</span><span class="p">],</span>
+                <span class="s1">&#39;run&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">pkg</span><span class="o">.</span><span class="n">run_depends</span><span class="p">]}</span>
+    <span class="k">return</span> <span class="n">depends1</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">rosdistro</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../rosdistro.html">rosdistro package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  <li><a href="../rosdistro.html">rosdistro</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

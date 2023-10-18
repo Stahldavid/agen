@@ -1,0 +1,6 @@
+class Controller:
+    def __init__(self):
+        # Initialize the controller
+
+    def run(self):
+        # Run the controller

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to the documentation for rcl_action &mdash; rcl_action 6.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/collapsible-lists/css/tree_view.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/collapsible-lists/js/CollapsibleLists.compressed.js"></script>
+        <script src="_static/collapsible-lists/js/apply-collapsible-lists.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="rcl: Common functionality ROS actions" href="generated/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            rcl_action
+          </a>
+              <div class="version">
+                6.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">rcl_action</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#reference">Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/index.html#classes-and-structs">Classes and Structs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrcl__action__cancel__response__s.html">Struct rcl_action_cancel_response_s</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrcl__action__cancel__response__s.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrcl__action__client__options__s.html">Struct rcl_action_client_options_s</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrcl__action__client__options__s.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrcl__action__client__s.html">Struct rcl_action_client_s</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrcl__action__client__s.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrcl__action__goal__handle__s.html">Struct rcl_action_goal_handle_s</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrcl__action__goal__handle__s.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrcl__action__goal__status__array__s.html">Struct rcl_action_goal_status_array_s</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrcl__action__goal__status__array__s.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrcl__action__server__options__s.html">Struct rcl_action_server_options_s</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrcl__action__server__options__s.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/structrcl__action__server__s.html">Struct rcl_action_server_s</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/structrcl__action__server__s.html#struct-documentation">Struct Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/index.html#enums">Enums</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/enum_types_8h_1a8ad95b36ab0bcff4427e3bf43513e9b0.html">Enum rcl_action_goal_event_e</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/enum_types_8h_1a8ad95b36ab0bcff4427e3bf43513e9b0.html#enum-documentation">Enum Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/index.html#functions">Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a2f1a14f4cb1b2114fa0d08f0a5034822.html">Function rcl_action_accept_new_goal</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a2f1a14f4cb1b2114fa0d08f0a5034822.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_types_8h_1a198433232d66ab846646c2ccaf0d06e5.html">Function rcl_action_cancel_response_fini</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_types_8h_1a198433232d66ab846646c2ccaf0d06e5.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_types_8h_1abf26e88b7f62d707c954b47bbcc2006f.html">Function rcl_action_cancel_response_init</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_types_8h_1abf26e88b7f62d707c954b47bbcc2006f.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1aab842b36fa0ebb1ee4b620fd4bb918e8.html">Function rcl_action_client_fini</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1aab842b36fa0ebb1ee4b620fd4bb918e8.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a59197294be37a9ec617df55a98091ecf.html">Function rcl_action_client_get_action_name</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a59197294be37a9ec617df55a98091ecf.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a33dc135836b48c4a360c5cf595435915.html">Function rcl_action_client_get_default_options</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a33dc135836b48c4a360c5cf595435915.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1ad33d068bb48bc5d74f7cd4dc371e6bf8.html">Function rcl_action_client_get_options</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1ad33d068bb48bc5d74f7cd4dc371e6bf8.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a83dd13761a1aa0e65ebf90b779d5a442.html">Function rcl_action_client_init</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a83dd13761a1aa0e65ebf90b779d5a442.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1ad4357d33e4932c0d7f006885a080a282.html">Function rcl_action_client_is_valid</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1ad4357d33e4932c0d7f006885a080a282.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a5d84aeb723d7329f7ed96ac99bcd6260.html">Function rcl_action_client_set_cancel_client_callback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a5d84aeb723d7329f7ed96ac99bcd6260.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a2aecdda0ce99ef7241e5be5024f1cdb0.html">Function rcl_action_client_set_feedback_subscription_callback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a2aecdda0ce99ef7241e5be5024f1cdb0.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1aff844378c6514ba733a196a1219a3456.html">Function rcl_action_client_set_goal_client_callback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1aff844378c6514ba733a196a1219a3456.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1aa9c02b454a4e4d00c937de03603c607e.html">Function rcl_action_client_set_result_client_callback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1aa9c02b454a4e4d00c937de03603c607e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a28038f2bf13779be6f9927e86904b8e6.html">Function rcl_action_client_set_status_subscription_callback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a28038f2bf13779be6f9927e86904b8e6.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_wait_8h_1a2b83f225a06866a4a2839990b94acf8e.html">Function rcl_action_client_wait_set_get_entities_ready</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_wait_8h_1a2b83f225a06866a4a2839990b94acf8e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_wait_8h_1a6e57887c8594b6b224b4e2312e3aa42c.html">Function rcl_action_client_wait_set_get_num_entities</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_wait_8h_1a6e57887c8594b6b224b4e2312e3aa42c.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1ade5e368247bb0b8a789bd26e7386619d.html">Function rcl_action_expire_goals</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1ade5e368247bb0b8a789bd26e7386619d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_names_8h_1a5359dcb2cdde6c26e30077dbe78d21df.html">Function rcl_action_get_cancel_service_name</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_names_8h_1a5359dcb2cdde6c26e30077dbe78d21df.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_graph_8h_1ab65b668645eb4b7305efdfd825f84a8a.html">Function rcl_action_get_client_names_and_types_by_node</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_graph_8h_1ab65b668645eb4b7305efdfd825f84a8a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_names_8h_1a4ba8548f3f3ece651c23fcfec4e8855c.html">Function rcl_action_get_feedback_topic_name</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_names_8h_1a4ba8548f3f3ece651c23fcfec4e8855c.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_names_8h_1a381dd31bd7919d0a01b82811fe5d7933.html">Function rcl_action_get_goal_service_name</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_names_8h_1a381dd31bd7919d0a01b82811fe5d7933.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a9ed511e4ed7c37b30299e14c1aef81c5.html">Function rcl_action_get_goal_status_array</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a9ed511e4ed7c37b30299e14c1aef81c5.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_graph_8h_1af289ed4cc8134f4219e416e24492481b.html">Function rcl_action_get_names_and_types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_graph_8h_1af289ed4cc8134f4219e416e24492481b.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_names_8h_1a71c55391fa3b82789a85df1ada81911d.html">Function rcl_action_get_result_service_name</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_names_8h_1a71c55391fa3b82789a85df1ada81911d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_graph_8h_1ad2602ead9e5e0ddb764280aadd7ad8df.html">Function rcl_action_get_server_names_and_types_by_node</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_graph_8h_1ad2602ead9e5e0ddb764280aadd7ad8df.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_names_8h_1a862abe7940ca7f5795524f44b9efa1ad.html">Function rcl_action_get_status_topic_name</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_names_8h_1a862abe7940ca7f5795524f44b9efa1ad.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_types_8h_1acfe02c2265bf70b453991ab6f0b18ccc.html">Function rcl_action_get_zero_initialized_cancel_request</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_types_8h_1acfe02c2265bf70b453991ab6f0b18ccc.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_types_8h_1a47146ddd42868cde82dc4db00c87e744.html">Function rcl_action_get_zero_initialized_cancel_response</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_types_8h_1a47146ddd42868cde82dc4db00c87e744.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1ad2cd8cbb49713de66082c0cd5486669e.html">Function rcl_action_get_zero_initialized_client</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1ad2cd8cbb49713de66082c0cd5486669e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__handle_8h_1a5fa5bee68335e88dde07223646743ca6.html">Function rcl_action_get_zero_initialized_goal_handle</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__handle_8h_1a5fa5bee68335e88dde07223646743ca6.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_types_8h_1a00a20aec5702ba117a723b17a6270e0e.html">Function rcl_action_get_zero_initialized_goal_info</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_types_8h_1a00a20aec5702ba117a723b17a6270e0e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_types_8h_1aabbb562e144af66fee23e8e967030a15.html">Function rcl_action_get_zero_initialized_goal_status_array</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_types_8h_1aabbb562e144af66fee23e8e967030a15.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a0e161797ad05bddb2225e5562823060e.html">Function rcl_action_get_zero_initialized_server</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a0e161797ad05bddb2225e5562823060e.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__handle_8h_1afbedbe2d1fc8638eedc18c8134e96026.html">Function rcl_action_goal_handle_fini</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__handle_8h_1afbedbe2d1fc8638eedc18c8134e96026.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__handle_8h_1a2ee7864b98db42edf7722fd635d1e769.html">Function rcl_action_goal_handle_get_info</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__handle_8h_1a2ee7864b98db42edf7722fd635d1e769.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__handle_8h_1a219ee18de9395ac6c1f36a2b5d62cc68.html">Function rcl_action_goal_handle_get_status</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__handle_8h_1a219ee18de9395ac6c1f36a2b5d62cc68.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__handle_8h_1a80a66761972aff788ba3aa718a4c858a.html">Function rcl_action_goal_handle_init</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__handle_8h_1a80a66761972aff788ba3aa718a4c858a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__handle_8h_1a9ba25a71e7c45ee8af2890bc1416fc90.html">Function rcl_action_goal_handle_is_active</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__handle_8h_1a9ba25a71e7c45ee8af2890bc1416fc90.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__handle_8h_1ac8337de8a11ad29e6b603ef787c66b6b.html">Function rcl_action_goal_handle_is_cancelable</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__handle_8h_1ac8337de8a11ad29e6b603ef787c66b6b.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__handle_8h_1a1e7211ad0005e7d336cae4fd77289299.html">Function rcl_action_goal_handle_is_valid</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__handle_8h_1a1e7211ad0005e7d336cae4fd77289299.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_types_8h_1a5b7bc7d7e31340519a2e24aa405529df.html">Function rcl_action_goal_status_array_fini</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_types_8h_1a5b7bc7d7e31340519a2e24aa405529df.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_types_8h_1adc02e7941f05a0e96be6e20a7a3ff539.html">Function rcl_action_goal_status_array_init</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_types_8h_1adc02e7941f05a0e96be6e20a7a3ff539.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a8d2815ee08a50636093b72dd014e3fc3.html">Function rcl_action_notify_goal_done</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a8d2815ee08a50636093b72dd014e3fc3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1ab3da67913bb62d836cdf20bafeafdc5d.html">Function rcl_action_process_cancel_request</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1ab3da67913bb62d836cdf20bafeafdc5d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a5287036aa866aee99e8271c80becf5a9.html">Function rcl_action_publish_feedback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a5287036aa866aee99e8271c80becf5a9.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a8bbe17d3bde3628e3ec66400a17da6fc.html">Function rcl_action_publish_status</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a8bbe17d3bde3628e3ec66400a17da6fc.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a74b3f1b51fd0d5e51f932005d0f9a5c4.html">Function rcl_action_send_cancel_request</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a74b3f1b51fd0d5e51f932005d0f9a5c4.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a57919bfc1bf394d16551f52cce7ed947.html">Function rcl_action_send_cancel_response</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a57919bfc1bf394d16551f52cce7ed947.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1ae18cdce195d79b7a41f9fed602dfe9af.html">Function rcl_action_send_goal_request</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1ae18cdce195d79b7a41f9fed602dfe9af.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a1c7406b9f86e476ff559146e43a4b9dd.html">Function rcl_action_send_goal_response</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a1c7406b9f86e476ff559146e43a4b9dd.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a2d4ab2fc7871b3a6a4d15066e8f46a09.html">Function rcl_action_send_result_request</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a2d4ab2fc7871b3a6a4d15066e8f46a09.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a4c6371d9c8e7cda3d4d9ead348b40df1.html">Function rcl_action_send_result_response</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a4c6371d9c8e7cda3d4d9ead348b40df1.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1aed70cc0fb87c4421007cfe58619fe6ab.html">Function rcl_action_server_fini</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1aed70cc0fb87c4421007cfe58619fe6ab.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a015b1c90f63271451e06d543c8f6a28c.html">Function rcl_action_server_get_action_name</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a015b1c90f63271451e06d543c8f6a28c.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1ac73f1bd0bba19c42d229f80d02fb577d.html">Function rcl_action_server_get_default_options</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1ac73f1bd0bba19c42d229f80d02fb577d.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1ad78e6775c7c0df4185651f49569ea9c2.html">Function rcl_action_server_get_goal_handles</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1ad78e6775c7c0df4185651f49569ea9c2.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1afc68d4e4a7b2f3d1cd2bf53c98dd8d21.html">Function rcl_action_server_get_options</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1afc68d4e4a7b2f3d1cd2bf53c98dd8d21.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a1d5dc2286d4e1eeefd839f10afcf7e86.html">Function rcl_action_server_goal_exists</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a1d5dc2286d4e1eeefd839f10afcf7e86.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a9562de74401e786fc5a4a92e2b0e0d0f.html">Function rcl_action_server_init</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a9562de74401e786fc5a4a92e2b0e0d0f.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a5f696ac019be578cafdabc124cfab546.html">Function rcl_action_server_is_available</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a5f696ac019be578cafdabc124cfab546.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a783f553951b8887d013a08d1f323d1e3.html">Function rcl_action_server_is_valid</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a783f553951b8887d013a08d1f323d1e3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1adc369190b0a3d2ca8f760a0972374d0a.html">Function rcl_action_server_is_valid_except_context</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1adc369190b0a3d2ca8f760a0972374d0a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a142ff7a69084020798aee5ff03fbdea3.html">Function rcl_action_server_set_cancel_service_callback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a142ff7a69084020798aee5ff03fbdea3.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a690bc55853d0cad7ac5215586494c6c6.html">Function rcl_action_server_set_goal_service_callback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a690bc55853d0cad7ac5215586494c6c6.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a9d156a530d54d76d4339f61afe45ca9a.html">Function rcl_action_server_set_result_service_callback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a9d156a530d54d76d4339f61afe45ca9a.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_wait_8h_1a459db840da26e3d7e6f56df1d2ce6669.html">Function rcl_action_server_wait_set_get_entities_ready</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_wait_8h_1a459db840da26e3d7e6f56df1d2ce6669.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_wait_8h_1a2bd86112fdc08ccb05faafe903bb3810.html">Function rcl_action_server_wait_set_get_num_entities</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_wait_8h_1a2bd86112fdc08ccb05faafe903bb3810.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a69302552acbabcdbc8f266a921a9e712.html">Function rcl_action_take_cancel_request</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a69302552acbabcdbc8f266a921a9e712.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a05442790683ecbb9ec0dec3621435806.html">Function rcl_action_take_cancel_response</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a05442790683ecbb9ec0dec3621435806.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1ac42158f83925ade93ca69ac36394f38f.html">Function rcl_action_take_feedback</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1ac42158f83925ade93ca69ac36394f38f.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1ae03358601cb65ca800099a2c97e5aa33.html">Function rcl_action_take_goal_request</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1ae03358601cb65ca800099a2c97e5aa33.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1aeb5b30783747aa9f787ecaae923f54ef.html">Function rcl_action_take_goal_response</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1aeb5b30783747aa9f787ecaae923f54ef.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__server_8h_1a0069d2bc654b4d2389af71382293537c.html">Function rcl_action_take_result_request</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__server_8h_1a0069d2bc654b4d2389af71382293537c.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a84282537dd1089761e01fd285a26056b.html">Function rcl_action_take_result_response</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a84282537dd1089761e01fd285a26056b.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_action__client_8h_1a690ecc6c5e41634692b599c38c6e7256.html">Function rcl_action_take_status</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_action__client_8h_1a690ecc6c5e41634692b599c38c6e7256.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__state__machine_8h_1a1c45149a012b5fdfca499e2814b73d87.html">Function rcl_action_transition_goal_state</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__state__machine_8h_1a1c45149a012b5fdfca499e2814b73d87.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_goal__handle_8h_1ad55dad7e2d725f55aa5b0dcaad341362.html">Function rcl_action_update_goal_state</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_goal__handle_8h_1ad55dad7e2d725f55aa5b0dcaad341362.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_wait_8h_1ae505945651e3d570296dfa9789854359.html">Function rcl_action_wait_set_add_action_client</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_wait_8h_1ae505945651e3d570296dfa9789854359.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/function_wait_8h_1a2ce455d540cb0452f9eb8a2e94e948b1.html">Function rcl_action_wait_set_add_action_server</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/function_wait_8h_1a2ce455d540cb0452f9eb8a2e94e948b1.html#function-documentation">Function Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/index.html#variables">Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_types_8h_1a713e2bf6e3e90bc2466634504774562f.html">Variable goal_event_descriptions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/variable_types_8h_1a713e2bf6e3e90bc2466634504774562f.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_types_8h_1a373eeaeba2bdac0136212fce92ec328d.html">Variable goal_state_descriptions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/variable_types_8h_1a373eeaeba2bdac0136212fce92ec328d.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/variable_default__qos_8h_1ad3c805098fabea38b9b46df3cdb06945.html">Variable rcl_action_qos_profile_status_default</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/variable_default__qos_8h_1ad3c805098fabea38b9b46df3cdb06945.html#variable-documentation">Variable Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/index.html#defines">Defines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1ac162a8102fc5bd02ee704d757b7cfec8.html">Define GOAL_STATE_ABORTED</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1ac162a8102fc5bd02ee704d757b7cfec8.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a828b9efa4339e8f0708e5fa0a8ad121a.html">Define GOAL_STATE_ACCEPTED</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a828b9efa4339e8f0708e5fa0a8ad121a.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1abd96dfa1949d684b39d60af7c7f9ec79.html">Define GOAL_STATE_CANCELED</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1abd96dfa1949d684b39d60af7c7f9ec79.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1abf2918c7709dd62a2e2747d2699e8a24.html">Define GOAL_STATE_CANCELING</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1abf2918c7709dd62a2e2747d2699e8a24.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a94ea3b25d9e0f911b53268c8c8961149.html">Define GOAL_STATE_EXECUTING</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a94ea3b25d9e0f911b53268c8c8961149.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1aca094122b9c371f2a67391cac15dea1d.html">Define GOAL_STATE_NUM_STATES</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1aca094122b9c371f2a67391cac15dea1d.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1ad3927f0a2b7ae1783147374d07a5a70b.html">Define GOAL_STATE_SUCCEEDED</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1ad3927f0a2b7ae1783147374d07a5a70b.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1ace3fc2cde0ed9e2673f7464d6a350195.html">Define GOAL_STATE_UNKNOWN</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1ace3fc2cde0ed9e2673f7464d6a350195.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8h_1a40175d52487f253f5776938443cf3291.html">Define RCL_ACTION_EXPORT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_visibility__control_8h_1a40175d52487f253f5776938443cf3291.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8h_1a003cac8c82f5f4eec318d73bef48b544.html">Define RCL_ACTION_IMPORT</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_visibility__control_8h_1a003cac8c82f5f4eec318d73bef48b544.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8h_1a7ce23dcb77cea1a39b776a7b09acb7a9.html">Define RCL_ACTION_LOCAL</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_visibility__control_8h_1a7ce23dcb77cea1a39b776a7b09acb7a9.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8h_1a697147f89f84557cd0fe6ab287126416.html">Define RCL_ACTION_PUBLIC</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_visibility__control_8h_1a697147f89f84557cd0fe6ab287126416.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_visibility__control_8h_1ae4e30675cde78eacc378949dfc4aa3cc.html">Define RCL_ACTION_PUBLIC_TYPE</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_visibility__control_8h_1ae4e30675cde78eacc378949dfc4aa3cc.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a9bc00466ad1a790364be8834d578d87e.html">Define RCL_RET_ACTION_CLIENT_INVALID</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a9bc00466ad1a790364be8834d578d87e.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1aa0d2d88452b3b2a6b9eaf308443b4bd8.html">Define RCL_RET_ACTION_CLIENT_TAKE_FAILED</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1aa0d2d88452b3b2a6b9eaf308443b4bd8.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a1870aeeb51b2d0038e85925fdfaec58e.html">Define RCL_RET_ACTION_GOAL_ACCEPTED</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a1870aeeb51b2d0038e85925fdfaec58e.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a7e287910f15339c80ad03a53888ecb6d.html">Define RCL_RET_ACTION_GOAL_EVENT_INVALID</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a7e287910f15339c80ad03a53888ecb6d.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1aeec76a49567e571bc1d5174ec5d458b3.html">Define RCL_RET_ACTION_GOAL_HANDLE_INVALID</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1aeec76a49567e571bc1d5174ec5d458b3.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a7bd219b3bdc7f0208117e4a1fa727d2f.html">Define RCL_RET_ACTION_GOAL_REJECTED</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a7bd219b3bdc7f0208117e4a1fa727d2f.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a12629862df3ce341ee6b1bc3b210624b.html">Define RCL_RET_ACTION_NAME_INVALID</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a12629862df3ce341ee6b1bc3b210624b.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a46a6050994420eff238242b3066d70cd.html">Define RCL_RET_ACTION_SERVER_INVALID</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a46a6050994420eff238242b3066d70cd.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1aa19495205e4b5b769bac9334a21f6c7e.html">Define RCL_RET_ACTION_SERVER_TAKE_FAILED</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1aa19495205e4b5b769bac9334a21f6c7e.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a5db91c4b658dc322b42959cb5c851020.html">Define UUID_SIZE</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a5db91c4b658dc322b42959cb5c851020.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1acb86f87b62a28673361eb6ebcabf3558.html">Define uuidcmp</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1acb86f87b62a28673361eb6ebcabf3558.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a93018e2220e4ab3dcc5048d562f1b25f.html">Define uuidcmpzero</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a93018e2220e4ab3dcc5048d562f1b25f.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/define_types_8h_1a35906c63135b20ab3187ab8b97a0b498.html">Define zerouuid</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/define_types_8h_1a35906c63135b20ab3187ab8b97a0b498.html#define-documentation">Define Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/index.html#typedefs">Typedefs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_types_8h_1acaed442eaf978dbb9270c93025165769.html">Typedef rcl_action_cancel_request_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_types_8h_1acaed442eaf978dbb9270c93025165769.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_types_8h_1a2db6e1522475dfc85d17cb39a093149c.html">Typedef rcl_action_cancel_response_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_types_8h_1a2db6e1522475dfc85d17cb39a093149c.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_action__client_8h_1ae037fec05818586a45cf194020bfc74e.html">Typedef rcl_action_client_impl_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_action__client_8h_1ae037fec05818586a45cf194020bfc74e.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_action__client_8h_1ad8a4c3c1fe01740188eb3a8c44354d61.html">Typedef rcl_action_client_options_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_action__client_8h_1ad8a4c3c1fe01740188eb3a8c44354d61.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_action__client_8h_1a0057d83c8cf06c1f0c124a804acae51c.html">Typedef rcl_action_client_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_action__client_8h_1a0057d83c8cf06c1f0c124a804acae51c.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_types_8h_1a0286e4423ef866ea4aae2a37ee9f8ab9.html">Typedef rcl_action_goal_event_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_types_8h_1a0286e4423ef866ea4aae2a37ee9f8ab9.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_goal__handle_8h_1a777b392b3fc9d244411d66c6a0934aec.html">Typedef rcl_action_goal_handle_impl_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_goal__handle_8h_1a777b392b3fc9d244411d66c6a0934aec.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_goal__handle_8h_1a90e59e51b5289d0bebb49582a93c5440.html">Typedef rcl_action_goal_handle_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_goal__handle_8h_1a90e59e51b5289d0bebb49582a93c5440.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_types_8h_1aa1931c22457629ad8cc3fff84746d9ae.html">Typedef rcl_action_goal_info_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_types_8h_1aa1931c22457629ad8cc3fff84746d9ae.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_types_8h_1a4c99b806adf1c08e95b0f3b2786a9b12.html">Typedef rcl_action_goal_state_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_types_8h_1a4c99b806adf1c08e95b0f3b2786a9b12.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_types_8h_1ac8125be658dd4583e7fa9ac940692349.html">Typedef rcl_action_goal_status_array_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_types_8h_1ac8125be658dd4583e7fa9ac940692349.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_types_8h_1abf5d02b3f5043bbdbdb4ac78d252c188.html">Typedef rcl_action_goal_status_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_types_8h_1abf5d02b3f5043bbdbdb4ac78d252c188.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_action__server_8h_1a40adf1d0f7d5318ec667329e8afad3b5.html">Typedef rcl_action_server_impl_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_action__server_8h_1a40adf1d0f7d5318ec667329e8afad3b5.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_action__server_8h_1a5dedd72603a3407072789c0ea9c73dd1.html">Typedef rcl_action_server_options_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_action__server_8h_1a5dedd72603a3407072789c0ea9c73dd1.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/typedef_action__server_8h_1a70a66d101e49d55ef136c048c7dbbc04.html">Typedef rcl_action_server_t</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/typedef_action__server_8h_1a70a66d101e49d55ef136c048c7dbbc04.html#typedef-documentation">Typedef Documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/index.html#directories">Directories</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir_include.html">Directory include</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dir_include.html#subdirectories">Subdirectories</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/dir_include_rcl_action.html">Directory rcl_action</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/dir_include_rcl_action.html#files">Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generated/index.html#files">Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_action_client.h.html">File action_client.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_client.h.html#definition-include-rcl-action-action-client-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/action_client.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_action_client.h.html">Program Listing for File action_client.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_client.h.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_client.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_client.h.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_client.h.html#functions">Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_client.h.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_action_server.h.html">File action_server.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_server.h.html#definition-include-rcl-action-action-server-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/action_server.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_action_server.h.html">Program Listing for File action_server.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_server.h.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_server.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_server.h.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_server.h.html#functions">Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_action_server.h.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_default_qos.h.html">File default_qos.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_default_qos.h.html#definition-include-rcl-action-default-qos-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/default_qos.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_default_qos.h.html">Program Listing for File default_qos.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_default_qos.h.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_default_qos.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_default_qos.h.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_goal_handle.h.html">File goal_handle.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_handle.h.html#definition-include-rcl-action-goal-handle-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/goal_handle.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_goal_handle.h.html">Program Listing for File goal_handle.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_handle.h.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_handle.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_handle.h.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_handle.h.html#functions">Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_handle.h.html#typedefs">Typedefs</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_goal_state_machine.h.html">File goal_state_machine.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_state_machine.h.html#definition-include-rcl-action-goal-state-machine-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/goal_state_machine.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_goal_state_machine.h.html">Program Listing for File goal_state_machine.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_state_machine.h.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_state_machine.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_goal_state_machine.h.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_graph.h.html">File graph.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_graph.h.html#definition-include-rcl-action-graph-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/graph.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_graph.h.html">Program Listing for File graph.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_graph.h.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_graph.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_graph.h.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_names.h.html">File names.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_names.h.html#definition-include-rcl-action-names-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/names.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_names.h.html">Program Listing for File names.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_names.h.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_names.h.html#functions">Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_rcl_action.h.html">File rcl_action.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_rcl_action.h.html#definition-include-rcl-action-rcl-action-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/rcl_action.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_rcl_action.h.html">Program Listing for File rcl_action.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_rcl_action.h.html#includes">Includes</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html">File types.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html#definition-include-rcl-action-types-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/types.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_types.h.html">Program Listing for File types.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html#classes">Classes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html#enums">Enums</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html#functions">Functions</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html#defines">Defines</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html#typedefs">Typedefs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_types.h.html#variables">Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_visibility_control.h.html">File visibility_control.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_visibility_control.h.html#definition-include-rcl-action-visibility-control-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/visibility_control.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_visibility_control.h.html">Program Listing for File visibility_control.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_visibility_control.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_visibility_control.h.html#defines">Defines</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generated/file_include_rcl_action_wait.h.html">File wait.h</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_wait.h.html#definition-include-rcl-action-wait-h">Definition (<code class="docutils literal notranslate"><span class="pre">include/rcl_action/wait.h</span></code>)</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="generated/program_listing_file_include_rcl_action_wait.h.html">Program Listing for File wait.h</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_wait.h.html#includes">Includes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_wait.h.html#included-by">Included By</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generated/file_include_rcl_action_wait.h.html#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">rcl_action</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to the documentation for rcl_action</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-the-documentation-for-rcl-action">
+<h1>Welcome to the documentation for rcl_action<a class="headerlink" href="#welcome-to-the-documentation-for-rcl-action" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generated/index.html">rcl_action</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#class-hierarchy">Class Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#file-hierarchy">File Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/index.html#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-search">
+<h1>Indices and Search<a class="headerlink" href="#indices-and-search" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/index.html" class="btn btn-neutral float-right" title="rcl: Common functionality ROS actions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Apache License 2.0.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

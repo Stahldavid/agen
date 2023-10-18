@@ -1,0 +1,1 @@
+This function currently only contains a skeleton of the code and needs to be completed based on semantic search results. According to the search results, the function should wait for a set service to be available from the controller manager within a given timeout period.

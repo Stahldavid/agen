@@ -1,0 +1,360 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>capabilities.client &mdash; capabilities 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="capabilities 0.1.0 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  <link rel="canonical" href="http://docs.ros.org/hydro/api/capabilities/html/_modules/capabilities/client.html" />
+</head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for capabilities.client</h1><div class="highlight"><pre>
+<span class="c"># Software License Agreement (BSD License)</span>
+<span class="c">#</span>
+<span class="c"># Copyright (c) 2013, Open Source Robotics Foundation, Inc.</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c"># modification, are permitted provided that the following conditions</span>
+<span class="c"># are met:</span>
+<span class="c">#</span>
+<span class="c">#  * Redistributions of source code must retain the above copyright</span>
+<span class="c">#    notice, this list of conditions and the following disclaimer.</span>
+<span class="c">#  * Redistributions in binary form must reproduce the above</span>
+<span class="c">#    copyright notice, this list of conditions and the following</span>
+<span class="c">#    disclaimer in the documentation and/or other materials provided</span>
+<span class="c">#    with the distribution.</span>
+<span class="c">#  * Neither the name of Open Source Robotics Foundation, Inc. nor</span>
+<span class="c">#    the names of its contributors may be used to endorse or promote</span>
+<span class="c">#    products derived from this software without specific prior</span>
+<span class="c">#    written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS</span>
+<span class="c"># &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<span class="c"># LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS</span>
+<span class="c"># FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE</span>
+<span class="c"># COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,</span>
+<span class="c"># INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,</span>
+<span class="c"># BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span class="c"># LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</span>
+<span class="c"># CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span class="c"># LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN</span>
+<span class="c"># ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+<span class="c"># Author: William Woodall &lt;william@osrfoundation.org&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;Provides a simple Python interface for interacting with the capability server.</span>
+
+<span class="sd">Typical usage::</span>
+
+<span class="sd">    &gt;&gt;&gt; from capabilities.client import Client</span>
+<span class="sd">    &gt;&gt;&gt; client = Client()</span>
+<span class="sd">    &gt;&gt;&gt; # Use the line below if the capability_server has a different name</span>
+<span class="sd">    &gt;&gt;&gt; # client = Client(capability_server_node_name=&#39;/capability_server_node_name&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; if not client.wait_for_services(3.0):  # Wait upto 3.0 seconds for the required ROS services</span>
+<span class="sd">    ...     import sys</span>
+<span class="sd">    ...     sys.exit(&quot;capability_server, called &#39;{0}&#39;, failed to come up.&quot;.format(client._name))</span>
+<span class="sd">    &gt;&gt;&gt; client.use_capability(&#39;foo_pkg/Foo&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; client.use_capability(&#39;foo_pkg/Foo&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; client.free_capability(&#39;foo_pkg/Foo&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; client.shutdown()</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">atexit</span>
+
+<span class="kn">import</span> <span class="nn">rospy</span>
+
+<span class="kn">from</span> <span class="nn">bondpy.bondpy</span> <span class="kn">import</span> <span class="n">Bond</span>
+
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">EstablishBond</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">FreeCapability</span>
+<span class="kn">from</span> <span class="nn">capabilities.srv</span> <span class="kn">import</span> <span class="n">UseCapability</span>
+
+
+<span class="k">class</span> <span class="nc">ServiceNotAvailableException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service_name</span><span class="p">):</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;Required ROS service &#39;{0}&#39; not available&quot;</span>
+                                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">service_name</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">CannotEstablishBondException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c"># pragma: no cover</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;Failed to establish bond.&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">CapabilityNotRunningException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;Capability interface &#39;{0}&#39; is not running.&quot;</span>
+                                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">interface</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">CapabilityNotInUseException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interface</span><span class="p">):</span>
+        <span class="ne">Exception</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&quot;Capability interface &#39;{0}&#39; not previously used.&quot;</span>
+                                 <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">interface</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="CapabilitiesClient"><a class="viewcode-back" href="../../capabilities.client.html#capabilities.client.CapabilitiesClient">[docs]</a><span class="k">class</span> <span class="nc">CapabilitiesClient</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Single point of entry for interacting with a remote capability server.</span>
+
+<span class="sd">    Instantiation of this class does not check to see if the underlying</span>
+<span class="sd">    services are available, call :py:meth:`wait_for_services` if you want</span>
+<span class="sd">    to ensure that the services are available before continuing.</span>
+
+<span class="sd">    :param capability_server_node_name: name of the remote capability server</span>
+<span class="sd">    :type capability_server_node_name: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capability_server_node_name</span><span class="o">=</span><span class="s">&#39;/capability_server&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">capability_server_node_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bond</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bond_id</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_used_capabilities</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_services</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c"># Create service proxy for establish_bond</span>
+        <span class="n">service_name</span> <span class="o">=</span> <span class="s">&#39;{0}/establish_bond&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability_server_node_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__establish_bond</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="n">service_name</span><span class="p">,</span> <span class="n">EstablishBond</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_services</span><span class="p">[</span><span class="s">&#39;establish_bond&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__establish_bond</span>
+        <span class="c"># Create service proxy for free_capability</span>
+        <span class="n">service_name</span> <span class="o">=</span> <span class="s">&#39;{0}/free_capability&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability_server_node_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__free_capability</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="n">service_name</span><span class="p">,</span> <span class="n">FreeCapability</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_services</span><span class="p">[</span><span class="s">&#39;free_capability&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__free_capability</span>
+        <span class="c"># Create service proxy for use_capability</span>
+        <span class="n">service_name</span> <span class="o">=</span> <span class="s">&#39;{0}/use_capability&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability_server_node_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__use_capability</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="n">service_name</span><span class="p">,</span> <span class="n">UseCapability</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_services</span><span class="p">[</span><span class="s">&#39;use_capability&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__use_capability</span>
+        <span class="c"># Register atexit shutdown</span>
+        <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shutdown</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CapabilitiesClient.wait_for_services"><a class="viewcode-back" href="../../capabilities.client.html#capabilities.client.CapabilitiesClient.wait_for_services">[docs]</a>    <span class="k">def</span> <span class="nf">wait_for_services</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">services</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Blocks until the requested services are available.</span>
+
+<span class="sd">        Services are waited on one at a time. Therefore, if a non-None value</span>
+<span class="sd">        for timeout is given, and one or more services are being waited on,</span>
+<span class="sd">        the full timeout will be given to each wait, meaning that the total</span>
+<span class="sd">        run time of this function can exceed the timeout provided.</span>
+
+<span class="sd">        :param timeout: Seconds to wait for the services before returning False.</span>
+<span class="sd">            If None is passed, then this will block indefinitely until the</span>
+<span class="sd">            services are available.</span>
+<span class="sd">        :type timeout: float</span>
+<span class="sd">        :param services: List of services to wait on.</span>
+<span class="sd">            If None is passed, then this will check all the services.</span>
+<span class="sd">        :type services: list</span>
+<span class="sd">        :returns: :py:obj:`True` is the services are available, :py:obj:`False` otherwise (timeout)</span>
+<span class="sd">        :rtype: :py:obj:`bool`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">services</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_services</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">services</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">services</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">services</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="n">services</span>
+        <span class="k">for</span> <span class="n">service</span> <span class="ow">in</span> <span class="n">services</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">service</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_services</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s">&quot;Service &#39;{0}&#39; is not a valid service and cannot be waited on. These are the valid services: {1}&quot;</span>
+                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_services</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wait_for_service</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_services</span><span class="p">[</span><span class="n">service</span><span class="p">],</span> <span class="n">timeout</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+    <span class="k">def</span> <span class="nf">__wait_for_service</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service</span><span class="p">,</span> <span class="n">timeout</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">service</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ROSException</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logwarn</span><span class="p">(</span><span class="s">&quot;Timed out after waiting &#39;{0}&#39; seconds for service &#39;{1}&#39; to be available.&quot;</span>
+                          <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> <span class="n">service</span><span class="o">.</span><span class="n">resolved_name</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+<div class="viewcode-block" id="CapabilitiesClient.establish_bond"><a class="viewcode-back" href="../../capabilities.client.html#capabilities.client.CapabilitiesClient.establish_bond">[docs]</a>    <span class="k">def</span> <span class="nf">establish_bond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Establishes a bond using the ``~establish_bond`` service call</span>
+
+<span class="sd">        The bond id which is returned by the service call is stored internally</span>
+<span class="sd">        and used implicitly by the use/free capabilities functions.</span>
+
+<span class="sd">        If :py:meth:`establish_bond` had previously been called, then the old bond will be</span>
+<span class="sd">        broken, which will result in any capability uses under that bond to be</span>
+<span class="sd">        implicitly freed.</span>
+
+<span class="sd">        This function is called implicitly by :py:meth:`use_capability` if</span>
+<span class="sd">        no bond exists.</span>
+
+<span class="sd">        This function will block waiting for the service call to become</span>
+<span class="sd">        available and to wait for the bond to be established. In both cases</span>
+<span class="sd">        the timeout parameter is used.</span>
+
+<span class="sd">        None is returned if the timeout occurs while waiting on the service</span>
+<span class="sd">        to become available or while waiting for the bond to form.</span>
+
+<span class="sd">        :param timeout: time in seconds to wait for the service to be available</span>
+<span class="sd">        :type timeout: float</span>
+<span class="sd">        :returns: the bond_id received from the server or :py:obj:`None` on failure</span>
+<span class="sd">        :rtype: :py:obj:`str`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wait_for_service</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__establish_bond</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__establish_bond</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="o">.</span><span class="n">bond_id</span><span class="p">:</span>  <span class="c"># pragma: no cover</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bond_id</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">bond_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bond</span> <span class="o">=</span> <span class="n">Bond</span><span class="p">(</span><span class="s">&#39;{0}/bonds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bond_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bond</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">timeout_dur</span> <span class="o">=</span> <span class="bp">None</span> <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">rospy</span><span class="o">.</span><span class="n">Duration</span><span class="o">.</span><span class="n">from_sec</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bond</span><span class="o">.</span><span class="n">wait_until_formed</span><span class="p">(</span><span class="n">timeout_dur</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>  <span class="c"># pragma: no cover</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bond_id</span>
+</div>
+<div class="viewcode-block" id="CapabilitiesClient.free_capability"><a class="viewcode-back" href="../../capabilities.client.html#capabilities.client.CapabilitiesClient.free_capability">[docs]</a>    <span class="k">def</span> <span class="nf">free_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capability_interface</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Free&#39;s a previously used capability.</span>
+
+<span class="sd">        Calls the ``~free_capability`` service, which effectively decrements</span>
+<span class="sd">        the internal reference count for that capability in the remote</span>
+<span class="sd">        capability server.</span>
+
+<span class="sd">        If that results in a reference count of zero,</span>
+<span class="sd">        then the capability server will shutdown that capability automatically.</span>
+
+<span class="sd">        :param capability_interface: Name of the capability interface to free up</span>
+<span class="sd">        :type capability_interface: str</span>
+<span class="sd">        :param timeout: time to wait on service to be available (optional)</span>
+<span class="sd">        :type timeout: float</span>
+<span class="sd">        :returns: :py:obj:`True` if successful, otherwise :py:obj:`False`</span>
+<span class="sd">        :rtype: :py:obj:`bool`</span>
+<span class="sd">        :raises: CapabilityNotInUseException if the capability has not been previously used</span>
+<span class="sd">        :raises: CapabilityNotRunningException if the capability has already been stopped</span>
+<span class="sd">            which can be caused by a capability it depends on stopping</span>
+<span class="sd">        :raises: ServiceNotAvailableException if the required service is not available</span>
+<span class="sd">            after the timeout has expired</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">capability_interface</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_used_capabilities</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">logerr</span><span class="p">(</span><span class="s">&quot;Cannot free capability interface &#39;{0}&#39;, because it was not first used.&quot;</span>
+                         <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">capability_interface</span><span class="p">))</span>
+            <span class="n">CapabilityNotInUseException</span><span class="p">(</span><span class="n">capability_interface</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wait_for_service</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__free_capability</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ServiceNotAvailableException</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__free_capability</span><span class="o">.</span><span class="n">resolved_name</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__free_capability</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">capability_interface</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bond_id</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceException</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="n">exc_str</span> <span class="o">=</span> <span class="s">&quot;{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s">&#39;Cannot free Capability&#39;</span> <span class="ow">in</span> <span class="n">exc_str</span> <span class="ow">and</span> <span class="s">&#39;because it is not running&#39;</span> <span class="ow">in</span> <span class="n">exc_str</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">CapabilityNotRunningException</span><span class="p">(</span><span class="n">capability_interface</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</div>
+<div class="viewcode-block" id="CapabilitiesClient.shutdown"><a class="viewcode-back" href="../../capabilities.client.html#capabilities.client.CapabilitiesClient.shutdown">[docs]</a>    <span class="k">def</span> <span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cleanly frees any used capabilities.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bond</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_bond</span><span class="o">.</span><span class="n">break_bond</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="CapabilitiesClient.use_capability"><a class="viewcode-back" href="../../capabilities.client.html#capabilities.client.CapabilitiesClient.use_capability">[docs]</a>    <span class="k">def</span> <span class="nf">use_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capability_interface</span><span class="p">,</span> <span class="n">preferred_provider</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Declares that this capability is being used.</span>
+
+<span class="sd">        Calls the ``~use_capability`` service, and opens a bond with capability server if none exists.</span>
+<span class="sd">        This will cause the capability to be started, if it has not been already, and the</span>
+<span class="sd">        internal reference count for that capability in the capability server is incremented.</span>
+
+<span class="sd">        If the bond fails (i.e. this program crashes) then the reference is decremented automatically.</span>
+<span class="sd">        The reference is also decremented if :py:meth:`free_capability` is called.</span>
+
+<span class="sd">        :param capability_interface: Name of the capability interface to use</span>
+<span class="sd">        :type capability_interface: str</span>
+<span class="sd">        :param preferred_provider: preferred provider or None for default provider (optional)</span>
+<span class="sd">        :type preferred_provider: str</span>
+<span class="sd">        :param timeout: time to wait on service to be available (optional)</span>
+<span class="sd">        :type timeout: float</span>
+<span class="sd">        :returns: :py:obj:`True` if successful, otherwise :py:obj:`False`</span>
+<span class="sd">        :rtype: :py:obj:`bool`</span>
+<span class="sd">        :raises: ServiceNotAvailableException if the required service is not available</span>
+<span class="sd">            after the timeout has expired</span>
+<span class="sd">        :raise: CannotEstablishBondException is the bond with the capability_server cannot be established</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># If no bond has been established, establish one first</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bond</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">establish_bond</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>  <span class="c"># pragma: no cover</span>
+                <span class="k">raise</span> <span class="n">CannotEstablishBondException</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__wait_for_service</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__use_capability</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">False</span><span class="p">:</span>  <span class="c"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="n">ServiceNotAvailableException</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__use_capability</span><span class="o">.</span><span class="n">resolved_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__use_capability</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">capability_interface</span><span class="p">,</span> <span class="n">preferred_provider</span> <span class="ow">or</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bond_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_used_capabilities</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">capability_interface</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">capabilities 0.1.0 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Open Source Robotics Foundation.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

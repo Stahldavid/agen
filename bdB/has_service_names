@@ -1,0 +1,2 @@
+def has_service_names(node, node_name, node_namespace, service_names):
+    # Check if the node has the specified service names
